@@ -8,7 +8,7 @@ a web micro-framework.
 
 - Jeffery Russell
 - Perry Deng
-- Bryce Murphy
+- MEMBER3
 - MEMBER4
 
 
