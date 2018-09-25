@@ -7,7 +7,7 @@ a web micro-framework.
 ## Team
 
 - Jeffery Russell
-- MEMBER2
+- Perry Deng
 - MEMBER3
 - MEMBER4
 
