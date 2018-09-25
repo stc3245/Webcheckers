@@ -9,7 +9,7 @@ a web micro-framework.
 - MEMBER1
 - MEMBER2
 - MEMBER3
-- MEMBER4
+- Sean Coyne
 
 
 ## Prerequisites
