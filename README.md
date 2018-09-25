@@ -10,6 +10,7 @@ a web micro-framework.
 - Perry Deng
 - Max Gusinov
 - Sean Coyne
+- Bryce Murphy
 
 
 ## Prerequisites
