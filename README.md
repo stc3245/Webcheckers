@@ -7,7 +7,7 @@ a web micro-framework.
 ## Team
 
 - Jeffery Russell
-- Perry Dumbass
+- Perry Deng
 - Max Gusinov
 - Sean Coyne
 - Bryce Murphy
