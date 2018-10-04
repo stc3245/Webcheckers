@@ -13,6 +13,10 @@
     <div class="navigation">
       <a href="/">my home</a>
     </div>
+
+      <div class="navigation">
+          <a href="/signin">sign in</a>
+      </div>
     
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
