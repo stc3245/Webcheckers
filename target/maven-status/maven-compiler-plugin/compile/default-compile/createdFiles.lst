@@ -1,3 +1,5 @@
 com\webcheckers\ui\WebServer.class
 com\webcheckers\ui\GetHomeRoute.class
+com\webcheckers\authModel\SignIn.class
+com\webcheckers\ui\GetSigninRoute.class
 com\webcheckers\Application.class

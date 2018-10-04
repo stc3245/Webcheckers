@@ -6,4 +6,5 @@ package com.webcheckers.authModel;
  * @author <a href='mailto:xxd9704@rit.edu'>Perry Deng</a>
  */
 public class SignIn {
+
 }
