@@ -36,6 +36,7 @@ public class GetHomeRoute implements Route {
     //
     LOG.config("GetHomeRoute is initialized.");
   }
+  //fuckeu
 
   /**
    * Render the WebCheckers Home page.
