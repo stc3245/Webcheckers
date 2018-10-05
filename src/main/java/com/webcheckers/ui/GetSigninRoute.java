@@ -11,6 +11,7 @@ import java.util.logging.Logger;
  * The UI Controller to GET the signin page.
  *
  * @author <a href='mailto: xxd9704@rit.edu'>Perry Deng</a>
+ * @author <a href='mailto: bm5890@rit.edu'>Bryce Murphy</a>
  */
 public class GetSigninRoute implements Route {
     private static final Logger LOG = Logger.getLogger(GetSigninRoute.class.getName());
