@@ -1,6 +1,6 @@
 package com.webcheckers.ui;
 
-import com.webcheckers.authModel.SigninServices;
+import com.webcheckers.appl.PlayerLobby;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -12,12 +12,13 @@ import java.util.Objects;
  * The UI Controller for handling Post /signin
  *
  * @author <a href='mailto: xxd9704@rit.edu'>Perry Deng</a>
+ * @author <a href='mailto: bm5890@rit.edu'>Bryce Murphy</a>
  */
 public class PostSigninRoute implements Route {
     //
     // Constants
     //
-    private final SigninServices signinServices;
+    private final PlayerLobby playerLobby;
     private final TemplateEngine templateEngine;
 
     // Values used in the view-model map for rendering the signin view after entering credentials.
@@ -41,18 +42,18 @@ public class PostSigninRoute implements Route {
 
     /**
      * constructor
-     * @param signinServices an instance of SigninServices, handles sign in logic
+     * @param playerLobby an instance of SigninServices, handles sign in logic
      * @param templateEngine an instance of TemplateEngine
      */
-    PostSigninRoute(SigninServices signinServices, TemplateEngine templateEngine) {
+    PostSigninRoute(PlayerLobby playerLobby, TemplateEngine templateEngine) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         this.templateEngine = templateEngine;
-        this.signinServices = signinServices;
+        this.playerLobby = playerLobby;
     }
 
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response) {
         return null;
     }
 }

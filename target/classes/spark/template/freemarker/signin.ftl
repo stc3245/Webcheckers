@@ -18,9 +18,14 @@
         <a href="/signin>">sign in</a>
     </div>
 
-    <div class="body">
-        <p>Sign In Here.</p>
-    </div>
+    <form action="./signin" method="post">
+        <br/>
+        Sign in here.
+        <br/>
+        <input name="username" />
+        <br/> <br/>
+        <button type="submit">Sign In</button>
+    </form>
 
 </div>
 </body>

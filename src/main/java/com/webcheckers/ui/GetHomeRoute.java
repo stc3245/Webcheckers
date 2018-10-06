@@ -17,6 +17,11 @@ import spark.TemplateEngine;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class GetHomeRoute implements Route {
+
+  static final String VIEW_NAME = "home.ftl";
+
+  static final String PLAYERLOBBY_KEY = "playerLobby";
+
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   private final TemplateEngine templateEngine;
