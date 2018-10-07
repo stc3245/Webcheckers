@@ -37,6 +37,7 @@ public class PostSigninRoute implements Route {
     static final String ERROR_MESSAGE = "errorMessage";
     static final String ERROR_DEFAULT = "An unknown error has occurred. ";
     static final String ERROR_WRONG_CREDENTIALS = "Credentials are incorrect. ";
+    static final String ERROR_ALREADY_LOGGEDIN = "The user is already logged in. ";
     static final String ERROR_USERNAME_TAKEN = "This username has been taken. ";
     static final String ERROR_INVALID_CHARACTERS = "Invalid characters detected. ";
 

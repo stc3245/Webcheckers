@@ -8,7 +8,8 @@ import spark.TemplateEngine;
 
 import java.util.logging.Logger;
 
-public class PlayerLobby implements Route {
+
+public class PlayerLobby{
 
     private static final Logger LOG = Logger.getLogger(PlayerLobby.class.getName());
 
@@ -20,11 +21,6 @@ public class PlayerLobby implements Route {
 
         LOG.config("PlayerLobby is initialized.");
 
-    }
-
-    @Override
-    public Object handle(Request request, Response response) {
-        return null;
     }
 
 }
