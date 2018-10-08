@@ -3,11 +3,10 @@ package com.webcheckers.ui;
 import com.sun.deploy.util.StringUtils;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.TemplateEngine;
+import spark.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -24,15 +23,15 @@ public class PostSignInRoute implements Route {
     private final PlayerLobby playerLobby;
     private final TemplateEngine templateEngine;
 
-    static final String NAME_PARAM = "username";
+    // username input value
+    private static final String NAME_PARAM = "username";
 
     // Values used in the view-model map for rendering the signin view after entering credentials.
-    static final String VIEW_NAME = "signin.ftl";
+    private static final String VIEW_NAME = "signin.ftl";
 
-    static final String SIGNIN_ATTR = "signinAuthorized";
-
-    static final String SIGNUP_ATTR = "signupAuthorized";
-
+    private static final String ERROR_MESSAGE_ATTR = "errorMessage";
+    private static final String WELCOME_MSG = "Welcome, %s";
+    private static final String SIGN_IN_ERROR_ATTR = "signInError";
     static final String DISPLYED_MESSAGE_ATTR = "displayedMessage";
     static final String SIGNIN_AUTHORIZED = "User has successfully sign in. ";
     static final String SIGNIN_UNAUTHORIZED = "User has failed to sign in. ";
@@ -43,8 +42,8 @@ public class PostSignInRoute implements Route {
     static final String ERROR_DEFAULT = "An unknown error has occurred. ";
     static final String ERROR_WRONG_CREDENTIALS = "Credentials are incorrect. ";
     static final String ERROR_ALREADY_LOGGEDIN = "The user is already logged in. ";
-    static final String ERROR_USERNAME_TAKEN = "This username has been taken. ";
-    static final String ERROR_INVALID_CHARACTERS = "Invalid characters detected. ";
+    private static final String ERROR_USERNAME_TAKEN = "This username has been taken. ";
+    private static final String ERROR_INVALID_CHARACTERS = "Invalid characters detected. ";
 
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
@@ -58,8 +57,6 @@ public class PostSignInRoute implements Route {
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         this.templateEngine = templateEngine;
         this.playerLobby = playerLobby;
-
-        LOG.config("POSTSigninRoute is initialized.");
     }
 
     @Override
@@ -67,24 +64,42 @@ public class PostSignInRoute implements Route {
 
         final String username = request.queryParams(NAME_PARAM);
 
-        LOG.config(username);
+        final Map<String, Object> vm = new HashMap<>();
+        vm.put(GetHomeRoute.TITLE_ATTR, GetHomeRoute.TITLE_ATTR);
+        vm.put(SIGN_IN_ERROR_ATTR, false);
 
-        PlayerLobby playerLobby = new PlayerLobby();
+        ModelAndView mv;
 
         // if the username is valid
         if (playerLobby.isValid(username)) {
             if (playerLobby.userExists(username)) {
-                LOG.config("Player already exists");
                 // navigate back to sign in page with error message
+                mv = error(vm, ERROR_USERNAME_TAKEN);
             } else {
+                // create a new player and return to home page
                 playerLobby.createPlayer(username);
-                // navigate to home page with success message
+                vm.put(GetHomeRoute.WELCOME_MSG, String.format(WELCOME_MSG, username));
+                mv = success(vm, WELCOME_MSG);
             }
         } else {
-            LOG.config("Make a username containing alphanumeric characters");
             // navigate back to sign in page with error message
+            mv = error(vm, ERROR_INVALID_CHARACTERS);
         }
 
-        return null;
+        return templateEngine.render(mv);
+
     }
+
+    private ModelAndView error(final Map<String, Object> vm, final String message) {
+        vm.put(SIGN_IN_ERROR_ATTR, true);
+        vm.put(ERROR_MESSAGE_ATTR, message);
+        return new ModelAndView(vm, VIEW_NAME);
+    }
+
+    private ModelAndView success(final  Map<String, Object> vm, final String message) {
+        vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
+        vm.put(GetHomeRoute.PLAYER_LIST, playerLobby.getPlayers());
+        return new ModelAndView(vm, GetHomeRoute.VIEW_NAME);
+    }
+
 }

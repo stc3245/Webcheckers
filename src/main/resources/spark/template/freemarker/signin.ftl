@@ -18,6 +18,12 @@
         <a href="/signin>">sign in</a>
     </div>
 
+    <#if signInError??>
+        <p>
+            ${errorMessage}
+        </p>
+    </#if>
+
     <form action="./signin" method="post">
         <br/>
         Sign in here.

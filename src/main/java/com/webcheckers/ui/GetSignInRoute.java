@@ -24,7 +24,7 @@ public class GetSignInRoute implements Route {
 
     private final TemplateEngine templateEngine;
 
-    public GetSignInRoute(final TemplateEngine templateEngine) {
+    GetSignInRoute(final TemplateEngine templateEngine) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         //

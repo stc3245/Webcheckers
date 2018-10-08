@@ -1,6 +1,7 @@
 package com.webcheckers.appl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class PlayerLobby {
@@ -15,6 +16,11 @@ public class PlayerLobby {
 
         LOG.config("PlayerLobby is initialized.");
 
+    }
+
+    // returns list of current players
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
     // creates and adds a new player to Players[] array

@@ -17,6 +17,18 @@
       <div class="navigation">
           <a href="/signin">sign in</a>
       </div>
+
+      <#if signedIn>
+            <br/>
+          ${welcomeMessage}
+            <br/>
+            <#list users as user>
+                <p>
+                    ${user}
+                </p>
+            </#list>
+            <br/>
+      </#if>
     
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
