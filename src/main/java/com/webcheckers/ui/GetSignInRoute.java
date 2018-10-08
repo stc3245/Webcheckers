@@ -1,6 +1,5 @@
 package com.webcheckers.ui;
 
-import com.webcheckers.Application;
 import com.webcheckers.appl.PlayerLobby;
 import spark.*;
 
@@ -17,15 +16,15 @@ import static spark.Spark.halt;
  * @author <a href='mailto: xxd9704@rit.edu'>Perry Deng</a>
  * @author <a href='mailto: bm5890@rit.edu'>Bryce Murphy</a>
  */
-public class GetSigninRoute implements Route {
+public class GetSignInRoute implements Route {
 
-    private static final Logger LOG = Logger.getLogger(GetSigninRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
     static final String VIEW_NAME = "signin.ftl";
 
     private final TemplateEngine templateEngine;
 
-    public GetSigninRoute(final TemplateEngine templateEngine) {
+    public GetSignInRoute(final TemplateEngine templateEngine) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         //
@@ -36,9 +35,11 @@ public class GetSigninRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
+        /*
         final Session httpSession = request.session();
         final PlayerLobby playerLobby =
-                httpSession.attribute(GetHomeRoute.PLAYERLOBBY_KEY);
+                httpSession.attribute(GetHomeRoute.PLAYERLOBBY_KEY);*/
+
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
         return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
