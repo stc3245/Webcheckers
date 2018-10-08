@@ -7,13 +7,19 @@ package com.webcheckers.appl;
 public class Player {
 
     private String name;
+    private boolean signedIn;
 
     public Player(String username) {
         name = username;
+        signedIn = true;
     }
 
     public String getName(){
         return name;
+    }
+
+    public boolean signedIn() {
+        return signedIn;
     }
 
 }

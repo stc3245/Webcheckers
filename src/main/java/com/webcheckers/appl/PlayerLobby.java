@@ -9,6 +9,7 @@ public class PlayerLobby {
     private static final Logger LOG = Logger.getLogger(PlayerLobby.class.getName());
 
     private ArrayList<Player> players;
+    private Player currentPlayer;
 
     public PlayerLobby() {
 
@@ -20,12 +21,19 @@ public class PlayerLobby {
 
     // returns list of current players
     public ArrayList<Player> getPlayers() {
-        return players;
+        ArrayList<Player> temp = new ArrayList<>();
+        for (Player p : players) {
+            if (p != currentPlayer) {
+                temp.add(p);
+            }
+        }
+        return temp;
     }
 
     // creates and adds a new player to Players[] array
     public void createPlayer(String username) {
         Player temp = new Player(username);
+        currentPlayer = temp;
         players.add(temp);
     }
 
@@ -60,6 +68,14 @@ public class PlayerLobby {
         } else {
             return false;
         }
+    }
+
+    public boolean signedIn() {
+        return currentPlayer.signedIn();
+    }
+
+    public Player currentPlayer() {
+        return currentPlayer;
     }
 
 }

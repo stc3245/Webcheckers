@@ -22,12 +22,15 @@
             <br/>
           ${welcomeMessage}
             <br/>
+            <br/>
+            Current users logged in:
             <#list users as user>
-                <p>
-                    ${user}
-                </p>
+                <br>
+                    ${user.getName()}
             </#list>
             <br/>
+      <#else>
+        ${currentUserNum}
       </#if>
     
     <div class="body">

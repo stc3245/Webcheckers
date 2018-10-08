@@ -35,11 +35,6 @@ public class GetSignInRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        /*
-        final Session httpSession = request.session();
-        final PlayerLobby playerLobby =
-                httpSession.attribute(GetHomeRoute.PLAYERLOBBY_KEY);*/
-
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
         return templateEngine.render(new ModelAndView(vm , VIEW_NAME));

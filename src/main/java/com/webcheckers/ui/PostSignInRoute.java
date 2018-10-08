@@ -30,7 +30,6 @@ public class PostSignInRoute implements Route {
     private static final String VIEW_NAME = "signin.ftl";
 
     private static final String ERROR_MESSAGE_ATTR = "errorMessage";
-    private static final String WELCOME_MSG = "Welcome, %s";
     private static final String SIGN_IN_ERROR_ATTR = "signInError";
     static final String DISPLYED_MESSAGE_ATTR = "displayedMessage";
     static final String SIGNIN_AUTHORIZED = "User has successfully sign in. ";
@@ -65,8 +64,7 @@ public class PostSignInRoute implements Route {
         final String username = request.queryParams(NAME_PARAM);
 
         final Map<String, Object> vm = new HashMap<>();
-        vm.put(GetHomeRoute.TITLE_ATTR, GetHomeRoute.TITLE_ATTR);
-        vm.put(SIGN_IN_ERROR_ATTR, false);
+        vm.put(GetHomeRoute.TITLE_ATTR, GetHomeRoute.TITLE);
 
         ModelAndView mv;
 
@@ -78,8 +76,7 @@ public class PostSignInRoute implements Route {
             } else {
                 // create a new player and return to home page
                 playerLobby.createPlayer(username);
-                vm.put(GetHomeRoute.WELCOME_MSG, String.format(WELCOME_MSG, username));
-                mv = success(vm, WELCOME_MSG);
+                mv = success(vm);
             }
         } else {
             // navigate back to sign in page with error message
@@ -96,8 +93,10 @@ public class PostSignInRoute implements Route {
         return new ModelAndView(vm, VIEW_NAME);
     }
 
-    private ModelAndView success(final  Map<String, Object> vm, final String message) {
+    private ModelAndView success(final  Map<String, Object> vm) {
+        // puts text on initial redirect to home page. further calls are dealt with in GetHomeRoute on refresh
         vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
+        vm.put(GetHomeRoute.WELCOME_MSG_ATTR, String.format(GetHomeRoute.WELCOME_MSG, playerLobby.currentPlayer().getName()));
         vm.put(GetHomeRoute.PLAYER_LIST, playerLobby.getPlayers());
         return new ModelAndView(vm, GetHomeRoute.VIEW_NAME);
     }
