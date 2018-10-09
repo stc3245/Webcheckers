@@ -1,3 +1,13 @@
 com\webcheckers\ui\WebServer.class
 com\webcheckers\ui\GetHomeRoute.class
+com\webcheckers\auth\AuthData.class
+com\webcheckers\auth\AuthException.class
+com\webcheckers\auth\AuthInterface.class
+com\webcheckers\auth\AuthException$ExceptionMessage.class
+com\webcheckers\auth\AuthInterface$1.class
+com\webcheckers\appl\Player.class
+com\webcheckers\ui\GetSignInRoute.class
+com\webcheckers\ui\PostSignInRoute.class
+com\webcheckers\appl\PlayerLobby.class
+com\webcheckers\auth\AuthInterface$message.class
 com\webcheckers\Application.class

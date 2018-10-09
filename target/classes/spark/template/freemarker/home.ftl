@@ -17,6 +17,21 @@
       <div class="navigation">
           <a href="/signin">sign in</a>
       </div>
+
+      <#if signedIn>
+            <br/>
+          ${welcomeMessage}
+            <br/>
+            <br/>
+            Current users logged in:
+            <#list users as user>
+                <br>
+                    ${user.getName()}
+            </#list>
+            <br/>
+      <#else>
+        ${currentUserNum}
+      </#if>
     
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
