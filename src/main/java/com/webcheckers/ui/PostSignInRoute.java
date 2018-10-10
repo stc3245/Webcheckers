@@ -1,7 +1,5 @@
 package com.webcheckers.ui;
 
-import com.sun.deploy.util.StringUtils;
-import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
 import spark.*;
 
