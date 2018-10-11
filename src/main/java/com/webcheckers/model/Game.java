@@ -22,9 +22,6 @@ public class Game
     /** The status of the game Is always active for now */
     private ViewModeEnum viewMode;
 
-    /** The current player */
-    private Player currentPlayer;
-
 
     /**
      * Constructs a new game with two players 
@@ -56,9 +53,10 @@ public class Game
         return this.whitePlayer;
     }
 
-    public Player getCurrentPlayer()
+
+    public ViewModeEnum getViewMode()
     {
-        return this.currentPlayer;
+        return this.viewMode;
     }
 
 }
