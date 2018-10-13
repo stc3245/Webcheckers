@@ -7,12 +7,18 @@ import java.util.logging.Logger;
 
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
-import spark.*;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.Route;
+import spark.Session;
+import spark.TemplateEngine;
 
 /**
  * The UI Controller to GET the Home page.
  *
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
+ * @author Jeffery Russell 10-12-18
  */
 public class GetHomeRoute implements Route {
 
@@ -61,7 +67,8 @@ public class GetHomeRoute implements Route {
    *   the rendered HTML for the Home page
    */
   @Override
-  public Object handle(Request request, Response response) {
+  public Object handle(Request request, Response response)
+  {
     final Session httpSession = request.session();
     //
     Map<String, Object> vm = new HashMap<>();
@@ -69,16 +76,22 @@ public class GetHomeRoute implements Route {
     vm.put(SIGN_IN_ATTR, false);
 
     // logic for if a current player is signed in
-    if (playerLobby.currentPlayer() != null) {
-      if (playerLobby.signedIn()) {
+    if(playerLobby.currentPlayer() != null) 
+    {
+      if(playerLobby.signedIn()) 
+      {
         vm.put(SIGN_IN_ATTR, true);
-        vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerLobby.currentPlayer().getName()));
+        vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, 
+          playerLobby.currentPlayer().getName()));
         vm.put(PLAYER_LIST, playerLobby.getPlayers());
       }
-    } else {
+    }
+    else 
+    {
       vm.put(SIGN_IN_ATTR, false);
       int userNum = 0;
-      for (Player p : playerLobby.getPlayers()) {
+      for (Player p : playerLobby.getPlayers()) 
+      {
         userNum++;
       }
       vm.put(USER_NUM_ATTR, String.format(USER_NUM, userNum));

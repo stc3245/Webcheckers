@@ -5,9 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.Player;
-import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Game;
+import com.webcheckers.model.*;
+import com.webcheckers.appl.*;
 
 import spark.*;
 
@@ -39,7 +38,8 @@ public class GetGameRoute implements Route
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  GetGameRoute(final Player player, final TemplateEngine templateEngine) {
+  GetGameRoute(final TemplateEngine templateEngine)
+   {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
@@ -60,7 +60,8 @@ public class GetGameRoute implements Route
    *   the rendered HTML for the Home page
    */
   @Override
-  public Object handle(Request request, Response response) {
+  public Object handle(Request request, Response response) 
+  {
     final Session httpSession = request.session();
     //
     Map<String, Object> vm = new HashMap<>();
@@ -68,9 +69,17 @@ public class GetGameRoute implements Route
 
     Player player = httpSession.attribute(WebServer.PLAYER_KEY);
 
-    Game game = player.get
+    Game game = player.getGame();
 
-    vm.put(CURRENTPLAYER, )
+    vm.put(CURRENTPLAYER, player);
+
+    vm.put(VIEWMODE, game.getViewMode());
+
+    vm.put(REDPLAYER, game.getRedPlayer());
+
+    vm.put(WHITEPLAYER, game.getWhitePlayer());
+
+    vm.put(ACTIVECOLOR, game.getActiveColor());
 
 
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
