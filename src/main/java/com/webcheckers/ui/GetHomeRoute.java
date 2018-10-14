@@ -45,7 +45,9 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  GetHomeRoute(final PlayerLobby playerLobby, final TemplateEngine templateEngine) {
+  GetHomeRoute(final PlayerLobby playerLobby, 
+  final TemplateEngine templateEngine)
+   {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //

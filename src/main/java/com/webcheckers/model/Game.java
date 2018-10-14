@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.*;
+
 /**
  * Used to store the status of an active game
  * 
