@@ -23,9 +23,10 @@ public class GetGameRoute implements Route
   public static final String REDPLAYER = "redPlayer";
   public static final String WHITEPLAYER = "whitePlayer";
   public static final String ACTIVECOLOR = "activeColor";
+  public static final String BOARD = "board";
 
   static final String TITLE = "WebCheckers Game!";
-  static final String VIEW_NAME = "home.ftl";
+  static final String VIEW_NAME = "game.ftl";
 
   private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
@@ -67,13 +68,17 @@ public class GetGameRoute implements Route
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
 
-    Player player = httpSession.attribute(WebServer.PLAYER_KEY);
+    PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
+
+    Player player = playerS.currentPlayer();
 
     Game game = player.getGame();
 
     vm.put(CURRENTPLAYER, player);
 
     vm.put(VIEWMODE, game.getViewMode());
+    vm.put(BOARD, game.getBoard());
+
 
     vm.put(REDPLAYER, game.getRedPlayer());
 

@@ -2,12 +2,16 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerServices;
+
+import com.webcheckers.ui.*;
+
 import spark.*;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
+
 
 /**
  * The UI Controller for handling Post /signin
@@ -69,7 +73,7 @@ public class PostSignInRoute implements Route {
 
         ModelAndView mv;
 
-        final PlayerServices playerServices = request.session().attribute("playerServices");
+        final PlayerServices playerServices = request.session().attribute(WebServer.PLAYER_KEY);
 
         // check for active session
         if(playerServices != null) {

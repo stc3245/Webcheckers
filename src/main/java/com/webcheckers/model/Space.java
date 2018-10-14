@@ -21,7 +21,8 @@ public class Space {
      * @param piece - piece if there is one in space or null
      * @param color - color of piece (red or white)
      */
-    public Space(int cellIdx, Piece piece, ColorEnum color){
+    public Space(int cellIdx, Piece piece, ColorEnum color)
+    {
         this.cellIdx = cellIdx;
         this.piece = piece;
         this.color = color;

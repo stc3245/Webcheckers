@@ -1,33 +1,45 @@
 package com.webcheckers.model;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import java.lang.Iterable;
 
-public class Row extends ArrayList<Space> {
+
+/**
+ * @author Jeffery Russell, Shean 10-14-18
+ */
+public class Row implements Iterable<Space>
+{
 
     //Private Instance Variables
     private int index;
+
+    private List<Space> row;
 
     /**
      * constructor for row
      *
      * @param index - index of the row on the board
      */
-    public Row(int index){
+    public Row(int index)
+    {
+        this.row = new ArrayList<>(8);
        if (index % 2 == 0) {
            for (int i = 0; i < 8; i++) {
                if (i % 2 == 0) {
-                   add(new Space(i, null, ColorEnum.WHITE));
+                   row.add(new Space(i, null, ColorEnum.WHITE));
                } else {
-                   add(new Space(i, new Piece(), ColorEnum.RED));
+                   row.add(new Space(i, new Piece(PieceEnum.SINGLE, ColorEnum.RED), ColorEnum.RED));
                }
            }
        }
        else{
            for (int i = 0; i < 8; i++) {
                if (i % 2 == 0) {
-                   add(new Space(i, new Piece(), ColorEnum.RED));
+                   row.add(new Space(i, new Piece(PieceEnum.SINGLE, ColorEnum.RED), ColorEnum.RED));
                } else {
-                   add(new Space(i, null, ColorEnum.WHITE));
+                   row.add(new Space(i, null, ColorEnum.WHITE));
                }
            }
        }
@@ -40,6 +52,11 @@ public class Row extends ArrayList<Space> {
      */
     public int getIndex(){
         return index;
+    }
+
+    public Iterator<Space> iterator() 
+    {
+        return row.iterator();
     }
 
 }

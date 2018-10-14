@@ -50,7 +50,6 @@ public class PostValidateMove implements Route
     PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
     Player player = playerS.currentPlayer();
 
-    
 
     response.redirect(WebServer.GAME_URL);
     return null;

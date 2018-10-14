@@ -19,6 +19,7 @@ public class Player
     public Player(String username) 
     {
         name = username;
+        this.game = null;
     }
 
     public String getName()

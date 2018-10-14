@@ -11,6 +11,7 @@ import spark.Response;
 import spark.Route;
 import spark.Session;
 import spark.TemplateEngine;
+import static spark.Spark.halt;
 
 import com.webcheckers.appl.*;
 import com.webcheckers.model.*;
@@ -55,6 +56,7 @@ public class PostStartGameRoute implements Route
     final String opponentName = request.queryParams(this.OPPONENT_ATTR);
 
     PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
+
     Player player = playerS.currentPlayer();
 
     // other player is not in another game
@@ -63,10 +65,12 @@ public class PostStartGameRoute implements Route
         //start a new game
         gameCenter.startGame(player, gameCenter.getPlayer(opponentName));
         response.redirect(WebServer.GAME_URL);
+        halt();
     }
     else //invalid user selected
     {
         response.redirect(WebServer.HOME_URL);
+        halt();
     }
     return null;
   }

@@ -82,7 +82,7 @@ public class GetHomeRoute implements Route {
 
     // retrieve the game object
     final Session session = request.session();
-    PlayerServices playerServices = session.attribute("playerServices");
+    PlayerServices playerServices = session.attribute(WebServer.PLAYER_KEY);
 
     // logic for if a current player is signed in
     if (playerServices!= null)
@@ -103,7 +103,7 @@ public class GetHomeRoute implements Route {
     else
     {
       playerServices = gameCenter.newPlayerServices();
-      session.attribute(PLAYERSERVICES_KEY, playerServices);
+      session.attribute(WebServer.PLAYER_KEY, playerServices);
       vm.put(SIGN_IN_ATTR, false);
       vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
     }

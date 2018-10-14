@@ -40,7 +40,7 @@ public class Game
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.board = new BoardView();
-        this.viewMode = ViewModeEnum.PLAYER;
+        this.viewMode = ViewModeEnum.PLAY;
         this.activeColor = ColorEnum.RED;
     }
 
@@ -63,6 +63,11 @@ public class Game
     public ViewModeEnum getViewMode()
     {
         return this.viewMode;
+    }
+
+    public BoardView getBoard()
+    {
+        return this.board;
     }
 
 }

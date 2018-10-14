@@ -8,7 +8,7 @@ package com.webcheckers.model;
  */
 public enum ViewModeEnum
 {
-    PLAYER,
+    PLAY,
     SPECTATOR,
     REPLAY
 }

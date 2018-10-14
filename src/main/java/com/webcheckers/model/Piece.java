@@ -6,11 +6,19 @@ package com.webcheckers.model;
  * @author Sean Coyne 10-10-18
  */
 
-public class Piece {
+public class Piece 
+{
 
     //Private instance variables
     private PieceEnum type;
     private ColorEnum color;
+
+    public Piece(PieceEnum type, ColorEnum color)
+    {
+        this.type = type;
+        this.color = color;
+    }
+
 
     /**
      * Get the type of this piece.
