@@ -42,10 +42,22 @@ public class PlayerServices {
         AuthInterface.message msg = authInstance.signIn(username, null, null);
         if (msg != AuthInterface.message.SUCCESS){
             errorMsg = msg.name();
-            LOG.config("PlayerService unsuccessfully signed ." + username + " in");
-            return false;
+            msg = authInstance.signUp(username, null);
+            if (msg != AuthInterface.message.SUCCESS){
+                LOG.config("PlayerService unsuccessfully signed " + username + " up.");
+                LOG.config("PlayerService unsuccessfully signed " + username + " in.");
+                return false;
+            }
+            LOG.config("PlayerService successfully signed " + username + " up.");
+            msg = authInstance.signIn(username, null, null);
+            if (msg != AuthInterface.message.SUCCESS){
+                LOG.config("PlayerService unsuccessfully signed " + username + " in.");
+                return false;
+            }
+            LOG.config("PlayerService successfully signed ." + username + " in.");
+            return true;
         }
-        LOG.config("PlayerService successfully signed ." + username + " in");
+        LOG.config("PlayerService successfully signed ." + username + " in.");
         return true;
     }
 

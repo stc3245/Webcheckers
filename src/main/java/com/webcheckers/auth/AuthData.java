@@ -19,13 +19,6 @@ public class AuthData {
     private static void sync(){
         if (usernamePasswords == null){
             usernamePasswords = new HashMap<>();
-            try {
-                signUp("testuser1", "");
-                signUp("testuser2", "");
-            }catch (AuthException e){
-                e.printStackTrace();
-            }
-
         }
 
         if (userStatus == null){
