@@ -13,28 +13,18 @@ public class Player
     /** Stores name of player */
     private String name;
 
-    private boolean signedIn;
-
     /** Stores active game of the user */
     private Game game;
 
     public Player(String username) 
     {
         name = username;
-        signedIn = true;
     }
 
     public String getName()
     {
         return name;
     }
-
-    public boolean signedIn() 
-    {
-        return signedIn;
-    }
-
-
 
     /**
      * sets the current game
@@ -56,4 +46,12 @@ public class Player
         return this.game;
     }
 
+    /**
+     * copies values from another Player, used for syncing session data and server data
+     * @param player instance to be copied from
+     */
+    public void copiesValuesFrom(Player player){
+        this.name = player.getName();
+        this.game = player.getGame();
+    }
 }

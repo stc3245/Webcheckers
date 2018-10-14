@@ -22,11 +22,11 @@ public class GameCenter
 {
     private static final Logger LOG = Logger.getLogger(GameCenter.class.getName());
 
-    private Map<String, PlayerServices> players;
+    private Map<String, PlayerServices> activeSessions;
 
     public GameCenter()
     {
-        this.players = new HashMap<String, PlayerServices>();
+        this.activeSessions = new HashMap<>();
     }
 
     /**
@@ -42,6 +42,30 @@ public class GameCenter
       return new PlayerServices(this);
     }
 
+    /**
+     * start a logged in session
+     * @param sesh session data
+     */
+    public void startSession(PlayerServices sesh){
+        activeSessions.put(sesh.playerName(), sesh);
+    }
+
+    /**
+     * returns data of an logged in active session
+     * @param username the username
+     * @return the session data
+     */
+    public PlayerServices getSession(String username){
+        return activeSessions.get(username);
+    }
+
+    /**
+     * deletes the data of an active session when they log off
+     * @param username userame
+     */
+    public void terminateSession(String username){
+        activeSessions.remove(username);
+    }
     /**
      * Create a new Game
      *
@@ -72,6 +96,10 @@ public class GameCenter
      */
     public Player getPlayer(String playerName)
     {
-      return null;
+        try{
+            return activeSessions.get(playerName).currentPlayer();
+        }catch(Exception e) {
+            return null;
+        }
     }
 }
