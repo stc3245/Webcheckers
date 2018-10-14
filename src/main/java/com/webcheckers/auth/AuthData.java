@@ -1,5 +1,7 @@
 package com.webcheckers.auth;
 
+import com.webcheckers.appl.Player;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,7 +12,7 @@ public class AuthData {
     private static final Logger LOG = Logger.getLogger(AuthData.class.getName());
 
     private static HashMap<String,String> usernamePasswords;
-    private static HashMap<String,Boolean> userStatus;
+    private static HashMap<String,Player> userData;
     private static HashSet<String> signedInUsers;
 
     /**
@@ -19,17 +21,10 @@ public class AuthData {
     private static void sync(){
         if (usernamePasswords == null){
             usernamePasswords = new HashMap<>();
-            try {
-                signUp("testuser1", "");
-                signUp("testuser2", "");
-            }catch (AuthException e){
-                e.printStackTrace();
-            }
-
         }
 
-        if (userStatus == null){
-            userStatus = new HashMap<>();
+        if (userData == null){
+            userData = new HashMap<>();
         }
 
         if (signedInUsers == null){
@@ -61,7 +56,7 @@ public class AuthData {
      * @param clientUID unique identifier for the client
      * @throws AuthException will throw exception if failed
      */
-    static synchronized void signIn(String username, String password, String clientUID) throws AuthException{
+    static synchronized Player signIn(String username, String password, String clientUID) throws AuthException{
         sync();
 
         String expected = usernamePasswords.get(username);
@@ -71,9 +66,9 @@ public class AuthData {
         if (signedInUsers.contains(username)){
             throw new AuthException(AuthException.ExceptionMessage.ALREADY_SIGNEDIN);
         }
-        userStatus.put(username, true);
         signedInUsers.add(username);
         LOG.config(username + " signed in.");
+        return userData.get(username);
     }
 
     /**
@@ -83,7 +78,7 @@ public class AuthData {
      * @param clientUID unique identifier for the client
      * @throws AuthException will throw exception if failed
      */
-    static synchronized void signOff(String username, String password, String clientUID) throws AuthException{
+    static synchronized void signOff(String username, String password, String clientUID, Player player) throws AuthException{
         sync();
 
         String expected = usernamePasswords.get(username);
@@ -93,8 +88,8 @@ public class AuthData {
         if (!signedInUsers.contains(username)){
             throw new AuthException(AuthException.ExceptionMessage.ALREADY_SIGNEDOFF);
         }
-        userStatus.put(username, false);
         signedInUsers.remove(username);
+        userData.get(username).copiesValuesFrom(player);
         LOG.config(username + " signed off.");
     }
 
@@ -111,6 +106,7 @@ public class AuthData {
         }
         usernamePasswords.put(username, password);
         LOG.config(username + " signed up.");
+        userData.put(username, new Player(username));
     }
 
     static synchronized void changePassword(String username, String password, String newpassword) throws AuthException{

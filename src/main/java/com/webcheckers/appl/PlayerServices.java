@@ -33,30 +33,57 @@ public class PlayerServices {
         errorMsg = "";
     }
 
+    /**
+     * encapsulation
+     * @return the name
+     */
+    public String playerName(){
+        if (signedIn()){
+            return player.getName();
+        }else{
+            return "";
+        }
+    }
+
     public String getErrorMsg(){
         return errorMsg;
     }
 
     public boolean signIn(String username){
-        player = new Player(username);
-        AuthInterface.message msg = authInstance.signIn(username, null, null);
+        player = new Player(null);
+        AuthInterface.message msg = authInstance.signIn(username, null, null, player);
         if (msg != AuthInterface.message.SUCCESS){
             errorMsg = msg.name();
-            LOG.config("PlayerService unsuccessfully signed ." + username + " in");
-            return false;
+            msg = authInstance.signUp(username, null);
+            if (msg != AuthInterface.message.SUCCESS){
+                LOG.config("PlayerService unsuccessfully signed " + username + " up.");
+                LOG.config("PlayerService unsuccessfully signed " + username + " in.");
+                return false;
+            }
+            LOG.config("PlayerService successfully signed " + username + " up.");
+            msg = authInstance.signIn(username, null, null, player);
+            if (msg != AuthInterface.message.SUCCESS){
+                LOG.config("PlayerService unsuccessfully signed " + username + " in.");
+                return false;
+            }
+            gameCenter.startSession(this);
+            LOG.config("PlayerService successfully signed ." + username + " in.");
+            return true;
         }
-        LOG.config("PlayerService successfully signed ." + username + " in");
+        gameCenter.startSession(this);
+        LOG.config("PlayerService successfully signed ." + username + " in.");
         return true;
     }
 
     public boolean signOff(){
         String name = player.getName();
-        AuthInterface.message msg = authInstance.signOff(name, null, null);
+        AuthInterface.message msg = authInstance.signOff(name, null, null, player);
         if (msg != AuthInterface.message.SUCCESS){
             errorMsg = msg.name();
             LOG.config("PlayerService unsuccessfully signed ." + name + " off");
             return false;
         }
+        gameCenter.terminateSession(name);
         player = null;
         LOG.config("PlayerService successfully signed ." + name + " off");
         return true;

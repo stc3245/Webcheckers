@@ -1,5 +1,7 @@
 package com.webcheckers.auth;
 
+import com.webcheckers.appl.Player;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -25,16 +27,7 @@ public class AuthInterface {
      * @param username string of the username
      * @return LogInMessage from login attempt
      */
-    public message signIn(String username, String password, String clientUID){
-        return authenticate(username, password, clientUID);
-    }
-
-    /**
-     * method for signing players off
-     * @param username string of the username
-     * @return LogInMessage from login attempt
-     */
-    public message signOff(String username, String password, String clientUID){
+    public message signIn(String username, String password, String clientUID, Player player){
         // sanity check
         if (password == null){
             password = "";
@@ -44,7 +37,36 @@ public class AuthInterface {
         }
 
         try{
-            AuthData.signOff(username, password, clientUID);
+            player.copiesValuesFrom(AuthData.signIn(username, password, clientUID));
+        }catch (AuthException e){
+            switch (AuthException.ExceptionMessage.valueOf(e.getMessage())){
+                case ALREADY_SIGNEDIN:
+                    return message.ALREADY_SIGNEDIN;
+                case WRONG_CREDENTIALS:
+                    return message.WRONG_CREDENTIALS;
+                default:
+                    return message.UNKNOWN_ERROR;
+            }
+        }
+        return message.SUCCESS;
+    }
+
+    /**
+     * method for signing players off
+     * @param username string of the username
+     * @return LogInMessage from login attempt
+     */
+    public message signOff(String username, String password, String clientUID, Player player){
+        // sanity check
+        if (password == null){
+            password = "";
+        }
+        if (clientUID == null){
+            clientUID = "";
+        }
+
+        try{
+            AuthData.signOff(username, password, clientUID, player);
         }catch (AuthException e){
             switch (AuthException.ExceptionMessage.valueOf(e.getMessage())){
                 case ALREADY_SIGNEDIN:
