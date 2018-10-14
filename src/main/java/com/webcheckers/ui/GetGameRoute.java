@@ -5,8 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.Player;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Player;
 import com.webcheckers.model.Game;
 
 import spark.*;
@@ -66,11 +65,7 @@ public class GetGameRoute implements Route
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
 
-    Player player = httpSession.attribute(WebServer.PLAYER_KEY);
 
-    Game game = player.get
-
-    vm.put(CURRENTPLAYER, )
 
 
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));

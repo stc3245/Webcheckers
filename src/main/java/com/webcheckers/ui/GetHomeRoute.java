@@ -1,12 +1,13 @@
 package com.webcheckers.ui;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.appl.Player;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.PlayerServices;
 import spark.*;
 
 /**
@@ -27,10 +28,14 @@ public class GetHomeRoute implements Route {
   static final String WELCOME_MSG = "Welcome, %s!";
   static final String PLAYER_LIST = "users";
 
+  // Key in the session attribute map for the player who started the session
+  static final String PLAYERSERVICES_KEY = "playerServices";
+  static final String TIMEOUT_SESSION_KEY = "timeoutWatchdog";
+
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
+  private final GameCenter gameCenter;
 
   private final TemplateEngine templateEngine;
-  private final PlayerLobby playerLobby;
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -39,12 +44,13 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  GetHomeRoute(final PlayerLobby playerLobby, final TemplateEngine templateEngine) {
+  GetHomeRoute(GameCenter gameCenter,final TemplateEngine templateEngine) {
     // validation
+    Objects.requireNonNull(gameCenter, "gameCenter must not be null");
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
+    this.gameCenter = gameCenter;
     this.templateEngine = templateEngine;
-    this.playerLobby = playerLobby;
     //
     LOG.config("GetHomeRoute is initialized.");
   }
@@ -62,26 +68,31 @@ public class GetHomeRoute implements Route {
    */
   @Override
   public Object handle(Request request, Response response) {
-    final Session httpSession = request.session();
-    //
+    // starts the view model
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
     vm.put(SIGN_IN_ATTR, false);
 
+    // retrieve the game object
+    final Session session = request.session();
+    PlayerServices playerServices = session.attribute("playerServices");
+
     // logic for if a current player is signed in
-    if (playerLobby.currentPlayer() != null) {
-      if (playerLobby.signedIn()) {
+    if (playerServices!= null) {
+      if (playerServices.signedIn()) {
         vm.put(SIGN_IN_ATTR, true);
-        vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerLobby.currentPlayer().getName()));
-        vm.put(PLAYER_LIST, playerLobby.getPlayers());
+        vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerServices.currentPlayer().getName()));
+        vm.put(PLAYER_LIST, gameCenter.getOnlinePlayers());
+        vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
+      }else {
+        vm.put(SIGN_IN_ATTR, false);
+        vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
       }
     } else {
+      playerServices = gameCenter.newPlayerServices();
+      session.attribute(PLAYERSERVICES_KEY, playerServices);
       vm.put(SIGN_IN_ATTR, false);
-      int userNum = 0;
-      for (Player p : playerLobby.getPlayers()) {
-        userNum++;
-      }
-      vm.put(USER_NUM_ATTR, String.format(USER_NUM, userNum));
+      vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
     }
 
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
