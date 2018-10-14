@@ -62,6 +62,7 @@ public class WebServer
   public static final String SIGNIN_URL = "/signin";
   public static final String GAME_URL = "/game";
   public static final String START_GAME_URL = "/startGame";
+  public static final String VALIDATE_MOVE = "/validateMove";
 
 
   /**
@@ -165,6 +166,8 @@ public class WebServer
     get(GAME_URL, new GetGameRoute(templateEngine));
     post(START_GAME_URL, new PostStartGameRoute(gameCenter ,templateEngine));
 
+
+    post(VALIDATE_MOVE, new PostValidateMove(templateEngine));
     //
     LOG.config("WebServer is initialized.");
   }

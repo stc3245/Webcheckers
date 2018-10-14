@@ -16,22 +16,17 @@ import com.webcheckers.appl.*;
 import com.webcheckers.model.*;
 
 /**
- * Class dealing with entering a player in a game 
+ * Class dealing with validating a move
  * 
- * @author Jeffery Russell 10-13-18
+ * @author Jeffery Russell 10-14-18
  */
-public class PostStartGameRoute implements Route
+public class PostValidateMove implements Route
 {
     private final TemplateEngine templateEngine;
-    private final GameCenter gameCenter;
 
-    static final String OPPONENT_ATTR = "opponentName";
-
-    public PostStartGameRoute(final GameCenter gameCenter,
-        final TemplateEngine templateEngine)
+    public PostValidateMove(final TemplateEngine templateEngine)
     {
         this.templateEngine = templateEngine;
-        this.gameCenter = gameCenter;
     }
 
 
@@ -52,22 +47,12 @@ public class PostStartGameRoute implements Route
   {
     final Session httpSession = request.session();
 
-    final String opponentName = request.queryParams(this.OPPONENT_ATTR);
-
     PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
     Player player = playerS.currentPlayer();
 
-    // other player is not in another game
-    if(!gameCenter.playerInGame(opponentName))
-    {
-        //start a new game
-        gameCenter.startGame(player, gameCenter.getPlayer(opponentName));
-        response.redirect(WebServer.GAME_URL);
-    }
-    else //invalid user selected
-    {
-        response.redirect(WebServer.HOME_URL);
-    }
+    
+
+    response.redirect(WebServer.GAME_URL);
     return null;
   }
 
