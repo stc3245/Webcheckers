@@ -33,6 +33,10 @@ public class Game
      */
     public Game(Player redPlayer, Player whitePlayer)
     {
+        //adds players to the game
+        redPlayer.setGame(this);
+        whitePlayer.setGame(this);
+
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.board = new BoardView();

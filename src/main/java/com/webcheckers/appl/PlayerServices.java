@@ -3,9 +3,11 @@ package com.webcheckers.appl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.webcheckers.auth.AuthInterface;
-import com.webcheckers.model.Player;
+import com.webcheckers.appl.Player;
 
 /**
  * The object to coordinate the state of the Web Application.

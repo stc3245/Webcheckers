@@ -68,6 +68,7 @@ public class GetGameRoute implements Route
     vm.put("title", "Welcome!");
 
     Player player = httpSession.attribute(WebServer.PLAYER_KEY);
+
     Game game = player.getGame();
 
     vm.put(CURRENTPLAYER, player);

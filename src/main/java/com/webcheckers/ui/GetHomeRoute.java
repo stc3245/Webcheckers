@@ -6,8 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.appl.Player;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -86,17 +85,23 @@ public class GetHomeRoute implements Route {
     PlayerServices playerServices = session.attribute("playerServices");
 
     // logic for if a current player is signed in
-    if (playerServices!= null) {
-      if (playerServices.signedIn()) {
+    if (playerServices!= null)
+    {
+      if (playerServices.signedIn()) 
+      {
         vm.put(SIGN_IN_ATTR, true);
         vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerServices.currentPlayer().getName()));
         vm.put(PLAYER_LIST, gameCenter.getOnlinePlayers());
         vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
-      }else {
+      }
+      else 
+      {
         vm.put(SIGN_IN_ATTR, false);
         vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
       }
-    } else {
+    } 
+    else
+    {
       playerServices = gameCenter.newPlayerServices();
       session.attribute(PLAYERSERVICES_KEY, playerServices);
       vm.put(SIGN_IN_ATTR, false);
