@@ -55,4 +55,13 @@ public class Player
         this.name = player.getName();
         this.game = player.getGame();
     }
+
+
+    /**
+     * Returns if the player is currently in a game or not.
+     */
+    public boolean inGame()
+    {
+        return this.game != null;
+    }
 }

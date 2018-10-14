@@ -86,7 +86,7 @@ public class GameCenter
      */
     public boolean playerInGame(String player)
     {
-      return this.getPlayer(player).getGame() != null;
+      return this.getPlayer(player).inGame();
     }
 
 

@@ -13,6 +13,7 @@ import spark.Response;
 import spark.Route;
 import spark.Session;
 import spark.TemplateEngine;
+import static spark.Spark.halt;
 
 /**
  * The UI Controller to GET the Home page.
@@ -87,12 +88,21 @@ public class GetHomeRoute implements Route {
     // logic for if a current player is signed in
     if (playerServices!= null)
     {
-      if (playerServices.signedIn()) 
+      if(playerServices.signedIn()) 
       {
-        vm.put(SIGN_IN_ATTR, true);
-        vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerServices.currentPlayer().getName()));
-        vm.put(PLAYER_LIST, gameCenter.getOnlinePlayers());
-        vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
+        if(playerServices.currentPlayer().inGame())
+        {
+          response.redirect(WebServer.GAME_URL);
+          halt();
+          return null;
+        }
+        else
+        {
+          vm.put(SIGN_IN_ATTR, true);
+          vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerServices.currentPlayer().getName()));
+          vm.put(PLAYER_LIST, gameCenter.getOnlinePlayers());
+          vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
+        }
       }
       else 
       {
