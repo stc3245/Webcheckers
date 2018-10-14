@@ -6,14 +6,20 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.appl.GameCenter;
-import com.webcheckers.appl.PlayerServices;
-import spark.*;
+import com.webcheckers.appl.Player;
+import com.webcheckers.appl.PlayerLobby;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.Route;
+import spark.Session;
+import spark.TemplateEngine;
 
 /**
  * The UI Controller to GET the Home page.
  *
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
+ * @author Jeffery Russell 10-12-18
  */
 public class GetHomeRoute implements Route {
 
@@ -67,8 +73,10 @@ public class GetHomeRoute implements Route {
    *   the rendered HTML for the Home page
    */
   @Override
-  public Object handle(Request request, Response response) {
-    // starts the view model
+  public Object handle(Request request, Response response)
+  {
+    final Session httpSession = request.session();
+    //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
     vm.put(SIGN_IN_ATTR, false);

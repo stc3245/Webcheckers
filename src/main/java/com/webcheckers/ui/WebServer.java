@@ -43,9 +43,13 @@ import spark.TemplateEngine;
  * </p>
  *
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
+ * @author Jeffery Russell
  */
-public class WebServer {
+public class WebServer
+{
   private static final Logger LOG = Logger.getLogger(WebServer.class.getName());
+
+
 
   //
   // Constants
@@ -56,7 +60,16 @@ public class WebServer {
    */
   public static final String HOME_URL = "/";
   public static final String SIGNIN_URL = "/signin";
+  public static final String GAME_URL = "/game";
+  public static final String START_GAME_URL = "/startGame";
 
+
+  /**
+   * Keys to use for session data
+   *
+   */
+
+  public static final String PLAYER_KEY = "playerKey";
   //
   // Attributes
   //
@@ -103,7 +116,8 @@ public class WebServer {
    * returns after the web server finishes its initialization.
    * </p>
    */
-  public void initialize() {
+  public void initialize()
+  {
 
     // Configuration to serve static files
     staticFileLocation("/public");
@@ -146,6 +160,10 @@ public class WebServer {
     get(SIGNIN_URL, new GetSignInRoute(templateEngine));
     // redirects home for now, can be changed in the future
     post(HOME_URL, new PostSignInRoute(gameCenter, templateEngine));
+
+
+    get(GAME_URL, new GetGameRoute(templateEngine));
+    post(START_GAME_URL, new PostStartGameRoute(gameCenter ,templateEngine));
 
     //
     LOG.config("WebServer is initialized.");
