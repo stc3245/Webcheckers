@@ -2,10 +2,12 @@ package com.webcheckers.appl;
 
 import java.util.Collection;
 import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.webcheckers.auth.AuthInterface;
 import com.webcheckers.model.Game;
-import com.webcheckers.model.Player;
+import com.webcheckers.appl.Player;
 
 /**
  * The object to coordinate the state of the Web Application.
@@ -14,9 +16,18 @@ import com.webcheckers.model.Player;
  * This class is an example of the Pure Fabrication principle.
  *
  * @author <a href='mailto:xxd9704@rit.edu'>Perry Deng</a>
+ * @author Jeffery Russell 10-13-18
  */
-public class GameCenter {
+public class GameCenter 
+{
     private static final Logger LOG = Logger.getLogger(GameCenter.class.getName());
+
+    private Map<String, PlayerServices> players;
+
+    public GameCenter()
+    {
+        this.players = new HashMap<String, PlayerServices>();
+    }
 
     /**
      * Get a new {@Linkplain PlayerServices} object instance to provide client-specific services to
@@ -25,9 +36,10 @@ public class GameCenter {
      * @return
      *   A new {@Link PlayerServices}
      */
-    public PlayerServices newPlayerServices() {
+    public PlayerServices newPlayerServices() 
+    {
       LOG.fine("New player services instance created.");
-      return new PlayerServices(this);
+      PlayerServices temp = new PlayerServices(this);
     }
 
     /**
@@ -36,11 +48,30 @@ public class GameCenter {
      * @return
      *   A new {@link Game}
      */
-    public Game getGame(Player player1, Player player2) {
-      return new Game(player1, player2);
+    public void startGame(Player player1, Player player2) {
+      Game(player1, player2);
     }
 
-    public Collection<String> getOnlinePlayers(){
+    public Collection<String> getOnlinePlayers()
+    {
         return AuthInterface.getOnlinePlayers();
+    }
+
+    /**
+     * Determins if a player is already in a game
+     */
+    public boolean playerInGame(String player)
+    {
+      return false;
+    }
+
+
+    /**
+     * Returns the specific player who is logged into 
+     * with that username.
+     */
+    public Player getPlayer(String playerName)
+    {
+      return null;
     }
 }

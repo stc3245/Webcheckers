@@ -12,8 +12,7 @@ import spark.Route;
 import spark.Session;
 import spark.TemplateEngine;
 
-import com.webcheckers.appl.Player;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.*;
 
 /**
  * Class dealing with entering a player in a game 
@@ -23,15 +22,15 @@ import com.webcheckers.appl.PlayerLobby;
 public class PostStartGameRoute implements Route
 {
     private final TemplateEngine templateEngine;
-    private final PlayerLobby playerLobby;
+    private final GameCenter gameCenter;
 
     static final String OPPONENT_ATTR = "opponentName";
 
-    public PostStartGameRoute(final PlayerLobby playerLobby,
+    public PostStartGameRoute(final GameCenter gameCenter,
         final TemplateEngine templateEngine)
     {
         this.templateEngine = templateEngine;
-        this.playerLobby = playerLobby;
+        this.gameCenter = gameCenter;
     }
 
 
@@ -60,14 +59,21 @@ public class PostStartGameRoute implements Route
 
     final String opponentName = request.queryParams(this.OPPONENT_ATTR);
 
+    Player player = httpSession.attribute(WebServer.PLAYER_KEY);
 
-    //
-    Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
-
-
-
-    return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+    // other player is not in another game
+    if(!gameCenter.playerInGame(opponentName))
+    {
+        //start a new game
+        gameCenter.startGame(player, gameCenter.getPlayer(opponentName));
+        response.redirect(WebServer.GAME_URL);
+    }
+    else //invalid user selected
+    {
+        response.redirect(WebServer.HOME_URL);
+    }
+    halt();
+    return null;
   }
 
 }
