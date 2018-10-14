@@ -28,19 +28,24 @@ public class BoardView implements Iterable<Row>
         }
     }
 
+    public BoardView(List<Row> view)
+    {
+        this.board = view;
+    }
 
-    // /**
-    //  * returns the inverted display for the black player.
-    //  */
-    // public List<Row> getInverted()
-    // {
-    //     ArrayList<Row> temp = new ArrayList<Row>();
-    //     for(int i = 7; i <= 0; i--)
-    //     {
-    //         temp.add(board.get(i));
-    //     }
-    //     return temp;
-    // }
+
+    /**
+     * returns the inverted display for the black player.
+     */
+    public BoardView getInverted()
+    {
+        ArrayList<Row> temp = new ArrayList<Row>();
+        for(int i = 7; i >= 0; i--)
+        {
+            temp.add(board.get(i).inverted());
+        }
+        return new BoardView(temp);
+    }
 
     public Iterator<Row> iterator() 
     {

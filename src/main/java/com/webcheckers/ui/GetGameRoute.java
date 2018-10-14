@@ -77,7 +77,7 @@ public class GetGameRoute implements Route
     vm.put(CURRENTPLAYER, player);
 
     vm.put(VIEWMODE, game.getViewMode());
-    vm.put(BOARD, game.getBoard());
+    vm.put(BOARD, player.getPlayersBoard());
 
 
     vm.put(REDPLAYER, game.getRedPlayer());

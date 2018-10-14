@@ -64,4 +64,14 @@ public class Player
     {
         return this.game != null;
     }
+
+    public BoardView getPlayersBoard()
+    {
+        if(this.game.getWhitePlayer() != this)
+        {
+            return game.getBoard();
+        }
+        return game.getBoard().getInverted();
+    }
+
 }

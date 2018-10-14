@@ -24,25 +24,58 @@ public class Row implements Iterable<Space>
      */
     public Row(int index)
     {
-        this.row = new ArrayList<>(8);
-       if (index % 2 == 0) {
-           for (int i = 0; i < 8; i++) {
-               if (i % 2 == 0) {
-                   row.add(new Space(i, null, ColorEnum.WHITE));
-               } else {
-                   row.add(new Space(i, new Piece(PieceEnum.SINGLE, ColorEnum.RED), ColorEnum.RED));
-               }
-           }
+       ColorEnum selectedPlayerColor;
+       this.row = new ArrayList<>(8);
+
+       if(index >= 3)
+       {
+           selectedPlayerColor = ColorEnum.RED;
        }
-       else{
-           for (int i = 0; i < 8; i++) {
-               if (i % 2 == 0) {
-                   row.add(new Space(i, new Piece(PieceEnum.SINGLE, ColorEnum.RED), ColorEnum.RED));
-               } else {
-                   row.add(new Space(i, null, ColorEnum.WHITE));
-               }
-           }
+       else
+       {
+           selectedPlayerColor = ColorEnum.WHITE;
        }
+
+        Piece tempPiece;
+        if(index != 3 && index != 4)
+        {
+            tempPiece =  new Piece(PieceEnum.SINGLE, selectedPlayerColor);
+        }
+        else
+        {
+            tempPiece = null;
+        }
+
+
+       for(int i = 0; i < 8; i++)
+       {
+           ColorEnum tileColor = ((index + i) %2 == 0) ? ColorEnum.WHITE : ColorEnum.RED;
+           if(tileColor == ColorEnum.RED)
+           {
+                row.add(new Space(i, tempPiece, tileColor));
+           }
+           else
+           {
+               row.add(new Space(i, null, tileColor));
+           }
+           
+       }
+    }
+
+    public Row(int index, List<Space> row)
+    {
+        this.index = index;
+        this.row = row;
+    }
+
+    public Row inverted()
+    {
+        List<Space> row = new ArrayList<Space>(8);
+        for(int i = 7; i>=0; i--)
+        {
+            row.add(this.row.get(i));
+        }
+        return new Row(this.getIndex(), row);
     }
 
     /**
