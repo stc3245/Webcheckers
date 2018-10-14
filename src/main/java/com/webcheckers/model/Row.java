@@ -1,4 +1,8 @@
 package com.webcheckers.model;
 
-public class Row {
+import java.util.ArrayList;
+
+public class Row extends ArrayList<Space> {
+
+
 }
