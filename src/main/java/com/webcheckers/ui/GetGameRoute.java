@@ -60,7 +60,7 @@ public class GetGameRoute implements Route
    *   the rendered HTML for the Home page
    */
   @Override
-  public Object handle(Request request, Response response) 
+  public Object handle(Request request, Response response)
   {
     final Session httpSession = request.session();
     //

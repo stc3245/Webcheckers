@@ -23,13 +23,14 @@
           ${welcomeMessage}
             <br/>
             <br/>
-            Current users logged in:
+            Other users logged in:
             <#list users as user>
                 <br>
-                    ${user.getName()}
+                    ${user}
             </#list>
             <br/>
       <#else>
+        <br/>
         ${currentUserNum}
       </#if>
     

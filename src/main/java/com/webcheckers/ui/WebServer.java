@@ -7,7 +7,8 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.PlayerServices;
 import spark.TemplateEngine;
 
 
@@ -44,7 +45,7 @@ import spark.TemplateEngine;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  * @author Jeffery Russell
  */
-public class WebServer 
+public class WebServer
 {
   private static final Logger LOG = Logger.getLogger(WebServer.class.getName());
 
@@ -63,7 +64,7 @@ public class WebServer
   public static final String START_GAME_URL = "/startGame";
 
 
-  /** 
+  /**
    * Keys to use for session data
    *
    */
@@ -72,11 +73,9 @@ public class WebServer
   //
   // Attributes
   //
-
+  private final GameCenter gameCenter;
   private final TemplateEngine templateEngine;
   private final Gson gson;
-  private final PlayerLobby playerLobby;
-
 
   //
   // Constructor
@@ -93,15 +92,15 @@ public class WebServer
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby playerLobby) {
+  public WebServer(final GameCenter gameCenter, final TemplateEngine templateEngine, final Gson gson) {
     // validation
+    Objects.requireNonNull(gameCenter, "gameCenter must not be null");
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
     //
+    this.gameCenter = gameCenter;
     this.templateEngine = templateEngine;
     this.gson = gson;
-    this.playerLobby = playerLobby;
-
   }
 
   //
@@ -117,7 +116,7 @@ public class WebServer
    * returns after the web server finishes its initialization.
    * </p>
    */
-  public void initialize() 
+  public void initialize()
   {
 
     // Configuration to serve static files
@@ -157,16 +156,14 @@ public class WebServer
     //// code clean; using small classes.
 
     // Shows the Checkers game Home page.
-    
+    get(HOME_URL, new GetHomeRoute(gameCenter, templateEngine));
     get(SIGNIN_URL, new GetSignInRoute(templateEngine));
     // redirects home for now, can be changed in the future
-
-    get(HOME_URL, new GetHomeRoute(playerLobby, templateEngine));
-    post(HOME_URL, new PostSignInRoute(playerLobby, templateEngine));
+    post(HOME_URL, new PostSignInRoute(gameCenter, templateEngine));
 
 
     get(GAME_URL, new GetGameRoute(templateEngine));
-    post(START_GAME_URL, new PostStartGameRoute(playerLobby ,templateEngine));
+    post(START_GAME_URL, new PostStartGameRoute(gameCenter ,templateEngine));
 
     //
     LOG.config("WebServer is initialized.");

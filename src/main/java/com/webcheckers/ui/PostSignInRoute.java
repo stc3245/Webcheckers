@@ -1,7 +1,7 @@
 package com.webcheckers.ui;
 
-import com.webcheckers.appl.Player;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.PlayerServices;
 import spark.*;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class PostSignInRoute implements Route {
     //
     // Constants
     //
-    private final PlayerLobby playerLobby;
+    private final GameCenter gameCenter;
     private final TemplateEngine templateEngine;
 
     // username input value
@@ -47,14 +47,16 @@ public class PostSignInRoute implements Route {
 
     /**
      * constructor
-     * @param playerLobby an instance of SigninServices, handles sign in logic
+     * @param gameCenter the one and only instance of gameCenter
      * @param templateEngine an instance of TemplateEngine
      */
-    PostSignInRoute(PlayerLobby playerLobby, TemplateEngine templateEngine) {
+    PostSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
         // validation
+        Objects.requireNonNull(gameCenter, "gameCenter must not be null");
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
+
+        this.gameCenter = gameCenter;
         this.templateEngine = templateEngine;
-        this.playerLobby = playerLobby;
     }
 
     @Override
@@ -67,19 +69,19 @@ public class PostSignInRoute implements Route {
 
         ModelAndView mv;
 
-        // if the username is valid
-        if (playerLobby.isValid(username)) {
-            if (playerLobby.userExists(username)) {
-                // navigate back to sign in page with error message
-                mv = error(vm, ERROR_USERNAME_TAKEN);
+        final PlayerServices playerServices = request.session().attribute("playerServices");
+
+        // check for active session
+        if(playerServices != null) {
+            // attempts to sign in
+            if (playerServices.signIn(username)) {
+                mv = success(playerServices, vm);
             } else {
-                // create a new player and return to home page
-                playerLobby.createPlayer(username);
-                mv = success(vm);
+                mv = error(vm, playerServices.getErrorMsg());
             }
-        } else {
-            // navigate back to sign in page with error message
-            mv = error(vm, ERROR_INVALID_CHARACTERS);
+        }else{
+            response.redirect(WebServer.HOME_URL);
+            return null;
         }
 
         return templateEngine.render(mv);
@@ -87,16 +89,18 @@ public class PostSignInRoute implements Route {
     }
 
     private ModelAndView error(final Map<String, Object> vm, final String message) {
+        vm.put(GetHomeRoute.SIGN_IN_ATTR, false);
         vm.put(SIGN_IN_ERROR_ATTR, true);
         vm.put(ERROR_MESSAGE_ATTR, message);
         return new ModelAndView(vm, VIEW_NAME);
     }
 
-    private ModelAndView success(final  Map<String, Object> vm) {
+    private ModelAndView success(PlayerServices playerServices, final Map<String, Object> vm) {
         // puts text on initial redirect to home page. further calls are dealt with in GetHomeRoute on refresh
+        String name = playerServices.currentPlayer().getName();
         vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
-        vm.put(GetHomeRoute.WELCOME_MSG_ATTR, String.format(GetHomeRoute.WELCOME_MSG, playerLobby.currentPlayer().getName()));
-        vm.put(GetHomeRoute.PLAYER_LIST, playerLobby.getPlayers());
+        vm.put(GetHomeRoute.WELCOME_MSG_ATTR, String.format(GetHomeRoute.WELCOME_MSG, name));
+        vm.put(GetHomeRoute.PLAYER_LIST, gameCenter.getOnlinePlayers());
         return new ModelAndView(vm, GetHomeRoute.VIEW_NAME);
     }
 
