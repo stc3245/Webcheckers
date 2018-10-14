@@ -39,7 +39,7 @@ public class GameCenter
     public PlayerServices newPlayerServices() 
     {
       LOG.fine("New player services instance created.");
-      PlayerServices temp = new PlayerServices(this);
+      return new PlayerServices(this);
     }
 
     /**
@@ -49,7 +49,7 @@ public class GameCenter
      *   A new {@link Game}
      */
     public void startGame(Player player1, Player player2) {
-      Game(player1, player2);
+      new Game(player1, player2);
     }
 
     public Collection<String> getOnlinePlayers()

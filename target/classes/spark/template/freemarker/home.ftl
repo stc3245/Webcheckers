@@ -23,10 +23,12 @@
           ${welcomeMessage}
             <br/>
             <br/>
-            Other users logged in:
+            All users logged in:
             <#list users as user>
                 <br>
-                    ${user}
+                  <form action="./startGame" method="post">
+                      <input type="submit" name="opponentName" value="${user}" />
+                  </form>
             </#list>
             <br/>
       <#else>

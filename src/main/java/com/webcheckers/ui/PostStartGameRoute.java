@@ -72,7 +72,6 @@ public class PostStartGameRoute implements Route
     {
         response.redirect(WebServer.HOME_URL);
     }
-    halt();
     return null;
   }
 
