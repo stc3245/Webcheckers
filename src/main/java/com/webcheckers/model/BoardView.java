@@ -1,4 +1,7 @@
 package com.webcheckers.model;
 
-public class BoardView {
+import java.util.ArrayList;
+
+public class BoardView extends ArrayList<Row> {
+
 }
