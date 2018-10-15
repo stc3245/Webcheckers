@@ -103,7 +103,7 @@ public class GetHomeRoute implements Route {
           vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerServices.currentPlayer().getName()));
           vm.put(PLAYER_LIST, gameCenter.getOnlinePlayers());
           vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
-          vm.put(ERROR_MSG, playerServices.getErrorMsg())
+          vm.put(ERROR_MSG, playerServices.getErrorMsg());
         }
         
       }
