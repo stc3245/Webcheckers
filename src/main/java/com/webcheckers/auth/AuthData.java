@@ -58,7 +58,6 @@ public class AuthData {
      */
     static synchronized Player signIn(String username, String password, String clientUID) throws AuthException{
         sync();
-
         String expected = usernamePasswords.get(username);
         if (expected == null || !expected.equals(password)){
             throw new AuthException(AuthException.ExceptionMessage.WRONG_CREDENTIALS);
@@ -89,7 +88,7 @@ public class AuthData {
             throw new AuthException(AuthException.ExceptionMessage.ALREADY_SIGNEDOFF);
         }
         signedInUsers.remove(username);
-        userData.get(username).copiesValuesFrom(player);
+        //userData.get(username).copiesValuesFrom(player);
         LOG.config(username + " signed off.");
     }
 

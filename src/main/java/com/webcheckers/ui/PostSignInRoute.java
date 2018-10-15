@@ -81,7 +81,9 @@ public class PostSignInRoute implements Route {
             if (playerServices.signIn(username)) {
                 mv = success(playerServices, vm);
             } else {
-                mv = error(vm, playerServices.getErrorMsg());
+
+                System.out.println(playerServices.getErrorMsg());
+                mv = error(vm, playerServices.getErrorMsg().toString());
             }
         }else{
             response.redirect(WebServer.HOME_URL);
@@ -95,7 +97,9 @@ public class PostSignInRoute implements Route {
     private ModelAndView error(final Map<String, Object> vm, final String message) {
         vm.put(GetHomeRoute.SIGN_IN_ATTR, false);
         vm.put(SIGN_IN_ERROR_ATTR, true);
-        vm.put(ERROR_MESSAGE_ATTR, message);
+        System.out.println(message);
+        vm.put(ERROR_MESSAGE_ATTR, "Error loggin in.");
+        vm.put(GetHomeRoute.ERROR_MSG, "");
         return new ModelAndView(vm, VIEW_NAME);
     }
 
@@ -105,6 +109,7 @@ public class PostSignInRoute implements Route {
         vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
         vm.put(GetHomeRoute.WELCOME_MSG_ATTR, String.format(GetHomeRoute.WELCOME_MSG, name));
         vm.put(GetHomeRoute.PLAYER_LIST, gameCenter.getOnlinePlayers());
+        vm.put(GetHomeRoute.ERROR_MSG, "");
         return new ModelAndView(vm, GetHomeRoute.VIEW_NAME);
     }
 

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.webcheckers.model.*;
 import com.webcheckers.appl.*;
+import static spark.Spark.halt;
 
 import spark.*;
 
@@ -69,6 +70,11 @@ public class GetGameRoute implements Route
     vm.put("title", "Welcome!");
 
     PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
+    if(playerS == null)
+    {
+      response.redirect(WebServer.HOME_URL);
+      halt();
+    }
 
     Player player = playerS.currentPlayer();
 

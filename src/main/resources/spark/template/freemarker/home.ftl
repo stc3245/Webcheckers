@@ -18,11 +18,13 @@
           <a href="/signin">sign in</a>
       </div>
 
+      ${errorMsg}<br />
+
       <#if signedIn>
             <br/>
           ${welcomeMessage}
             <br/>
-            ${errorMsg}
+            <br/>
 
             <br/>
             All users logged in:

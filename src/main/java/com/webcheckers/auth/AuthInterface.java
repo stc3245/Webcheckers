@@ -37,7 +37,7 @@ public class AuthInterface {
         }
 
         try{
-            player.copiesValuesFrom(AuthData.signIn(username, password, clientUID));
+            AuthData.signIn(username, password, clientUID);
         }catch (AuthException e){
             switch (AuthException.ExceptionMessage.valueOf(e.getMessage())){
                 case ALREADY_SIGNEDIN:

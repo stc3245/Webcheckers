@@ -16,6 +16,8 @@ import static spark.Spark.halt;
 import com.webcheckers.appl.*;
 import com.webcheckers.model.*;
 
+import static spark.Spark.halt;
+
 /**
  * Class dealing with entering a player in a game 
  * 
@@ -57,10 +59,17 @@ public class PostStartGameRoute implements Route
 
     PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
 
+    if(playerS == null)
+    {
+      response.redirect(WebServer.HOME_URL);
+      halt();
+    }
+
     Player player = playerS.currentPlayer();
 
     // other player is not in another game
-    if(!gameCenter.playerInGame(opponentName))
+    if(!gameCenter.playerInGame(opponentName) &&
+         !player.getName().equals(opponentName))
     {
         //start a new game
         gameCenter.startGame(player, gameCenter.getPlayer(opponentName));
