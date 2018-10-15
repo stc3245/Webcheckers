@@ -121,7 +121,7 @@ public class GetHomeRoute implements Route {
       vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
     }
 
-    vm.put(ERROR_MSG, playerServices.getErrorMsg());
+    vm.put(ERROR_MSG, playerServices.getStartGameError());
 
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }

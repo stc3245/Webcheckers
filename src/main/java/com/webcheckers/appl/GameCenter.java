@@ -46,7 +46,9 @@ public class GameCenter
      * start a logged in session
      * @param sesh session data
      */
-    public void startSession(PlayerServices sesh){
+    public void startSession(PlayerServices sesh)
+    {
+        System.out.println("Player added");
         activeSessions.put(sesh.playerName(), sesh);
     }
 

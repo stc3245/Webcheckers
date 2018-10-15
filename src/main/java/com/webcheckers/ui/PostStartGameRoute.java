@@ -79,7 +79,7 @@ public class PostStartGameRoute implements Route
     else //invalid user selected
     {
         response.redirect(WebServer.HOME_URL);
-        playerS.setErrorMsg("You can't play with that player!"); //display an error message on the home page by changing welcome message
+        playerS.setStartGameError("You can't play with that player!"); //display an error message on the home page by changing welcome message
         halt();
     }
     return null;

@@ -98,6 +98,7 @@ public class PostSignInRoute implements Route {
         vm.put(GetHomeRoute.SIGN_IN_ATTR, false);
         vm.put(SIGN_IN_ERROR_ATTR, true);
         System.out.println(message);
+
         vm.put(ERROR_MESSAGE_ATTR, "Error loggin in.");
         vm.put(GetHomeRoute.ERROR_MSG, "");
         return new ModelAndView(vm, VIEW_NAME);

@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.webcheckers.auth.AuthData;
 import com.webcheckers.auth.AuthInterface;
 import com.webcheckers.appl.Player;
 
@@ -25,12 +26,25 @@ public class PlayerServices {
     private AuthInterface authInstance;
     private Player player;
     private String errorMsg;
+    private String startGameError;
 
     public PlayerServices(GameCenter gameCenter) {
         LOG.config("PlayerService is initialized.");
         this.gameCenter = gameCenter;
         authInstance = AuthInterface.getAuthInterfaceInstance();
         errorMsg = "";
+        startGameError = "";
+    }
+
+
+    public void setStartGameError(String error)
+    {
+        startGameError = error;
+    }
+
+    public String getStartGameError()
+    {
+        return startGameError;
     }
 
     /**
@@ -59,35 +73,34 @@ public class PlayerServices {
     }
 
     public boolean signIn(String username){
-        player = new Player(null);
-        AuthInterface.message msg = authInstance.signIn(username, null, null, player);
-        if (msg != AuthInterface.message.SUCCESS){
+        AuthInterface.Message msg = authInstance.signIn(username);
+        if (msg != AuthInterface.Message.SUCCESS){
             errorMsg = msg.name();
-            msg = authInstance.signUp(username, null);
-            if (msg != AuthInterface.message.SUCCESS){
+
+            if (msg != AuthInterface.Message.SUCCESS){
                 LOG.config("PlayerService unsuccessfully signed " + username + " up.");
                 LOG.config("PlayerService unsuccessfully signed " + username + " in.");
                 return false;
             }
             LOG.config("PlayerService successfully signed " + username + " up.");
-            msg = authInstance.signIn(username, null, null, player);
-            if (msg != AuthInterface.message.SUCCESS){
+
+            if (msg != AuthInterface.Message.SUCCESS){
                 LOG.config("PlayerService unsuccessfully signed " + username + " in.");
                 return false;
             }
-            gameCenter.startSession(this);
-            LOG.config("PlayerService successfully signed ." + username + " in.");
-            return true;
         }
+
+        this.player = new Player(username);
         gameCenter.startSession(this);
+        AuthData.signUp(username, player);
         LOG.config("PlayerService successfully signed ." + username + " in.");
         return true;
     }
 
     public boolean signOff(){
         String name = player.getName();
-        AuthInterface.message msg = authInstance.signOff(name, null, null, player);
-        if (msg != AuthInterface.message.SUCCESS){
+        AuthInterface.Message msg = authInstance.signOff(name, null, null, player);
+        if (msg != AuthInterface.Message.SUCCESS){
             errorMsg = msg.name();
             LOG.config("PlayerService unsuccessfully signed ." + name + " off");
             return false;

@@ -10,7 +10,7 @@ import java.util.Collection;
  * one instance for every player
  */
 public class AuthInterface {
-    public enum message {
+    public enum Message {
         SUCCESS, WRONG_CREDENTIALS, ALREADY_SIGNEDIN, ALREADY_SIGNEDOFF, USERNAME_TAKEN, UNKNOWN_ERROR;
     }
 
@@ -27,28 +27,21 @@ public class AuthInterface {
      * @param username string of the username
      * @return LogInMessage from login attempt
      */
-    public message signIn(String username, String password, String clientUID, Player player){
-        // sanity check
-        if (password == null){
-            password = "";
-        }
-        if (clientUID == null){
-            clientUID = "";
-        }
-
+    public Message signIn(String username)
+    {
         try{
-            AuthData.signIn(username, password, clientUID);
+            AuthData.signIn(username);
         }catch (AuthException e){
             switch (AuthException.ExceptionMessage.valueOf(e.getMessage())){
                 case ALREADY_SIGNEDIN:
-                    return message.ALREADY_SIGNEDIN;
+                    return Message.ALREADY_SIGNEDIN;
                 case WRONG_CREDENTIALS:
-                    return message.WRONG_CREDENTIALS;
+                    return Message.WRONG_CREDENTIALS;
                 default:
-                    return message.UNKNOWN_ERROR;
+                    return Message.UNKNOWN_ERROR;
             }
         }
-        return message.SUCCESS;
+        return Message.SUCCESS;
     }
 
     /**
@@ -56,7 +49,7 @@ public class AuthInterface {
      * @param username string of the username
      * @return LogInMessage from login attempt
      */
-    public message signOff(String username, String password, String clientUID, Player player){
+    public Message signOff(String username, String password, String clientUID, Player player){
         // sanity check
         if (password == null){
             password = "";
@@ -70,64 +63,17 @@ public class AuthInterface {
         }catch (AuthException e){
             switch (AuthException.ExceptionMessage.valueOf(e.getMessage())){
                 case ALREADY_SIGNEDIN:
-                    return message.ALREADY_SIGNEDOFF;
+                    return Message.ALREADY_SIGNEDOFF;
                 case WRONG_CREDENTIALS:
-                    return message.WRONG_CREDENTIALS;
+                    return Message.WRONG_CREDENTIALS;
                 default:
-                    return message.UNKNOWN_ERROR;
+                    return Message.UNKNOWN_ERROR;
             }
         }
 
-        return message.SUCCESS;
+        return Message.SUCCESS;
     }
 
-    /**
-     * method for signing users up
-     * @param username string of the username
-     * @param password string of the username
-     * @return LogInMessage from login attempt
-     */
-    public message signUp(String username,String password){
-        // sanity check
-        if (password == null){
-            password = "";
-        }
-        try{
-            AuthData.signUp(username, password);
-        }catch (AuthException e){
-            switch (AuthException.ExceptionMessage.valueOf(e.getMessage())) {
-                case USERNAME_TAKEN:
-                    return message.USERNAME_TAKEN;
-                default:
-                    return message.UNKNOWN_ERROR;
-            }
-        }
-        return message.SUCCESS;
-    }
-
-    public message authenticate(String username, String password, String clientUID){
-        // sanity check
-        if (password == null){
-            password = "";
-        }
-        if (clientUID == null){
-            clientUID = "";
-        }
-
-        try{
-            AuthData.signIn(username, password, clientUID);
-        }catch (AuthException e){
-            switch (AuthException.ExceptionMessage.valueOf(e.getMessage())){
-                case ALREADY_SIGNEDIN:
-                    return message.ALREADY_SIGNEDIN;
-                case WRONG_CREDENTIALS:
-                    return message.WRONG_CREDENTIALS;
-                default:
-                    return message.UNKNOWN_ERROR;
-            }
-        }
-        return message.SUCCESS;
-    }
 
     public static Collection<String> getOnlinePlayers(){
         return  AuthData.getSignedInUsers();
