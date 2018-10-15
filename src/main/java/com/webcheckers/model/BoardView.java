@@ -13,7 +13,6 @@ import com.webcheckers.model.*;
  */
 public class BoardView implements Iterable<Row>
 {
-
     private List<Row> board;
 
     /**

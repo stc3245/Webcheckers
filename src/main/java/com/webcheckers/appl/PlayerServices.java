@@ -34,6 +34,15 @@ public class PlayerServices {
     }
 
     /**
+     * set error message
+     * return: no return
+     */
+    public void setErrorMsg(String s) {
+        this.errorMsg = s;
+
+    }
+
+    /**
      * encapsulation
      * @return the name
      */

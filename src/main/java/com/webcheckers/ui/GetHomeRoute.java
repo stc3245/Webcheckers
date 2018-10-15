@@ -32,6 +32,7 @@ public class GetHomeRoute implements Route {
   static final String USER_NUM_ATTR = "currentUserNum";
   static final String USER_NUM = "current number of signed in users: %d";
   static final String WELCOME_MSG = "Welcome, %s!";
+  static final String ERROR_MSG = "errorMsg"; //msg for when someone tries to play wt someone already in the game
   static final String PLAYER_LIST = "users";
 
   // Key in the session attribute map for the player who started the session
@@ -102,7 +103,9 @@ public class GetHomeRoute implements Route {
           vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerServices.currentPlayer().getName()));
           vm.put(PLAYER_LIST, gameCenter.getOnlinePlayers());
           vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
+          vm.put(ERROR_MSG, playerServices.getErrorMsg())
         }
+        
       }
       else 
       {

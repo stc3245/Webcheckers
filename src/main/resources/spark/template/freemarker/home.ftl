@@ -22,6 +22,8 @@
             <br/>
           ${welcomeMessage}
             <br/>
+            ${errorMsg}
+
             <br/>
             All users logged in:
             <#list users as user>
