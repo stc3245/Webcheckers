@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
+import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.PlayerServices;
 import spark.TemplateEngine;
 
 
@@ -41,9 +43,13 @@ import spark.TemplateEngine;
  * </p>
  *
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
+ * @author Jeffery Russell
  */
-public class WebServer {
+public class WebServer
+{
   private static final Logger LOG = Logger.getLogger(WebServer.class.getName());
+
+
 
   //
   // Constants
@@ -54,11 +60,21 @@ public class WebServer {
    */
   public static final String HOME_URL = "/";
   public static final String SIGNIN_URL = "/signin";
+  public static final String GAME_URL = "/game";
+  public static final String START_GAME_URL = "/startGame";
+  public static final String VALIDATE_MOVE = "/validateMove";
 
+
+  /**
+   * Keys to use for session data
+   *
+   */
+
+  public static final String PLAYER_KEY = "playerKey";
   //
   // Attributes
   //
-
+  private final GameCenter gameCenter;
   private final TemplateEngine templateEngine;
   private final Gson gson;
 
@@ -77,11 +93,13 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson) {
+  public WebServer(final GameCenter gameCenter, final TemplateEngine templateEngine, final Gson gson) {
     // validation
+    Objects.requireNonNull(gameCenter, "gameCenter must not be null");
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
     //
+    this.gameCenter = gameCenter;
     this.templateEngine = templateEngine;
     this.gson = gson;
   }
@@ -99,7 +117,8 @@ public class WebServer {
    * returns after the web server finishes its initialization.
    * </p>
    */
-  public void initialize() {
+  public void initialize()
+  {
 
     // Configuration to serve static files
     staticFileLocation("/public");
@@ -138,9 +157,17 @@ public class WebServer {
     //// code clean; using small classes.
 
     // Shows the Checkers game Home page.
-    get(HOME_URL, new GetHomeRoute(templateEngine));
-    get(SIGNIN_URL, new GetSigninRoute(templateEngine));
+    get(HOME_URL, new GetHomeRoute(gameCenter, templateEngine));
+    get(SIGNIN_URL, new GetSignInRoute(templateEngine));
+    // redirects home for now, can be changed in the future
+    post(HOME_URL, new PostSignInRoute(gameCenter, templateEngine));
 
+
+    get(GAME_URL, new GetGameRoute(templateEngine));
+    post(START_GAME_URL, new PostStartGameRoute(gameCenter ,templateEngine));
+
+
+    post(VALIDATE_MOVE, new PostValidateMove(templateEngine));
     //
     LOG.config("WebServer is initialized.");
   }

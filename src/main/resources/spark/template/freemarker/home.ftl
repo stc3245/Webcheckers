@@ -17,6 +17,28 @@
       <div class="navigation">
           <a href="/signin">sign in</a>
       </div>
+
+      ${errorMsg}<br />
+
+      <#if signedIn>
+            <br/>
+          ${welcomeMessage}
+            <br/>
+            <br/>
+
+            <br/>
+            All users logged in:
+            <#list users as user>
+                <br>
+                  <form action="./startGame" method="post">
+                      <input type="submit" name="opponentName" value="${user}" />
+                  </form>
+            </#list>
+            <br/>
+      <#else>
+        <br/>
+        ${currentUserNum}
+      </#if>
     
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
