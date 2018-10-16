@@ -74,7 +74,10 @@ public class AuthInterface {
         return Message.SUCCESS;
     }
 
-
+    /**
+     * getter for collection of online players
+     * return: collection of online players(string)
+     */
     public static Collection<String> getOnlinePlayers(){
         return  AuthData.getSignedInUsers();
     }
