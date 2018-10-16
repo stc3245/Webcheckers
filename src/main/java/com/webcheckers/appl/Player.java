@@ -16,12 +16,19 @@ public class Player
     /** Stores active game of the user */
     private Game game;
 
+    /**
+     * constructor for Player class
+     */
     public Player(String username) 
     {
         name = username;
         this.game = null;
     }
 
+    /**
+     * getter for name variable
+     * return: name
+     */
     public String getName()
     {
         return name;
@@ -56,6 +63,10 @@ public class Player
         return this.game != null;
     }
 
+    /**
+     * getter for PlayerBoard
+     * return: an either inverted or normal PlayerBoard
+     */
     public BoardView getPlayersBoard()
     {
         if(this.game.getWhitePlayer() != this)

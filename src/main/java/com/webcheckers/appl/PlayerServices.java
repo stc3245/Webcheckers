@@ -28,6 +28,9 @@ public class PlayerServices {
     private String errorMsg;
     private String startGameError;
 
+    /**
+     * Constructor for PlayerServices class
+     */
     public PlayerServices(GameCenter gameCenter) {
         LOG.config("PlayerService is initialized.");
         this.gameCenter = gameCenter;
@@ -36,12 +39,17 @@ public class PlayerServices {
         startGameError = "";
     }
 
-
+    /**
+     * setter for game error
+     */
     public void setStartGameError(String error)
     {
         startGameError = error;
     }
 
+    /**
+     * getter for a startGameError
+     */
     public String getStartGameError()
     {
         return startGameError;
@@ -68,10 +76,18 @@ public class PlayerServices {
         }
     }
 
+    /**
+     * getter for error message
+     * return: errorMsg
+     */
     public String getErrorMsg(){
         return errorMsg;
     }
 
+    /**
+     * class for signing in a specific username
+     * returns boolean value dependent on the success of signing in
+     */
     public boolean signIn(String username){
         AuthInterface.Message msg = authInstance.signIn(username);
         if (msg != AuthInterface.Message.SUCCESS){
@@ -97,6 +113,10 @@ public class PlayerServices {
         return true;
     }
 
+    /**
+     * class for signing off
+     * return: a boolean for signing off and its relative success
+     */
     public boolean signOff(){
         String name = player.getName();
         AuthInterface.Message msg = authInstance.signOff(name, null, null, player);
@@ -111,10 +131,18 @@ public class PlayerServices {
         return true;
     }
 
+    /**
+     * class for checking if a player is signed in
+     * return: if a player is signed in or not
+     */
     public boolean signedIn() {
         return player != null;
     }
 
+    /**
+     * getter for currentPlayer
+     * return: the current player struct
+     */
     public Player currentPlayer(){
         return player;
     }
