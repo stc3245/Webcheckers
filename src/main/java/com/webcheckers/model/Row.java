@@ -62,6 +62,11 @@ public class Row implements Iterable<Space>
        }
     }
 
+    /**
+     * overloader constructor for Row class
+     * @param index index of the row
+     * @param row row information
+     */
     public Row(int index, List<Space> row)
     {
         this.index = index;

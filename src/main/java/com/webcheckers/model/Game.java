@@ -44,27 +44,46 @@ public class Game
         this.activeColor = ColorEnum.RED;
     }
 
+    /**
+     * getter for active color
+     * return: activeColor(colorEnum)
+     */
     public ColorEnum getActiveColor()
     {
         return activeColor;
     }
 
+    /**
+     * getter for RedPlayer
+     * return: redPlayer
+     */
     public Player getRedPlayer()
     {
         return this.redPlayer;
     }
 
+    /**
+     * getter for WhitePlayer
+     * return: whitePlayer
+     */
     public Player getWhitePlayer()
     {
         return this.whitePlayer;
     }
 
-
+    /**
+     * getter for viewMode
+     * return: viewMode
+     */
     public ViewModeEnum getViewMode()
     {
         return this.viewMode;
     }
 
+    /**
+     * getter for BoardView
+     * return the board
+     */
     public BoardView getBoard()
     {
         return this.board;

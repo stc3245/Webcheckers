@@ -77,6 +77,11 @@ public class AuthData
         LOG.config(username + " signed off.");
     }
 
+    /**
+     * class for signing up
+     * @param username username
+     * @param p player
+     */
     public static synchronized void signUp(String username, Player p)
     {
         sync();

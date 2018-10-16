@@ -27,6 +27,10 @@ public class BoardView implements Iterable<Row>
         }
     }
 
+    /**
+     * overloaded constructor for BoardView
+     * @param view List<Row> of Row
+     */
     public BoardView(List<Row> view)
     {
         this.board = view;
@@ -46,6 +50,10 @@ public class BoardView implements Iterable<Row>
         return new BoardView(temp);
     }
 
+    /**
+     * getter for board iterator
+     * returns board iterator
+     */
     public Iterator<Row> iterator() 
     {
         return board.iterator();
