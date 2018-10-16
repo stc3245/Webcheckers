@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.webcheckers.auth.AuthData;
-import com.webcheckers.auth.AuthInterface;
+
+import com.webcheckers.auth.*;
 import com.webcheckers.appl.Player;
 
 /**
@@ -72,7 +72,20 @@ public class PlayerServices {
         return errorMsg;
     }
 
-    public boolean signIn(String username){
+    public boolean signIn(String username)
+    {
+
+        if(player != null)
+        {
+            this.errorMsg = AuthException.ExceptionMessage.ALREADY_SIGNEDIN.toString();
+            return false;
+        }else if(username.length() == 0 || 
+            username.length() != username.replaceAll(" ", "").length())
+        {
+            this.errorMsg = AuthException.ExceptionMessage.INVALID_CHARACTER.toString();
+            return false;
+        }
+
         AuthInterface.Message msg = authInstance.signIn(username);
         if (msg != AuthInterface.Message.SUCCESS){
             errorMsg = msg.name();

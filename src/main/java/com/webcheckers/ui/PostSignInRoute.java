@@ -2,10 +2,12 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerServices;
+import com.webcheckers.auth.AuthException;
 
 import com.webcheckers.ui.*;
 
 import spark.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -99,7 +101,18 @@ public class PostSignInRoute implements Route {
         vm.put(SIGN_IN_ERROR_ATTR, true);
         System.out.println(message);
 
-        vm.put(ERROR_MESSAGE_ATTR, "Error loggin in.");
+        if(message.equals(AuthException.ExceptionMessage.ALREADY_SIGNEDIN.toString()))
+        {
+            vm.put(ERROR_MESSAGE, ERROR_ALREADY_LOGGEDIN );
+        }
+        else if(message.equals(AuthException.ExceptionMessage.INVALID_CHARACTER.toString()))
+        {
+            vm.put(ERROR_MESSAGE, ERROR_INVALID_CHARACTERS);
+        }
+        else
+        {
+            vm.put(ERROR_MESSAGE, ERROR_USERNAME_TAKEN);
+        }
         vm.put(GetHomeRoute.ERROR_MSG, "");
         return new ModelAndView(vm, VIEW_NAME);
     }

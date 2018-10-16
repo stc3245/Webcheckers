@@ -3,7 +3,7 @@ package com.webcheckers.auth;
 import java.security.PrivilegedActionException;
 
 public class AuthException extends Exception {
-    enum ExceptionMessage{
+    public enum ExceptionMessage{
         WRONG_CREDENTIALS, ALREADY_SIGNEDIN, ALREADY_SIGNEDOFF, USERNAME_TAKEN, INVALID_CHARACTER;
     }
 
