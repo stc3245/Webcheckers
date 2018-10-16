@@ -94,6 +94,9 @@ public class PostSignInRoute implements Route {
 
     }
 
+    /**
+     * error handler for the ModelAndView
+     */
     private ModelAndView error(final Map<String, Object> vm, final String message) {
         vm.put(GetHomeRoute.SIGN_IN_ATTR, false);
         vm.put(SIGN_IN_ERROR_ATTR, true);

@@ -23,6 +23,10 @@ public class GetSignInRoute implements Route {
 
     private final TemplateEngine templateEngine;
 
+    /**
+     * getter for SignInRoute
+     * @param templateEngine used for UI controller
+     */
     GetSignInRoute(final TemplateEngine templateEngine) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
@@ -32,6 +36,9 @@ public class GetSignInRoute implements Route {
         LOG.config("SigninRoute is initialized.");
     }
 
+    /**
+     * handler for the UI
+     */
     @Override
     public Object handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
