@@ -41,7 +41,7 @@ public class GetGameRoute implements Route
    *   the HTML template rendering engine
    */
   GetGameRoute(final TemplateEngine templateEngine)
-   {
+  {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
@@ -67,7 +67,7 @@ public class GetGameRoute implements Route
     final Session httpSession = request.session();
     //
     Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
+    vm.put("title", TITLE);
 
     PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
     if(playerS == null)
