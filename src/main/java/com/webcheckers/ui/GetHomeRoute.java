@@ -1,6 +1,5 @@
 package com.webcheckers.ui;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -40,7 +39,7 @@ public class GetHomeRoute implements Route {
   static final String TIMEOUT_SESSION_KEY = "timeoutWatchdog";
 
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
-  private final GameCenter gameCenter;
+  private final PlayerLobby playerLobby;
 
   private final TemplateEngine templateEngine;
 
@@ -51,12 +50,12 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  GetHomeRoute(GameCenter gameCenter,final TemplateEngine templateEngine) {
+  GetHomeRoute(PlayerLobby playerLobby, final TemplateEngine templateEngine) {
     // validation
-    Objects.requireNonNull(gameCenter, "gameCenter must not be null");
+    Objects.requireNonNull(playerLobby, "playerLobby must not be null");
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
-    this.gameCenter = gameCenter;
+    this.playerLobby = playerLobby;
     this.templateEngine = templateEngine;
     //
     LOG.config("GetHomeRoute is initialized.");
@@ -101,24 +100,24 @@ public class GetHomeRoute implements Route {
         {
           vm.put(SIGN_IN_ATTR, true);
           vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerServices.currentPlayer().getName()));
-          vm.put(PLAYER_LIST, gameCenter.getOnlinePlayers());
-          vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
+          vm.put(PLAYER_LIST, playerLobby.getOnlinePlayers());
+          vm.put(USER_NUM_ATTR, String.format(USER_NUM, playerLobby.getOnlinePlayers().size()));
         }
         
       }
       else 
       {
         vm.put(SIGN_IN_ATTR, false);
-        vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
+        vm.put(USER_NUM_ATTR, String.format(USER_NUM, playerLobby.getOnlinePlayers().size()));
       }
       
     } 
     else
     {
-      playerServices = gameCenter.newPlayerServices();
+      playerServices = playerLobby.newPlayerServices();
       session.attribute(WebServer.PLAYER_KEY, playerServices);
       vm.put(SIGN_IN_ATTR, false);
-      vm.put(USER_NUM_ATTR, String.format(USER_NUM, gameCenter.getOnlinePlayers().size()));
+      vm.put(USER_NUM_ATTR, String.format(USER_NUM, playerLobby.getOnlinePlayers().size()));
     }
 
     vm.put(ERROR_MSG, playerServices.getStartGameError());

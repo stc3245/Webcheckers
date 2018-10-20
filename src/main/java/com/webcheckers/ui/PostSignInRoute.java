@@ -1,10 +1,8 @@
 package com.webcheckers.ui;
 
-import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.appl.PlayerServices;
 import com.webcheckers.auth.AuthException;
-
-import com.webcheckers.ui.*;
 
 import spark.*;
 
@@ -25,7 +23,7 @@ public class PostSignInRoute implements Route {
     //
     // Constants
     //
-    private final GameCenter gameCenter;
+    private final PlayerLobby playerLobby;
     private final TemplateEngine templateEngine;
 
     // username input value
@@ -53,15 +51,15 @@ public class PostSignInRoute implements Route {
 
     /**
      * constructor
-     * @param gameCenter the one and only instance of gameCenter
+     * @param playerLobby the one and only instance of playerLobby
      * @param templateEngine an instance of TemplateEngine
      */
-    PostSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
+    PostSignInRoute(PlayerLobby playerLobby, TemplateEngine templateEngine) {
         // validation
-        Objects.requireNonNull(gameCenter, "gameCenter must not be null");
+        Objects.requireNonNull(playerLobby, "playerLobby must not be null");
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
 
-        this.gameCenter = gameCenter;
+        this.playerLobby = playerLobby;
         this.templateEngine = templateEngine;
     }
 
@@ -125,7 +123,7 @@ public class PostSignInRoute implements Route {
         String name = playerServices.currentPlayer().getName();
         vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
         vm.put(GetHomeRoute.WELCOME_MSG_ATTR, String.format(GetHomeRoute.WELCOME_MSG, name));
-        vm.put(GetHomeRoute.PLAYER_LIST, gameCenter.getOnlinePlayers());
+        vm.put(GetHomeRoute.PLAYER_LIST, playerLobby.getOnlinePlayers());
         vm.put(GetHomeRoute.ERROR_MSG, "");
         return new ModelAndView(vm, GetHomeRoute.VIEW_NAME);
     }

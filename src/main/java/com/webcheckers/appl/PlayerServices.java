@@ -1,14 +1,9 @@
 package com.webcheckers.appl;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.logging.Logger;
-import java.util.HashMap;
-import java.util.Map;
 
 
 import com.webcheckers.auth.*;
-import com.webcheckers.appl.Player;
 
 /**
  * The object to coordinate the state of the Web Application.
@@ -18,11 +13,12 @@ import com.webcheckers.appl.Player;
  *
  * @author <a href='mailto:jrv@se.rit.edu'>Jim Vallino</a>
  */
-public class PlayerServices {
+public class PlayerServices
+{
 
     private static final Logger LOG = Logger.getLogger(PlayerServices.class.getName());
 
-    private GameCenter gameCenter;
+    private PlayerLobby playerLobby;
     private AuthInterface authInstance;
     private Player player;
     private String errorMsg;
@@ -31,9 +27,9 @@ public class PlayerServices {
     /**
      * Constructor for PlayerServices class
      */
-    public PlayerServices(GameCenter gameCenter) {
+    public PlayerServices(PlayerLobby playerLobby) {
         LOG.config("PlayerService is initialized.");
-        this.gameCenter = gameCenter;
+        this.playerLobby = playerLobby;
         authInstance = AuthInterface.getAuthInterfaceInstance();
         errorMsg = "";
         startGameError = "";
@@ -91,7 +87,6 @@ public class PlayerServices {
      */
     public boolean signIn(String username)
     {
-
         if(player != null)
         {
             this.errorMsg = AuthException.ExceptionMessage.ALREADY_SIGNEDIN.toString();
@@ -120,12 +115,19 @@ public class PlayerServices {
             }
         }
 
-        this.player = new Player(username);
-        gameCenter.startSession(this);
+        this.setPlayerWithName(username);
+        playerLobby.startSession(this);
         AuthData.signUp(username, player);
         LOG.config("PlayerService successfully signed ." + username + " in.");
         return true;
     }
+
+
+    private void setPlayerWithName(String username)
+    {
+        this.player = new Player(username);
+    }
+
 
     /**
      * class for signing off
@@ -139,7 +141,7 @@ public class PlayerServices {
             LOG.config("PlayerService unsuccessfully signed ." + name + " off");
             return false;
         }
-        gameCenter.terminateSession(name);
+        playerLobby.terminateSession(name);
         player = null;
         LOG.config("PlayerService successfully signed ." + name + " off");
         return true;

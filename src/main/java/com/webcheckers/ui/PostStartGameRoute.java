@@ -1,11 +1,5 @@
 package com.webcheckers.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.logging.Logger;
-
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -14,7 +8,6 @@ import spark.TemplateEngine;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.*;
-import com.webcheckers.model.*;
 
 import static spark.Spark.halt;
 
@@ -26,15 +19,15 @@ import static spark.Spark.halt;
 public class PostStartGameRoute implements Route
 {
     private final TemplateEngine templateEngine;
-    private final GameCenter gameCenter;
+    private final PlayerLobby playerLobby;
 
     static final String OPPONENT_ATTR = "opponentName";
 
-    public PostStartGameRoute(final GameCenter gameCenter,
+    public PostStartGameRoute(final PlayerLobby playerLobby,
         final TemplateEngine templateEngine)
     {
         this.templateEngine = templateEngine;
-        this.gameCenter = gameCenter;
+        this.playerLobby = playerLobby;
     }
 
 
@@ -68,11 +61,11 @@ public class PostStartGameRoute implements Route
     Player player = playerS.currentPlayer();
 
     // other player is not in another game
-    if(!gameCenter.playerInGame(opponentName) &&
+    if(!playerLobby.playerInGame(opponentName) &&
          !player.getName().equals(opponentName))
     {
         //start a new game
-        gameCenter.startGame(player, gameCenter.getPlayer(opponentName));
+        playerLobby.startGame(player, playerLobby.getPlayer(opponentName));
         response.redirect(WebServer.GAME_URL);
         halt();
     }
