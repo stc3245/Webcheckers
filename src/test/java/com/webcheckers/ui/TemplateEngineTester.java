@@ -31,7 +31,7 @@ public class TemplateEngineTester {
   public Answer<Object> makeAnswer() {
     return new Answer<Object>() {
       @Override
-      public Object answer(InvocationOnMock invocation) throws Throwable {
+      public Object answer(InvocationOnMock invocation) {
         final ModelAndView modelAndView = invocation.getArgument(0);
         TemplateEngineTester.this.model = modelAndView.getModel();
         TemplateEngineTester.this.viewName = modelAndView.getViewName();

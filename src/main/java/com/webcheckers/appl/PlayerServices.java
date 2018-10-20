@@ -123,7 +123,7 @@ public class PlayerServices
     }
 
 
-    private void setPlayerWithName(String username)
+    public void setPlayerWithName(String username)
     {
         this.player = new Player(username);
     }

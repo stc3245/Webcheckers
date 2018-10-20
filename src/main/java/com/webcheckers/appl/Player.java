@@ -60,7 +60,7 @@ public class Player
      */
     public boolean inGame()
     {
-        return this.game != null;
+        return this.getGame() != null;
     }
 
     /**

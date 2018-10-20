@@ -94,10 +94,12 @@ public class PlayerLobby
       return new Game(player1, player2);
     }
 
+
     public Collection<String> getOnlinePlayers()
     {
-        return AuthInterface.getOnlinePlayers();
+        return this.activeSessions.keySet();
     }
+
 
     /**
      * Determins if a player is already in a game
