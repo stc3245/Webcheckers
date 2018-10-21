@@ -26,8 +26,8 @@ public class GetGameRoute implements Route
   public static final String ACTIVECOLOR = "activeColor";
   public static final String BOARD = "board";
 
-  static final String TITLE = "WebCheckers Game!";
-  static final String VIEW_NAME = "game.ftl";
+  public static final String TITLE = "Game!";
+  public static final String VIEW_NAME = "game.ftl";
 
   private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
