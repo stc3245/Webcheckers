@@ -25,11 +25,12 @@ This is a summary of the project.
 > important user group and user goals._
 
 ### Glossary and Acronyms
-> _Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
 | VO | Value Object |
+| AI | Artificial Intelligence |
+| HTML | Hyper-Text Markup Language |
 
 
 ## Requirements
@@ -54,11 +55,14 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](domain-model-placeholder.png)
+![The WebCheckers Domain Model](domain-model.png)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+In this domain model we captured the high level aspects of playing a game of
+checkers. Each checkers game consists of two players, each player is either red
+or black. This checkers game is played on a checkers board where each player starts
+with 12 pieces but, they can loose pieces throughout the game. With a checkers piece
+each player can make a move, this move can either be a simple move, a jump move or a 
+multi-jump move. Not are players are humans, some players can be ai players. 
 
 
 ## Architecture and Design
@@ -87,10 +91,13 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](web-interface-placeholder.png)
+![The WebCheckers Web Interface Statechart](web-interface.png)
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+When the user initially goes to the website they land on a home page. From that
+page the user can go to the sign in page. After a user has selected a valid username
+they can go back to the home page where they now see a player lobby page. After 
+being selected or selecting a player to play a game with, the user is sent to 
+the game page where they can play a game of checkers. 
 
 
 ### UI Tier
