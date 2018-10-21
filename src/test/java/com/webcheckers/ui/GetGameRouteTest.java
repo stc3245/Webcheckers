@@ -8,6 +8,7 @@ import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerServices;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.ColorEnum;
+import com.webcheckers.model.Game;
 import com.webcheckers.model.ViewModeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -51,7 +52,8 @@ public class GetGameRouteTest
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
-        engine = mock(TemplateEngine.class);
+//        engine = mock(TemplateEngine.class);
+        engine = new FreeMarkerEngine();
 
         // create a unique CuT for each test
         cut = new GetGameRoute(engine);
@@ -135,7 +137,7 @@ public class GetGameRouteTest
      * the javascript
      */
     @Test
-    public void testValidGame()
+    public void testViewModel()
     {
         engine = new FreeMarkerEngine();
 
@@ -166,6 +168,55 @@ public class GetGameRouteTest
 
 
         //current player is Jeff, active player is also jeff
+        assertTrue(viewHtml.contains(TITLE_HEAD_TAG), "Title head tag exists.");
+        assertTrue(viewHtml.contains("<a href=\"/signout\">sign out [" + p1Name + "]</a>"),
+                "Correct sign out is displayed");
+
+        assertTrue(viewHtml.contains("\"redPlayer\" : \""  + p1Name + "\","),
+                "Correct red player is stored");
+        assertTrue(viewHtml.contains("\"whitePlayer\" : \""  + p2Name + "\","),
+                "Correct white player is stored");
+
+        assertTrue(viewHtml.contains("\"currentPlayer\" : \""  + p1Name + "\","),
+                "Correct current player is stored");
+
+        assertTrue(viewHtml.contains("\"activeColor\" : \"RED\""),
+                "Correct active color stored");
+    }
+
+
+    /**
+     * Tests the path where the render method is fully used for
+     * the get game route
+     */
+    @Test
+    public void testHandelOnValidGame()
+    {
+        String p1Name = "Jeff";
+        String p2Name = "Pardeep";
+        Player p1 = mock(Player.class);
+        Player p2 = mock(Player.class);
+        when(p1.getName()).thenReturn(p1Name);
+        when(p2.getName()).thenReturn(p2Name);
+        engine = new FreeMarkerEngine();
+
+        PlayerServices playerService = mock(PlayerServices.class);
+        when(p1.inGame()).thenReturn(true);
+        when(playerService.currentPlayer()).thenReturn(p1);
+
+        Game game = mock(Game.class);
+        when(game.getViewMode()).thenReturn(ViewModeEnum.PLAY);
+        when(p1.getPlayersBoard()).thenReturn(new BoardView());
+        when(p1.getGame()).thenReturn(game);
+        when(game.getRedPlayer()).thenReturn(p1);
+        when(game.getWhitePlayer()).thenReturn(p2);
+        when(game.getActiveColor()).thenReturn(ColorEnum.RED);
+
+        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(playerService);
+        String viewHtml = "";
+
+        viewHtml = cut.handle(request, response).toString();
+
         assertTrue(viewHtml.contains(TITLE_HEAD_TAG), "Title head tag exists.");
         assertTrue(viewHtml.contains("<a href=\"/signout\">sign out [" + p1Name + "]</a>"),
                 "Correct sign out is displayed");
