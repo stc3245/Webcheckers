@@ -64,12 +64,6 @@ public class WebServer
   public static final String VALIDATE_MOVE = "/validateMove";
 
 
-  /**
-   * Keys to use for session data
-   *
-   */
-
-  public static final String PLAYER_KEY = "playerKey";
   //
   // Attributes
   //

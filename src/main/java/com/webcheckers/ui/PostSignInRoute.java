@@ -73,7 +73,7 @@ public class PostSignInRoute implements Route {
 
         ModelAndView mv;
 
-        final PlayerServices playerServices = request.session().attribute(WebServer.PLAYER_KEY);
+        final PlayerServices playerServices = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
 
         // check for active session
         if(playerServices != null) {

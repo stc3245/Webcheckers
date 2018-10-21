@@ -69,7 +69,7 @@ public class GetGameRoute implements Route
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", TITLE);
 
-    PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
+    PlayerServices playerS = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
     if(playerS == null)
     {
       response.redirect(WebServer.HOME_URL);
@@ -77,6 +77,12 @@ public class GetGameRoute implements Route
     }
 
     Player player = playerS.currentPlayer();
+
+    if(!player.inGame())
+    {
+      response.redirect(WebServer.HOME_URL);
+      halt();
+    }
 
     Game game = player.getGame();
 

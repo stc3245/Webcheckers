@@ -50,7 +50,7 @@ public class PostStartGameRoute implements Route
 
     final String opponentName = request.queryParams(this.OPPONENT_ATTR);
 
-    PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
+    PlayerServices playerS = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
 
     if(playerS == null)
     {
