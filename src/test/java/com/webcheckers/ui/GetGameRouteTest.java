@@ -7,9 +7,8 @@ import static org.mockito.Mockito.*;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerServices;
 import com.webcheckers.model.BoardView;
-import com.webcheckers.model.ColorEnum;
 import com.webcheckers.model.Game;
-import com.webcheckers.model.ViewModeEnum;
+import com.webcheckers.model.Piece;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -153,7 +152,7 @@ public class GetGameRouteTest
         final ModelAndView modelAndView = new ModelAndView(vm, GetGameRoute.VIEW_NAME);
         // setup View-Model for a new player
         vm.put(GetHomeRoute.TITLE_ATTR, GetGameRoute.TITLE);
-        vm.put(GetGameRoute.VIEWMODE, ViewModeEnum.PLAY);
+        vm.put(GetGameRoute.VIEWMODE, BoardView.ViewModeEnum.PLAY);
 
         //not testing for valid board in this test so no mock is used
         vm.put(GetGameRoute.BOARD, new BoardView());
@@ -162,7 +161,7 @@ public class GetGameRouteTest
         vm.put(GetGameRoute.REDPLAYER, p1);
         vm.put(GetGameRoute.WHITEPLAYER, p2);
 
-        vm.put(GetGameRoute.ACTIVECOLOR, ColorEnum.RED);
+        vm.put(GetGameRoute.ACTIVECOLOR, Piece.ColorEnum.RED);
 
         final String viewHtml = engine.render(modelAndView);
 
@@ -205,12 +204,12 @@ public class GetGameRouteTest
         when(playerService.currentPlayer()).thenReturn(p1);
 
         Game game = mock(Game.class);
-        when(game.getViewMode()).thenReturn(ViewModeEnum.PLAY);
+        when(game.getViewMode()).thenReturn(BoardView.ViewModeEnum.PLAY);
         when(p1.getPlayersBoard()).thenReturn(new BoardView());
         when(p1.getGame()).thenReturn(game);
         when(game.getRedPlayer()).thenReturn(p1);
         when(game.getWhitePlayer()).thenReturn(p2);
-        when(game.getActiveColor()).thenReturn(ColorEnum.RED);
+        when(game.getActiveColor()).thenReturn(Piece.ColorEnum.RED);
 
         when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(playerService);
         String viewHtml = "";

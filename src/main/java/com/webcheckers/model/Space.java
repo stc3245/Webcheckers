@@ -12,7 +12,7 @@ public class Space {
     //Private Instance Variables
     private int cellIdx;
     private Piece piece;
-    private ColorEnum color;
+    private Piece.ColorEnum color;
 
     /**
      * Constructor for space object
@@ -21,7 +21,7 @@ public class Space {
      * @param piece - piece if there is one in space or null
      * @param color - color of piece (red or white)
      */
-    public Space(int cellIdx, Piece piece, ColorEnum color)
+    public Space(int cellIdx, Piece piece, Piece.ColorEnum color)
     {
         this.cellIdx = cellIdx;
         this.piece = piece;
@@ -44,7 +44,7 @@ public class Space {
      * @return piece - true or false
      */
     public boolean isValid(){
-        if((this.color == ColorEnum.RED) && (this.piece == null)){
+        if((this.color == Piece.ColorEnum.RED) && (this.piece == null)){
             return true;
         }
         return false;

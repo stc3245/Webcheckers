@@ -24,22 +24,22 @@ public class Row implements Iterable<Space>
      */
     public Row(int index)
     {
-       ColorEnum selectedPlayerColor;
+       Piece.ColorEnum selectedPlayerColor;
        this.row = new ArrayList<>(8);
 
        if(index >= 3)
        {
-           selectedPlayerColor = ColorEnum.RED;
+           selectedPlayerColor = Piece.ColorEnum.RED;
        }
        else
        {
-           selectedPlayerColor = ColorEnum.WHITE;
+           selectedPlayerColor = Piece.ColorEnum.WHITE;
        }
 
         Piece tempPiece;
         if(index != 3 && index != 4)
         {
-            tempPiece =  new Piece(PieceEnum.SINGLE, selectedPlayerColor);
+            tempPiece =  new Piece(BoardView.PieceEnum.SINGLE, selectedPlayerColor);
         }
         else
         {
@@ -49,8 +49,8 @@ public class Row implements Iterable<Space>
 
        for(int i = 0; i < 8; i++)
        {
-           ColorEnum tileColor = ((index + i) %2 == 0) ? ColorEnum.WHITE : ColorEnum.RED;
-           if(tileColor == ColorEnum.RED)
+           Piece.ColorEnum tileColor = ((index + i) %2 == 0) ? Piece.ColorEnum.WHITE : Piece.ColorEnum.RED;
+           if(tileColor == Piece.ColorEnum.RED)
            {
                 row.add(new Space(i, tempPiece, tileColor));
            }

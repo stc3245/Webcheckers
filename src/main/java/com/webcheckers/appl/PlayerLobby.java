@@ -63,17 +63,6 @@ public class PlayerLobby
 
 
     /**
-     * returns data of an logged in active session
-     * @param username the username
-     * @return the session data
-     */
-    public PlayerServices getSession(String username)
-    {
-        return activeSessions.get(username);
-    }
-
-
-    /**
      * deletes the data of an active session when they log off
      * @param username userame
      */

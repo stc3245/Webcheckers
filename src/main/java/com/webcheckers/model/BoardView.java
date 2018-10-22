@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Iterator;
 import java.lang.Iterable;
 
-import com.webcheckers.model.*;
-
 
 /**
  * @author Jeffery Russell 10-14-18
@@ -57,5 +55,27 @@ public class BoardView implements Iterable<Row>
     public Iterator<Row> iterator() 
     {
         return board.iterator();
+    }
+
+    /**
+     * Simple enum for storing state of player
+     *
+     */
+    public enum ViewModeEnum
+    {
+        PLAY,
+        SPECTATOR,
+        REPLAY
+    }
+
+    /**
+     * Enum for storing different types of checkers pieces
+     *
+     * @author Sean Coyne 10-10-18
+     */
+
+    public enum PieceEnum {
+        SINGLE,
+        KING
     }
 }

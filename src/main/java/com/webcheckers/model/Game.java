@@ -16,13 +16,13 @@ public class Game
     private Player whitePlayer;
 
     /** The current color of the current player */
-    private ColorEnum activeColor;
+    private Piece.ColorEnum activeColor;
 
     /** Representation of the game board */
     private BoardView board;
 
     /** The status of the game Is always active for now */
-    private ViewModeEnum viewMode;
+    private BoardView.ViewModeEnum viewMode;
 
 
     /**
@@ -40,15 +40,15 @@ public class Game
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.board = new BoardView();
-        this.viewMode = ViewModeEnum.PLAY;
-        this.activeColor = ColorEnum.RED;
+        this.viewMode = BoardView.ViewModeEnum.PLAY;
+        this.activeColor = Piece.ColorEnum.RED;
     }
 
     /**
      * getter for active color
      * return: activeColor(colorEnum)
      */
-    public ColorEnum getActiveColor()
+    public Piece.ColorEnum getActiveColor()
     {
         return activeColor;
     }
@@ -75,7 +75,7 @@ public class Game
      * getter for viewMode
      * return: viewMode
      */
-    public ViewModeEnum getViewMode()
+    public BoardView.ViewModeEnum getViewMode()
     {
         return this.viewMode;
     }

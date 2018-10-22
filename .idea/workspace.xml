@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="b2ed53c5-15ef-4688-be12-83affc9c22d9" name="Default Changelist" comment="game now automatically signs user up if they are not already">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/webcheckers/appl/GameCenter.java" afterPath="$PROJECT_DIR$/src/main/java/com/webcheckers/appl/GameCenter.java" />
@@ -9,15 +8,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/webcheckers/appl/PlayerServices.java" afterPath="$PROJECT_DIR$/src/main/java/com/webcheckers/appl/PlayerServices.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/webcheckers/auth/AuthData.java" afterPath="$PROJECT_DIR$/src/main/java/com/webcheckers/auth/AuthData.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/webcheckers/auth/AuthInterface.java" afterPath="$PROJECT_DIR$/src/main/java/com/webcheckers/auth/AuthInterface.java" />
-=======
-    <list default="true" id="b2ed53c5-15ef-4688-be12-83affc9c22d9" name="Default Changelist" comment="deleted idea">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webcheckers/authModel/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webcheckers/authModel/SignIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webcheckers/ui/GetSigninRoute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webcheckers/ui/GetSigninRoute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/signin.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/signin.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/webcheckers/ui/GetHomeRoute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webcheckers/ui/GetHomeRoute.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
->>>>>>> master
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

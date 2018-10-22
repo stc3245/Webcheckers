@@ -30,4 +30,13 @@ public class Message {
     public MessageEnum getType(){
         return type;
     }
+
+    /**
+     * Simple enum for storing the type of a message
+     *
+     */
+    public enum MessageEnum {
+        ERROR,
+        INFO
+    }
 }

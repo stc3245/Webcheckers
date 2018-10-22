@@ -10,10 +10,10 @@ public class Piece
 {
 
     //Private instance variables
-    private PieceEnum type;
+    private BoardView.PieceEnum type;
     private ColorEnum color;
 
-    public Piece(PieceEnum type, ColorEnum color)
+    public Piece(BoardView.PieceEnum type, ColorEnum color)
     {
         this.type = type;
         this.color = color;
@@ -25,7 +25,7 @@ public class Piece
      *
      * @return PieceEnum - type of piece
      */
-    public PieceEnum getType(){
+    public BoardView.PieceEnum getType(){
         return type;
     }
 
@@ -36,5 +36,16 @@ public class Piece
      */
     public ColorEnum getColor() {
         return color;
+    }
+
+
+    /**
+     * Simple enum for storing color of player
+     *
+     */
+    public enum ColorEnum
+    {
+        RED,
+        WHITE
     }
 }
