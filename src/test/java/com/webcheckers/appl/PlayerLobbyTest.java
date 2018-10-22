@@ -82,13 +82,13 @@ public class PlayerLobbyTest
     @Test
     public void testStartSession()
     {
-        cut.startSession(services1);
+        cut.createPlayer(name1);
 
         assertNotNull(cut.getPlayer(name1));
 
         assertEquals(cut.getPlayer(name1).getName(), name1);
 
-        cut.startSession(services2);
+        cut.createPlayer(name2);
 
         assertNotNull(cut.getPlayer(name2));
 
@@ -103,8 +103,8 @@ public class PlayerLobbyTest
     @Test
     public void terminateSessionTest()
     {
-        cut.startSession(services2);
-        cut.startSession(services1);
+        cut.createPlayer(name2);
+        cut.createPlayer(name1);
         cut.terminateSession(name1);
 
         assertNull(cut.getPlayer(name1));
@@ -120,8 +120,8 @@ public class PlayerLobbyTest
     @Test
     public void testOnlinePlayersList()
     {
-        cut.startSession(services2);
-        cut.startSession(services1);
+        cut.createPlayer(name1);
+        cut.createPlayer(name2);
 
         assertTrue(cut.getOnlinePlayers().contains(name1));
         assertTrue(cut.getOnlinePlayers().contains(name2));
@@ -131,29 +131,25 @@ public class PlayerLobbyTest
 
 
     /**
-     * Tests the ability of the PlayerLobby to start a game
-     * between two players.
+     * Simple test to verify that they create player
+     * function of create player does not return null
      */
     @Test
-    public void testStartGame()
+    public void testCreatePlayer()
     {
-        Game game = cut.startGame(player1, player2);
-
-        assertNotNull(game);
+        assertNotNull(cut.createPlayer(name1));
     }
 
 
-    /**
-     * Tests the player lobby ability to detect if players
-     * are currently in games.
-     */
-    @Test
-    public void testInGame()
-    {
-        when(player1.inGame()).thenReturn(true);
-
-        cut.startSession(services1);
-
-        assertTrue(cut.playerInGame(name1));
-    }
+//    /**
+//     * Tests the ability of the PlayerLobby to start a game
+//     * between two players.
+//     */
+//    @Test
+//    public void testStartGame()
+//    {
+//        Game game = cut.startGame(player1, player2);
+//
+//        assertNotNull(game);
+//    }
 }

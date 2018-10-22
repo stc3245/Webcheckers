@@ -17,7 +17,6 @@ public class PlayerServices
     private static final Logger LOG = Logger.getLogger(PlayerServices.class.getName());
 
     private Player player;
-    private String errorMsg;
     private String startGameError;
 
     /**
@@ -26,7 +25,6 @@ public class PlayerServices
     public PlayerServices()
     {
         LOG.config("PlayerService is initialized.");
-        errorMsg = "";
         startGameError = "";
     }
 
@@ -78,7 +76,8 @@ public class PlayerServices
      * getter for currentPlayer
      * return: the current player struct
      */
-    public Player currentPlayer(){
+    public Player currentPlayer()
+    {
         return player;
     }
 }
