@@ -2,7 +2,6 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.appl.PlayerServices;
-import com.webcheckers.auth.AuthException;
 
 import spark.*;
 
@@ -11,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
+
+import static spark.Spark.halt;
 
 
 /**
@@ -71,21 +72,34 @@ public class PostSignInRoute implements Route {
         final Map<String, Object> vm = new HashMap<>();
         vm.put(GetHomeRoute.TITLE_ATTR, GetHomeRoute.TITLE);
 
-        ModelAndView mv;
+        ModelAndView mv = null;
 
         final PlayerServices playerServices = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
 
         // check for active session
-        if(playerServices != null) {
-            // attempts to sign in
-            if (playerServices.signIn(username)) {
-                mv = success(playerServices, vm);
-            } else {
-
-                System.out.println(playerServices.getErrorMsg());
-                mv = error(vm, playerServices.getErrorMsg().toString());
+        if(playerServices != null)
+        {
+            if(!(playerLobby.usernameTaken(username)))
+            {
+                if(PlayerLobby.containsInvalidCharacters(username))
+                {
+                    mv = error(vm, (ERROR_INVALID_CHARACTERS));
+                }
+                else
+                {
+                    playerServices.setPlayer(playerLobby.createPlayer(username));
+                    response.redirect(WebServer.HOME_URL);
+                    halt();
+                    return null;
+                }
             }
-        }else{
+            else
+            {
+                mv = error(vm, (ERROR_USERNAME_TAKEN));
+            }
+        }
+        else
+        {
             response.redirect(WebServer.HOME_URL);
             return null;
         }
@@ -102,30 +116,9 @@ public class PostSignInRoute implements Route {
         vm.put(SIGN_IN_ERROR_ATTR, true);
         System.out.println(message);
 
-        if(message.equals(AuthException.ExceptionMessage.ALREADY_SIGNEDIN.toString()))
-        {
-            vm.put(ERROR_MESSAGE, ERROR_ALREADY_LOGGEDIN );
-        }
-        else if(message.equals(AuthException.ExceptionMessage.INVALID_CHARACTER.toString()))
-        {
-            vm.put(ERROR_MESSAGE, ERROR_INVALID_CHARACTERS);
-        }
-        else
-        {
-            vm.put(ERROR_MESSAGE, ERROR_USERNAME_TAKEN);
-        }
+        vm.put(ERROR_MESSAGE, message);
         vm.put(GetHomeRoute.ERROR_MSG, "");
         return new ModelAndView(vm, VIEW_NAME);
-    }
-
-    private ModelAndView success(PlayerServices playerServices, final Map<String, Object> vm) {
-        // puts text on initial redirect to home page. further calls are dealt with in GetHomeRoute on refresh
-        String name = playerServices.currentPlayer().getName();
-        vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
-        vm.put(GetHomeRoute.WELCOME_MSG_ATTR, String.format(GetHomeRoute.WELCOME_MSG, name));
-        vm.put(GetHomeRoute.PLAYER_LIST, playerLobby.getOnlinePlayers());
-        vm.put(GetHomeRoute.ERROR_MSG, "");
-        return new ModelAndView(vm, GetHomeRoute.VIEW_NAME);
     }
 
 }

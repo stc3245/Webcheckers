@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.webcheckers.auth.AuthInterface;
 import com.webcheckers.model.Game;
 
 /**
@@ -23,7 +22,7 @@ public class PlayerLobby
             (PlayerLobby.class.getName());
 
     /** Map of all player usernames to their sessions */
-    private Map<String, PlayerServices> activeSessions;
+    private Map<String, Player> activeSessions;
 
 
     /**
@@ -46,19 +45,21 @@ public class PlayerLobby
     public PlayerServices newPlayerServices() 
     {
         LOG.fine("New player services instance created.");
-        return new PlayerServices(this);
+        return new PlayerServices();
     }
 
 
     /**
      * start a logged in session
      *
-     * @param sesh session data
+     * @param username username
      */
-    public void startSession(PlayerServices sesh)
+    public Player createPlayer(String username)
     {
         System.out.println("Player added");
-        activeSessions.put(sesh.playerName(), sesh);
+        Player p = new Player(username);
+        activeSessions.put(username, p);
+        return p;
     }
 
 
@@ -105,9 +106,27 @@ public class PlayerLobby
      */
     public Player getPlayer(String playerName)
     {
-        PlayerServices playerserv = activeSessions.get(playerName);
-        if(playerserv == null)
-            return null;
-        return playerserv.currentPlayer();
+        return this.activeSessions.get(playerName);
+    }
+
+
+    /**
+     * Checks to see if the username is taken
+     *
+     * @param username
+     * @return
+     */
+    public boolean usernameTaken(String username)
+    {
+        return this.activeSessions.containsKey(username);
+    }
+
+
+
+    public static boolean containsInvalidCharacters(String username)
+    {
+        return (username.length() == 0 ||
+                username.length() !=
+                        username.replaceAll(" ", "").length());
     }
 }

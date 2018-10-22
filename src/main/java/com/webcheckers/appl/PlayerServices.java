@@ -3,7 +3,6 @@ package com.webcheckers.appl;
 import java.util.logging.Logger;
 
 
-import com.webcheckers.auth.*;
 
 /**
  * The object to coordinate the state of the Web Application.
@@ -15,11 +14,8 @@ import com.webcheckers.auth.*;
  */
 public class PlayerServices
 {
-
     private static final Logger LOG = Logger.getLogger(PlayerServices.class.getName());
 
-    private PlayerLobby playerLobby;
-    private AuthInterface authInstance;
     private Player player;
     private String errorMsg;
     private String startGameError;
@@ -27,10 +23,9 @@ public class PlayerServices
     /**
      * Constructor for PlayerServices class
      */
-    public PlayerServices(PlayerLobby playerLobby) {
+    public PlayerServices()
+    {
         LOG.config("PlayerService is initialized.");
-        this.playerLobby = playerLobby;
-        authInstance = AuthInterface.getAuthInterfaceInstance();
         errorMsg = "";
         startGameError = "";
     }
@@ -51,14 +46,7 @@ public class PlayerServices
         return startGameError;
     }
 
-    /**
-     * set error message
-     * return: no return
-     */
-    public void setErrorMsg(String s) {
-        this.errorMsg = s;
 
-    }
 
     /**
      * encapsulation
@@ -72,80 +60,11 @@ public class PlayerServices
         }
     }
 
-    /**
-     * getter for error message
-     * return: errorMsg
-     */
-    public String getErrorMsg(){
-        return errorMsg;
-    }
-
-
-    /**
-     * class for signing in a specific username
-     * returns boolean value dependent on the success of signing in
-     */
-    public boolean signIn(String username)
+    public void setPlayer(Player p)
     {
-        if(player != null)
-        {
-            this.errorMsg = AuthException.ExceptionMessage.ALREADY_SIGNEDIN.toString();
-            return false;
-        }else if(username.length() == 0 || 
-            username.length() != username.replaceAll(" ", "").length())
-        {
-            this.errorMsg = AuthException.ExceptionMessage.INVALID_CHARACTER.toString();
-            return false;
-        }
-
-        AuthInterface.Message msg = authInstance.signIn(username);
-        if (msg != AuthInterface.Message.SUCCESS){
-            errorMsg = msg.name();
-
-            if (msg != AuthInterface.Message.SUCCESS){
-                LOG.config("PlayerService unsuccessfully signed " + username + " up.");
-                LOG.config("PlayerService unsuccessfully signed " + username + " in.");
-                return false;
-            }
-            LOG.config("PlayerService successfully signed " + username + " up.");
-
-            if (msg != AuthInterface.Message.SUCCESS){
-                LOG.config("PlayerService unsuccessfully signed " + username + " in.");
-                return false;
-            }
-        }
-
-        this.setPlayerWithName(username);
-        playerLobby.startSession(this);
-        AuthData.signUp(username, player);
-        LOG.config("PlayerService successfully signed ." + username + " in.");
-        return true;
+        this.player = p;
     }
 
-
-    public void setPlayerWithName(String username)
-    {
-        this.player = new Player(username);
-    }
-
-
-    /**
-     * class for signing off
-     * return: a boolean for signing off and its relative success
-     */
-    public boolean signOff(){
-        String name = player.getName();
-        AuthInterface.Message msg = authInstance.signOff(name, null, null, player);
-        if (msg != AuthInterface.Message.SUCCESS){
-            errorMsg = msg.name();
-            LOG.config("PlayerService unsuccessfully signed ." + name + " off");
-            return false;
-        }
-        playerLobby.terminateSession(name);
-        player = null;
-        LOG.config("PlayerService successfully signed ." + name + " off");
-        return true;
-    }
 
     /**
      * class for checking if a player is signed in
