@@ -4,22 +4,35 @@ package com.webcheckers.model;
  * Represents a message within the webcheckers game
  *
  * @author Sean Coyne 10-10-18
+ * @author Jeffery Russell 10-22-18
  */
 
-public class Message {
-
-    //Private instance variables
+public class Message
+{
+    /** The message being sent */
     private String text;
+
+    /** The message type */
     private MessageEnum type;
+
+
+    public Message(MessageEnum type, String message)
+    {
+        this.text = message;
+        this.type = type;
+    }
+
 
     /**
      * Get the text of the message
      *
      * @return String - text of message
      */
-    public String getText(){
+    public String getText()
+    {
         return text;
     }
+
 
     /**
      * Get the type of message, either an informational
@@ -27,15 +40,18 @@ public class Message {
      *
      * @return MessageEnum - type of message
      */
-    public MessageEnum getType(){
+    public MessageEnum getType()
+    {
         return type;
     }
+
 
     /**
      * Simple enum for storing the type of a message
      *
      */
-    public enum MessageEnum {
+    public enum MessageEnum
+    {
         ERROR,
         INFO
     }
