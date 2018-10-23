@@ -37,8 +37,8 @@ public class MessageTest {
         Message infoSubject = new Message(Message.MessageEnum.INFO, null);
         assertEquals(Message.MessageEnum.INFO, infoSubject.getType());
         Message emptySubject = new Message(Message.MessageEnum.INFO, "");
-        assertEquals("", errorSubject.getText());
+        assertEquals("", emptySubject.getText());
         Message longSubject = new Message(Message.MessageEnum.INFO, LONG_STRING);
-        assertEquals(LONG_STRING, errorSubject.getText());
+        assertEquals(LONG_STRING, longSubject.getText());
     }
 }
