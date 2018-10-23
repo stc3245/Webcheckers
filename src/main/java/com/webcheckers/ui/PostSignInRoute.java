@@ -65,8 +65,11 @@ public class PostSignInRoute implements Route {
     }
 
     @Override
-    public Object handle(Request request, Response response) {
+    public Object handle(Request request, Response response)
+     {
 
+        final Session httpSession = request.session();
+        final Session session = request.session();
         final String username = request.queryParams(NAME_PARAM);
 
         final Map<String, Object> vm = new HashMap<>();
@@ -88,7 +91,9 @@ public class PostSignInRoute implements Route {
                 else
                 {
                     //playerServices.setPlayer(playerLobby.createPlayer(username));
+                    Player p = playerLobby.createPlayer(username);
 
+                    session.attribute(GetHomeRoute.PLAYERSERVICES_KEY, p);
 
                     response.redirect(WebServer.HOME_URL);
                     halt();

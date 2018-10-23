@@ -13,16 +13,12 @@ public class Player
     /** Stores name of player */
     private String name;
 
-    /** Stores active game of the user */
-    private Game game;
-
     /**
      * constructor for Player class
      */
     public Player(String username) 
     {
         name = username;
-        this.game = null;
     }
 
     /**
@@ -34,46 +30,8 @@ public class Player
         return name;
     }
 
-    /**
-     * sets the current game
-     * 
-     * @param g
-     */
-    public void setGame(Game g)
+    public boolean equals(Player other)
     {
-        this.game = g;
+        return true;
     }
-
-
-    /**
-     * Returns the current game the player is in
-     * @return
-     */
-    public Game getGame()
-    {
-        return this.game;
-    }
-    
-
-    /**
-     * Returns if the player is currently in a game or not.
-     */
-    public boolean inGame()
-    {
-        return this.getGame() != null;
-    }
-
-    /**
-     * getter for PlayerBoard
-     * return: an either inverted or normal PlayerBoard
-     */
-    public BoardView getPlayersBoard()
-    {
-        if(this.game.getWhitePlayer() != this)
-        {
-            return game.getBoard();
-        }
-        return game.getBoard().getInverted();
-    }
-
 }

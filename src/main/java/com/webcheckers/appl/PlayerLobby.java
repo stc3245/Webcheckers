@@ -1,11 +1,14 @@
 package com.webcheckers.appl;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.webcheckers.model.Game;
+import com.webcheckers.model.*;
+import com.webcheckers.appl.*;
 
 /**
  * The object to coordinate the state of the Web Application.
@@ -25,11 +28,15 @@ public class PlayerLobby
     private Map<String, Player> activeSessions;
 
 
+    public List<Game> activeGames;
+
+
     /**
      * Initializes game center's hashmap
      */
     public PlayerLobby()
     {
+        this.activeGames = new ArrayList<>();
         this.activeSessions = new HashMap<>();
     }
 
@@ -65,7 +72,22 @@ public class PlayerLobby
      */
     public Game startGame(Player player1, Player player2)
     {
-      return new Game(player1, player2);
+        Game g =  new Game(player1, player2);
+        this.activeGames.add(g);
+        return g;
+    }
+
+
+    public Game getGame(String playerName)
+    {
+        for(Game g: activeGames)
+        {
+            if(g.playerInGame(playerName))
+            {
+                return g;
+            }
+        }
+        return null;
     }
 
 
@@ -80,8 +102,7 @@ public class PlayerLobby
      */
     public boolean inGame(String playerName)
     {
-        return false;
-      //return this.getPlayer(player).inGame();
+        return this.getGame(playerName) != null;
     }
 
 

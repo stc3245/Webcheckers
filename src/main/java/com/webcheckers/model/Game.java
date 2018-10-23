@@ -33,16 +33,20 @@ public class Game
      */
     public Game(Player redPlayer, Player whitePlayer)
     {
-        //adds players to the game
-        redPlayer.setGame(this);
-        whitePlayer.setGame(this);
-
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.board = new BoardView();
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
     }
+
+    
+    public boolean playerInGame(String playerName)
+    {
+        return playerName.equals(this.redPlayer.getName()) || 
+            playerName.equals(this.whitePlayer.getName());
+    }
+
 
     /**
      * getter for active color
@@ -87,6 +91,20 @@ public class Game
     public BoardView getBoard()
     {
         return this.board;
+    }
+
+
+    /**
+     * getter for PlayerBoard
+     * return: an either inverted or normal PlayerBoard
+     */
+    public BoardView getPlayersBoard(Player p)
+    {
+        if(this.getWhitePlayer().equals(p))
+        {
+            return getBoard();
+        }
+        return getBoard().getInverted();
     }
 
 }

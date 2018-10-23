@@ -33,6 +33,7 @@ public class GetGameRoute implements Route
 
   private final TemplateEngine templateEngine;
 
+  /** Lobby which keeps track of players and their game status */
   public PlayerLobby lobby;
 
   /**
@@ -53,6 +54,7 @@ public class GetGameRoute implements Route
     //
     LOG.config("GetGameRoute is initialized.");
   }
+
 
   /**
    * Render the WebCheckers Home page.
@@ -86,20 +88,18 @@ public class GetGameRoute implements Route
       halt();
     }
 
-    Game game = player.getGame();
+    Game game = lobby.getGame(player.getName());
 
     vm.put(CURRENTPLAYER, player);
 
     vm.put(VIEWMODE, game.getViewMode());
-    vm.put(BOARD, player.getPlayersBoard());
-
+    vm.put(BOARD, game.getPlayersBoard(player));
 
     vm.put(REDPLAYER, game.getRedPlayer());
 
     vm.put(WHITEPLAYER, game.getWhitePlayer());
 
     vm.put(ACTIVECOLOR, game.getActiveColor());
-
 
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }
