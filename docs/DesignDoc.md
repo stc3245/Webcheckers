@@ -9,20 +9,23 @@ geometry: margin=1in
 > and appear in the generated PDF in italics._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: null
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Sean Coyne
+  * Jeffery Russell
+  * Bryce Murphy
+  * Max Gusinov
+  * Perry Deng
 
 ## Executive Summary
 
 This is a summary of the project.
 
 ### Purpose
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
+
+To create a fully functional version of online checkers using Java
+and the Spark framework for all checkers enthusiasts looking to
+play a digitized form of the game.
 
 ### Glossary and Acronyms
 
@@ -31,6 +34,7 @@ This is a summary of the project.
 | VO | Value Object |
 | AI | Artificial Intelligence |
 | HTML | Hyper-Text Markup Language |
+| CSS | Cascading Style Sheets |
 
 
 ## Requirements
@@ -57,12 +61,12 @@ This section describes the application domain.
 
 ![The WebCheckers Domain Model](domain-model.png)
 
-In this domain model we captured the high level aspects of playing a game of
-checkers. Each checkers game consists of two players, each player is either red
-or black. This checkers game is played on a checkers board where each player starts
-with 12 pieces but, they can loose pieces throughout the game. With a checkers piece
-each player can make a move, this move can either be a simple move, a jump move or a 
-multi-jump move. Not are players are humans, some players can be ai players. 
+In this domain model, we captured the high level aspects of playing a game of
+checkers. Each checkers game consists of two players, a red player and a black
+player. The game is played on a 8x8 checkers board with each player starting
+with 12 pieces and losing pieces throughout the game. With a checkers piece,
+each player can make a move. This move can either be a simple move, a jump move, or a 
+multi-jump move. Not all players are humans. Some players can be AI players. 
 
 
 ## Architecture and Design
@@ -93,9 +97,9 @@ with the WebCheckers application.
 
 ![The WebCheckers Web Interface Statechart](web-interface.png)
 
-When the user initially goes to the website they land on a home page. From that
-page the user can go to the sign in page. After a user has selected a valid username
-they can go back to the home page where they now see a player lobby page. After 
+When the user initially goes to the website, they land on a home page. From there,
+the user can go to the sign-in page. After a user has selected a valid username,
+they can go back to the home page where they are now able to see the player lobby. After 
 being selected or selecting a player to play a game with, the user is sent to 
 the game page where they can play a game of checkers. 
 
