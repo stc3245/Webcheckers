@@ -21,13 +21,11 @@ import com.webcheckers.appl.*;
  */
 public class PlayerLobby
 {
-    private static final Logger LOG = Logger.getLogger
-            (PlayerLobby.class.getName());
-
     /** Map of all player usernames to their sessions */
     private Map<String, Player> activeSessions;
 
 
+    /** Active games on the server */
     public List<Game> activeGames;
 
 
@@ -78,6 +76,13 @@ public class PlayerLobby
     }
 
 
+    /**
+     * Returns the player of a specific player
+     * null if the game is not in a game
+     *
+     * @param playerName name of a player
+     * @return game of that player
+     */
     public Game getGame(String playerName)
     {
         for(Game g: activeGames)
@@ -91,6 +96,11 @@ public class PlayerLobby
     }
 
 
+    /**
+     * Returns a list of online players
+     *
+     * @return list of players
+     */
     public Collection<String> getOnlinePlayers()
     {
         return this.activeSessions.keySet();

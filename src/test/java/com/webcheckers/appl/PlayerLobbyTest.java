@@ -26,11 +26,9 @@ public class PlayerLobbyTest
     /** Mock objects to use in the tests */
     private Player player1;
     private final String name1 = "bob";
-    private PlayerServices services1;
 
     private Player player2;
     private final String name2 = "jim";
-    private PlayerServices services2;
 
 
     /**
@@ -46,34 +44,8 @@ public class PlayerLobbyTest
 
         player2 = mock(Player.class);
         when(player2.getName()).thenReturn(this.name2);
-
-
-        // mock objects so we don't rely on dependencies
-        services1 = mock(PlayerServices.class);
-
-        when(services1.playerName()).thenReturn(name1);
-        when(services1.currentPlayer()).thenReturn(this.player1);
-
-        services2 = mock(PlayerServices.class);
-
-        when(services2.playerName()).thenReturn(name2);
-        when(services2.currentPlayer()).thenReturn(this.player2);
     }
 
-
-    /**
-     * Tests the game centers ability to create new player services and
-     * a new player lobby.
-     */
-    @Test
-    public void testMakeNewPlayerServices()
-    {
-        assertNotNull(cut);
-
-        PlayerServices services = cut.newPlayerServices();
-
-        assertNotNull(services);
-    }
 
 
     /**
@@ -141,15 +113,55 @@ public class PlayerLobbyTest
     }
 
 
-//    /**
-//     * Tests the ability of the PlayerLobby to start a game
-//     * between two players.
-//     */
-//    @Test
-//    public void testStartGame()
-//    {
-//        Game game = cut.startGame(player1, player2);
-//
-//        assertNotNull(game);
-//    }
+    /**
+     * Tests the start game and is in game functionality
+     * of the {@link PlayerLobby}
+     */
+    @Test
+    public void testStartGame()
+    {
+        assertFalse(cut.inGame(name1));
+
+        assertFalse(cut.inGame(name1));
+
+        cut.startGame(player1, player2);
+
+        assertTrue(cut.inGame(name1));
+
+        assertTrue(cut.inGame(name1));
+    }
+
+
+    /**
+     * Tests to make sure that the username taken function
+     * is properly working.
+     *
+     */
+    @Test
+    public void testusernameTaken()
+    {
+        assertFalse(cut.usernameTaken(name1));
+        cut.createPlayer(name1);
+        assertTrue(cut.usernameTaken(name1));
+
+        assertFalse(cut.usernameTaken(name2));
+        cut.createPlayer(name2);
+        assertTrue(cut.usernameTaken(name2));
+    }
+
+
+    /**
+     * Tests to see if the username is invalid for the system.
+     */
+    @Test
+    public void testContainsInvalidCharacters()
+    {
+        assertTrue(PlayerLobby.containsInvalidCharacters(""));
+
+        assertTrue(PlayerLobby.containsInvalidCharacters(" "));
+        assertTrue(PlayerLobby.containsInvalidCharacters("       "));
+
+        assertFalse(PlayerLobby.containsInvalidCharacters(name1));
+        assertFalse(PlayerLobby.containsInvalidCharacters(name2));
+    }
 }

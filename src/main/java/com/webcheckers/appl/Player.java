@@ -1,6 +1,6 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.*;
+import java.util.Objects;
 
 /**
  * Represents a player within the webcheckers game
@@ -13,6 +13,7 @@ public class Player
     /** Stores name of player */
     private String name;
 
+
     /**
      * constructor for Player class
      */
@@ -20,6 +21,7 @@ public class Player
     {
         name = username;
     }
+
 
     /**
      * getter for name variable
@@ -30,8 +32,21 @@ public class Player
         return name;
     }
 
-    public boolean equals(Player other)
+
+    @Override
+    public boolean equals(Object o)
     {
-        return true;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(name, player.name);
+    }
+
+
+    @Override
+    public int hashCode()
+    {
+
+        return Objects.hash(name);
     }
 }

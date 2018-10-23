@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.webcheckers.appl.Player;
-import com.webcheckers.appl.PlayerServices;
+import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Game;
 import com.webcheckers.model.Piece;
@@ -36,6 +36,7 @@ public class GetGameRouteTest
     private Session session;
     private Response response;
     private TemplateEngine engine;
+    private PlayerLobby lobby;
 
 
     private static final String TITLE_HEAD_TAG = "<title>" + GetGameRoute.TITLE + " | Web Checkers</title>";
@@ -51,11 +52,11 @@ public class GetGameRouteTest
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
-//        engine = mock(TemplateEngine.class);
         engine = new FreeMarkerEngine();
 
         // create a unique CuT for each test
-        cut = new GetGameRoute(engine);
+        lobby = mock(PlayerLobby.class);
+        cut = new GetGameRoute(engine, lobby);
     }
 
 
@@ -88,11 +89,10 @@ public class GetGameRouteTest
     @Test
     public void redirectWhenPlayerNotInGame()
     {
-        PlayerServices playerService = mock(PlayerServices.class);
-        Player player = mock(Player.class);
-        when(player.inGame()).thenReturn(false);
-        when(playerService.currentPlayer()).thenReturn(player);
-        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(playerService);
+        Player player = new Player("Jeff");
+        PlayerLobby playerLobby = mock(PlayerLobby.class);
+        when(playerLobby.inGame("Jeff")).thenReturn(false);
+        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(player);
         try
         {
             cut.handle(request, response);
@@ -113,11 +113,9 @@ public class GetGameRouteTest
     @Test
     public void validSessionNoRedirect()
     {
-        PlayerServices playerService = mock(PlayerServices.class);
-        Player player = mock(Player.class);
-        when(player.inGame()).thenReturn(true);
-        when(playerService.currentPlayer()).thenReturn(player);
-        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(playerService);
+        Player player = new Player("Jeff");
+        when(lobby.inGame("Jeff")).thenReturn(true);
+        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(player);
         try
         {
             cut.handle(request, response);
@@ -197,24 +195,31 @@ public class GetGameRouteTest
         Player p2 = mock(Player.class);
         when(p1.getName()).thenReturn(p1Name);
         when(p2.getName()).thenReturn(p2Name);
+
+        when(lobby.inGame("Jeff")).thenReturn(true);
         engine = new FreeMarkerEngine();
 
-        PlayerServices playerService = mock(PlayerServices.class);
-        when(p1.inGame()).thenReturn(true);
-        when(playerService.currentPlayer()).thenReturn(p1);
 
         Game game = mock(Game.class);
         when(game.getViewMode()).thenReturn(BoardView.ViewModeEnum.PLAY);
-        when(p1.getPlayersBoard()).thenReturn(new BoardView());
-        when(p1.getGame()).thenReturn(game);
+        when(game.getPlayersBoard(p1)).thenReturn(new BoardView());
+        when(lobby.getGame(p1Name)).thenReturn(game);
         when(game.getRedPlayer()).thenReturn(p1);
         when(game.getWhitePlayer()).thenReturn(p2);
         when(game.getActiveColor()).thenReturn(Piece.ColorEnum.RED);
 
-        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(playerService);
+        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(p1);
         String viewHtml = "";
 
-        viewHtml = cut.handle(request, response).toString();
+        try
+        {
+            viewHtml = cut.handle(request, response).toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
 
         assertTrue(viewHtml.contains(TITLE_HEAD_TAG), "Title head tag exists.");
         assertTrue(viewHtml.contains("<a href=\"/signout\">sign out [" + p1Name + "]</a>"),
