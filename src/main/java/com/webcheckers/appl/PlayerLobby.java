@@ -35,28 +35,12 @@ public class PlayerLobby
 
 
     /**
-     * Get a new {@Linkplain PlayerServices} object instance
-     * to provide client-specific services to
-     * the client who just connected to this application.
-     *
-     * @return
-     *   A new {@Link PlayerServices}
-     */
-    public PlayerServices newPlayerServices() 
-    {
-        LOG.fine("New player services instance created.");
-        return new PlayerServices();
-    }
-
-
-    /**
      * start a logged in session
      *
      * @param username username
      */
     public Player createPlayer(String username)
     {
-        System.out.println("Player added");
         Player p = new Player(username);
         activeSessions.put(username, p);
         return p;
@@ -94,9 +78,10 @@ public class PlayerLobby
     /**
      * Determins if a player is already in a game
      */
-    public boolean playerInGame(String player)
+    public boolean inGame(String playerName)
     {
-      return this.getPlayer(player).inGame();
+        return false;
+      //return this.getPlayer(player).inGame();
     }
 
 

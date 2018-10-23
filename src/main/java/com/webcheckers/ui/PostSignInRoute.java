@@ -1,7 +1,7 @@
 package com.webcheckers.ui;
 
-import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.appl.PlayerServices;
+import com.webcheckers.appl.*;
+
 
 import spark.*;
 
@@ -74,10 +74,10 @@ public class PostSignInRoute implements Route {
 
         ModelAndView mv = null;
 
-        final PlayerServices playerServices = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+        Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
 
         // check for active session
-        if(playerServices != null)
+        if(player == null)
         {
             if(!(playerLobby.usernameTaken(username)))
             {
@@ -87,7 +87,9 @@ public class PostSignInRoute implements Route {
                 }
                 else
                 {
-                    playerServices.setPlayer(playerLobby.createPlayer(username));
+                    //playerServices.setPlayer(playerLobby.createPlayer(username));
+
+
                     response.redirect(WebServer.HOME_URL);
                     halt();
                     return null;
@@ -100,6 +102,7 @@ public class PostSignInRoute implements Route {
         }
         else
         {
+            //already logged in
             response.redirect(WebServer.HOME_URL);
             return null;
         }

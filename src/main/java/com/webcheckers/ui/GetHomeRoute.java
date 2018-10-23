@@ -83,44 +83,34 @@ public class GetHomeRoute implements Route {
 
     // retrieve the game object
     final Session session = request.session();
-    PlayerServices playerServices = session.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+    Player player = session.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
 
-    // logic for if a current player is signed in
-    if (playerServices!= null)
+
+    if(player != null) 
     {
-      if(playerServices.signedIn()) 
+      if(playerLobby.inGame(player.getName()))
       {
-        if(playerServices.currentPlayer().inGame())
-        {
-          response.redirect(WebServer.GAME_URL);
-          halt();
-          return null;
-        }
-        else
-        {
-          vm.put(SIGN_IN_ATTR, true);
-          vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, playerServices.currentPlayer().getName()));
-          vm.put(PLAYER_LIST, playerLobby.getOnlinePlayers());
-          vm.put(USER_NUM_ATTR, String.format(USER_NUM, playerLobby.getOnlinePlayers().size()));
-        }
-        
+        response.redirect(WebServer.GAME_URL);
+        halt();
+        return null;
       }
-      else 
+      else
       {
-        vm.put(SIGN_IN_ATTR, false);
+        vm.put(SIGN_IN_ATTR, true);
+        vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, player.getName()));
+        vm.put(PLAYER_LIST, playerLobby.getOnlinePlayers());
         vm.put(USER_NUM_ATTR, String.format(USER_NUM, playerLobby.getOnlinePlayers().size()));
       }
       
-    } 
-    else
+    }
+    else 
     {
-      playerServices = playerLobby.newPlayerServices();
-      session.attribute(GetHomeRoute.PLAYERSERVICES_KEY, playerServices);
       vm.put(SIGN_IN_ATTR, false);
       vm.put(USER_NUM_ATTR, String.format(USER_NUM, playerLobby.getOnlinePlayers().size()));
     }
 
-    vm.put(ERROR_MSG, playerServices.getStartGameError());
+
+    vm.put(ERROR_MSG, "");
 
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }

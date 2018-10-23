@@ -50,18 +50,17 @@ public class PostStartGameRoute implements Route
 
     final String opponentName = request.queryParams(this.OPPONENT_ATTR);
 
-    PlayerServices playerS = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+    Player player = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
 
-    if(playerS == null)
+    //cant start a game when you are not logged in
+    if(player == null)
     {
       response.redirect(WebServer.HOME_URL);
       halt();
     }
 
-    Player player = playerS.currentPlayer();
-
     // other player is not in another game
-    if(!playerLobby.playerInGame(opponentName) &&
+    if(!playerLobby.inGame(opponentName) &&
          !player.getName().equals(opponentName))
     {
         //start a new game
@@ -72,7 +71,9 @@ public class PostStartGameRoute implements Route
     else //invalid user selected
     {
         response.redirect(WebServer.HOME_URL);
-        playerS.setStartGameError("You can't play with that player!"); //display an error message on the home page by changing welcome message
+
+        //code smell
+        //playerS.setStartGameError("You can't play with that player!"); //display an error message on the home page by changing welcome message
         halt();
     }
     return null;

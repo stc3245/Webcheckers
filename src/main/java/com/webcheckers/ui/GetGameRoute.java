@@ -33,6 +33,8 @@ public class GetGameRoute implements Route
 
   private final TemplateEngine templateEngine;
 
+  public PlayerLobby lobby;
+
   /**
    * Create the Spark Route (UI controller) for the
    * {@code GET /} HTTP request.
@@ -40,8 +42,10 @@ public class GetGameRoute implements Route
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  GetGameRoute(final TemplateEngine templateEngine)
+  GetGameRoute(final TemplateEngine templateEngine, PlayerLobby lobby)
   {
+
+    this.lobby = lobby;
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
@@ -69,16 +73,14 @@ public class GetGameRoute implements Route
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", TITLE);
 
-    PlayerServices playerS = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
-    if(playerS == null)
+    Player player = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+    if(player == null)
     {
       response.redirect(WebServer.HOME_URL);
       halt();
     }
 
-    Player player = playerS.currentPlayer();
-
-    if(!player.inGame())
+    if(!lobby.inGame(player.getName()))
     {
       response.redirect(WebServer.HOME_URL);
       halt();
