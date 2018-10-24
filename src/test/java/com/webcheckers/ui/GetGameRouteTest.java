@@ -61,7 +61,7 @@ public class GetGameRouteTest
 
 
     /**
-     * Test's that the Game Rout Handeler redirects to the
+     * Tests that the Game Route Handler redirects to the
      * home page if the Player Services is either faulty
      * or non-existent for their session data.
      */

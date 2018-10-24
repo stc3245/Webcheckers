@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PostValidateMove.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WebCheckers Application Tier Test Coverage</a> &gt; <a href="index.source.html" class="el_package">com.webcheckers.ui</a> &gt; <span class="el_source">PostValidateMove.java</span></div><h1>PostValidateMove.java</h1><pre class="source lang-java linenums">package com.webcheckers.ui;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.logging.Logger;
+
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.Route;
+import spark.Session;
+import spark.TemplateEngine;
+
+import com.webcheckers.appl.*;
+import com.webcheckers.model.*;
+
+/**
+ * Class dealing with validating a move
+ * 
+ * @author Jeffery Russell 10-14-18
+ */
+public class PostValidateMove implements Route
+{
+    private final TemplateEngine templateEngine;
+
+    public PostValidateMove(final TemplateEngine templateEngine)
+<span class="nc" id="L28">    {</span>
+<span class="nc" id="L29">        this.templateEngine = templateEngine;</span>
+<span class="nc" id="L30">    }</span>
+
+
+  /**
+   * Starts a game with another player if that player is available to
+   * play a game.
+   *
+   * @param request
+   *   the HTTP request
+   * @param response
+   *   the HTTP response
+   *
+   * @return
+   *   the rendered HTML for the Home page
+   */
+  @Override
+  public Object handle(Request request, Response response)
+  {
+<span class="nc" id="L48">    final Session httpSession = request.session();</span>
+
+    //PlayerServices playerS = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+    //Player player = playerS.currentPlayer();
+
+
+<span class="nc" id="L54">    response.redirect(WebServer.GAME_URL);</span>
+<span class="nc" id="L55">    return null;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Application Tier</div></body></html>

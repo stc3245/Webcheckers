@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Row.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WebCheckers Model Tier Test Coverage</a> &gt; <a href="index.source.html" class="el_package">com.webcheckers.model</a> &gt; <span class="el_source">Row.java</span></div><h1>Row.java</h1><pre class="source lang-java linenums">package com.webcheckers.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import java.lang.Iterable;
+
+
+/**
+ * @author Jeffery Russell, Shean 10-14-18
+ */
+public class Row implements Iterable&lt;Space&gt;
+{
+
+    //Private Instance Variables
+    private int index;
+
+    private List&lt;Space&gt; row;
+
+    /**
+     * constructor for row
+     *
+     * @param index - index of the row on the board
+     */
+    public Row(int index)
+<span class="fc" id="L26">    {</span>
+       Piece.ColorEnum selectedPlayerColor;
+<span class="fc" id="L28">       this.row = new ArrayList&lt;&gt;(8);</span>
+
+<span class="fc bfc" id="L30" title="All 2 branches covered.">       if(index &gt;= 3)</span>
+       {
+<span class="fc" id="L32">           selectedPlayerColor = Piece.ColorEnum.RED;</span>
+       }
+       else
+       {
+<span class="fc" id="L36">           selectedPlayerColor = Piece.ColorEnum.WHITE;</span>
+       }
+
+        Piece tempPiece;
+<span class="fc bfc" id="L40" title="All 4 branches covered.">        if(index != 3 &amp;&amp; index != 4)</span>
+        {
+<span class="fc" id="L42">            tempPiece =  new Piece(BoardView.PieceEnum.SINGLE, selectedPlayerColor);</span>
+        }
+        else
+        {
+<span class="fc" id="L46">            tempPiece = null;</span>
+        }
+
+
+<span class="fc bfc" id="L50" title="All 2 branches covered.">       for(int i = 0; i &lt; 8; i++)</span>
+       {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">           Piece.ColorEnum tileColor = ((index + i) %2 == 0) ? Piece.ColorEnum.WHITE : Piece.ColorEnum.RED;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">           if(tileColor == Piece.ColorEnum.RED)</span>
+           {
+<span class="fc" id="L55">                row.add(new Space(i, tempPiece, tileColor));</span>
+           }
+           else
+           {
+<span class="fc" id="L59">               row.add(new Space(i, null, tileColor));</span>
+           }
+           
+       }
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * overloader constructor for Row class
+     * @param index index of the row
+     * @param row row information
+     */
+    public Row(int index, List&lt;Space&gt; row)
+<span class="nc" id="L71">    {</span>
+<span class="nc" id="L72">        this.index = index;</span>
+<span class="nc" id="L73">        this.row = row;</span>
+<span class="nc" id="L74">    }</span>
+
+    public Row inverted()
+    {
+<span class="nc" id="L78">        List&lt;Space&gt; row = new ArrayList&lt;Space&gt;(8);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        for(int i = 7; i&gt;=0; i--)</span>
+        {
+<span class="nc" id="L81">            row.add(this.row.get(i));</span>
+        }
+<span class="nc" id="L83">        return new Row(this.getIndex(), row);</span>
+    }
+
+    /**
+     * gets index of the row within the board
+     *
+     * @return int - index of row
+     */
+    public int getIndex(){
+<span class="fc" id="L92">        return index;</span>
+    }
+
+    public Iterator&lt;Space&gt; iterator() 
+    {
+<span class="fc" id="L97">        return row.iterator();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Model Tier</div></body></html>

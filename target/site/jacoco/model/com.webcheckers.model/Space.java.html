@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Space.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WebCheckers Model Tier Test Coverage</a> &gt; <a href="index.source.html" class="el_package">com.webcheckers.model</a> &gt; <span class="el_source">Space.java</span></div><h1>Space.java</h1><pre class="source lang-java linenums">package com.webcheckers.model;
+
+/**
+ * Represents a space on the board within
+ * the webcheckers game
+ *
+ * @author Sean Coyne 10-14-18
+ */
+
+public class Space {
+
+    //Private Instance Variables
+    private int cellIdx;
+    private Piece piece;
+    private Piece.ColorEnum color;
+
+    /**
+     * Constructor for space object
+     *
+     * @param cellIdx - position of cell in row
+     * @param piece - piece if there is one in space or null
+     * @param color - color of piece (red or white)
+     */
+    public Space(int cellIdx, Piece piece, Piece.ColorEnum color)
+<span class="fc" id="L25">    {</span>
+<span class="fc" id="L26">        this.cellIdx = cellIdx;</span>
+<span class="fc" id="L27">        this.piece = piece;</span>
+<span class="fc" id="L28">        this.color = color;</span>
+<span class="fc" id="L29">    }</span>
+
+    /**
+     * gets the id of the cell in the row
+     *
+     * @return int - id of cell
+     */
+    public int getCellIdx(){
+<span class="fc" id="L37">        return this.cellIdx;</span>
+    }
+
+    /**
+     * returns true if space is valid location for
+     * piece or false if not.
+     *
+     * @return piece - true or false
+     */
+    public boolean isValid(){
+<span class="fc bfc" id="L47" title="All 4 branches covered.">        if((this.color == Piece.ColorEnum.RED) &amp;&amp; (this.piece == null)){</span>
+<span class="fc" id="L48">            return true;</span>
+        }
+<span class="fc" id="L50">        return false;</span>
+
+    }
+
+    /**
+     * gets piece that resides on space or
+     * null if there is no piece.
+     *
+     * @return Piece - null or piece
+     */
+    public Piece getPiece(){
+<span class="fc" id="L61">        return piece;</span>
+    }
+
+    /**
+     * sets the piece of the current square
+     *
+     * @param p - piece moving to square
+     */
+    public void setPiece(Piece p){
+<span class="nc" id="L70">        this.piece = p;</span>
+<span class="nc" id="L71">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Model Tier</div></body></html>
