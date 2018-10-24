@@ -27,6 +27,8 @@ public class Row implements Iterable<Space>
        Piece.ColorEnum selectedPlayerColor;
        this.row = new ArrayList<>(8);
 
+       this.index = index;
+
        if(index >= 3)
        {
            selectedPlayerColor = Piece.ColorEnum.RED;
@@ -92,9 +94,24 @@ public class Row implements Iterable<Space>
         return index;
     }
 
+    /**
+     * get iterator
+     * @return the iterator for the row
+     */
     public Iterator<Space> iterator() 
     {
         return row.iterator();
     }
 
+    /**
+     * overriden equals function
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Row)) {
+            return false;
+        }
+        Row t = (Row) obj;
+        return t.index == this.index;
+    }
 }

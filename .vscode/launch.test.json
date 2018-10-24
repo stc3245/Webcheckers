@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "checkers-app",
+                "projectName": "checkers-app",
+                "workingDirectory": "c:\\Users\\mgusi\\Documents\\team-project-2181-swen-261-07-c-null",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "checkers-app",
+                "projectName": "checkers-app",
+                "workingDirectory": "c:\\Users\\mgusi\\Documents\\team-project-2181-swen-261-07-c-null",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
