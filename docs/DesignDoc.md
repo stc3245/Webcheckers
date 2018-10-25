@@ -3,62 +3,69 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
-
 ## Team Information
-* Team name: TEAMNAME
+* Team name: null
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Sean Coyne
+  * Jeffery Russell
+  * Bryce Murphy
+  * Max Gusinov
+  * Perry Deng
 
 ## Executive Summary
 
-This is a summary of the project.
+From the SE vision document [here](http://www.se.rit.edu/~swen-261/projects/WebCheckers/Vision_document.html):
+"The application must allow players to play checkers with other players who are currently signed-in. The game user interface (UI) will support a game experience using drag-and-drop browser capabilities for making moves. Beyond this minimal set of features, we have grand vision for how we could further enhance the player experience with some additional features beyond the basic checkers game".
 
 ### Purpose
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
+
+To create a fully functional version of online checkers using Java
+and the Spark framework for all checkers enthusiasts looking to
+play a digitized form of the game.
 
 ### Glossary and Acronyms
-> _Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
 | VO | Value Object |
+| AI | Artificial Intelligence |
+| HTML | Hyper-Text Markup Language |
+| CSS | Cascading Style Sheets |
 
 
 ## Requirements
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
-
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+Players must be able to play of checkers on a website adhering to the American Rules. Before
+playing a game players must be able to sign in. Players must also be able to sign out. Two
+players must be able to play a game of checkers with another player following the american 
+rules. At any point in the game a player must be able to resign which ends the game. 
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+- Players must be able to sign in.
+- Players must be able to sign out
+- Two playes must be able to play a game of checkers adnering to the [American rules](http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html).
+- At any point in the game a player must be able to resign from the game at which point the other player Wins by default. 
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
+- AI Player: The player will have the option to play a game against a artificial intelligence.
+- Player Help: If chosen, the player will be able to get move reccomendations from the server. This will then display on the board. 
 
 
 ## Application Domain
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](domain-model-placeholder.png)
+![The WebCheckers Domain Model](domain-model.png)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+In this domain model, we captured the high level aspects of playing a game of
+checkers. Each checkers game consists of two players, a red player and a black
+player. The game is played on a 8x8 checkers board with each player starting
+with 12 pieces and losing pieces throughout the game. With a checkers piece,
+each player can make a move. This move can either be a simple move, a jump move, or a 
+multi-jump move. Not all players are humans. Some players can be AI players. 
 
 
 ## Architecture and Design
@@ -87,10 +94,13 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](web-interface-placeholder.png)
+![The WebCheckers Web Interface Statechart](web-interface.png)
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+When the user initially goes to the website, they land on a home page. From there,
+the user can go to the sign-in page. After a user has selected a valid username,
+they can go back to the home page where they are now able to see the player lobby. After 
+being selected or selecting a player to play a game with, the user is sent to 
+the game page where they can play a game of checkers. 
 
 
 ### UI Tier
