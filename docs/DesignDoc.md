@@ -3,11 +3,6 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
-
 ## Team Information
 * Team name: null
 * Team members
@@ -19,7 +14,8 @@ geometry: margin=1in
 
 ## Executive Summary
 
-This is a summary of the project.
+From the SE vision document [here](http://www.se.rit.edu/~swen-261/projects/WebCheckers/Vision_document.html):
+"The application must allow players to play checkers with other players who are currently signed-in. The game user interface (UI) will support a game experience using drag-and-drop browser capabilities for making moves. Beyond this minimal set of features, we have grand vision for how we could further enhance the player experience with some additional features beyond the basic checkers game".
 
 ### Purpose
 
@@ -41,18 +37,21 @@ play a digitized form of the game.
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
-
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+Players must be able to play of checkers on a website adhering to the American Rules. Before
+playing a game players must be able to sign in. Players must also be able to sign out. Two
+players must be able to play a game of checkers with another player following the american 
+rules. At any point in the game a player must be able to resign which ends the game. 
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+- Players must be able to sign in.
+- Players must be able to sign out
+- Two playes must be able to play a game of checkers adnering to the [American rules](http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html).
+- At any point in the game a player must be able to resign from the game at which point the other player Wins by default. 
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
+- AI Player: The player will have the option to play a game against a artificial intelligence.
+- Player Help: If chosen, the player will be able to get move reccomendations from the server. This will then display on the board. 
 
 
 ## Application Domain
