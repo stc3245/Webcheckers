@@ -40,7 +40,6 @@ public class BoardViewTest {
     public void testConstructor(){
         boardView = new BoardView();
         assertNotNull(boardView);
-        testGetIterator();
     }
 
     /**
@@ -55,7 +54,6 @@ public class BoardViewTest {
         }
         boardView = new BoardView(rowArrayList);
         assertNotNull(boardView);
-        testGetIterator();
 
     }
 
