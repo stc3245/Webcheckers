@@ -1,12 +1,8 @@
 package com.webcheckers.ui;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.BoardView;
-import com.webcheckers.model.Game;
-import com.webcheckers.model.Piece;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -17,21 +13,12 @@ import spark.template.freemarker.FreeMarkerEngine;
 /**
  * The Junit test suite for the {@link GetHomeRoute}
  *
- * @author Sean Coyne 10-24-2018
- */
-import java.util.HashMap;
-import java.util.Map;
-
-
-/**
- * The Junit test suite for the {@link GetHomeRoute}
- *
  * @author Sean Coyne 10-24-18
  */
 @Tag("UI-tier")
 public class GetHomeRouteTest
 {
-    /** Component under test */
+    /** Route being tested */
     private GetHomeRoute cut;
 
     /** Mock objects to use for tests */
@@ -41,9 +28,6 @@ public class GetHomeRouteTest
     private TemplateEngine engine;
     private PlayerLobby lobby;
 
-
-    private static final String TITLE_HEAD_TAG = "<title>" + GetHomeRoute.TITLE + " | Web Checkers</title>";
-
     /**
      * Setup new mock objects for each unit test
      * to use.
@@ -51,6 +35,7 @@ public class GetHomeRouteTest
     @BeforeEach
     public void setup()
     {
+        // mock objects used
         request = mock(Request.class);
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
@@ -86,11 +71,12 @@ public class GetHomeRouteTest
 
 
     /**
-     * Verifies that if the player is not in a game, they are redirected to the home page.
+     * Verifies that if the player is not in a game, they are shown
+     * the home page with the option to play online
      */
     @Test
-    public void validSessionNoRedirect()
-    {
+    public void renderWhenPlayerSignedIn() {
+
         Player player = new Player("Sean");
 
         when(lobby.inGame("Sean")).thenReturn(false);
@@ -100,6 +86,25 @@ public class GetHomeRouteTest
             cut.handle(request, response);
 
         } catch (Exception e) {}
+
+        verify(response, Mockito.times(0)).redirect(WebServer.HOME_URL);
+    }
+
+    /**
+     * Verifies that when the player is not signed in and not in a game
+     * they will be shown the home url
+     */
+    @Test
+    public void renderWhenPlayedNotSignedIn() {
+
+        Player player = null;
+
+        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(player);
+
+        try {
+            cut.handle(request, response);
+
+        } catch (HaltException e) {}
 
         verify(response, Mockito.times(0)).redirect(WebServer.HOME_URL);
     }
