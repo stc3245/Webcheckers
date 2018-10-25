@@ -28,13 +28,13 @@ public class PostSignInRoute implements Route {
     private final TemplateEngine templateEngine;
 
     // username input value
-    private static final String NAME_PARAM = "username";
+    static final String NAME_PARAM = "username";
 
     // Values used in the view-model map for rendering the signin view after entering credentials.
-    private static final String VIEW_NAME = "signin.ftl";
+    static final String VIEW_NAME = "signin.ftl";
 
-    private static final String ERROR_MESSAGE_ATTR = "errorMessage";
-    private static final String SIGN_IN_ERROR_ATTR = "signInError";
+    static final String ERROR_MESSAGE_ATTR = "errorMessage";
+    static final String SIGN_IN_ERROR_ATTR = "signInError";
     static final String DISPLYED_MESSAGE_ATTR = "displayedMessage";
     static final String SIGNIN_AUTHORIZED = "User has successfully sign in. ";
     static final String SIGNIN_UNAUTHORIZED = "User has failed to sign in. ";
@@ -45,8 +45,8 @@ public class PostSignInRoute implements Route {
     static final String ERROR_DEFAULT = "An unknown error has occurred. ";
     static final String ERROR_WRONG_CREDENTIALS = "Credentials are incorrect. ";
     static final String ERROR_ALREADY_LOGGEDIN = "The user is already logged in. ";
-    private static final String ERROR_USERNAME_TAKEN = "This username has been taken. ";
-    private static final String ERROR_INVALID_CHARACTERS = "Invalid characters detected. ";
+    static final String ERROR_USERNAME_TAKEN = "This username has been taken. ";
+    static final String ERROR_INVALID_CHARACTERS = "Invalid characters detected. ";
 
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
