@@ -5,3 +5,5 @@
 # @author Jeffery Russell 10-22-18
 
 .idea
+target/*
+*.iml
