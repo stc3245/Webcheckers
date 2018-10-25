@@ -46,5 +46,17 @@ import org.junit.jupiter.api.Test;
 
         assertEquals(p, tSpace.getPiece());
     }
-    //still need to check setPiece
+
+    /**
+     * JUnit test for setPiece
+     */
+    @Test
+    public void testsetPiece() {
+        Piece p = new Piece(PieceEnum.SINGLE, ColorEnum.WHITE);
+        Piece q = new Piece(PieceEnum.SINGLE, ColorEnum.RED);
+        Space s = new Space(4, p, ColorEnum.WHITE);
+        s.setPiece(p);
+
+        assertSame(p, s.getPiece());
+    }
  }
