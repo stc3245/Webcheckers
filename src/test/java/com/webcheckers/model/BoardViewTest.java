@@ -79,7 +79,7 @@ public class BoardViewTest {
         Iterator<Row> rowIterator = boardViewInverted.iterator();
 
         Row r = rowIterator.next();
-        assertEquals(0, r.getIndex());
+        assertEquals(7, r.getIndex());
         assertEquals(true, rowIterator.hasNext());
 
     }

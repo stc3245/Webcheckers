@@ -43,8 +43,7 @@ public class RowTest {
         Row row1 = new Row(8);
         Row row2 = new Row(8);
 
-        row2 = row2.inverted();
-        row2 = row2.inverted();
+        //row2 = row2.inverted();
         
         assertEquals(row1, row2);
     }

@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import java.util.Objects;
+
 /**
  * Represents a piece within the webcheckers game
  *
@@ -47,5 +49,20 @@ public class Piece
     {
         RED,
         WHITE
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Piece piece = (Piece) o;
+        return type == piece.type &&
+                color == piece.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, color);
     }
 }

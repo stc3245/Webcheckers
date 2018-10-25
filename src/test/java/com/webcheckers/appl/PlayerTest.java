@@ -36,7 +36,6 @@ public class PlayerTest
     }
 
 
-
     /**
      * Tests our ability to create a new player
      */

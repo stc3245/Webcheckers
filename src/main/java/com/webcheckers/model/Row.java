@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import java.lang.Iterable;
+import java.util.Objects;
 
 
 /**
@@ -64,6 +65,13 @@ public class Row implements Iterable<Space>
        }
     }
 
+
+    public Space getSpace(int index)
+    {
+        return this.row.get(index);
+    }
+
+
     /**
      * overloader constructor for Row class
      * @param index index of the row
@@ -90,7 +98,8 @@ public class Row implements Iterable<Space>
      *
      * @return int - index of row
      */
-    public int getIndex(){
+    public int getIndex()
+    {
         return index;
     }
 
@@ -103,15 +112,25 @@ public class Row implements Iterable<Space>
         return row.iterator();
     }
 
-    /**
-     * overriden equals function
-     */
+
     @Override
-    public boolean equals(Object obj) {
-        if(!(obj instanceof Row)) {
-            return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Row t = (Row) o;
+
+        for(int i = 0; i < this.row.size(); i++)
+        {
+            if(!this.getSpace(i).equals(t.getSpace(i)))
+            {
+                return false;
+            }
         }
-        Row t = (Row) obj;
-        return t.index == this.index;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, row);
     }
 }
