@@ -2,7 +2,6 @@ package com.webcheckers.ui;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
 import org.junit.jupiter.api.BeforeEach;

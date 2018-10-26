@@ -2,7 +2,6 @@ package com.webcheckers.ui;
 
 import org.junit.jupiter.api.Assertions.*;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
 import org.junit.jupiter.api.BeforeEach;
@@ -88,7 +87,7 @@ public class PostSignInRouteTest {
         when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(null);
         // invalid username
         String name = "";
-        when(request.queryParams(NAME_PARAM)).thenReturn("Perry");
+        when(request.queryParams(NAME_PARAM)).thenReturn(name);
         when(lobby.usernameTaken(name)).thenReturn(false);
 
         final Map<String, Object> vm = new HashMap<>();
