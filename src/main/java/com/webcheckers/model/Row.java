@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import java.lang.Iterable;
+import java.util.Objects;
 
 
 /**
@@ -24,22 +25,24 @@ public class Row implements Iterable<Space>
      */
     public Row(int index)
     {
-       ColorEnum selectedPlayerColor;
+       Piece.ColorEnum selectedPlayerColor;
        this.row = new ArrayList<>(8);
+
+       this.index = index;
 
        if(index >= 3)
        {
-           selectedPlayerColor = ColorEnum.RED;
+           selectedPlayerColor = Piece.ColorEnum.RED;
        }
        else
        {
-           selectedPlayerColor = ColorEnum.WHITE;
+           selectedPlayerColor = Piece.ColorEnum.WHITE;
        }
 
         Piece tempPiece;
         if(index != 3 && index != 4)
         {
-            tempPiece =  new Piece(PieceEnum.SINGLE, selectedPlayerColor);
+            tempPiece =  new Piece(BoardView.PieceEnum.SINGLE, selectedPlayerColor);
         }
         else
         {
@@ -49,8 +52,8 @@ public class Row implements Iterable<Space>
 
        for(int i = 0; i < 8; i++)
        {
-           ColorEnum tileColor = ((index + i) %2 == 0) ? ColorEnum.WHITE : ColorEnum.RED;
-           if(tileColor == ColorEnum.RED)
+           Piece.ColorEnum tileColor = ((index + i) %2 == 0) ? Piece.ColorEnum.WHITE : Piece.ColorEnum.RED;
+           if(tileColor == Piece.ColorEnum.RED)
            {
                 row.add(new Space(i, tempPiece, tileColor));
            }
@@ -61,6 +64,13 @@ public class Row implements Iterable<Space>
            
        }
     }
+
+
+    public Space getSpace(int index)
+    {
+        return this.row.get(index);
+    }
+
 
     /**
      * overloader constructor for Row class
@@ -88,13 +98,39 @@ public class Row implements Iterable<Space>
      *
      * @return int - index of row
      */
-    public int getIndex(){
+    public int getIndex()
+    {
         return index;
     }
 
+    /**
+     * get iterator
+     * @return the iterator for the row
+     */
     public Iterator<Space> iterator() 
     {
         return row.iterator();
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Row t = (Row) o;
+
+        for(int i = 0; i < this.row.size(); i++)
+        {
+            if(!this.getSpace(i).equals(t.getSpace(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, row);
+    }
 }

@@ -26,12 +26,15 @@ public class GetGameRoute implements Route
   public static final String ACTIVECOLOR = "activeColor";
   public static final String BOARD = "board";
 
-  static final String TITLE = "WebCheckers Game!";
-  static final String VIEW_NAME = "game.ftl";
+  public static final String TITLE = "Game!";
+  public static final String VIEW_NAME = "game.ftl";
 
   private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
   private final TemplateEngine templateEngine;
+
+  /** Lobby which keeps track of players and their game status */
+  public PlayerLobby lobby;
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -40,8 +43,10 @@ public class GetGameRoute implements Route
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  GetGameRoute(final TemplateEngine templateEngine)
-   {
+  GetGameRoute(final TemplateEngine templateEngine, PlayerLobby lobby)
+  {
+
+    this.lobby = lobby;
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
@@ -49,6 +54,7 @@ public class GetGameRoute implements Route
     //
     LOG.config("GetGameRoute is initialized.");
   }
+
 
   /**
    * Render the WebCheckers Home page.
@@ -67,31 +73,33 @@ public class GetGameRoute implements Route
     final Session httpSession = request.session();
     //
     Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
+    vm.put("title", TITLE);
 
-    PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
-    if(playerS == null)
+    Player player = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+    if(player == null)
     {
       response.redirect(WebServer.HOME_URL);
       halt();
     }
 
-    Player player = playerS.currentPlayer();
+    if(!lobby.inGame(player.getName()))
+    {
+      response.redirect(WebServer.HOME_URL);
+      halt();
+    }
 
-    Game game = player.getGame();
+    Game game = lobby.getGame(player.getName());
 
     vm.put(CURRENTPLAYER, player);
 
     vm.put(VIEWMODE, game.getViewMode());
-    vm.put(BOARD, player.getPlayersBoard());
-
+    vm.put(BOARD, game.getPlayersBoard(player));
 
     vm.put(REDPLAYER, game.getRedPlayer());
 
     vm.put(WHITEPLAYER, game.getWhitePlayer());
 
     vm.put(ACTIVECOLOR, game.getActiveColor());
-
 
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }
