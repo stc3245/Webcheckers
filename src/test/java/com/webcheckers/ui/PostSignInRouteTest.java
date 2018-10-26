@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assertions.*;
 
 import com.webcheckers.appl.Player;
@@ -17,6 +18,7 @@ import java.util.Map;
 import static com.webcheckers.ui.PostSignInRoute.NAME_PARAM;
 import static com.webcheckers.ui.PostSignInRoute.VIEW_NAME;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -72,14 +74,21 @@ public class PostSignInRouteTest {
     @Test
     public void usernameRepeatedRedirect() {
         when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(null);
-        String name = "Perry";
+        String name = "TakenName";
         when(request.queryParams(NAME_PARAM)).thenReturn(name);
         when(lobby.usernameTaken(name)).thenReturn(true);
 
-        try {
-            CuT.handle(request, response);
-        } catch (HaltException e) {}
-        verify(response).redirect(WebServer.HOME_URL);
+        final Map<String, Object> vm = new HashMap<>();
+        ModelAndView mv;
+        vm.put(GetHomeRoute.TITLE_ATTR, GetHomeRoute.TITLE);
+        vm.put(GetHomeRoute.SIGN_IN_ATTR, false);
+        vm.put(PostSignInRoute.SIGN_IN_ERROR_ATTR, true);
+
+        vm.put(PostSignInRoute.ERROR_MESSAGE, PostSignInRoute.ERROR_USERNAME_TAKEN);
+        vm.put(GetHomeRoute.ERROR_MSG, "");
+        mv = new ModelAndView(vm, VIEW_NAME);
+
+        assertTrue(CuT.handle(request, response).toString().equals(engine.render(mv)));
     }
 
     @Test
@@ -99,7 +108,8 @@ public class PostSignInRouteTest {
         vm.put(PostSignInRoute.ERROR_MESSAGE, PostSignInRoute.ERROR_INVALID_CHARACTERS);
         vm.put(GetHomeRoute.ERROR_MSG, "");
         mv = new ModelAndView(vm, VIEW_NAME);
-        assertSame(CuT.handle(request, response), engine.render(mv));
+        Assertions.assertTrue(
+                CuT.handle(request, response).toString().equals(engine.render(mv)));
     }
 
     @Test
