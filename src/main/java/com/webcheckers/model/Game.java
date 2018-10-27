@@ -16,13 +16,13 @@ public class Game
     private Player whitePlayer;
 
     /** The current color of the current player */
-    private ColorEnum activeColor;
+    private Piece.ColorEnum activeColor;
 
     /** Representation of the game board */
     private BoardView board;
 
     /** The status of the game Is always active for now */
-    private ViewModeEnum viewMode;
+    private BoardView.ViewModeEnum viewMode;
 
 
     /**
@@ -33,22 +33,26 @@ public class Game
      */
     public Game(Player redPlayer, Player whitePlayer)
     {
-        //adds players to the game
-        redPlayer.setGame(this);
-        whitePlayer.setGame(this);
-
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.board = new BoardView();
-        this.viewMode = ViewModeEnum.PLAY;
-        this.activeColor = ColorEnum.RED;
+        this.viewMode = BoardView.ViewModeEnum.PLAY;
+        this.activeColor = Piece.ColorEnum.RED;
     }
+
+    
+    public boolean playerInGame(String playerName)
+    {
+        return playerName.equals(this.redPlayer.getName()) || 
+            playerName.equals(this.whitePlayer.getName());
+    }
+
 
     /**
      * getter for active color
      * return: activeColor(colorEnum)
      */
-    public ColorEnum getActiveColor()
+    public Piece.ColorEnum getActiveColor()
     {
         return activeColor;
     }
@@ -75,7 +79,7 @@ public class Game
      * getter for viewMode
      * return: viewMode
      */
-    public ViewModeEnum getViewMode()
+    public BoardView.ViewModeEnum getViewMode()
     {
         return this.viewMode;
     }
@@ -87,6 +91,20 @@ public class Game
     public BoardView getBoard()
     {
         return this.board;
+    }
+
+
+    /**
+     * getter for PlayerBoard
+     * return: an either inverted or normal PlayerBoard
+     */
+    public BoardView getPlayersBoard(Player p)
+    {
+        if(this.getWhitePlayer().equals(p))
+        {
+            return getBoard();
+        }
+        return getBoard().getInverted();
     }
 
 }

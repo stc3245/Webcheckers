@@ -57,8 +57,8 @@ public class PostValidateMove implements Route
   {
     final Session httpSession = request.session();
 
-    PlayerServices playerS = httpSession.attribute(WebServer.PLAYER_KEY);
-    Player player = playerS.currentPlayer();
+    //PlayerServices playerS = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+    //Player player = playerS.currentPlayer();
 
     return null;
   }

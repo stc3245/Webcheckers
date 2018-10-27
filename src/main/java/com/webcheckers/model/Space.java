@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import java.util.Objects;
+
 /**
  * Represents a space on the board within
  * the webcheckers game
@@ -12,7 +14,7 @@ public class Space {
     //Private Instance Variables
     private int cellIdx;
     private Piece piece;
-    private ColorEnum color;
+    private Piece.ColorEnum color;
 
     /**
      * Constructor for space object
@@ -21,7 +23,7 @@ public class Space {
      * @param piece - piece if there is one in space or null
      * @param color - color of piece (red or white)
      */
-    public Space(int cellIdx, Piece piece, ColorEnum color)
+    public Space(int cellIdx, Piece piece, Piece.ColorEnum color)
     {
         this.cellIdx = cellIdx;
         this.piece = piece;
@@ -44,7 +46,7 @@ public class Space {
      * @return piece - true or false
      */
     public boolean isValid(){
-        if((this.color == ColorEnum.RED) && (this.piece == null)){
+        if((this.color == Piece.ColorEnum.RED) && (this.piece == null)){
             return true;
         }
         return false;
@@ -66,8 +68,24 @@ public class Space {
      *
      * @param p - piece moving to square
      */
-    public void setPiece(Piece p){
+    public void setPiece(Piece p)
+    {
         this.piece = p;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Space space = (Space) o;
+        return cellIdx == space.cellIdx &&
+                Objects.equals(piece, space.piece) &&
+                color == space.color;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(cellIdx, piece, color);
+    }
 }

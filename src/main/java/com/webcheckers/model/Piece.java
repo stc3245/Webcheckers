@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import java.util.Objects;
+
 /**
  * Represents a piece within the webcheckers game
  *
@@ -10,10 +12,10 @@ public class Piece
 {
 
     //Private instance variables
-    private PieceEnum type;
+    private BoardView.PieceEnum type;
     private ColorEnum color;
 
-    public Piece(PieceEnum type, ColorEnum color)
+    public Piece(BoardView.PieceEnum type, ColorEnum color)
     {
         this.type = type;
         this.color = color;
@@ -25,7 +27,7 @@ public class Piece
      *
      * @return PieceEnum - type of piece
      */
-    public PieceEnum getType(){
+    public BoardView.PieceEnum getType(){
         return type;
     }
 
@@ -36,5 +38,31 @@ public class Piece
      */
     public ColorEnum getColor() {
         return color;
+    }
+
+
+    /**
+     * Simple enum for storing color of player
+     *
+     */
+    public enum ColorEnum
+    {
+        RED,
+        WHITE
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Piece piece = (Piece) o;
+        return type == piece.type &&
+                color == piece.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, color);
     }
 }
