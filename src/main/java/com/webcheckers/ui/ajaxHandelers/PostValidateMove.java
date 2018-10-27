@@ -39,6 +39,13 @@ import com.webcheckers.model.*;
 public class PostValidateMove implements Route
 {
 
+  private PlayerLobby lobby;
+
+
+  public PostValidateMove(PlayerLobby lobby)
+  {
+      this.lobby = lobby;
+  }
 
   /**
    * Starts a game with another player if that player is available to

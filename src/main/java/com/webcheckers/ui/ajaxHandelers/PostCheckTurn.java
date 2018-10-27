@@ -1,6 +1,7 @@
 package com.webcheckers.ui.ajaxHandelers;
 
 
+import com.webcheckers.appl.PlayerLobby;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -27,6 +28,15 @@ import spark.Route;
  */
 public class PostCheckTurn implements Route
 {
+
+    private PlayerLobby lobby;
+
+
+    public PostCheckTurn(PlayerLobby lobby)
+    {
+        this.lobby = lobby;
+    }
+
     @Override
     public Object handle(Request request, Response response) throws Exception
     {
