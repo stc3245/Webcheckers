@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.ui.GetHomeRoute;
 import com.webcheckers.ui.WebServer;
 import spark.ModelAndView;
 import spark.Request;
@@ -62,12 +63,15 @@ public class PostValidateMove implements Route
   @Override
   public Object handle(Request request, Response response)
   {
-    final Session httpSession = request.session();
+      Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+      if(player == null || !lobby.inGame(player.getName()))
+      {
+          return null;
+      }
 
-    //PlayerServices playerS = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
-    //Player player = playerS.currentPlayer();
+      Game game = lobby.getGame(player.getName());
 
-    return null;
+      return null;
   }
 
 }

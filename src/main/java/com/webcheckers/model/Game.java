@@ -107,4 +107,16 @@ public class Game
         return getBoard().getInverted();
     }
 
+
+
+
+    public boolean isCurrentPlayer(Player player)
+    {
+        if(this.activeColor == Piece.ColorEnum.RED)
+        {
+            return this.redPlayer.equals(player);
+        }
+        return this.whitePlayer.equals(player);
+    }
+
 }

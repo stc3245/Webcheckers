@@ -1,7 +1,12 @@
 package com.webcheckers.ui.ajaxHandelers;
 
 
+import com.google.gson.Gson;
+import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Game;
+import com.webcheckers.model.Message;
+import com.webcheckers.ui.GetHomeRoute;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -29,17 +34,57 @@ import spark.Route;
 public class PostCheckTurn implements Route
 {
 
+    /** Object which stores all games */
     private PlayerLobby lobby;
 
+    /** Object  used to convert objects to json strings */
+    private final Gson gson;
 
+
+    /**
+     * Initalizes class level objects lobby and
+     * gson
+     *
+     * @param lobby
+     */
     public PostCheckTurn(PlayerLobby lobby)
     {
+        gson = new Gson();
         this.lobby = lobby;
     }
 
+
+    /**
+     * Uses the game to determine whether the current player
+     * is their turn and returns a {@link Message}
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     @Override
-    public Object handle(Request request, Response response) throws Exception
+    public Object handle(Request request, Response response)
     {
-        return null;
+        Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+        if(player == null || !lobby.inGame(player.getName()))
+        {
+            return null;
+        }
+
+        Game game = lobby.getGame(player.getName());
+
+
+        Message msg;
+
+        if(game.isCurrentPlayer(player))
+        {
+            msg = new Message(Message.MessageEnum.INFO, "true");
+        }
+        else
+        {
+            msg = new Message(Message.MessageEnum.INFO, "false");
+        }
+
+        return gson.toJson(msg);
     }
 }

@@ -35,7 +35,7 @@ public class GetHomeRoute implements Route {
   static final String PLAYER_LIST = "users";
 
   // Key in the session attribute map for the player who started the session
-  static final String PLAYERSERVICES_KEY = "playerServices";
+  public static final String PLAYERSERVICES_KEY = "playerServices";
   static final String TIMEOUT_SESSION_KEY = "timeoutWatchdog";
 
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
