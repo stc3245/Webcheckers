@@ -1,18 +1,11 @@
 package com.webcheckers.ui.ajaxHandelers;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.logging.Logger;
 
+import com.google.gson.Gson;
 import com.webcheckers.ui.GetHomeRoute;
-import com.webcheckers.ui.WebServer;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import spark.Session;
-import spark.TemplateEngine;
 
 import com.webcheckers.appl.*;
 import com.webcheckers.model.*;
@@ -39,39 +32,50 @@ import com.webcheckers.model.*;
  */
 public class PostValidateMove implements Route
 {
+    /** Object used to fetch the players game */
+    private PlayerLobby lobby;
 
-  private PlayerLobby lobby;
+
+    /** Object  used to convert objects to json strings */
+    private final Gson gson;
 
 
-  public PostValidateMove(PlayerLobby lobby)
-  {
-      this.lobby = lobby;
-  }
+    public PostValidateMove(PlayerLobby lobby)
+    {
+        this.lobby = lobby;
+        this.gson = new Gson();
+    }
 
-  /**
-   * Starts a game with another player if that player is available to
-   * play a game.
-   *
-   * @param request
-   *   the HTTP request
-   * @param response
-   *   the HTTP response
-   *
-   * @return
-   *   the rendered HTML for the Home page
-   */
-  @Override
-  public Object handle(Request request, Response response)
-  {
-      Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
-      if(player == null || !lobby.inGame(player.getName()))
-      {
-          return null;
-      }
 
-      Game game = lobby.getGame(player.getName());
+    /**
+    * Starts a game with another player if that player is available to
+    * play a game.
+    *
+    * @param request
+    *   the HTTP request
+    * @param response
+    *   the HTTP response
+    *
+    * @return
+    *   the rendered HTML for the Home page
+    */
+    @Override
+    public Object handle(Request request, Response response)
+    {
+        Player player = request.session()
+                .attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+        if(player == null || !lobby.inGame(player.getName()))
+        {
+            return null;
+        }
 
-      return null;
-  }
+        Game game = lobby.getGame(player.getName());
+
+        final String clientJSON = request.body();
+
+        final Move move = gson.fromJson(clientJSON, Move.class);
+
+        return gson.toJson(new Message(Message.MessageEnum.INFO, ""));
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.webcheckers.ui.ajaxHandelers;
 
+import com.google.gson.Gson;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Game;
@@ -33,17 +34,34 @@ import spark.Route;
  */
 public class PostResignGame implements Route
 {
-
+    /** Object used to fetch the players game */
     private PlayerLobby lobby;
 
+    /** Object  used to convert objects to json strings */
+    private final Gson gson;
 
+
+    /**
+     *
+     * @param lobby
+     */
     public PostResignGame(PlayerLobby lobby)
     {
         this.lobby = lobby;
+        this.gson = new Gson();
     }
 
+
+    /**
+     *
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @Override
-    public Object handle(Request request, Response response) throws Exception
+    public Object handle(Request request, Response response)
     {
         Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
         if(player == null || !lobby.inGame(player.getName()))

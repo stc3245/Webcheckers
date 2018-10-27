@@ -27,7 +27,8 @@ public class Piece
      *
      * @return PieceEnum - type of piece
      */
-    public BoardView.PieceEnum getType(){
+    public BoardView.PieceEnum getType()
+    {
         return type;
     }
 
@@ -36,7 +37,8 @@ public class Piece
      *
      * @return ColorEnum - color of piece
      */
-    public ColorEnum getColor() {
+    public ColorEnum getColor()
+    {
         return color;
     }
 
@@ -53,7 +55,8 @@ public class Piece
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Piece piece = (Piece) o;

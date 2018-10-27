@@ -100,7 +100,7 @@ public class Game
      */
     public BoardView getPlayersBoard(Player p)
     {
-        if(this.getWhitePlayer().equals(p))
+        if(!this.getWhitePlayer().equals(p))
         {
             return getBoard();
         }

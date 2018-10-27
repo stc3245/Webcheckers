@@ -5,11 +5,15 @@ package com.webcheckers.model;
  *
  * @author Sean Coyne 10-21-18
  */
-
-public class Position {
+public class Position
+{
 
     //Private instance variables
+
+    /** Row of the piece */
     private int row;
+
+    /** col of the piece */
     private int cell;
 
     /**
@@ -17,7 +21,8 @@ public class Position {
      *
      * @return int - row number
      */
-    public int getRow() {
+    public int getRow()
+    {
         return row;
     }
 
@@ -26,7 +31,8 @@ public class Position {
      *
      * @return int - cell number
      */
-    public int getCell() {
+    public int getCell()
+    {
         return cell;
     }
 
