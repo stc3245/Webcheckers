@@ -75,7 +75,6 @@ public class PostSubmitTurn implements Route
 
         game.applyMoves();
 
-
         return gson.toJson(new Message(Message.MessageEnum.info, ""));
     }
 }

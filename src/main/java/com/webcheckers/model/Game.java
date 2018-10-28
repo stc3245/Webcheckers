@@ -159,9 +159,20 @@ public class Game
     }
 
 
-    public void applyMoves()
+    public Message applyMoves()
     {
+        MoveValidator.MoveStatus status = MoveApplyer.applyMove(this.currentMoves, board);
 
+        switch (status)
+        {
+            case VALID:
+                this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
+                        Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
+                return new Message(Message.MessageEnum.info, "Move Applied");
+            case INVALID:
+                return new Message(Message.MessageEnum.error, "Invalid Move");
+        }
+        return null;
     }
 
 }
