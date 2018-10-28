@@ -2,6 +2,9 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.*;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Used to store the status of an active game
  * 
@@ -25,6 +28,9 @@ public class Game
     private BoardView.ViewModeEnum viewMode;
 
 
+    private Queue<Move> currentMoves;
+
+
     /**
      * Constructs a new game with two players 
      * 
@@ -38,6 +44,7 @@ public class Game
         this.board = new BoardView();
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
+        this.currentMoves = new LinkedList<>();
     }
 
     
@@ -135,6 +142,7 @@ public class Game
         switch(status)
         {
             case VALID:
+                this.currentMoves.add(move);
                 return new Message(Message.MessageEnum.info, "Valid Move");
             case INVALID:
                 return new Message(Message.MessageEnum.error, "Invalid Move");
@@ -142,6 +150,18 @@ public class Game
                 return new Message(Message.MessageEnum.error, "You are required to make a jump move.");
         }
         return null;
+    }
+
+
+    public void backupMoves()
+    {
+        this.currentMoves.clear();
+    }
+
+
+    public void applyMoves()
+    {
+
     }
 
 }

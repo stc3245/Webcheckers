@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Game;
+import com.webcheckers.model.Message;
 import com.webcheckers.ui.GetHomeRoute;
 import spark.Request;
 import spark.Response;
@@ -69,7 +70,10 @@ public class PostBackupMove implements Route
         }
 
         Game game = lobby.getGame(player.getName());
+        game.backupMoves();
 
-        return null;
+        Message msg = new Message(Message.MessageEnum.info, "Move Reverted");
+
+        return gson.toJson(msg);
     }
 }
