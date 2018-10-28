@@ -108,8 +108,12 @@ public class Game
     }
 
 
-
-
+    /**
+     * Checks to see if it is the current player's turn
+     *
+     * @param player
+     * @return if it is the current players turn
+     */
     public boolean isCurrentPlayer(Player player)
     {
         if(this.activeColor == Piece.ColorEnum.RED)
@@ -117,6 +121,27 @@ public class Game
             return this.redPlayer.equals(player);
         }
         return this.whitePlayer.equals(player);
+    }
+
+
+    /**
+     *
+     * @param move
+     * @return
+     */
+    public Message validateMove(Move move)
+    {
+        MoveValidator.MoveStatus status = MoveValidator.validateMove(this.board, move);
+        switch(status)
+        {
+            case VALID:
+                return new Message(Message.MessageEnum.info, "Valid Move");
+            case INVALID:
+                return new Message(Message.MessageEnum.error, "Invalid Move");
+            case JUMP_REQUIRED:
+                return new Message(Message.MessageEnum.error, "You are required to make a jump move.");
+        }
+        return null;
     }
 
 }

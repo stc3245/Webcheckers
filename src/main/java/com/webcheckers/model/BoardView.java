@@ -40,13 +40,34 @@ public class BoardView implements Iterable<Row>
      */
     public BoardView getInverted()
     {
-        ArrayList<Row> temp = new ArrayList<Row>();
+        ArrayList<Row> temp = new ArrayList<>();
         for(int i = 7; i >= 0; i--)
         {
             temp.add(board.get(i).inverted());
         }
         return new BoardView(temp);
     }
+
+
+    /**
+     * Returns a specific tile.
+     *
+     * @param r
+     * @param c
+     * @return
+     */
+    public Space getTile(int r, int c)
+    {
+        return this.board.get(r).getSpace(c);
+    }
+
+
+    public boolean isOccupied(Position p)
+    {
+        Space s = this.getTile(p.getRow(), p.getCell());
+        return s == null;
+    }
+
 
     /**
      * getter for board iterator

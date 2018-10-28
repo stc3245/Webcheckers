@@ -9,7 +9,8 @@ import java.util.Objects;
  * @author Sean Coyne 10-14-18
  */
 
-public class Space {
+public class Space
+{
 
     //Private Instance Variables
     private int cellIdx;
@@ -59,7 +60,8 @@ public class Space {
      *
      * @return Piece - null or piece
      */
-    public Piece getPiece(){
+    public Piece getPiece()
+    {
         return piece;
     }
 

@@ -57,7 +57,7 @@ public class Message
      */
     public enum MessageEnum
     {
-        ERROR,
-        INFO
+        error,
+        info
     }
 }

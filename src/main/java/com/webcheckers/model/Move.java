@@ -8,20 +8,26 @@ package com.webcheckers.model;
 public class Move
 {
     /** Start position of a move */
-    private Position startPosition;
+    private Position start;
 
     /** End position of a move */
-    private Position endPosition;
+    private Position end;
 
+
+    public Move(Position startPosition, Position endPosition)
+    {
+        this.start = startPosition;
+        this.end = endPosition;
+    }
 
     /**
      * gets the start position of the move
      *
      * @return Position - start
      */
-    public Position getStart()
+    public Position getStartPosition()
     {
-        return startPosition;
+        return start;
     }
 
 
@@ -32,7 +38,14 @@ public class Move
      */
     public Position getEndPosition()
     {
-        return endPosition;
+        return end;
     }
 
+    @Override
+    public String toString() {
+        return "Move{" +
+                "startPosition=" + start +
+                ", endPosition=" + end +
+                '}';
+    }
 }

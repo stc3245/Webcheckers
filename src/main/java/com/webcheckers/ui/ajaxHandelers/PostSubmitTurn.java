@@ -1,6 +1,7 @@
 package com.webcheckers.ui.ajaxHandelers;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Game;
@@ -48,7 +49,7 @@ public class PostSubmitTurn implements Route
     public PostSubmitTurn(PlayerLobby lobby)
     {
         this.lobby = lobby;
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().create();
     }
 
 
@@ -73,6 +74,6 @@ public class PostSubmitTurn implements Route
         Game game = lobby.getGame(player.getName());
 
 
-        return gson.toJson(new Message(Message.MessageEnum.INFO, ""));
+        return gson.toJson(new Message(Message.MessageEnum.error, ""));
     }
 }

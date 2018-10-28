@@ -80,11 +80,11 @@ public class PostCheckTurn implements Route
 
         if(game.isCurrentPlayer(player))
         {
-            msg = new Message(Message.MessageEnum.INFO, "true");
+            msg = new Message(Message.MessageEnum.info, "true");
         }
         else
         {
-            msg = new Message(Message.MessageEnum.INFO, "false");
+            msg = new Message(Message.MessageEnum.info, "false");
         }
 
         return gson.toJson(msg);
