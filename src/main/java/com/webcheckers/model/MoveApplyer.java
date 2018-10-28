@@ -4,15 +4,36 @@ package com.webcheckers.model;
 import java.util.Queue;
 
 /**
- * @author Jeffery Russell
+ * @author Jeffery Russell 10-28-18
  */
 public class MoveApplyer
 {
+
+    private static Position getPositionBetween(Position p1, Position p2)
+    {
+        int rowDiff = p1.getRow() - p2.getRow();
+        int colDiff = p1.getCell() - p2.getCell();
+
+        if(Math.abs(rowDiff) != 1 && Math.abs(colDiff) != 1)
+        {
+            return new Position(p2.getRow() + (rowDiff/2), p2.getCell() + (colDiff/2));
+        }
+        return null;
+    }
+
     private static void applySingleMove(Move move, BoardView board)
     {
         Space startSpace = board.getTile(move.getStartPosition());
 
         Space finishSpace = board.getTile(move.getEndPosition());
+
+        Position between = getPositionBetween(move.getStartPosition(), move.getEndPosition());
+
+        if(between != null) //jump move
+        {
+            Space middle = board.getTile(between);
+            middle.setPiece(null);
+        }
 
         finishSpace.setPiece(startSpace.getPiece());
         startSpace.setPiece(null);

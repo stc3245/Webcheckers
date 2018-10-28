@@ -70,8 +70,8 @@ public class BoardView implements Iterable<Row>
 
     public boolean isOccupied(Position p)
     {
-        Space s = this.getTile(p.getRow(), p.getCell());
-        return s == null;
+        Space s = this.getTile(p);
+        return s.getPiece() != null;
     }
 
 
