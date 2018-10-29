@@ -1,6 +1,6 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.*;
+import java.util.Objects;
 
 /**
  * Represents a player within the webcheckers game
@@ -13,8 +13,6 @@ public class Player
     /** Stores name of player */
     private String name;
 
-    /** Stores active game of the user */
-    private Game game;
 
     /**
      * constructor for Player class
@@ -22,8 +20,8 @@ public class Player
     public Player(String username) 
     {
         name = username;
-        this.game = null;
     }
+
 
     /**
      * getter for name variable
@@ -34,46 +32,20 @@ public class Player
         return name;
     }
 
-    /**
-     * sets the current game
-     * 
-     * @param g
-     */
-    public void setGame(Game g)
+
+    @Override
+    public boolean equals(Object o)
     {
-        this.game = g;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(name, player.name);
     }
 
 
-    /**
-     * Returns the current game the player is in
-     * @return
-     */
-    public Game getGame()
+    @Override
+    public int hashCode()
     {
-        return this.game;
+        return Objects.hash(name);
     }
-    
-
-    /**
-     * Returns if the player is currently in a game or not.
-     */
-    public boolean inGame()
-    {
-        return this.game != null;
-    }
-
-    /**
-     * getter for PlayerBoard
-     * return: an either inverted or normal PlayerBoard
-     */
-    public BoardView getPlayersBoard()
-    {
-        if(this.game.getWhitePlayer() != this)
-        {
-            return game.getBoard();
-        }
-        return game.getBoard().getInverted();
-    }
-
 }
