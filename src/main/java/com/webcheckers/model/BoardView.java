@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Iterator;
 import java.lang.Iterable;
 
-import com.webcheckers.model.*;
-
 
 /**
  * @author Jeffery Russell 10-14-18
@@ -42,13 +40,40 @@ public class BoardView implements Iterable<Row>
      */
     public BoardView getInverted()
     {
-        ArrayList<Row> temp = new ArrayList<Row>();
+        ArrayList<Row> temp = new ArrayList<>();
         for(int i = 7; i >= 0; i--)
         {
             temp.add(board.get(i).inverted());
         }
         return new BoardView(temp);
     }
+
+
+    /**
+     * Returns a specific tile.
+     *
+     * @param r
+     * @param c
+     * @return
+     */
+    public Space getTile(int r, int c)
+    {
+        return this.board.get(r).getSpace(c);
+    }
+
+
+    public Space getTile(Position p)
+    {
+        return this.getTile(p.getRow(), p.getCell());
+    }
+
+
+    public boolean isOccupied(Position p)
+    {
+        Space s = this.getTile(p);
+        return s.getPiece() != null;
+    }
+
 
     /**
      * getter for board iterator
@@ -57,5 +82,27 @@ public class BoardView implements Iterable<Row>
     public Iterator<Row> iterator() 
     {
         return board.iterator();
+    }
+
+    /**
+     * Simple enum for storing state of player
+     *
+     */
+    public enum ViewModeEnum
+    {
+        PLAY,
+        SPECTATOR,
+        REPLAY
+    }
+
+    /**
+     * Enum for storing different types of checkers pieces
+     *
+     * @author Sean Coyne 10-10-18
+     */
+
+    public enum PieceEnum {
+        SINGLE,
+        KING
     }
 }

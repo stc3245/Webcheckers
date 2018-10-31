@@ -2,6 +2,9 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.*;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Used to store the status of an active game
  * 
@@ -16,13 +19,16 @@ public class Game
     private Player whitePlayer;
 
     /** The current color of the current player */
-    private ColorEnum activeColor;
+    private Piece.ColorEnum activeColor;
 
     /** Representation of the game board */
     private BoardView board;
 
     /** The status of the game Is always active for now */
-    private ViewModeEnum viewMode;
+    private BoardView.ViewModeEnum viewMode;
+
+
+    private Queue<Move> currentMoves;
 
 
     /**
@@ -33,22 +39,27 @@ public class Game
      */
     public Game(Player redPlayer, Player whitePlayer)
     {
-        //adds players to the game
-        redPlayer.setGame(this);
-        whitePlayer.setGame(this);
-
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.board = new BoardView();
-        this.viewMode = ViewModeEnum.PLAY;
-        this.activeColor = ColorEnum.RED;
+        this.viewMode = BoardView.ViewModeEnum.PLAY;
+        this.activeColor = Piece.ColorEnum.RED;
+        this.currentMoves = new LinkedList<>();
     }
+
+    
+    public boolean playerInGame(String playerName)
+    {
+        return playerName.equals(this.redPlayer.getName()) || 
+            playerName.equals(this.whitePlayer.getName());
+    }
+
 
     /**
      * getter for active color
      * return: activeColor(colorEnum)
      */
-    public ColorEnum getActiveColor()
+    public Piece.ColorEnum getActiveColor()
     {
         return activeColor;
     }
@@ -75,7 +86,7 @@ public class Game
      * getter for viewMode
      * return: viewMode
      */
-    public ViewModeEnum getViewMode()
+    public BoardView.ViewModeEnum getViewMode()
     {
         return this.viewMode;
     }
@@ -87,6 +98,81 @@ public class Game
     public BoardView getBoard()
     {
         return this.board;
+    }
+
+
+    /**
+     * getter for PlayerBoard
+     * return: an either inverted or normal PlayerBoard
+     */
+    public BoardView getPlayersBoard(Player p)
+    {
+        if(!this.getWhitePlayer().equals(p))
+        {
+            return getBoard();
+        }
+        return getBoard().getInverted();
+    }
+
+
+    /**
+     * Checks to see if it is the current player's turn
+     *
+     * @param player
+     * @return if it is the current players turn
+     */
+    public boolean isCurrentPlayer(Player player)
+    {
+        if(this.activeColor == Piece.ColorEnum.RED)
+        {
+            return this.redPlayer.equals(player);
+        }
+        return this.whitePlayer.equals(player);
+    }
+
+
+    /**
+     *
+     * @param move
+     * @return
+     */
+    public Message validateMove(Move move)
+    {
+        MoveValidator.MoveStatus status = MoveValidator.validateMove(this.board, move);
+        switch(status)
+        {
+            case VALID:
+                this.currentMoves.add(move);
+                return new Message(Message.MessageEnum.info, "Valid Move");
+            case INVALID:
+                return new Message(Message.MessageEnum.error, "Invalid Move");
+            case JUMP_REQUIRED:
+                return new Message(Message.MessageEnum.error, "You are required to make a jump move.");
+        }
+        return null;
+    }
+
+
+    public void backupMoves()
+    {
+        this.currentMoves.clear();
+    }
+
+
+    public Message applyMoves()
+    {
+        MoveValidator.MoveStatus status = MoveApplyer.applyMove(this.currentMoves, board);
+
+        switch (status)
+        {
+            case VALID:
+                this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
+                        Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
+                return new Message(Message.MessageEnum.info, "Move Applied");
+            case INVALID:
+                return new Message(Message.MessageEnum.error, "Invalid Move");
+        }
+        return null;
     }
 
 }

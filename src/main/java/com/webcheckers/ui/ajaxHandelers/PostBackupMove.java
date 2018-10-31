@@ -1,9 +1,16 @@
 package com.webcheckers.ui.ajaxHandelers;
 
 
+import com.google.gson.Gson;
+import com.webcheckers.appl.Player;
+import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Game;
+import com.webcheckers.model.Message;
+import com.webcheckers.ui.GetHomeRoute;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+
 
 /**
  * ** Description from Swen Website -- for consistency**
@@ -26,9 +33,47 @@ import spark.Route;
  */
 public class PostBackupMove implements Route
 {
+    /** Object used to fetch the players game */
+    private PlayerLobby lobby;
+
+    /** Object  used to convert objects to json strings */
+    private final Gson gson;
+
+
+    /**
+     * Instantiates the post handeler with
+     *
+     * @param lobby
+     */
+    public PostBackupMove(PlayerLobby lobby)
+    {
+        this.lobby = lobby;
+        this.gson = new Gson();
+    }
+
+
+    /**
+     * Reverts all the players moves that they made in the turn
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception
     {
-        return null;
+        Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+        if(player == null || !lobby.inGame(player.getName()))
+        {
+            return null;
+        }
+
+        Game game = lobby.getGame(player.getName());
+        game.backupMoves();
+
+        Message msg = new Message(Message.MessageEnum.info, "Move Reverted");
+
+        return gson.toJson(msg);
     }
 }
