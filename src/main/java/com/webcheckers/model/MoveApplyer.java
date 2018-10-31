@@ -1,6 +1,10 @@
 package com.webcheckers.model;
 
 
+import javafx.geometry.Pos;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -41,6 +45,28 @@ public class MoveApplyer
 
     public static boolean jumpMovesAvailable(BoardView boardView, Piece.ColorEnum currentColor)
     {
+        for(Row row : boardView) {
+
+            for (Space space : row) {
+
+                if (space.getPiece() != null) {
+
+                    Piece piece = space.getPiece();
+
+                    if ((piece.getColor() == currentColor) && (piece.getType() == BoardView.PieceEnum.SINGLE)) {
+
+                        Position startPosition = new Position(row.getIndex(), space.getCellIdx());
+
+                        List<Position> jumpMoves = MoveValidator.getJumpMoves(boardView, startPosition);
+
+                        if(!jumpMoves.isEmpty()){
+
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
         return false;
     }
 
