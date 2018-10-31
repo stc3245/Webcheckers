@@ -59,7 +59,7 @@ public class MoveApplyer
 
                         List<Position> jumpMoves = MoveValidator.getJumpMoves(boardView, startPosition);
 
-                        if(jumpMoves != null){
+                        if(!jumpMoves.isEmpty()){
 
                             return true;
                         }
