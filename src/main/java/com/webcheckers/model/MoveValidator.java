@@ -14,7 +14,7 @@ public class MoveValidator
     public enum MoveStatus{VALID, INVALID, JUMP_REQUIRED}
 
 
-    private static List<Position> getNormalMoves(BoardView board, Position startPos)
+    public static List<Position> getNormalMoves(BoardView board, Position startPos)
     {
         List<Position> validPositions = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class MoveValidator
         return validPositions;
     }
 
-    private static boolean hasOpponent(BoardView board, Piece.ColorEnum yourColor, Position inquestion)
+    public static boolean hasOpponent(BoardView board, Piece.ColorEnum yourColor, Position inquestion)
     {
         if(board.isOccupied(inquestion))
         {
@@ -48,7 +48,7 @@ public class MoveValidator
         return false;
     }
 
-    private static boolean onBoard(Position p)
+    public static boolean onBoard(Position p)
     {
         return p.getCell() < 8 && p.getRow() < 8 &&
                 p.getCell() >= 0 && p.getRow() >= 0;
@@ -83,7 +83,7 @@ public class MoveValidator
     }
 
 
-    private static List<Position> getValidMovePositions(BoardView board, Position startPos)
+    public static List<Position> getValidMovePositions(BoardView board, Position startPos)
     {
         List<Position> validPositions = new ArrayList<>();
 
