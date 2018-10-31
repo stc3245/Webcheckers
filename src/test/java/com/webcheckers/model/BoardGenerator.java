@@ -1,7 +1,7 @@
 package com.webcheckers.model;
 import java.lang.Math;
 
-public class BoardViewGenerator {
+public class BoardGenerator {
     private enum TYPE{
         SPACE{
             @Override
