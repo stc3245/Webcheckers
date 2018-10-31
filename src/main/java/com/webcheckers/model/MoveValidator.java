@@ -54,7 +54,7 @@ public class MoveValidator
                 p.getCell() >= 0 && p.getRow() >= 0;
     }
 
-    private static List<Position> getJumpMoves(BoardView board, Position startPos)
+    public static List<Position> getJumpMoves(BoardView board, Position startPos)
     {
         List<Position> validPositions = new ArrayList<>();
 
