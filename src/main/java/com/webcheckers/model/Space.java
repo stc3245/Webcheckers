@@ -12,10 +12,15 @@ import java.util.Objects;
 public class Space
 {
 
-    //Private Instance Variables
+    /** Column index on the checkers board */
     private int cellIdx;
+
+    /** Checkers piece on space -- null if none */
     private Piece piece;
+
+    /** Color of this tile */
     private Piece.ColorEnum color;
+
 
     /**
      * Constructor for space object
@@ -36,9 +41,11 @@ public class Space
      *
      * @return int - id of cell
      */
-    public int getCellIdx(){
+    public int getCellIdx()
+    {
         return this.cellIdx;
     }
+
 
     /**
      * returns true if space is valid location for
@@ -46,13 +53,15 @@ public class Space
      *
      * @return piece - true or false
      */
-    public boolean isValid(){
+    public boolean isValid()
+    {
         if((this.color == Piece.ColorEnum.RED) && (this.piece == null)){
             return true;
         }
         return false;
 
     }
+
 
     /**
      * gets piece that resides on space or
@@ -65,6 +74,7 @@ public class Space
         return piece;
     }
 
+
     /**
      * sets the piece of the current square
      *
@@ -75,8 +85,10 @@ public class Space
         this.piece = p;
     }
 
+
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Space space = (Space) o;
@@ -84,6 +96,7 @@ public class Space
                 Objects.equals(piece, space.piece) &&
                 color == space.color;
     }
+
 
     @Override
     public int hashCode()

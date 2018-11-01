@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -205,15 +202,15 @@ public class MoveValidatorTest
         Move jumpMove = new Move(new Position(3,3), new Position(1,5));
 
         MoveValidator.MoveStatus status = MoveValidator.validateMove(board, jumpMove);
-        assertSame(status, MoveValidator.MoveStatus.VALID);
+        assertEquals(status, MoveValidator.MoveStatus.VALID);
 
         Move testRequireJumpMove = new Move(new Position(1,1), new Position(0,0));
         status = MoveValidator.validateMove(board, testRequireJumpMove);
-        assertSame(status, MoveValidator.MoveStatus.JUMP_REQUIRED);
+        assertEquals(status, MoveValidator.MoveStatus.JUMP_REQUIRED);
 
         Move whiteJump = new Move(new Position(2,4), new Position(4,2));
         status = MoveValidator.validateMove(board, whiteJump);
-        assertSame(status, MoveValidator.MoveStatus.VALID);
+        assertEquals(status, MoveValidator.MoveStatus.VALID);
     }
 
 
@@ -245,19 +242,19 @@ public class MoveValidatorTest
 
         MoveValidator.MoveStatus status = MoveValidator.validateMove(board, randomMove);
 
-        assertNotSame(status, MoveValidator.MoveStatus.VALID);
+        assertNotEquals(status, MoveValidator.MoveStatus.VALID);
 
         Move moveBackwardsRed = new Move(new Position(3,3),
                 new Position(4,4));
         status = MoveValidator.validateMove(board, moveBackwardsRed);
 
-        assertNotSame(status, MoveValidator.MoveStatus.VALID);
+        assertNotEquals(status, MoveValidator.MoveStatus.VALID);
 
         Move moveBackwardsWhite = new Move(new Position(3,3),
                 new Position(4,4));
         status = MoveValidator.validateMove(board, moveBackwardsWhite);
 
-        assertNotSame(status, MoveValidator.MoveStatus.VALID);
+        assertNotEquals(status, MoveValidator.MoveStatus.VALID);
     }
 
 
