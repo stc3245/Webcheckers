@@ -14,6 +14,7 @@ import java.util.Iterator;
  *
  * @author Jeffery Russell 10-30-18
  */
+@Tag("Model-tier")
 public class MoveApplyerTest
 {
     /**

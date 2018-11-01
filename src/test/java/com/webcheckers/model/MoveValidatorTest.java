@@ -15,6 +15,7 @@ import java.util.List;
  *
  * @author Jeffery Russell 10-30-18
  */
+@Tag("Model-tier")
 public class MoveValidatorTest
 {
 

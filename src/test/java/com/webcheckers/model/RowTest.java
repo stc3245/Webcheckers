@@ -17,7 +17,9 @@ import java.lang.Iterable;
  * JUnit test suite for Row
  * @author Max Gusinov 10-24-18
  */
-public class RowTest {
+@Tag("Model-tier")
+public class RowTest
+{
     /**
      * JUnit test for 1-param constructor
      */

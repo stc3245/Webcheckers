@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test;
  * JUnit test for Space
  * @author Max Gusinov 10-24-18
  */
-
- public class SpaceTest {
-
+@Tag("Model-tier")
+ public class SpaceTest
+{
     /**
      * JUnit test for getCellIdx
      */

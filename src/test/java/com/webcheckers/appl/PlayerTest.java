@@ -65,8 +65,12 @@ public class PlayerTest
     {
         Player p2 = new Player(name2);
         assertFalse(cut.equals(p2));
+        assertFalse(cut.equals(null));
 
         Player p3 = new Player(name1);
         assertTrue(cut.equals(p3));
+
+        Player equalTop2 = new Player(name2);
+        assertTrue(equalTop2.hashCode()== p2.hashCode());
     }
 }

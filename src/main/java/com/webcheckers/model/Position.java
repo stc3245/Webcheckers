@@ -18,11 +18,13 @@ public class Position
     /** col of the piece */
     private int cell;
 
+
     public Position(int row, int cell)
     {
         this.row = row;
         this.cell = cell;
     }
+
 
     /**
      * gets the row of the position
@@ -33,6 +35,7 @@ public class Position
     {
         return row;
     }
+
 
     /**
      * gets the cell of the position
@@ -56,15 +59,9 @@ public class Position
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(row, cell);
     }
 
-    @Override
-    public String toString() {
-        return "Position{" +
-                "row=" + row +
-                ", cell=" + cell +
-                '}';
-    }
 }
