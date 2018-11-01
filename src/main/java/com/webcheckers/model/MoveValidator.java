@@ -186,8 +186,6 @@ public class MoveValidator
 
         validPositions.addAll(getNormalMoves(board, startPos));
 
-        System.out.println(validPositions);
-
         return validPositions;
     }
 
@@ -216,7 +214,6 @@ public class MoveValidator
 
         for(Position p: getValidMovePositions(board, move.getStartPosition()))
         {
-            System.out.println(move.getEndPosition() + " : "  + p);
             if(p.equals(move.getEndPosition()))
             {
                 return MoveStatus.VALID;
