@@ -27,7 +27,7 @@ public class Game
     /** The status of the game Is always active for now */
     private BoardView.ViewModeEnum viewMode;
 
-
+    /** Queue of current moves the player wants to make */
     private Queue<Move> currentMoves;
 
 
@@ -47,7 +47,13 @@ public class Game
         this.currentMoves = new LinkedList<>();
     }
 
-    
+
+    /**
+     * Checks to see if a particular player is in this game
+     *
+     * @param playerName name of player
+     * @return whether player is in the game
+     */
     public boolean playerInGame(String playerName)
     {
         return playerName.equals(this.redPlayer.getName()) || 
@@ -57,43 +63,47 @@ public class Game
 
     /**
      * getter for active color
-     * return: activeColor(colorEnum)
+     * @return the color of the player's who's turn it currently is
      */
     public Piece.ColorEnum getActiveColor()
     {
         return activeColor;
     }
 
+
     /**
      * getter for RedPlayer
-     * return: redPlayer
+     * @return the red player
      */
     public Player getRedPlayer()
     {
         return this.redPlayer;
     }
 
+
     /**
      * getter for WhitePlayer
-     * return: whitePlayer
+     * @return whitePlayer
      */
     public Player getWhitePlayer()
     {
         return this.whitePlayer;
     }
 
+
     /**
      * getter for viewMode
-     * return: viewMode
+     * @return viewMode
      */
     public BoardView.ViewModeEnum getViewMode()
     {
         return this.viewMode;
     }
 
+
     /**
      * getter for BoardView
-     * return the board
+     * @return the board
      */
     public BoardView getBoard()
     {
@@ -103,7 +113,7 @@ public class Game
 
     /**
      * getter for PlayerBoard
-     * return: an either inverted or normal PlayerBoard
+     * @return an either inverted or normal PlayerBoard
      */
     public BoardView getPlayersBoard(Player p)
     {
@@ -132,9 +142,14 @@ public class Game
 
 
     /**
+     * Calls upon the {@link MoveValidator} to determine the status of
+     * applying a particular move. Based on the status enum value returned
+     * this generates a {@link Message}.
      *
-     * @param move
-     * @return
+     * This is called by {@link com.webcheckers.ui.ajaxHandelers.PostValidateMove}
+     *
+     * @param move currently being attempted by player
+     * @return {@link Message} to return in Ajax call
      */
     public Message validateMove(Move move)
     {
@@ -149,16 +164,28 @@ public class Game
             case JUMP_REQUIRED:
                 return new Message(Message.MessageEnum.error, "You are required to make a jump move.");
         }
-        return null;
+        return null; //shouldn't happen
     }
 
 
+    /**
+     * Clears the queue of currently being applied moves.
+     * So that the player can verify/apply different moves.
+     * This is primarily called by {@link com.webcheckers.ui.ajaxHandelers.PostBackupMove}
+     */
     public void backupMoves()
     {
         this.currentMoves.clear();
     }
 
 
+    /**
+     * Applies the players current moves to the the game board.
+     *
+     * Primarily called by {@link com.webcheckers.ui.ajaxHandelers.PostSubmitTurn}
+     *
+     * @return {@link Message} to return in Ajax call
+     */
     public Message applyMoves()
     {
         MoveValidator.MoveStatus status = MoveApplyer.applyMove(this.currentMoves, board);
@@ -172,7 +199,6 @@ public class Game
             case INVALID:
                 return new Message(Message.MessageEnum.error, "Invalid Move");
         }
-        return null;
+        return null; //shouldn't happen
     }
-
 }
