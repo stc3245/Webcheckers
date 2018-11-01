@@ -1,15 +1,26 @@
 package com.webcheckers.model;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 /**
+ * Class used to apply a queue of moves to a
+ * checkers board
+ *
  * @author Jeffery Russell 10-28-18
  * @author Bryce Murphy 10-30-18
  */
 public class MoveApplyer
 {
 
+    /**
+     * Returns the position between two positions. If no such position
+     * exists, null is returned instead.
+     * @param p1 position 1
+     * @param p2 position 2
+     * @return position between p1 and p2
+     */
     private static Position getPositionBetween(Position p1, Position p2)
     {
         int rowDiff = p1.getRow() - p2.getRow();
@@ -22,6 +33,13 @@ public class MoveApplyer
         return null;
     }
 
+
+    /**
+     * Applies a single move to the board.
+     *
+     * @param move move to apply
+     * @param board board to apply move on
+     */
     private static void applySingleMove(Move move, BoardView board)
     {
         Space startSpace = board.getTile(move.getStartPosition());
@@ -57,12 +75,14 @@ public class MoveApplyer
 
     }
 
-    public static boolean jumpMovesAvailable(BoardView boardView, Piece.ColorEnum currentColor)
-    {
-        return false;
-    }
 
-
+    /**
+     * Returns all moves in the queue to the {@link BoardView}
+     *
+     * @param moves collection of moves
+     * @param board checkers board to apply moves to
+     * @return Status to return to the client
+     */
     public static MoveValidator.MoveStatus applyMove(Queue<Move> moves, BoardView board)
     {
         if(moves.isEmpty())
@@ -72,10 +92,6 @@ public class MoveApplyer
 
         Space startSpace = board.getTile(moves.peek().getStartPosition());
 
-        if(jumpMovesAvailable(board, startSpace.getPiece().getColor()))
-        {
-            return MoveValidator.MoveStatus.JUMP_REQUIRED;
-        }
 
         while(!moves.isEmpty())
         {
