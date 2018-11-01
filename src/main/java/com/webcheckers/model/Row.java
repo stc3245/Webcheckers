@@ -55,7 +55,7 @@ public class Row implements Iterable<Space>
            Piece.ColorEnum tileColor = ((index + i) %2 == 0) ? Piece.ColorEnum.WHITE : Piece.ColorEnum.RED;
            if(tileColor == Piece.ColorEnum.RED)
            {
-                row.add(new Space(i, tempPiece, tileColor));
+                row.add(new Space(i, tempPiece == null ? null : tempPiece.makeCopy(), tileColor));
            }
            else
            {

@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.Player;
+
 /**
  * Represents a move within the webcheckers game
  *
@@ -12,7 +14,6 @@ public class Move
 
     /** End position of a move */
     private Position end;
-
 
     public Move(Position startPosition, Position endPosition)
     {

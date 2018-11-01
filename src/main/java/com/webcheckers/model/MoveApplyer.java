@@ -5,6 +5,7 @@ import java.util.Queue;
 
 /**
  * @author Jeffery Russell 10-28-18
+ * @author Bryce Murphy 10-30-18
  */
 public class MoveApplyer
 {
@@ -37,6 +38,23 @@ public class MoveApplyer
 
         finishSpace.setPiece(startSpace.getPiece());
         startSpace.setPiece(null);
+
+        // promotes the piece to king if they reach the end of board
+        if (finishSpace.getPiece().getType() == BoardView.PieceEnum.SINGLE) {
+            switch (finishSpace.getPiece().getColor()) {
+                case RED:
+                    if (move.getEndPosition().getRow() == 0) {
+                        finishSpace.getPiece().promote();
+                    }
+                    break;
+                case WHITE:
+                    if (move.getEndPosition().getRow() == 7) {
+                        finishSpace.getPiece().promote();
+                    }
+                    break;
+            }
+        }
+
     }
 
     public static boolean jumpMovesAvailable(BoardView boardView, Piece.ColorEnum currentColor)

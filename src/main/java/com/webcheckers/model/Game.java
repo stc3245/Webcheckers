@@ -27,7 +27,6 @@ public class Game
     /** The status of the game Is always active for now */
     private BoardView.ViewModeEnum viewMode;
 
-
     private Queue<Move> currentMoves;
 
 

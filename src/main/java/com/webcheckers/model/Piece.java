@@ -6,6 +6,7 @@ import java.util.Objects;
  * Represents a piece within the webcheckers game
  *
  * @author Sean Coyne 10-10-18
+ * @author Bryce Murphy 10-30-18
  */
 
 public class Piece 
@@ -40,6 +41,15 @@ public class Piece
     public ColorEnum getColor()
     {
         return color;
+    }
+
+    // promote the player to king
+    public void promote() {
+        this.type = BoardView.PieceEnum.KING;
+    }
+
+    public Piece makeCopy() {
+        return new Piece(this.type, this.color);
     }
 
 
