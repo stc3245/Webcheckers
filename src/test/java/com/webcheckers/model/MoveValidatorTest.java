@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Junit test for the move validator class
@@ -16,6 +17,17 @@ import java.util.Iterator;
  */
 public class MoveValidatorTest
 {
+
+    String boardString =
+            /**         0  1  2  3  4  5  6  7*/
+            /** 0 */ "  *  *  *  *  *  *  *  *  " +
+            /** 1 */ "  *  *  *  *  *  *  *  *  " +
+            /** 2 */ "  *  *  *  *  *  *  *  *  " +
+            /** 3 */ "  *  *  *  *  *  *  *  *  " +
+            /** 4 */ "  *  *  *  *  *  *  *  *  " +
+            /** 5 */ "  *  *  *  *  *  *  *  *  " +
+            /** 6 */ "  *  *  *  *  *  *  *  *  " +
+            /** 7 */ "  *  *  *  *  *  *  *  *  ";
     /**
      * Tests to see if there is an opponent's
      * piece in a particular {@link Position}
@@ -57,7 +69,28 @@ public class MoveValidatorTest
     @Test
     public void testGetValidMoves()
     {
+        String boardString =
+            /**         White side of board      */
+            /**         0  1  2  3  4  5  6  7   */
+            /** 0 */ "  *  @  *  @  *  @  *  @  " +
+            /** 1 */ "  @  *  @  *  @  *  @  *  " +
+            /** 2 */ "  *  @  *  @  *  @  *  @  " +
+            /** 3 */ "  @  *  @  *  @  *  @  *  " +
+            /** 4 */ "  *  @  *  @  *  @  *  @  " +
+            /** 5 */ "  @  *  @  r  @  *  @  *  " +
+            /** 6 */ "  *  @  *  @  *  @  *  @  " +
+            /** 7 */ "  @  *  @  *  @  *  @  *  ";
+            /**         Red side of board       */
 
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+        Position start = new Position(5,3);
+
+        List<Position> positions =
+                MoveValidator.getValidMovePositions(board, start);
+
+        assertTrue(positions.contains(new Position(4,2)));
+
+        assertTrue(positions.contains(new Position(4,4)));
     }
 
 

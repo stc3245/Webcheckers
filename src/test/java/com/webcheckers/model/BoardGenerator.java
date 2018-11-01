@@ -73,6 +73,7 @@ public class BoardGenerator {
             char c = board.charAt(i);
             switch (c) {
                 case '*':
+                case '@':
                     break;
                 case 'r':
                 case 'R':
@@ -99,15 +100,18 @@ public class BoardGenerator {
     }
 
     static void printBoard(String board){
+        board = board.replace(" ",  "");
         for (int i = 0; i < size; i ++){
-            System.out.println(board.charAt(i));
+            System.out.print(board.charAt(i));
             if (i % rowSize == 0 && i != 0){
-                System.out.println("\n");
+                System.out.print("\n");
             }
         }
     }
 
-    BoardView constructBoardView(String board){
+    static BoardView constructBoardView(String board)
+    {
+        board = board.replace(" ",  "");
         if (!boardIsValid(board)){
             return null;
         }
@@ -119,6 +123,8 @@ public class BoardGenerator {
             Piece pc;
             switch (c) {
                 case '*':
+                case '@':
+                    bv.getTile(row, col).setPiece(null);
                     break;
                 case 'r':
                     pc = new Piece(BoardView.PieceEnum.SINGLE, Piece.ColorEnum.RED);
@@ -137,6 +143,8 @@ public class BoardGenerator {
                     bv.getTile(row, col).setPiece(pc);
                     break;
                 default:
+                    System.out.println("Error!");
+                    System.out.println(c);
                     return null;
             }
         }
