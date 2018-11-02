@@ -41,19 +41,19 @@ public class MoveValidatorTest
     public void testHasOpponent()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  *  @  *  @  *  @  w  " +
-                /** 2 */ "  *  @  *  @  *  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  r  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  w  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  w  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  r  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  w  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
         Position p_red = new Position(3,3);
@@ -79,19 +79,19 @@ public class MoveValidatorTest
     public void testGetJumpMoves()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  w  @  *  @  w  @  " +
-                /** 1 */ "  @  *  @  r  @  *  @  r  " +
-                /** 2 */ "  *  @  *  @  *  @  *  @  " +
-                /** 3 */ "  @  *  @  *  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  w  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  r  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  w  @  *  @  w  @  " +
+                /* 1 */ "  @  *  @  r  @  *  @  r  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  *  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  w  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  r  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
         Position start = new Position(5,3);
@@ -116,19 +116,19 @@ public class MoveValidatorTest
     public void testCantJumpSelf()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  r  @  *  @  *  @  *  " +
-                /** 2 */ "  *  @  r  @  r  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  *  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  *  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  r  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  r  @  r  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
         Position start = new Position(3,3);
@@ -151,19 +151,19 @@ public class MoveValidatorTest
     public void testGetValidNormalMoves()
     {
         String boardString =
-            /** '@'= white tile '*' = empty black tile */
-            /** r = red, w = white, caps means king    */
-            /**         White side of board      */
-            /**         0  1  2  3  4  5  6  7   */
-            /** 0 */ "  *  @  *  @  *  @  *  @  " +
-            /** 1 */ "  @  *  @  *  @  *  @  *  " +
-            /** 2 */ "  *  @  *  @  *  @  *  @  " +
-            /** 3 */ "  @  *  @  *  @  *  @  *  " +
-            /** 4 */ "  *  @  *  @  *  @  *  @  " +
-            /** 5 */ "  @  *  @  r  @  *  @  *  " +
-            /** 6 */ "  *  @  *  @  *  @  *  @  " +
-            /** 7 */ "  @  *  @  *  @  *  @  *  ";
-            /**         Red side of board       */
+            /* '@'= white tile '*' = empty black tile */
+            /* r = red, w = white, caps means king    */
+            /*         White side of board      */
+            /*         0  1  2  3  4  5  6  7   */
+            /* 0 */ "  *  @  *  @  *  @  *  @  " +
+            /* 1 */ "  @  *  @  *  @  *  @  *  " +
+            /* 2 */ "  *  @  *  @  *  @  *  @  " +
+            /* 3 */ "  @  *  @  *  @  *  @  *  " +
+            /* 4 */ "  *  @  *  @  *  @  *  @  " +
+            /* 5 */ "  @  *  @  r  @  *  @  *  " +
+            /* 6 */ "  *  @  *  @  *  @  *  @  " +
+            /* 7 */ "  @  *  @  *  @  *  @  *  ";
+            /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
         Position start = new Position(5,3);
@@ -184,19 +184,19 @@ public class MoveValidatorTest
     public void testValidateMove()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  r  @  *  @  *  @  *  " +
-                /** 2 */ "  *  @  *  @  w  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  *  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  *  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  r  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  w  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
         Move jumpMove = new Move(new Position(3,3), new Position(1,5));
@@ -222,19 +222,19 @@ public class MoveValidatorTest
     public void testInvalidMove()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  w  @  *  @  *  @  *  " +
-                /** 2 */ "  *  @  *  @  *  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  *  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  *  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
         Move randomMove = new Move(new Position(3,3),

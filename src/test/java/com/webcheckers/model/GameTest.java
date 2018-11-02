@@ -79,19 +79,19 @@ public class GameTest
     public void testValidateMoveJumpMoveRequired()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  r  @  *  @  *  @  *  " +
-                /** 2 */ "  *  @  *  @  w  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  *  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  *  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  r  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  w  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
@@ -112,19 +112,19 @@ public class GameTest
     public void testValidAndInvalidMove()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  w  @  *  @  *  @  *  " +
-                /** 2 */ "  *  @  *  @  *  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  *  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  *  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
         Move randomMove = new Move(new Position(3,3),
@@ -156,19 +156,19 @@ public class GameTest
     public void testBackupMoves()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  w  @  *  @  *  @  *  " +
-                /** 2 */ "  *  @  *  @  *  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  *  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  *  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
         Move randomMove = new Move(new Position(3,3),
@@ -196,19 +196,19 @@ public class GameTest
     public void testApplyMoves()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  w  @  *  @  *  @  *  " +
-                /** 2 */ "  *  @  *  @  *  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  *  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  *  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
         Move move = new Move(new Position(3,3),

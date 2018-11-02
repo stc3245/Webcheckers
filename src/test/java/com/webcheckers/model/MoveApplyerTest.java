@@ -26,19 +26,19 @@ public class MoveApplyerTest
     public void applyNormalMoveCorrectly()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  w  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  *  @  *  @  *  @  w  " +
-                /** 2 */ "  *  @  *  @  *  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  r  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  w  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  w  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  w  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  r  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  w  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
         Move singleMove = new Move(new Position(3,3),
@@ -68,19 +68,19 @@ public class MoveApplyerTest
     public void testApplyJumpMove()
     {
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  r  @  *  @  *  @  *  " +
-                /** 2 */ "  *  @  *  @  w  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  *  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  *  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  r  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  w  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
         Move jumpMove = new Move(new Position(3,3),
