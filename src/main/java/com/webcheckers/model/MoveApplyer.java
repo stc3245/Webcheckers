@@ -90,9 +90,6 @@ public class MoveApplyer
             return MoveValidator.MoveStatus.INVALID;
         }
 
-        Space startSpace = board.getTile(moves.peek().getStartPosition());
-
-
         while(!moves.isEmpty())
         {
             applySingleMove(moves.remove(), board);

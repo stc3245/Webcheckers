@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Game;
+import com.webcheckers.model.Message;
 import com.webcheckers.ui.GetHomeRoute;
 import spark.Request;
 import spark.Response;
@@ -66,7 +67,8 @@ public class PostResignGame implements Route
         Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
         if(player == null || !lobby.inGame(player.getName()))
         {
-            return null;
+            Message msg = new Message(Message.MessageEnum.error, "Not in a game");
+            return gson.toJson(msg);
         }
 
         Game game = lobby.getGame(player.getName());

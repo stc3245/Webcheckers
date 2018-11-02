@@ -109,7 +109,7 @@ public class BoardGenerator {
         }
     }
 
-    static BoardView constructBoardView(String board)
+    public static BoardView constructBoardView(String board)
     {
         board = board.replace(" ",  "");
         if (!boardIsValid(board)){

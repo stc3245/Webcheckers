@@ -7,26 +7,33 @@ import java.lang.Iterable;
 
 
 /**
+ * Representation of a checkers board using
+ * iterables
+ *
  * @author Jeffery Russell 10-14-18
  */
 public class BoardView implements Iterable<Row>
 {
+    /** List of rows */
     private List<Row> board;
+
 
     /**
      * Creates a new Board
      */
     public BoardView()
     {
-        this.board = new ArrayList<Row>(8);
+        this.board = new ArrayList<>(8);
         for(int i = 0; i < 8; i++)
         {
             board.add(new Row(i));
         }
     }
 
+
     /**
      * overloaded constructor for BoardView
+     *
      * @param view List<Row> of Row
      */
     public BoardView(List<Row> view)
@@ -52,8 +59,8 @@ public class BoardView implements Iterable<Row>
     /**
      * Returns a specific tile.
      *
-     * @param r
-     * @param c
+     * @param r row id -- zero based
+     * @param c col id -- zero based
      * @return
      */
     public Space getTile(int r, int c)
@@ -62,6 +69,12 @@ public class BoardView implements Iterable<Row>
     }
 
 
+    /**
+     * Returns a tile at a specific position
+     *
+     * @param p position
+     * @return
+     */
     public Space getTile(Position p)
     {
         return this.getTile(p.getRow(), p.getCell());
@@ -84,6 +97,7 @@ public class BoardView implements Iterable<Row>
         return board.iterator();
     }
 
+
     /**
      * Simple enum for storing state of player
      *
@@ -95,12 +109,12 @@ public class BoardView implements Iterable<Row>
         REPLAY
     }
 
+
     /**
      * Enum for storing different types of checkers pieces
      *
      * @author Sean Coyne 10-10-18
      */
-
     public enum PieceEnum {
         SINGLE,
         KING
