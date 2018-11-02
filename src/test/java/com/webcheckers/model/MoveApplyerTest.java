@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 /**
@@ -18,36 +19,44 @@ import java.util.Iterator;
 public class MoveApplyerTest
 {
     /**
-     * Make sure that the player is forced to make
-     * a jump move when one is available
-     */
-    @Test
-    public void testForceJumpMove()
-    {
-
-    }
-
-
-    /**
-     * Tests to make sure that the player
-     * is not able to apply moves when none
-     * have been validated yet.
-     */
-    @Test
-    public void testEmptyMoves()
-    {
-
-    }
-
-
-    /**
      * Makes sure that you can apply a simple
      * move correctly to a board view
      */
     @Test
     public void applyNormalMoveCorrectly()
     {
+        String boardString =
+                /** '@'= white tile '*' = empty black tile */
+                /** r = red, w = white, caps means king    */
+                /**         White side of board      */
+                /**         0  1  2  3  4  5  6  7   */
+                /** 0 */ "  w  @  *  @  *  @  *  @  " +
+                /** 1 */ "  @  *  @  *  @  *  @  w  " +
+                /** 2 */ "  *  @  *  @  *  @  *  @  " +
+                /** 3 */ "  @  *  @  r  @  *  @  *  " +
+                /** 4 */ "  *  @  *  @  *  @  *  @  " +
+                /** 5 */ "  @  *  @  r  @  *  @  *  " +
+                /** 6 */ "  *  @  *  @  w  @  *  @  " +
+                /** 7 */ "  @  *  @  *  @  *  @  *  ";
+                /**         Red side of board       */
+        BoardView board = BoardGenerator.constructBoardView(boardString);
 
+        Move singleMove = new Move(new Position(3,3),
+                new Position(2,4));
+
+        Queue<Move> moves = new LinkedList<>();
+        moves.add(singleMove);
+
+        MoveApplyer.applyMove(moves, board);
+        assertTrue(board.isOccupied(new Position(2,4)));
+        assertFalse(board.isOccupied(new Position(3,3)));
+
+        singleMove = new Move(new Position(0,0),
+                new Position(1,1));
+        moves.add(singleMove);
+        MoveApplyer.applyMove(moves, board);
+        assertTrue(board.isOccupied(new Position(1,1)));
+        assertFalse(board.isOccupied(new Position(0,0)));
     }
 
 
@@ -58,30 +67,33 @@ public class MoveApplyerTest
     @Test
     public void testApplyJumpMove()
     {
+        String boardString =
+                /** '@'= white tile '*' = empty black tile */
+                /** r = red, w = white, caps means king    */
+                /**         White side of board      */
+                /**         0  1  2  3  4  5  6  7   */
+                /** 0 */ "  *  @  *  @  *  @  *  @  " +
+                /** 1 */ "  @  r  @  *  @  *  @  *  " +
+                /** 2 */ "  *  @  *  @  w  @  *  @  " +
+                /** 3 */ "  @  *  @  r  @  *  @  *  " +
+                /** 4 */ "  *  @  *  @  *  @  *  @  " +
+                /** 5 */ "  @  *  @  *  @  *  @  *  " +
+                /** 6 */ "  *  @  *  @  *  @  *  @  " +
+                /** 7 */ "  @  *  @  *  @  *  @  *  ";
+                /**         Red side of board       */
 
-    }
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+        Move jumpMove = new Move(new Position(3,3),
+                new Position(1,5));
 
+        Queue<Move> moves = new LinkedList<>();
+        moves.add(jumpMove);
 
-    /**
-     * Verifies that when jump moves are available
-     * on the board then the jumpMovesAvailable will
-     * return true
-     */
-    @Test
-    public void testJumpMovesAvailable()
-    {
+        MoveApplyer.applyMove(moves, board);
 
-    }
+        assertFalse(board.isOccupied(new Position(2,4)));
 
-
-    /**
-     * Makes sure that  if  a jump move is not
-     * available, then the function will say
-     * that there are no jump moves available.
-     */
-    @Test
-    public void testJumpMovesNotAvailable()
-    {
-
+        assertFalse(board.isOccupied(new Position(3,3)));
+        assertTrue(board.isOccupied(new Position(1,5)));
     }
 }

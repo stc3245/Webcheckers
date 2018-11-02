@@ -148,16 +148,83 @@ public class GameTest
     }
 
 
+    /**
+     * Tests the game's ability to remove the current moves
+     * of the player.
+     */
     @Test
     public void testBackupMoves()
     {
+        String boardString =
+                /** '@'= white tile '*' = empty black tile */
+                /** r = red, w = white, caps means king    */
+                /**         White side of board      */
+                /**         0  1  2  3  4  5  6  7   */
+                /** 0 */ "  *  @  *  @  *  @  *  @  " +
+                /** 1 */ "  @  w  @  *  @  *  @  *  " +
+                /** 2 */ "  *  @  *  @  *  @  *  @  " +
+                /** 3 */ "  @  *  @  r  @  *  @  *  " +
+                /** 4 */ "  *  @  *  @  *  @  *  @  " +
+                /** 5 */ "  @  *  @  *  @  *  @  *  " +
+                /** 6 */ "  *  @  *  @  *  @  *  @  " +
+                /** 7 */ "  @  *  @  *  @  *  @  *  ";
+                /**         Red side of board       */
 
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+        Move randomMove = new Move(new Position(3,3),
+                new Position(1,5));
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        Message status = cut.validateMove(randomMove);
+
+        cut.backupMoves();
+
+        cut.applyMoves();
+
+        assertTrue(cut.getBoard().isOccupied(new Position(3,3)));
+
+        assertFalse(cut.getBoard().isOccupied(new Position(2,4)));
     }
 
 
+    /**
+     * Tests the game's ability to apply valid moves of the current player to
+     * the game
+     */
+    @Test
     public void testApplyMoves()
     {
+        String boardString =
+                /** '@'= white tile '*' = empty black tile */
+                /** r = red, w = white, caps means king    */
+                /**         White side of board      */
+                /**         0  1  2  3  4  5  6  7   */
+                /** 0 */ "  *  @  *  @  *  @  *  @  " +
+                /** 1 */ "  @  w  @  *  @  *  @  *  " +
+                /** 2 */ "  *  @  *  @  *  @  *  @  " +
+                /** 3 */ "  @  *  @  r  @  *  @  *  " +
+                /** 4 */ "  *  @  *  @  *  @  *  @  " +
+                /** 5 */ "  @  *  @  *  @  *  @  *  " +
+                /** 6 */ "  *  @  *  @  *  @  *  @  " +
+                /** 7 */ "  @  *  @  *  @  *  @  *  ";
+                /**         Red side of board       */
 
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+        Move move = new Move(new Position(3,3),
+                new Position(2,4));
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        Message status = cut.validateMove(move);
+
+        assertEquals(status.getType(), Message.MessageEnum.info);
+
+        cut.applyMoves();
+
+        assertFalse(cut.getBoard().isOccupied(new Position(3,3)));
+
+        assertTrue(cut.getBoard().isOccupied(new Position(2,4)));
     }
 
 }
