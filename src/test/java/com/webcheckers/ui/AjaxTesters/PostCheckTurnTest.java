@@ -23,6 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+
 /**
  * Test for the ajax handler which informs
  * the client if it is their turn.
@@ -95,11 +96,11 @@ public class PostCheckTurnTest
 
 
     /**
-     * Tests to make sure that the correct message is returned by this ajax handeler with
-     * respect to whether it is the players turn or not.
+     * Tests to make sure that the correct message is returned
+     * by this ajax handler when the player is in agame
      */
     @Test
-    public void ensureValidMessageIsReturned()
+    public void ensureValidMessageCurrentTurn()
     {
         when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(new Player("Jeff"));
 
@@ -119,5 +120,34 @@ public class PostCheckTurnTest
         assertTrue(viewHtml.contains("info"));
 
         assertTrue(viewHtml.contains("true"));
+    }
+
+
+    /**
+     * Tests to make sure that the correct message is returned
+     * by this ajax handler when the player is in agame
+     */
+    @Test
+    public void validMessageWhenNotCurrentTurn()
+    {
+        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(new Player("Jeff"));
+
+        when(lobby.inGame("Jeff")).thenReturn(true);
+
+        Game gameMock = mock(Game.class);
+
+        when(gameMock.isCurrentPlayer(new Player("Jeff"))).thenReturn(false);
+
+        when(lobby.getGame("Jeff")).thenReturn(gameMock);
+
+        final String viewHtml = cut.handle(request, response).toString();
+
+        verify(gameMock, Mockito.times(1)).isCurrentPlayer(new Player("Jeff"));
+
+        assertFalse(viewHtml.contains("error"));
+        assertTrue(viewHtml.contains("info"));
+
+        assertFalse(viewHtml.contains("true"));
+        assertTrue(viewHtml.contains("false"));
     }
 }
