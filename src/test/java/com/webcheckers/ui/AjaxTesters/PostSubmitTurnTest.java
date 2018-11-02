@@ -4,10 +4,10 @@ package com.webcheckers.ui.AjaxTesters;
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Game;
+import com.webcheckers.model.Message;
 import com.webcheckers.ui.GetHomeRoute;
-import com.webcheckers.ui.ajaxHandelers.PostBackupMove;
+import com.webcheckers.ui.ajaxHandelers.PostSubmitTurn;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import spark.Request;
@@ -22,22 +22,21 @@ import static org.mockito.Mockito.when;
 
 
 /**
- * Testing file to make sure that the backup
- * move for the ajax.
+ * Class to test the submit turn ajax
+ * call for {@link PostSubmitTurn}
  *
  * @author Jeffery Russell 11-2-18
  */
-@Tag("UI-tier")
-public class PostBackupMoveTest
+public class PostSubmitTurnTest
 {
-    /** Mock object to use in testing */
-    private PlayerLobby lobby;
+    /** Component under test */
+    private PostSubmitTurn cut;
+
+    /** Mock objects to use for tests */
     private Request request;
     private Session session;
     private Response response;
-
-    /** Component under test */
-    private PostBackupMove cut;
+    private PlayerLobby lobby;
 
 
     /**
@@ -47,12 +46,38 @@ public class PostBackupMoveTest
     public void setUp()
     {
         lobby = mock(PlayerLobby.class);
-        cut = new PostBackupMove(lobby);
+        cut = new PostSubmitTurn(lobby);
 
         request = mock(Request.class);
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
+    }
+
+
+    /**
+     * Tests to ensure that the critical function
+     * of {@link Game} applymoves is called when this ajax
+     * route is invoked.
+     */
+    @Test
+    public void gameMovesApplied()
+    {
+        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY))
+                .thenReturn(new Player("Shawn"));
+
+        when(lobby.inGame("Shawn")).thenReturn(true);
+
+        Game gameMock = mock(Game.class);
+
+        when(gameMock.applyMoves())
+                .thenReturn(new Message(Message.MessageEnum.info, "Good Job!"));
+
+        when(lobby.getGame("Shawn")).thenReturn(gameMock);
+
+        final String viewHtml = cut.handle(request, response).toString();
+
+        verify(gameMock, Mockito.times(1)).applyMoves();
     }
 
 
@@ -80,38 +105,12 @@ public class PostBackupMoveTest
     @Test
     public void errorOnNotInGame()
     {
-        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(new Player("Jeff"));
+        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(new Player("Bryce"));
 
-        when(lobby.inGame("Jeff")).thenReturn(false);
+        when(lobby.inGame("Bryce")).thenReturn(false);
         final String viewHtml = cut.handle(request, response).toString();
 
         assertTrue(viewHtml.contains("error"));
         assertFalse(viewHtml.contains("info"));
-    }
-
-
-    /**
-     * Ensures that when the player has no issues and is in
-     * a game that they call call this function, have the game
-     * call backupMoves and return an info message for the
-     * ajax call.
-     */
-    @Test
-    public void ensureBackupReturnsInfoMessage()
-    {
-        when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(new Player("Jeff"));
-
-        when(lobby.inGame("Jeff")).thenReturn(true);
-
-        Game gameMock = mock(Game.class);
-
-        when(lobby.getGame("Jeff")).thenReturn(gameMock);
-
-        final String viewHtml = cut.handle(request, response).toString();
-
-        verify(gameMock, Mockito.times(1)).backupMoves();
-
-        assertFalse(viewHtml.contains("error"));
-        assertTrue(viewHtml.contains("info"));
     }
 }

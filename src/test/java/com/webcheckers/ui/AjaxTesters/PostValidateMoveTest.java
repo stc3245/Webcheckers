@@ -72,19 +72,19 @@ public class PostValidateMoveTest
         when(lobby.inGame("Jeff")).thenReturn(true);
 
         String boardString =
-                /** '@'= white tile '*' = empty black tile */
-                /** r = red, w = white, caps means king    */
-                /**         White side of board      */
-                /**         0  1  2  3  4  5  6  7   */
-                /** 0 */ "  *  @  *  @  *  @  *  @  " +
-                /** 1 */ "  @  *  @  *  @  *  @  w  " +
-                /** 2 */ "  *  @  *  @  *  @  *  @  " +
-                /** 3 */ "  @  *  @  r  @  *  @  *  " +
-                /** 4 */ "  *  @  *  @  *  @  *  @  " +
-                /** 5 */ "  @  *  @  r  @  *  @  *  " +
-                /** 6 */ "  *  @  *  @  w  @  *  @  " +
-                /** 7 */ "  @  *  @  *  @  *  @  *  ";
-                /**         Red side of board       */
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  w  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  r  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  w  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
         Game gameMock = new Game(new Player("Jeff"),
