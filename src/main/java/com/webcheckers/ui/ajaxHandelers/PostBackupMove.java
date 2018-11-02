@@ -61,12 +61,13 @@ public class PostBackupMove implements Route
      * @throws Exception
      */
     @Override
-    public Object handle(Request request, Response response) throws Exception
+    public Object handle(Request request, Response response)
     {
         Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
         if(player == null || !lobby.inGame(player.getName()))
         {
-            return null;
+            Message msg = new Message(Message.MessageEnum.error, "Not in a game");
+            return gson.toJson(msg);
         }
 
         Game game = lobby.getGame(player.getName());
