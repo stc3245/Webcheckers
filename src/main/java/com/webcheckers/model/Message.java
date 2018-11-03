@@ -16,6 +16,11 @@ public class Message
     private MessageEnum type;
 
 
+    /**
+     * Creates a new message class
+     * @param type type of message
+     * @param message string of the message
+     */
     public Message(MessageEnum type, String message)
     {
         this.text = message;
@@ -52,7 +57,7 @@ public class Message
      */
     public enum MessageEnum
     {
-        ERROR,
-        INFO
+        error,
+        info
     }
 }

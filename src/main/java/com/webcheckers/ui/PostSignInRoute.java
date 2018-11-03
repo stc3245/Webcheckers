@@ -67,8 +67,6 @@ public class PostSignInRoute implements Route {
     @Override
     public Object handle(Request request, Response response)
      {
-
-        final Session httpSession = request.session();
         final Session session = request.session();
         final String username = request.queryParams(NAME_PARAM);
 

@@ -1,7 +1,5 @@
 package com.webcheckers.model;
 
-
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -32,13 +30,13 @@ public class MessageTest {
         Message nullSubject = new Message(null, null);
         assertNull(nullSubject.getText());
         assertNull(nullSubject.getType());
-        Message errorSubject = new Message(Message.MessageEnum.ERROR, null);
-        assertEquals(Message.MessageEnum.ERROR, errorSubject.getType());
-        Message infoSubject = new Message(Message.MessageEnum.INFO, null);
-        assertEquals(Message.MessageEnum.INFO, infoSubject.getType());
-        Message emptySubject = new Message(Message.MessageEnum.INFO, "");
+        Message errorSubject = new Message(Message.MessageEnum.error, null);
+        assertEquals(Message.MessageEnum.error, errorSubject.getType());
+        Message infoSubject = new Message(Message.MessageEnum.info, null);
+        assertEquals(Message.MessageEnum.info, infoSubject.getType());
+        Message emptySubject = new Message(Message.MessageEnum.info, "");
         assertEquals("", emptySubject.getText());
-        Message longSubject = new Message(Message.MessageEnum.INFO, LONG_STRING);
+        Message longSubject = new Message(Message.MessageEnum.info, LONG_STRING);
         assertEquals(LONG_STRING, longSubject.getText());
     }
 }

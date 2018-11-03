@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import com.google.gson.Gson;
 
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.ui.ajaxHandelers.*;
 import spark.TemplateEngine;
 
 
@@ -61,7 +62,14 @@ public class WebServer
   public static final String SIGNIN_URL = "/signin";
   public static final String GAME_URL = "/game";
   public static final String START_GAME_URL = "/startGame";
+
+
+
+
   public static final String VALIDATE_MOVE = "/validateMove";
+  public static final String CHECK_TURN = "/checkTurn";
+  public static final String SUBMIT_TURN = "/submitTurn";
+  public static final String BACKUP_MOVE = "/backupMove";
 
 
   //
@@ -160,8 +168,11 @@ public class WebServer
     post(START_GAME_URL, new PostStartGameRoute(playerLobby,templateEngine));
 
 
-    post(VALIDATE_MOVE, new PostValidateMove(templateEngine));
-    //
+    /** Ajax handelers for the game */
+    post(VALIDATE_MOVE, new PostValidateMove(playerLobby));
+    post(CHECK_TURN, new PostCheckTurn(playerLobby));
+    post(BACKUP_MOVE, new PostBackupMove(playerLobby));
+    post(SUBMIT_TURN, new PostSubmitTurn(playerLobby));
     LOG.config("WebServer is initialized.");
   }
 
