@@ -70,11 +70,10 @@ public class PostCheckTurn implements Route
         Player player = request.session().attribute(GetHomeRoute.PLAYERSERVICES_KEY);
         if(player == null || !lobby.inGame(player.getName()))
         {
-            return null;
+            return gson.toJson(new Message(Message.MessageEnum.error, "Not  in a game"));
         }
 
         Game game = lobby.getGame(player.getName());
-
 
         Message msg;
 

@@ -1,11 +1,11 @@
 package com.webcheckers.model;
 
-import com.webcheckers.appl.Player;
 
 /**
  * Represents a move within the webcheckers game
  *
  * @author Sean Coyne 10-21-18
+ * @author Jeffery Russell 10-30-18
  */
 public class Move
 {
@@ -15,11 +15,19 @@ public class Move
     /** End position of a move */
     private Position end;
 
+    /**
+     * Simple constructor which takes in a start and
+     * finish position for a move.
+     *
+     * @param startPosition start position of move
+     * @param endPosition end position of move
+     */
     public Move(Position startPosition, Position endPosition)
     {
         this.start = startPosition;
         this.end = endPosition;
     }
+
 
     /**
      * gets the start position of the move
@@ -40,13 +48,5 @@ public class Move
     public Position getEndPosition()
     {
         return end;
-    }
-
-    @Override
-    public String toString() {
-        return "Move{" +
-                "startPosition=" + start +
-                ", endPosition=" + end +
-                '}';
     }
 }

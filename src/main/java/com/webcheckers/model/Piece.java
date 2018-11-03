@@ -8,14 +8,22 @@ import java.util.Objects;
  * @author Sean Coyne 10-10-18
  * @author Bryce Murphy 10-30-18
  */
-
 public class Piece 
 {
-
-    //Private instance variables
+    /** Type of checkers piece */
     private BoardView.PieceEnum type;
+
+    /** Color of the piece */
     private ColorEnum color;
 
+
+    /**
+     * Simple constructor which takes a type and
+     * color of the checkers piece.
+     *
+     * @param type
+     * @param color
+     */
     public Piece(BoardView.PieceEnum type, ColorEnum color)
     {
         this.type = type;

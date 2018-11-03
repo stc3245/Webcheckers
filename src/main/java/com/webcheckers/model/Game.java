@@ -32,10 +32,10 @@ public class Game
 
 
     /**
-     * Constructs a new game with two players 
-     *
-     * @param redPlayer
-     * @param whitePlayer
+     * Constructs a new game with two players
+     * 
+     * @param redPlayer red player
+     * @param whitePlayer white player
      */
     public Game(Player redPlayer, Player whitePlayer)
     {
@@ -49,6 +49,22 @@ public class Game
 
 
     /**
+     * Constructor which allows us to inject a board into the game
+     * creation. This is mostly used for testing, however, later down the
+     * line this can allow us to start the game with different configurations.
+     *
+     * @param redPlayer red player
+     * @param whitePlayer white player
+     * @param board checkers board
+     */
+    public Game(Player redPlayer, Player whitePlayer, BoardView board)
+    {
+        this(redPlayer, whitePlayer);
+        this.board = board;
+    }
+
+
+    /**
      * Checks to see if a particular player is in this game
      *
      * @param playerName name of player
@@ -56,8 +72,9 @@ public class Game
      */
     public boolean playerInGame(String playerName)
     {
-        return playerName.equals(this.redPlayer.getName()) ||
-                playerName.equals(this.whitePlayer.getName());
+        if(playerName == null) return false;
+        return playerName.equals(this.redPlayer.getName()) || 
+            playerName.equals(this.whitePlayer.getName());
     }
 
 

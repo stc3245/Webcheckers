@@ -8,6 +8,8 @@ import java.util.Objects;
 
 
 /**
+ * Representation of a checkers row.
+ *
  * @author Jeffery Russell, Shean 10-14-18
  */
 public class Row implements Iterable<Space>
@@ -19,7 +21,8 @@ public class Row implements Iterable<Space>
     private List<Space> row;
 
     /**
-     * constructor for row
+     * Contains logic for constructing the start game
+     * row of a checkers board.
      *
      * @param index - index of the row on the board
      */

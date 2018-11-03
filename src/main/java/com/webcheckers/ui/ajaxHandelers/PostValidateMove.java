@@ -74,7 +74,8 @@ public class PostValidateMove implements Route
                 .attribute(GetHomeRoute.PLAYERSERVICES_KEY);
         if(player == null || !lobby.inGame(player.getName()))
         {
-            return null;
+            Message msg = new Message(Message.MessageEnum.error, "Not in a game");
+            return gson.toJson(msg);
         }
 
         Game game = lobby.getGame(player.getName());
