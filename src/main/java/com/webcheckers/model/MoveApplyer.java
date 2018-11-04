@@ -27,7 +27,8 @@ public class MoveApplyer
 
         if(Math.abs(rowDiff) != 1 && Math.abs(colDiff) != 1)
         {
-            return new Position(p2.getRow() + (rowDiff/2), p2.getCell() + (colDiff/2));
+            return new Position(p2.getRow() + (rowDiff/2),
+                    p2.getCell() + (colDiff/2));
         }
         return null;
     }
@@ -65,7 +66,7 @@ public class MoveApplyer
      * @param board checkers board to apply moves to
      * @return Status to return to the client
      */
-    public static MoveValidator.MoveStatus applyMove(Queue<Move> moves, BoardView board)
+    public static MoveValidator.MoveStatus applyMove(List<Move> moves, BoardView board)
     {
         if(moves.isEmpty())
         {
@@ -74,7 +75,7 @@ public class MoveApplyer
 
         while(!moves.isEmpty())
         {
-            applySingleMove(moves.remove(), board);
+            applySingleMove(moves.remove(0), board);
         }
 
         return MoveValidator.MoveStatus.VALID;

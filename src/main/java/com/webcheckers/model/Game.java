@@ -2,8 +2,9 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 /**
  * Used to store the status of an active game
@@ -28,7 +29,7 @@ public class Game
     private BoardView.ViewModeEnum viewMode;
 
     /** Queue of current moves the player wants to make */
-    private Queue<Move> currentMoves;
+    private List<Move> currentMoves;
 
 
     /**
@@ -44,7 +45,7 @@ public class Game
         this.board = new BoardView();
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
-        this.currentMoves = new LinkedList<>();
+        this.currentMoves = new ArrayList<>();
     }
 
 
@@ -192,7 +193,8 @@ public class Game
      */
     public void backupMoves()
     {
-        this.currentMoves.clear();
+        if(!currentMoves.isEmpty())
+            this.currentMoves.remove(currentMoves.size() -1);
     }
 
 

@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 
 /**
@@ -44,7 +41,7 @@ public class MoveApplyerTest
         Move singleMove = new Move(new Position(3,3),
                 new Position(2,4));
 
-        Queue<Move> moves = new LinkedList<>();
+        List<Move> moves = new LinkedList<>();
         moves.add(singleMove);
 
         MoveApplyer.applyMove(moves, board);
@@ -86,7 +83,7 @@ public class MoveApplyerTest
         Move jumpMove = new Move(new Position(3,3),
                 new Position(1,5));
 
-        Queue<Move> moves = new LinkedList<>();
+        List<Move> moves = new LinkedList<>();
         moves.add(jumpMove);
 
         MoveApplyer.applyMove(moves, board);
