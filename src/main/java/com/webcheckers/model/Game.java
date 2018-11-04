@@ -176,7 +176,6 @@ public class Game
         switch(status)
         {
             case VALID:
-                System.out.println("move added to the gang");
                 this.currentMoves.add(move);
                 return new Message(Message.MessageEnum.info,
                         "Valid Move");
@@ -220,7 +219,6 @@ public class Game
     public Message applyMoves()
     {
         MoveValidator.MoveStatus status = MoveApplyer.applyMove(this.currentMoves, board);
-        System.out.println(status);
         switch (status)
         {
             case VALID:

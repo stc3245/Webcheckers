@@ -41,7 +41,7 @@ public class MoveApplyerTest
         Move singleMove = new Move(new Position(3,3),
                 new Position(2,4));
 
-        List<Move> moves = new LinkedList<>();
+        List<Move> moves = new ArrayList<>();
         moves.add(singleMove);
 
         MoveApplyer.applyMove(moves, board);
@@ -50,7 +50,9 @@ public class MoveApplyerTest
 
         singleMove = new Move(new Position(0,0),
                 new Position(1,1));
+        moves.clear();
         moves.add(singleMove);
+
         MoveApplyer.applyMove(moves, board);
         assertTrue(board.isOccupied(new Position(1,1)));
         assertFalse(board.isOccupied(new Position(0,0)));
@@ -92,5 +94,41 @@ public class MoveApplyerTest
 
         assertFalse(board.isOccupied(new Position(3,3)));
         assertTrue(board.isOccupied(new Position(1,5)));
+    }
+
+
+    /**
+     * Tests to see if the client is forced to make the full
+     * multi-jump instead of just the first jump.
+     */
+    @Test
+    public void forceFullMultiJump()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  w  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  r  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  r  @  *  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Move move = new Move(new Position(0,0),
+                new Position(2,2));
+
+        List<Move> moves = new ArrayList<>();
+        moves.add(move);
+
+        MoveValidator.MoveStatus stat = MoveApplyer.applyMove(moves, board);
+
+        assertEquals(stat, MoveValidator.MoveStatus.JUMP_REQUIRED);
     }
 }

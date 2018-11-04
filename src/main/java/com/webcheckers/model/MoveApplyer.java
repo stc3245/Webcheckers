@@ -92,27 +92,9 @@ public class MoveApplyer
         BoardView boardCopy = board.makeCopy();
         moves.forEach(m->applySingleMove(m, boardCopy));
         Position finalTile = moves.get(moves.size() -1).getEndPosition();
-        if(MoveValidator.isJumpMove(board, moves.get(0)) && !MoveValidator.getJumpMoves(boardCopy, finalTile).isEmpty())
+        if(MoveValidator.isJumpMove(board, moves.get(0)) &&
+                !MoveValidator.getJumpMoves(boardCopy, finalTile).isEmpty())
             return MoveValidator.MoveStatus.JUMP_REQUIRED;
-//        boolean jumpState = false;
-//        for(Move m: moves)
-//        {
-//            if(MoveValidator.isJumpMove(boardCopy, m))
-//            {
-//                applySingleMove(m, boardCopy);
-//                Position finalTile = m.getEndPosition();
-//                if(!MoveValidator.getJumpMoves(boardCopy, finalTile).isEmpty())
-//                {
-//                    jumpState = true;
-//                    return MoveValidator.MoveStatus.JUMP_REQUIRED;
-//                }
-//                else
-//                {
-//                    jumpState = false;
-//                }
-//            }
-//        }
-
 
         for(Move m: moves)
         {
