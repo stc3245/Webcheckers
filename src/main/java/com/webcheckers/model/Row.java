@@ -15,9 +15,10 @@ import java.util.Objects;
 public class Row implements Iterable<Space>
 {
 
-    //Private Instance Variables
+    /** zero-based index of the row on the checkers board */
     private int index;
 
+    /** Spaces on the row */
     private List<Space> row;
 
     /**
@@ -69,6 +70,12 @@ public class Row implements Iterable<Space>
     }
 
 
+    /**
+     * Gets a space at a particular index
+     *
+     * @param index
+     * @return
+     */
     public Space getSpace(int index)
     {
         return this.row.get(index);
@@ -86,6 +93,12 @@ public class Row implements Iterable<Space>
         this.row = row;
     }
 
+
+    /**
+     * Returns an inverted row
+     *
+     * @return row inverted
+     */
     public Row inverted()
     {
         List<Space> row = new ArrayList<Space>(8);
@@ -135,5 +148,20 @@ public class Row implements Iterable<Space>
     @Override
     public int hashCode() {
         return Objects.hash(index, row);
+    }
+
+
+    /**
+     * Creates a deep copy of the row
+     * @return copy of the row
+     */
+    public Row makeCopy()
+    {
+        List<Space> spaces = new ArrayList<>();
+        for(Space s: this.row)
+        {
+            spaces.add(s.makeCopy());
+        }
+        return new Row(this.index, spaces);
     }
 }

@@ -240,19 +240,18 @@ public class MoveValidator
 
 
     /**
-     * Returns a {@link Message} corresponding to the status of the move.
-     * If it is valid {@link MoveStatus} valid will be returned. Otherwise
-     * other error statuses will be returned corresponding to the reason
-     * the move is incorrect
+     * Validates a queue of moves. This allows for the player
+     * to make a double jump move.
      *
-     * @param board
-     * @param move
+     * @param board current game board
+     * @param move move to make
      * @return
      */
     public static MoveStatus validateMoves(BoardView board, Move move, List<Move> preveous)
     {
-        //change later
-        BoardView boardCopy = board;
+        //we must make a copy in case the player decides to backup their
+        //last move they made.
+        BoardView boardCopy = board.makeCopy();
 
         MoveApplyer.applyMove(preveous, boardCopy);
 

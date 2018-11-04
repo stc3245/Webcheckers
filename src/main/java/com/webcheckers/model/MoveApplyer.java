@@ -1,8 +1,6 @@
 package com.webcheckers.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Class used to apply a queue of moves to a

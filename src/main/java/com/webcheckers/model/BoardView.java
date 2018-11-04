@@ -14,6 +14,28 @@ import java.lang.Iterable;
  */
 public class BoardView implements Iterable<Row>
 {
+    /**
+     * Simple enum for storing state of player
+     */
+    public enum ViewModeEnum
+    {
+        PLAY,
+        SPECTATOR,
+        REPLAY
+    }
+
+
+    /**
+     * Enum for storing different types of checkers pieces
+     *
+     */
+    public enum PieceEnum
+    {
+        SINGLE,
+        KING
+    }
+
+
     /** List of rows */
     private List<Row> board;
 
@@ -81,6 +103,12 @@ public class BoardView implements Iterable<Row>
     }
 
 
+    /**
+     * Determines if the position is occupied.
+     *
+     * @param p
+     * @return
+     */
     public boolean isOccupied(Position p)
     {
         Space s = this.getTile(p);
@@ -99,24 +127,18 @@ public class BoardView implements Iterable<Row>
 
 
     /**
-     * Simple enum for storing state of player
+     * Creates a deep copy of the board
      *
+     * @return copy of board
      */
-    public enum ViewModeEnum
+    public BoardView makeCopy()
     {
-        PLAY,
-        SPECTATOR,
-        REPLAY
+        List<Row> rows = new ArrayList<>();
+        for(Row r : this.board)
+        {
+            rows.add(r.makeCopy());
+        }
+        return new BoardView(rows);
     }
 
-
-    /**
-     * Enum for storing different types of checkers pieces
-     *
-     * @author Sean Coyne 10-10-18
-     */
-    public enum PieceEnum {
-        SINGLE,
-        KING
-    }
 }

@@ -99,4 +99,19 @@ public class Space
     {
         return Objects.hash(cellIdx, piece, color);
     }
+
+
+    /**
+     * Creates a copy of the space.
+     *
+     * @return hard copy of the space
+     */
+    public Space makeCopy()
+    {
+        if(piece == null)
+        {
+            return new Space(this.cellIdx, null, this.color);
+        }
+        return new Space(this.cellIdx, piece.makeCopy(), this.color);
+    }
 }
