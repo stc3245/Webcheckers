@@ -223,4 +223,23 @@ public class MoveValidator
     }
 
 
+    /**
+     * Returns a {@link Message} corresponding to the status of the move.
+     * If it is valid {@link MoveStatus} valid will be returned. Otherwise
+     * other error statuses will be returned corresponding to the reason
+     * the move is incorrect
+     *
+     * @param board
+     * @param move
+     * @return
+     */
+    public static MoveStatus validateMoves(BoardView board, Move move, List<Move> preveous)
+    {
+        //change later
+        BoardView boardCopy = board;
+
+        MoveApplyer.applyMove(preveous, boardCopy);
+
+        return validateMove(boardCopy, move);
+    }
 }

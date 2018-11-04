@@ -171,16 +171,20 @@ public class Game
      */
     public Message validateMove(Move move)
     {
-        MoveValidator.MoveStatus status = MoveValidator.validateMove(this.board, move);
+        MoveValidator.MoveStatus status
+                = MoveValidator.validateMoves(this.board, move, currentMoves);
         switch(status)
         {
             case VALID:
                 this.currentMoves.add(move);
-                return new Message(Message.MessageEnum.info, "Valid Move");
+                return new Message(Message.MessageEnum.info,
+                        "Valid Move");
             case INVALID:
-                return new Message(Message.MessageEnum.error, "Invalid Move");
+                return new Message(Message.MessageEnum.error,
+                        "Invalid Move");
             case JUMP_REQUIRED:
-                return new Message(Message.MessageEnum.error, "You are required to make a jump move.");
+                return new Message(Message.MessageEnum.error,
+                        "You are required to make a jump move.");
         }
         return null; //shouldn't happen
     }
