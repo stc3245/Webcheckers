@@ -43,6 +43,11 @@
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
     </div>
+    <#if signedIn>
+        <div class="navigation">
+              <a href="/signout">sign out</a>
+        </div>
+    </#if>
     
   </div>
 </body>
