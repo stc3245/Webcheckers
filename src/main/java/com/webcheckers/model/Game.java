@@ -176,6 +176,7 @@ public class Game
         switch(status)
         {
             case VALID:
+                System.out.println("move added to the gang");
                 this.currentMoves.add(move);
                 return new Message(Message.MessageEnum.info,
                         "Valid Move");
@@ -185,8 +186,15 @@ public class Game
             case JUMP_REQUIRED:
                 return new Message(Message.MessageEnum.error,
                         "You are required to make a jump move.");
+            case INVALID_DOUBLE:
+                return new Message(Message.MessageEnum.error,
+                        "You can only string together jump moves in a double move.");
+            case CANT_DO_DOUBLE:
+                return new Message(Message.MessageEnum.error,
+                        "Double moves must start with a jump move.");
+            default:
+                return new Message(Message.MessageEnum.error, "Unknown server side error.");
         }
-        return null; //shouldn't happen
     }
 
 
@@ -212,16 +220,20 @@ public class Game
     public Message applyMoves()
     {
         MoveValidator.MoveStatus status = MoveApplyer.applyMove(this.currentMoves, board);
-
+        System.out.println(status);
         switch (status)
         {
             case VALID:
                 this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
                         Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
+                this.currentMoves.clear();
                 return new Message(Message.MessageEnum.info, "Move Applied");
             case INVALID:
                 return new Message(Message.MessageEnum.error, "Invalid Move");
+            case JUMP_REQUIRED:
+                return new Message(Message.MessageEnum.error, "Jump move required.");
+            default:
+                return new Message(Message.MessageEnum.error, "Unknown server side error.");
         }
-        return null; //shouldn't happen
     }
 }

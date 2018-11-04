@@ -1,11 +1,9 @@
 package com.webcheckers.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.webcheckers.model.BoardView.PieceEnum.KING;
-import static com.webcheckers.model.BoardView.PieceEnum.SINGLE;
 
 /**
  * Class used to apply the rules of checkers to validate
@@ -17,7 +15,7 @@ import static com.webcheckers.model.BoardView.PieceEnum.SINGLE;
 public class MoveValidator
 {
     /** Enum which represents the validation status of a move */
-    public enum MoveStatus{VALID, INVALID, JUMP_REQUIRED}
+    public enum MoveStatus{VALID, INVALID, JUMP_REQUIRED, INVALID_DOUBLE, CANT_DO_DOUBLE, MUST_FINISH_DOUBLE_JUMP_MOVE}
 
 
     /**
@@ -186,7 +184,6 @@ public class MoveValidator
     }
 
 
-
     /**
      * Returns a list of all valid moves for a piece to make
      *
@@ -247,13 +244,25 @@ public class MoveValidator
      * @param move move to make
      * @return
      */
-    public static MoveStatus validateMoves(BoardView board, Move move, List<Move> preveous)
+    public static MoveStatus validateMoves(BoardView board, Move move, List<Move> previous)
     {
+
         //we must make a copy in case the player decides to backup their
         //last move they made.
         BoardView boardCopy = board.makeCopy();
 
-        MoveApplyer.applyMove(preveous, boardCopy);
+        previous.forEach(m->MoveApplyer.applySingleMove(m, boardCopy));
+
+        //ensures that double moves start with a jump
+        if(!previous.isEmpty() && !isJumpMove(board, previous.get(0)))
+        {
+            return MoveStatus.CANT_DO_DOUBLE;
+        }
+
+
+        //prevents client from moving a single tile after a jump
+        if(!previous.isEmpty() && !isJumpMove(boardCopy, move))
+            return MoveStatus.INVALID_DOUBLE;
 
         return validateMove(boardCopy, move);
     }

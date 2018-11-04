@@ -39,7 +39,7 @@ public class MoveApplyer
      * @param move move to apply
      * @param board board to apply move on
      */
-    private static void applySingleMove(Move move, BoardView board)
+    public static void applySingleMove(Move move, BoardView board)
     {
         Space startSpace = board.getTile(move.getStartPosition());
 
@@ -85,13 +85,38 @@ public class MoveApplyer
     public static MoveValidator.MoveStatus applyMove(List<Move> moves, BoardView board)
     {
         if(moves.isEmpty())
-        {
             return MoveValidator.MoveStatus.INVALID;
-        }
 
-        while(!moves.isEmpty())
+        //Ensures that player does not stop half way through double jump move
+        //ie the player cannot stop part way through a multiple jump.
+        BoardView boardCopy = board.makeCopy();
+        moves.forEach(m->applySingleMove(m, boardCopy));
+        Position finalTile = moves.get(moves.size() -1).getEndPosition();
+        if(MoveValidator.isJumpMove(board, moves.get(0)) && !MoveValidator.getJumpMoves(boardCopy, finalTile).isEmpty())
+            return MoveValidator.MoveStatus.JUMP_REQUIRED;
+//        boolean jumpState = false;
+//        for(Move m: moves)
+//        {
+//            if(MoveValidator.isJumpMove(boardCopy, m))
+//            {
+//                applySingleMove(m, boardCopy);
+//                Position finalTile = m.getEndPosition();
+//                if(!MoveValidator.getJumpMoves(boardCopy, finalTile).isEmpty())
+//                {
+//                    jumpState = true;
+//                    return MoveValidator.MoveStatus.JUMP_REQUIRED;
+//                }
+//                else
+//                {
+//                    jumpState = false;
+//                }
+//            }
+//        }
+
+
+        for(Move m: moves)
         {
-            applySingleMove(moves.remove(0), board);
+            applySingleMove(m, board);
         }
 
         return MoveValidator.MoveStatus.VALID;
