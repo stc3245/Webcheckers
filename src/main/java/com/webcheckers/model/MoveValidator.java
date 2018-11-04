@@ -1,13 +1,18 @@
 package com.webcheckers.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.webcheckers.model.BoardView.PieceEnum.KING;
+import static com.webcheckers.model.BoardView.PieceEnum.SINGLE;
 
 /**
  * Class used to apply the rules of checkers to validate
  * a move
  *
  * @author Jeffery Russell 10-27-18
+ * @author Bryce Murphy 10-30-18
  */
 public class MoveValidator
 {
@@ -28,19 +33,22 @@ public class MoveValidator
 
         Space startSpace = board.getTile(startPos.getRow(), startPos.getCell());
 
-        int modifier = startSpace.getPiece().getColor() == Piece.ColorEnum.RED ?
-                -1: 1;
+        int modifier = startSpace.getPiece().getColor() == Piece.ColorEnum.RED ? -1: 1;
 
-        Position p1 = new Position(startPos.getRow() + modifier, startPos.getCell() + 1);
-        Position p2 = new Position(startPos.getRow() + modifier, startPos.getCell() - 1);
+        ArrayList<Position> positions = new ArrayList<>();
 
-        if(onBoard(p1) && !board.isOccupied(p1))
-        {
-            validPositions.add(p1);
+        positions.add(new Position(startPos.getRow() + modifier, startPos.getCell() + 1));
+        positions.add(new Position(startPos.getRow() + modifier, startPos.getCell() - 1));
+
+        if (startSpace.getPiece().getType() == KING) {
+            positions.add(new Position(startPos.getRow() - modifier, startPos.getCell() + 1));
+            positions.add(new Position(startPos.getRow() - modifier, startPos.getCell() - 1));
         }
-        if(onBoard(p2) && !board.isOccupied(p2))
-        {
-            validPositions.add(p2);
+
+        for (Position p: positions) {
+            if(onBoard(p) && !board.isOccupied(p)) {
+                validPositions.add(p);
+            }
         }
 
         return validPositions;
@@ -92,23 +100,31 @@ public class MoveValidator
 
         Space startSpace = board.getTile(startPos.getRow(), startPos.getCell());
         Piece.ColorEnum yourColor = startSpace.getPiece().getColor();
-        int modifier = yourColor== Piece.ColorEnum.RED ?
-                -1: 1;
-        Position p1 = new Position(startPos.getRow() + (2* modifier), startPos.getCell() + 2);
-        Position p2 = new Position(startPos.getRow() + (2* modifier), startPos.getCell() - 2);
+        int modifier = yourColor == Piece.ColorEnum.RED ? -1: 1;
 
+        ArrayList<Position> positions = new ArrayList<>();
+        ArrayList<Position> between = new ArrayList<>();
 
-        Position between1 = new Position(startPos.getRow() + modifier, startPos.getCell() + 1);
-        Position between2 = new Position(startPos.getRow() + modifier, startPos.getCell() - 1);
+        positions.add(new Position(startPos.getRow() + (2* modifier), startPos.getCell() + 2));
+        positions.add(new Position(startPos.getRow() + (2* modifier), startPos.getCell() - 2));
 
-        if(onBoard(p1) && !board.isOccupied(p1) && hasOpponent(board, yourColor, between1))
-        {
-            validPositions.add(p1);
+        between.add(new Position(startPos.getRow() + modifier, startPos.getCell() + 1));
+        between.add(new Position(startPos.getRow() + modifier, startPos.getCell() - 1));
+
+        if (startSpace.getPiece().getType() == KING) {
+            positions.add(new Position(startPos.getRow() - (2* modifier), startPos.getCell() + 2));
+            positions.add(new Position(startPos.getRow() - (2* modifier), startPos.getCell() - 2));
+
+            between.add(new Position(startPos.getRow() - modifier, startPos.getCell() + 1));
+            between.add(new Position(startPos.getRow() - modifier, startPos.getCell() - 1));
         }
 
-        if(onBoard(p2) && !board.isOccupied(p2) && hasOpponent(board, yourColor, between2))
-        {
-            validPositions.add(p2);
+        int pos = 0;
+        for (Position p: positions) {
+            if(onBoard(p) && !board.isOccupied(p) && hasOpponent(board, yourColor, between.get(pos))) {
+                validPositions.add(p);
+            }
+            pos++;
         }
 
         return validPositions;

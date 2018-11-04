@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Used to store the status of an active game
- * 
+ *
  * @author Jeffery Russell 10-10-18
  */
 public class Game
@@ -33,7 +33,7 @@ public class Game
 
 
     /**
-     * Constructs a new game with two players 
+     * Constructs a new game with two players
      * 
      * @param redPlayer red player
      * @param whitePlayer white player
