@@ -127,19 +127,19 @@ public class BoardGenerator {
                     bv.getTile(row, col).setPiece(null);
                     break;
                 case 'r':
-                    pc = new Piece(BoardView.PieceEnum.SINGLE, Piece.ColorEnum.RED);
+                    pc = new Piece(Piece.PieceEnum.SINGLE, Piece.ColorEnum.RED);
                     bv.getTile(row, col).setPiece(pc);
                     break;
                 case 'R':
-                    pc = new Piece(BoardView.PieceEnum.KING, Piece.ColorEnum.RED);
+                    pc = new Piece(Piece.PieceEnum.KING, Piece.ColorEnum.RED);
                     bv.getTile(row, col).setPiece(pc);
                     break;
                 case 'w':
-                    pc = new Piece(BoardView.PieceEnum.SINGLE, Piece.ColorEnum.WHITE);
+                    pc = new Piece(Piece.PieceEnum.SINGLE, Piece.ColorEnum.WHITE);
                     bv.getTile(row, col).setPiece(pc);
                     break;
                 case 'W':
-                    pc = new Piece(BoardView.PieceEnum.KING, Piece.ColorEnum.WHITE);
+                    pc = new Piece(Piece.PieceEnum.KING, Piece.ColorEnum.WHITE);
                     bv.getTile(row, col).setPiece(pc);
                     break;
                 default:

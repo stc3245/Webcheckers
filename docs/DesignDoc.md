@@ -224,6 +224,7 @@ Currently the following stories are passing all their acceptance tests:
 - Single Move
 - Login
 - Start Game
+- Sign Out
 
 Notable Issues:
 - None at the moment.
@@ -281,5 +282,11 @@ public void testValidateMove()
 With good design using dependency inversion, we are able to inject a checkers board
 which is at a current state either into our "logic" classes or even our Game class 
 and test very niche cases which would otherwise be close to impossible to test.
+Without our board generator, it would be nearly impossible if not close to impossible
+to unit test for tricky senarios like when happens when you are in the middle of a
+jump move.
 
-This helped us hit every branch when running our unit tests.
+This helped us hit every branch when running our unit tests in the model tier.
+
+![model tier test coverage](TestCoverageModelTier.png)
+
