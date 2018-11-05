@@ -1,13 +1,18 @@
 # PROJECT Home
 
-Welcome to the PROJECT Project!
+Welcome to the Web Checkers Project!
 
 ## Team
 
-* MEMBER1
-* MEMBER2
+* Team name: null
+* Team members
+  * Sean Coyne
+  * Jeffery Russell
+  * Bryce Murphy
+  * Max Gusinov
+  * Perry Deng
 
-## [Design Documentation](DesignDoc)
+## [Design Documentation](DesignDoc.md)
 
 Click above for details of the PROJECT design documentation.
 

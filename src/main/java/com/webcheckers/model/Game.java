@@ -2,8 +2,9 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 /**
  * Used to store the status of an active game
@@ -28,7 +29,7 @@ public class Game
     private BoardView.ViewModeEnum viewMode;
 
     /** Queue of current moves the player wants to make */
-    private Queue<Move> currentMoves;
+    private List<Move> currentMoves;
 
 
     /**
@@ -43,7 +44,7 @@ public class Game
         this.board = new BoardView();
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
-        this.currentMoves = new LinkedList<>();
+        this.currentMoves = new ArrayList<>();
     }
 
 
@@ -169,18 +170,29 @@ public class Game
      */
     public Message validateMove(Move move)
     {
-        MoveValidator.MoveStatus status = MoveValidator.validateMove(this.board, move);
+        MoveValidator.MoveStatus status
+                = MoveValidator.validateMoves(this.board, move, currentMoves);
         switch(status)
         {
             case VALID:
                 this.currentMoves.add(move);
-                return new Message(Message.MessageEnum.info, "Valid Move");
+                return new Message(Message.MessageEnum.info,
+                        "Valid Move");
             case INVALID:
-                return new Message(Message.MessageEnum.error, "Invalid Move");
+                return new Message(Message.MessageEnum.error,
+                        "Invalid Move");
             case JUMP_REQUIRED:
-                return new Message(Message.MessageEnum.error, "You are required to make a jump move.");
+                return new Message(Message.MessageEnum.error,
+                        "You are required to make a jump move.");
+            case INVALID_DOUBLE:
+                return new Message(Message.MessageEnum.error,
+                        "You can only string together jump moves in a double move.");
+            case CANT_DO_DOUBLE:
+                return new Message(Message.MessageEnum.error,
+                        "Double moves must start with a jump move.");
+            default:
+                return new Message(Message.MessageEnum.error, "Unknown server side error.");
         }
-        return null; //shouldn't happen
     }
 
 
@@ -191,7 +203,8 @@ public class Game
      */
     public void backupMoves()
     {
-        this.currentMoves.clear();
+        if(!currentMoves.isEmpty())
+            this.currentMoves.remove(currentMoves.size() -1);
     }
 
 
@@ -205,16 +218,19 @@ public class Game
     public Message applyMoves()
     {
         MoveValidator.MoveStatus status = MoveApplyer.applyMove(this.currentMoves, board);
-
         switch (status)
         {
             case VALID:
                 this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
                         Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
+                this.currentMoves.clear();
                 return new Message(Message.MessageEnum.info, "Move Applied");
             case INVALID:
                 return new Message(Message.MessageEnum.error, "Invalid Move");
+            case JUMP_REQUIRED:
+                return new Message(Message.MessageEnum.error, "Jump move required.");
+            default:
+                return new Message(Message.MessageEnum.error, "Unknown server side error.");
         }
-        return null; //shouldn't happen
     }
 }

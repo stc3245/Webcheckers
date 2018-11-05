@@ -3,6 +3,7 @@ package com.webcheckers.model;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -46,7 +47,7 @@ public class KingPlayerTest {
         Move singleMove = new Move(new Position(1,1),
                 new Position(0,2));
 
-        Queue<Move> moves = new LinkedList<>();
+        ArrayList<Move> moves = new ArrayList<>();
         moves.add(singleMove);
 
         MoveApplyer.applyMove(moves, board);
@@ -79,7 +80,7 @@ public class KingPlayerTest {
         Move singleMove = new Move(new Position(6,4),
                 new Position(7,3));
 
-        Queue<Move> moves = new LinkedList<>();
+        ArrayList<Move> moves = new ArrayList<>();
         moves.add(singleMove);
 
         MoveApplyer.applyMove(moves, board);
@@ -140,7 +141,7 @@ public class KingPlayerTest {
         Move jumpMove = new Move(new Position(0,2),
                 new Position(2,4));
 
-        Queue<Move> moves = new LinkedList<>();
+        List<Move> moves = new ArrayList<>();
         moves.add(jumpMove);
 
         MoveApplyer.applyMove(moves, board);
@@ -175,7 +176,7 @@ public class KingPlayerTest {
         Move jumpMove = new Move(new Position(5,3),
                 new Position(3,1));
 
-        Queue<Move> moves = new LinkedList<>();
+        List<Move> moves = new ArrayList<>();
         moves.add(jumpMove);
 
         MoveApplyer.applyMove(moves, board);

@@ -74,8 +74,8 @@ public class PostSubmitTurn implements Route
 
         Game game = lobby.getGame(player.getName());
 
-        game.applyMoves();
+        Message msg = game.applyMoves();
 
-        return gson.toJson(new Message(Message.MessageEnum.info, ""));
+        return gson.toJson(msg);
     }
 }
