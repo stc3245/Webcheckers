@@ -1,6 +1,5 @@
 package com.webcheckers.model;
 
-
 /**
  * Represents a move within the webcheckers game
  *
