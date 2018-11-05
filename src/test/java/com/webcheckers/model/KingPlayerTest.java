@@ -17,9 +17,9 @@ public class KingPlayerTest {
     // tests that promote turns a single piece into a king
     @Test
     public void testPromote() {
-        Piece temp = new Piece(BoardView.PieceEnum.SINGLE, Piece.ColorEnum.RED);
+        Piece temp = new Piece(Piece.PieceEnum.SINGLE, Piece.ColorEnum.RED);
         temp.promote();
-        assertTrue(temp.getType() == BoardView.PieceEnum.KING);
+        assertTrue(temp.getType() == Piece.PieceEnum.KING);
     }
 
     // tests that the single red piece is actually promoted when it reaches end of board
@@ -51,7 +51,7 @@ public class KingPlayerTest {
 
         MoveApplyer.applyMove(moves, board);
         assertSame(board.getTile(singleMove.getEndPosition()).getPiece().getType(),
-                BoardView.PieceEnum.KING);
+                Piece.PieceEnum.KING);
 
     }
 
@@ -84,7 +84,7 @@ public class KingPlayerTest {
 
         MoveApplyer.applyMove(moves, board);
         assertSame(board.getTile(singleMove.getEndPosition()).getPiece().getType(),
-                BoardView.PieceEnum.KING);
+                Piece.PieceEnum.KING);
 
     }
 

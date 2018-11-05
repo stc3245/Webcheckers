@@ -45,7 +45,7 @@ public class Row implements Iterable<Space>
         Piece tempPiece;
         if(index != 3 && index != 4)
         {
-            tempPiece =  new Piece(BoardView.PieceEnum.SINGLE, selectedPlayerColor);
+            tempPiece =  new Piece(Piece.PieceEnum.SINGLE, selectedPlayerColor);
         }
         else
         {

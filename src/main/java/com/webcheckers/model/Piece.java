@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Piece 
 {
     /** Type of checkers piece */
-    private BoardView.PieceEnum type;
+    private PieceEnum type;
 
     /** Color of the piece */
     private ColorEnum color;
@@ -24,7 +24,7 @@ public class Piece
      * @param type
      * @param color
      */
-    public Piece(BoardView.PieceEnum type, ColorEnum color)
+    public Piece(PieceEnum type, ColorEnum color)
     {
         this.type = type;
         this.color = color;
@@ -36,7 +36,7 @@ public class Piece
      *
      * @return PieceEnum - type of piece
      */
-    public BoardView.PieceEnum getType()
+    public PieceEnum getType()
     {
         return type;
     }
@@ -53,7 +53,7 @@ public class Piece
 
     // promote the player to king
     public void promote() {
-        this.type = BoardView.PieceEnum.KING;
+        this.type = PieceEnum.KING;
     }
 
     public Piece makeCopy() {
@@ -71,6 +71,15 @@ public class Piece
         WHITE
     }
 
+    /**
+     * Enum for storing different types of checkers pieces
+     *
+     * @author Sean Coyne 10-10-18
+     */
+    public enum PieceEnum {
+        SINGLE,
+        KING
+    }
 
     @Override
     public boolean equals(Object o)

@@ -3,7 +3,7 @@ package com.webcheckers.model;
 /* Importing necessary elements from Junit */
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.webcheckers.model.BoardView.PieceEnum;
+import com.webcheckers.model.Piece.PieceEnum;
 import com.webcheckers.model.Piece.ColorEnum;
 
 import org.junit.jupiter.api.Tag;

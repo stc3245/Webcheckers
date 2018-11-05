@@ -4,8 +4,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.webcheckers.model.BoardView.PieceEnum.KING;
-import static com.webcheckers.model.BoardView.PieceEnum.SINGLE;
+import static com.webcheckers.model.Piece.PieceEnum.KING;
+import static com.webcheckers.model.Piece.PieceEnum.SINGLE;
 
 /**
  * Class used to apply the rules of checkers to validate
@@ -166,7 +166,7 @@ public class MoveValidator
                     Piece piece = space.getPiece();
 
                     if ((piece.getColor() == currentColor)
-                            && (piece.getType() == BoardView.PieceEnum.SINGLE)) {
+                            && (piece.getType() == Piece.PieceEnum.SINGLE)) {
 
                         Position startPosition =
                                 new Position(row.getIndex(), space.getCellIdx());
