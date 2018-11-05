@@ -31,7 +31,12 @@ public class Game
     /** Queue of current moves the player wants to make */
     private List<Move> currentMoves;
 
+    /** Current state of game */
+    private GameState currState;
 
+    enum GameState {
+        GameInProgress, RedLost, WhiteLost, RedResigned, WhiteResigned
+    }
     /**
      * Constructs a new game with two players
      * @param redPlayer red player
@@ -39,6 +44,7 @@ public class Game
      */
     public Game(Player redPlayer, Player whitePlayer)
     {
+        this.currState = GameState.GameInProgress;
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.board = new BoardView();
@@ -141,6 +147,20 @@ public class Game
         return getBoard().getInverted();
     }
 
+    /**
+     * getter for current state(currState)
+     * @return the current state
+     */
+    public GameState getGameState() {
+        return this.currState;
+    }
+
+    /**
+     * setter for the current state
+     */
+    public void setGameState(GameState currState) {
+        this.currState = currState;
+    }
 
     /**
      * Checks to see if it is the current player's turn

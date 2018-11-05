@@ -145,4 +145,10 @@ public class PlayerLobby
                 username.length() !=
                         username.replaceAll(" ", "").length());
     }
+
+    public Game endGame() {
+        Game g = this.getGame(player1.getName());
+        this.activeGames.remove(g);
+        return g;
+    }
 }

@@ -71,8 +71,8 @@ public class PostResignGame implements Route
             return gson.toJson(msg);
         }
 
-        Game game = lobby.getGame(player.getName());
+        Message endMsg = new Message(Message.MessageEnum.info, "true");
 
-        return null;
+        return gson.toJson(endMsg);
     }
 }
