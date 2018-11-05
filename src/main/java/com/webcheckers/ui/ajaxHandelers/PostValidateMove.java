@@ -2,9 +2,6 @@ package com.webcheckers.ui.ajaxHandelers;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.webcheckers.ui.GetHomeRoute;
 import spark.Request;
 import spark.Response;
@@ -81,13 +78,10 @@ public class PostValidateMove implements Route
         Game game = lobby.getGame(player.getName());
 
         final String clientJSON = request.body();
-        System.out.println(clientJSON);
 
         final Move move = gson.fromJson(clientJSON, Move.class);
 
-
         return gson.toJson(game.validateMove(move));
-
     }
 
 }

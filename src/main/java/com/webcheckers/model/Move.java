@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 
+
 /**
  * Represents a move within the webcheckers game
  *
@@ -13,7 +14,6 @@ public class Move
 
     /** End position of a move */
     private Position end;
-
 
     /**
      * Simple constructor which takes in a start and

@@ -1,11 +1,13 @@
 package com.webcheckers.appl;
 
+import com.webcheckers.model.BoardView;
+
 import java.util.Objects;
 
 /**
  * Represents a player within the webcheckers game
  * 
- * author: Perry Deng, Bryce Murphy
+ * @author: Perry Deng, Bryce Murphy
  * @author Sean Coyne, Jeffery Russell 10-10-18
  */
 public class Player 
@@ -13,13 +15,12 @@ public class Player
     /** Stores name of player */
     private String name;
 
-
     /**
      * constructor for Player class
      */
-    public Player(String username) 
+    public Player(String username)
     {
-        name = username;
+        this.name = username;
     }
 
 
