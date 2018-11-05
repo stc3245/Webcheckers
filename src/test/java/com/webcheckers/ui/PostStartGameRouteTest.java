@@ -93,7 +93,7 @@ public class PostStartGameRouteTest {
         vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
         vm.put(GetHomeRoute.WELCOME_MSG_ATTR,
                 String.format(GetHomeRoute.WELCOME_MSG, player.getName()));
-        vm.put(GetHomeRoute.PLAYER_LIST, lobby.getOtherPlayers(player.getName());
+        vm.put(GetHomeRoute.PLAYER_LIST, lobby.getOtherPlayers(player.getName()));
         vm.put(GetHomeRoute.USER_NUM_ATTR, String.format(GetHomeRoute.USER_NUM,
                 lobby.getOnlinePlayers().size()));
         vm.put(GetHomeRoute.ERROR_MSG, "You can't play with that player.");
