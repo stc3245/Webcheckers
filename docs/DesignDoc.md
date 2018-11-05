@@ -152,6 +152,12 @@ us keep the business logic in the model tier.
 
 ![UML Diagram](SWEN%20261%20-%20UI%20Teir.png)
 
+#### Client side State Diagram
+This is the state diagram from the [SWEN](http://www.se.rit.edu/~swen-261/projects/WebCheckers/Sprint2_info.html) 
+website. I am including it here to illustrate how the client side code integrates with the ajax
+handlers which we wrote on the server side. 
+![Client Side State Diagram](GameView%20state%20model.png)
+
 
 ### Application Tier
 

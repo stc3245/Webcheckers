@@ -3,16 +3,19 @@ package com.webcheckers.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.webcheckers.model.BoardView.PieceEnum.KING;
+
 /**
  * Class used to apply the rules of checkers to validate
  * a move
  *
  * @author Jeffery Russell 10-27-18
+ * @author Bryce Murphy 10-30-18
  */
 public class MoveValidator
 {
     /** Enum which represents the validation status of a move */
-    public enum MoveStatus{VALID, INVALID, JUMP_REQUIRED}
+    public enum MoveStatus{VALID, INVALID, JUMP_REQUIRED, INVALID_DOUBLE, CANT_DO_DOUBLE, MUST_FINISH_DOUBLE_JUMP_MOVE}
 
 
     /**
@@ -28,19 +31,22 @@ public class MoveValidator
 
         Space startSpace = board.getTile(startPos.getRow(), startPos.getCell());
 
-        int modifier = startSpace.getPiece().getColor() == Piece.ColorEnum.RED ?
-                -1: 1;
+        int modifier = startSpace.getPiece().getColor() == Piece.ColorEnum.RED ? -1: 1;
 
-        Position p1 = new Position(startPos.getRow() + modifier, startPos.getCell() + 1);
-        Position p2 = new Position(startPos.getRow() + modifier, startPos.getCell() - 1);
+        ArrayList<Position> positions = new ArrayList<>();
 
-        if(onBoard(p1) && !board.isOccupied(p1))
-        {
-            validPositions.add(p1);
+        positions.add(new Position(startPos.getRow() + modifier, startPos.getCell() + 1));
+        positions.add(new Position(startPos.getRow() + modifier, startPos.getCell() - 1));
+
+        if (startSpace.getPiece().getType() == KING) {
+            positions.add(new Position(startPos.getRow() - modifier, startPos.getCell() + 1));
+            positions.add(new Position(startPos.getRow() - modifier, startPos.getCell() - 1));
         }
-        if(onBoard(p2) && !board.isOccupied(p2))
-        {
-            validPositions.add(p2);
+
+        for (Position p: positions) {
+            if(onBoard(p) && !board.isOccupied(p)) {
+                validPositions.add(p);
+            }
         }
 
         return validPositions;
@@ -92,23 +98,31 @@ public class MoveValidator
 
         Space startSpace = board.getTile(startPos.getRow(), startPos.getCell());
         Piece.ColorEnum yourColor = startSpace.getPiece().getColor();
-        int modifier = yourColor== Piece.ColorEnum.RED ?
-                -1: 1;
-        Position p1 = new Position(startPos.getRow() + (2* modifier), startPos.getCell() + 2);
-        Position p2 = new Position(startPos.getRow() + (2* modifier), startPos.getCell() - 2);
+        int modifier = yourColor == Piece.ColorEnum.RED ? -1: 1;
 
+        ArrayList<Position> positions = new ArrayList<>();
+        ArrayList<Position> between = new ArrayList<>();
 
-        Position between1 = new Position(startPos.getRow() + modifier, startPos.getCell() + 1);
-        Position between2 = new Position(startPos.getRow() + modifier, startPos.getCell() - 1);
+        positions.add(new Position(startPos.getRow() + (2* modifier), startPos.getCell() + 2));
+        positions.add(new Position(startPos.getRow() + (2* modifier), startPos.getCell() - 2));
 
-        if(onBoard(p1) && !board.isOccupied(p1) && hasOpponent(board, yourColor, between1))
-        {
-            validPositions.add(p1);
+        between.add(new Position(startPos.getRow() + modifier, startPos.getCell() + 1));
+        between.add(new Position(startPos.getRow() + modifier, startPos.getCell() - 1));
+
+        if (startSpace.getPiece().getType() == KING) {
+            positions.add(new Position(startPos.getRow() - (2* modifier), startPos.getCell() + 2));
+            positions.add(new Position(startPos.getRow() - (2* modifier), startPos.getCell() - 2));
+
+            between.add(new Position(startPos.getRow() - modifier, startPos.getCell() + 1));
+            between.add(new Position(startPos.getRow() - modifier, startPos.getCell() - 1));
         }
 
-        if(onBoard(p2) && !board.isOccupied(p2) && hasOpponent(board, yourColor, between2))
-        {
-            validPositions.add(p2);
+        int pos = 0;
+        for (Position p: positions) {
+            if(onBoard(p) && !board.isOccupied(p) && hasOpponent(board, yourColor, between.get(pos))) {
+                validPositions.add(p);
+            }
+            pos++;
         }
 
         return validPositions;
@@ -170,7 +184,6 @@ public class MoveValidator
     }
 
 
-
     /**
      * Returns a list of all valid moves for a piece to make
      *
@@ -223,4 +236,34 @@ public class MoveValidator
     }
 
 
+    /**
+     * Validates a queue of moves. This allows for the player
+     * to make a double jump move.
+     *
+     * @param board current game board
+     * @param move move to make
+     * @return
+     */
+    public static MoveStatus validateMoves(BoardView board, Move move, List<Move> previous)
+    {
+
+        //we must make a copy in case the player decides to backup their
+        //last move they made.
+        BoardView boardCopy = board.makeCopy();
+
+        previous.forEach(m->MoveApplyer.applySingleMove(m, boardCopy));
+
+        //ensures that double moves start with a jump
+        if(!previous.isEmpty() && !isJumpMove(board, previous.get(0)))
+        {
+            return MoveStatus.CANT_DO_DOUBLE;
+        }
+
+
+        //prevents client from moving a single tile after a jump
+        if(!previous.isEmpty() && !isJumpMove(boardCopy, move))
+            return MoveStatus.INVALID_DOUBLE;
+
+        return validateMove(boardCopy, move);
+    }
 }

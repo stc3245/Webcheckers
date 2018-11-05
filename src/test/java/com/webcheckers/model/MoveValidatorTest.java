@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -284,6 +285,90 @@ public class MoveValidatorTest
         assertFalse(MoveValidator.onBoard(new Position(0, -2)));
         assertFalse(MoveValidator.onBoard(new Position(8, 8)));
         assertFalse(MoveValidator.onBoard(new Position(8, 0)));
+    }
+
+
+    /**
+     * Tests to make sure that you can't make a non-jump move
+     * when you are half way through a jump move.
+     */
+    @Test
+    public void testValidateMidJumpMoveInvalid()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  r  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  *  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Move randomMove = new Move(new Position(1,1),
+                new Position(3,3));
+
+        List<Move> moves = new ArrayList<>();
+        moves.add(randomMove);
+
+        Move sillyMove = new Move(new Position(3,3),
+                new Position(4,4));
+
+        MoveValidator.MoveStatus stat = null;
+        try
+        {
+            stat = MoveValidator.validateMoves(board, sillyMove, moves);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        assertEquals(stat, MoveValidator.MoveStatus.INVALID_DOUBLE);
+
+    }
+
+
+    @Test
+    public void ensureDoubleMoveStartsWithJump()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Move randomMove = new Move(new Position(1,1),
+                new Position(2,2));
+
+        List<Move> moves = new ArrayList<>();
+        moves.add(randomMove);
+
+        Move sillyMove = new Move(new Position(2,2),
+                new Position(4,4));
+
+        MoveValidator.MoveStatus stat = MoveValidator
+                .validateMoves(board, sillyMove, moves);
+
+        assertEquals(stat, MoveValidator.MoveStatus.CANT_DO_DOUBLE);
     }
 
 }

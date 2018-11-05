@@ -1,14 +1,13 @@
 package com.webcheckers.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Class used to apply a queue of moves to a
  * checkers board
  *
  * @author Jeffery Russell 10-28-18
+ * @author Bryce Murphy 10-30-18
  */
 public class MoveApplyer
 {
@@ -27,7 +26,8 @@ public class MoveApplyer
 
         if(Math.abs(rowDiff) != 1 && Math.abs(colDiff) != 1)
         {
-            return new Position(p2.getRow() + (rowDiff/2), p2.getCell() + (colDiff/2));
+            return new Position(p2.getRow() + (rowDiff/2),
+                    p2.getCell() + (colDiff/2));
         }
         return null;
     }
@@ -39,7 +39,7 @@ public class MoveApplyer
      * @param move move to apply
      * @param board board to apply move on
      */
-    private static void applySingleMove(Move move, BoardView board)
+    public static void applySingleMove(Move move, BoardView board)
     {
         Space startSpace = board.getTile(move.getStartPosition());
 
@@ -55,6 +55,23 @@ public class MoveApplyer
 
         finishSpace.setPiece(startSpace.getPiece());
         startSpace.setPiece(null);
+
+        // promotes the piece to king if they reach the end of board
+        if (finishSpace.getPiece().getType() == BoardView.PieceEnum.SINGLE) {
+            switch (finishSpace.getPiece().getColor()) {
+                case RED:
+                    if (move.getEndPosition().getRow() == 0) {
+                        finishSpace.getPiece().promote();
+                    }
+                    break;
+                case WHITE:
+                    if (move.getEndPosition().getRow() == 7) {
+                        finishSpace.getPiece().promote();
+                    }
+                    break;
+            }
+        }
+
     }
 
 
@@ -65,16 +82,23 @@ public class MoveApplyer
      * @param board checkers board to apply moves to
      * @return Status to return to the client
      */
-    public static MoveValidator.MoveStatus applyMove(Queue<Move> moves, BoardView board)
+    public static MoveValidator.MoveStatus applyMove(List<Move> moves, BoardView board)
     {
         if(moves.isEmpty())
-        {
             return MoveValidator.MoveStatus.INVALID;
-        }
 
-        while(!moves.isEmpty())
+        //Ensures that player does not stop half way through double jump move
+        //ie the player cannot stop part way through a multiple jump.
+        BoardView boardCopy = board.makeCopy();
+        moves.forEach(m->applySingleMove(m, boardCopy));
+        Position finalTile = moves.get(moves.size() -1).getEndPosition();
+        if(MoveValidator.isJumpMove(board, moves.get(0)) &&
+                !MoveValidator.getJumpMoves(boardCopy, finalTile).isEmpty())
+            return MoveValidator.MoveStatus.JUMP_REQUIRED;
+
+        for(Move m: moves)
         {
-            applySingleMove(moves.remove(), board);
+            applySingleMove(m, board);
         }
 
         return MoveValidator.MoveStatus.VALID;

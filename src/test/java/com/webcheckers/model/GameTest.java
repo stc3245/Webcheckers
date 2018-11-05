@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Jeffery Russell 11-1-18
  */
@@ -189,6 +192,25 @@ public class GameTest
 
 
     /**
+     * Tests to see if an error is thrown when backup moves is empty
+     */
+    @Test
+    public void testBackupWithNoMoves()
+    {
+        Game cut = new Game(new Player(name1), new Player(name2));
+
+        try
+        {
+            cut.backupMoves();
+        }
+        catch (Exception e)
+        {
+            assertTrue(false);
+        }
+    }
+
+
+    /**
      * Tests the game's ability to apply valid moves of the current player to
      * the game
      */
@@ -225,6 +247,41 @@ public class GameTest
         assertFalse(cut.getBoard().isOccupied(new Position(3,3)));
 
         assertTrue(cut.getBoard().isOccupied(new Position(2,4)));
+    }
+
+
+    /**
+     * Tests that when submit turn is requested and the player has not
+     * done a full double jump move when one is available, a error
+     * message is returned.
+     */
+    @Test
+    public void testJumpMovesRequiredInDoubleMove()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  w  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  r  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  r  @  *  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+        Move move = new Move(new Position(0,0),
+                new Position(2,2));
+        cut.validateMove(move);
+
+        Message msg = cut.applyMoves();
+        assertEquals(msg.getType(), Message.MessageEnum.error);
     }
 
 }
