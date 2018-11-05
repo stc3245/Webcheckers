@@ -32,8 +32,7 @@ public class Game
 
 
     /**
-     * Constructs a new game with two players 
-     * 
+     * Constructs a new game with two players
      * @param redPlayer red player
      * @param whitePlayer white player
      */

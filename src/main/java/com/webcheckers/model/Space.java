@@ -6,9 +6,8 @@ import java.util.Objects;
  * Represents a space on the board within
  * the webcheckers game
  *
- * @author Sean Coyne 10-14-18
+ * @author Sean Coyne, Jeffery Russell 10-14-18
  */
-
 public class Space
 {
 
@@ -55,11 +54,8 @@ public class Space
      */
     public boolean isValid()
     {
-        if((this.color == Piece.ColorEnum.RED) && (this.piece == null)){
-            return true;
-        }
-        return false;
-
+        return this.color == Piece.ColorEnum.RED
+                && this.piece == null;
     }
 
 
