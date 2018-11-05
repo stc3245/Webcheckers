@@ -81,7 +81,6 @@ public class GetSignOutRoute implements Route {
         {
             playerLobby.terminateSession(player.getName());
             session.attribute(GetHomeRoute.PLAYERSERVICES_KEY, null);
-            //already logged in
             response.redirect(WebServer.HOME_URL);
             return null;
         }
