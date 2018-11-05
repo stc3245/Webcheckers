@@ -187,6 +187,16 @@ public class GameTest
 
         assertTrue(cut.getBoard().isOccupied(new Position(3,3)));
 
+        assertFalse(cut.getBoard().isOccupied(new Position(1,5)));
+
+        Move correctMove = new Move(new Position(3,3),
+                new Position(2,4));
+
+        cut.validateMove(correctMove);
+
+        cut.backupMoves();
+        cut.applyMoves();
+        assertTrue(cut.getBoard().isOccupied(new Position(3,3)));
         assertFalse(cut.getBoard().isOccupied(new Position(2,4)));
     }
 
@@ -244,6 +254,9 @@ public class GameTest
 
         cut.applyMoves();
 
+        //tests to see if turn has changed
+        assertFalse(cut.isCurrentPlayer(new Player(name1)));
+
         assertFalse(cut.getBoard().isOccupied(new Position(3,3)));
 
         assertTrue(cut.getBoard().isOccupied(new Position(2,4)));
@@ -284,4 +297,114 @@ public class GameTest
         assertEquals(msg.getType(), Message.MessageEnum.error);
     }
 
+
+    /**
+     * Makes sure that the get player's board view works properly
+     */
+    @Test
+    public void getPlayersBoardTest()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  R  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        assert(cut.getPlayersBoard(new Player(name1)).getTile(7,7)
+                .getPiece().equals(new Piece(Piece.PieceEnum.KING, Piece.ColorEnum.RED)));
+
+        assert(cut.getPlayersBoard(new Player(name2))
+                .getTile(0,0).getPiece().equals(new Piece(Piece.PieceEnum.KING, Piece.ColorEnum.RED)));
+    }
+
+
+    /**
+     * Ensures that all double moves must start with a jump move
+     */
+    @Test
+    public void ensureDoubleMoveStartsWithJump()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        Move randomMove = new Move(new Position(1,1),
+                new Position(2,2));
+
+        cut.validateMove(randomMove);
+
+        Move sillyMove = new Move(new Position(2,2),
+                new Position(4,4));
+
+        Message message = cut.validateMove(sillyMove);
+
+        assertEquals(message.getType(), Message.MessageEnum.error);
+    }
+
+
+    /**
+     * Ensures that a player is unable to make a single move
+     * in the middle of a jump move.
+     */
+    @Test
+    public void testInvalidMiddleJumpMove()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  w  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  r  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  *  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        Move randomMove = new Move(new Position(1,1),
+                new Position(3,3));
+
+        cut.validateMove(randomMove);
+
+        Move sillyMove = new Move(new Position(3,3),
+                new Position(4,4));
+
+        Message message = cut.validateMove(sillyMove);
+
+        assertEquals(message.getType(), Message.MessageEnum.error);
+    }
 }
