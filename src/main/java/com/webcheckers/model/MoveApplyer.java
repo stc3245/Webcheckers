@@ -57,7 +57,7 @@ public class MoveApplyer
         startSpace.setPiece(null);
 
         // promotes the piece to king if they reach the end of board
-        if (finishSpace.getPiece().getType() == BoardView.PieceEnum.SINGLE) {
+        if (finishSpace.getPiece().getType() == Piece.PieceEnum.SINGLE) {
             switch (finishSpace.getPiece().getColor()) {
                 case RED:
                     if (move.getEndPosition().getRow() == 0) {

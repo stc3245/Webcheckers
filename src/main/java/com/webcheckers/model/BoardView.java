@@ -24,18 +24,6 @@ public class BoardView implements Iterable<Row>
         REPLAY
     }
 
-
-    /**
-     * Enum for storing different types of checkers pieces
-     *
-     */
-    public enum PieceEnum
-    {
-        SINGLE,
-        KING
-    }
-
-
     /** List of rows */
     private List<Row> board;
 
