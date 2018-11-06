@@ -26,6 +26,8 @@ public class PostEndGameRoute implements Route {
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
 
+    static final String OPPONENT_ATTR = "opponentName";
+
     /**
      * Constructor for PostEndGameRoute
      */

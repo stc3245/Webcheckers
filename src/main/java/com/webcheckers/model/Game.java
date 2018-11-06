@@ -34,9 +34,10 @@ public class Game
     /** Current state of game */
     private GameState currState;
 
-    enum GameState {
+    public enum GameState {
         GameInProgress, RedLost, WhiteLost, RedResigned, WhiteResigned
     }
+
     /**
      * Constructs a new game with two players
      * @param redPlayer red player
@@ -251,6 +252,25 @@ public class Game
                 return new Message(Message.MessageEnum.error, "Jump move required.");
             default:
                 return new Message(Message.MessageEnum.error, "Unknown server side error.");
+        }
+    }
+
+    public Message endGame(GameState state) {
+        switch (state) {
+            case RedLost:
+                currState = GameState.RedLost;
+                return new Message(Message.MessageEnum.info, "Red Lost.");
+            case WhiteLost:
+                currState = GameState.WhiteLost;
+                return new Message(Message.MessageEnum.info, "White Lost.");
+            case RedResigned:
+                currState = GameState.RedResigned;
+                return new Message(Message.MessageEnum.info, "Red Resigned.");
+            case WhiteResigned:
+                currState = GameState.WhiteResigned;
+                return new Message(Message.MessageEnum.info, "White Resigned.");
+            default:
+                return new Message(Message.MessageEnum.error, "Invalid request.");
         }
     }
 }

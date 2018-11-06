@@ -18,6 +18,7 @@ import com.webcheckers.appl.*;
  *
  * @author <a href='mailto:xxd9704@rit.edu'>Perry Deng</a>
  * @author Jeffery Russell 10-13-18
+ * @author Bryce Murphy 11-5-18
  */
 public class PlayerLobby
 {
@@ -72,6 +73,12 @@ public class PlayerLobby
     {
         Game g =  new Game(player1, player2);
         this.activeGames.add(g);
+        return g;
+    }
+
+    public Game endGame(Player player1, Player player2) {
+        Game g = this.getGame(player1.getName());
+        this.activeGames.remove(g);
         return g;
     }
 
@@ -146,9 +153,4 @@ public class PlayerLobby
                         username.replaceAll(" ", "").length());
     }
 
-    public Game endGame() {
-        Game g = this.getGame(player1.getName());
-        this.activeGames.remove(g);
-        return g;
-    }
 }
