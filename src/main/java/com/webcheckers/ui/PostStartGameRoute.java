@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import spark.Request;
@@ -84,7 +85,7 @@ public class PostStartGameRoute implements Route
         vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
         vm.put(GetHomeRoute.WELCOME_MSG_ATTR,
              String.format(GetHomeRoute.WELCOME_MSG, player.getName()));
-        vm.put(GetHomeRoute.PLAYER_LIST, playerLobby.getOnlinePlayers());
+        vm.put(GetHomeRoute.PLAYER_LIST, playerLobby.getOtherPlayers(player.getName()));
         vm.put(GetHomeRoute.USER_NUM_ATTR, String.format(GetHomeRoute.USER_NUM,
              playerLobby.getOnlinePlayers().size()));
 

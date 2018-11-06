@@ -1,11 +1,7 @@
 package com.webcheckers.appl;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.logging.Logger;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.webcheckers.model.*;
 import com.webcheckers.appl.*;
@@ -107,6 +103,17 @@ public class PlayerLobby
     }
 
 
+    /**
+     * Returns a list of online players that does not have the passed username
+     *
+     * @return list of players
+     */
+    public Collection<String> getOtherPlayers(String username)
+    {
+        HashSet<String> listOfNames = new HashSet<>(this.getOnlinePlayers());
+        listOfNames.remove(username);
+        return listOfNames;
+    }
     /**
      * Determins if a player is already in a game
      */

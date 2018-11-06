@@ -1,6 +1,7 @@
 package com.webcheckers.appl;
 
 
+import com.webcheckers.model.BoardView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -63,13 +64,19 @@ public class PlayerTest
     public void testEquals()
     {
         Player p2 = new Player(name2);
+        assertTrue(p2.equals(p2));
         assertFalse(cut.equals(p2));
-        assertFalse(cut.equals(null));
+
+        Player p4 = null;
+        assertFalse(p2.equals(p4));
 
         Player p3 = new Player(name1);
         assertTrue(cut.equals(p3));
+        assertTrue(p3.equals(cut));
 
         Player equalTop2 = new Player(name2);
         assertTrue(equalTop2.hashCode()== p2.hashCode());
+        assertEquals(p2, equalTop2);
+        assertNotEquals(new BoardView(), p2);
     }
 }
