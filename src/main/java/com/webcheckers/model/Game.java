@@ -233,4 +233,15 @@ public class Game
                 return new Message(Message.MessageEnum.error, "Unknown server side error.");
         }
     }
+
+
+    /**
+     * Returns the recommended move that the player should make used for Player Help.
+     *
+     * @return
+     */
+    public Move getRecommendedMove()
+    {
+        return new Move(new Position(5,2), new Position(4, 3));
+    }
 }
