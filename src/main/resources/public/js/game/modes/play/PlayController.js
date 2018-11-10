@@ -72,6 +72,8 @@ define(function(require){
             PlayModeConstants.SUBMIT_BUTTON_TOOLTIP, this.submitTurn);
     this.addButton(PlayModeConstants.RESIGN_BUTTON_ID, 'Resign', true,
             PlayModeConstants.RESIGN_BUTTON_TOOLTIP, this.resignGame);
+    this.addButton(PlayModeConstants.HELP_BUTTON_ID, 'Help', false,
+            PlayModeConstants.HELP_BUTTON_TOOLTIP, this.requestHelp);
 
     // Public (internal) methods
 
@@ -107,6 +109,37 @@ define(function(require){
   //
   // Public (external) methods
   //
+
+
+  /**
+   * Resign from the game.
+   *
+   * This action leaves the current Game view and retrieves an
+   * updated Game view from the server.
+   */
+  PlayController.prototype.requestHelp = function requestHelp()
+  {
+      console.log("Yahoo!!!!");
+
+      // if confirmed, then send the resignation command to the server
+      AjaxUtils.callServer(
+          // the action takes no data
+          '/requestHelp', '',
+          // the handler method should be run in the context of 'this' Controller object
+          handleResponse, this);
+
+      //
+      function handleResponse(message) {
+          if (message.type === 'info') {
+              // tell the browser to route the player to the Home page
+              window.location = '/';
+          }
+          // handle error message
+          else {
+              this.displayMessage(message);
+          }
+      }
+  };
 
   /**
    * Request a move; could be a single move or a jump.
