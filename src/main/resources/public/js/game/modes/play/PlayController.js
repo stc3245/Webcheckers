@@ -129,15 +129,11 @@ define(function(require){
           handleResponse, this);
 
       //
-      function handleResponse(message) {
-          if (message.type === 'info') {
-              // tell the browser to route the player to the Home page
-              window.location = '/';
-          }
-          // handle error message
-          else {
-              this.displayMessage(message);
-          }
+      function handleResponse(message)
+      {
+          console.log(message);
+          this._boardController.setSpaceHelp(message.end);
+          this._boardController.setSpaceHelp(message.start);
       }
   };
 
