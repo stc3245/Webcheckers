@@ -18,6 +18,7 @@ import spark.Route;
  * the client in the form of a {@link com.webcheckers.model.Move}
  *
  * @author Jeffery RUssell 11-9-18
+ * @author Sean Coyne 11-14-18
  */
 public class PostGetHelp implements Route
 {

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 /**
  * Testing for PostGetHelp ajax handler
  *
- * @author Jeffery Russell 11-14-18
+ * @author Sean Coyne 11-14-18
  */
 
 public class PostGetHelpTest {
