@@ -57,7 +57,8 @@ public class PostGetHelp implements Route
 
         if(player == null || !lobby.inGame(player.getName()))
         {
-            return gson.toJson("");
+            Message msg = new Message(Message.MessageEnum.error, "Not in a game or not signed in");
+            return gson.toJson(msg);
         }
 
         Game game = lobby.getGame(player.getName());
