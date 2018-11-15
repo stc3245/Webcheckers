@@ -25,6 +25,7 @@ public class GetGameRoute implements Route
   public static final String WHITEPLAYER = "whitePlayer";
   public static final String ACTIVECOLOR = "activeColor";
   public static final String BOARD = "board";
+  public static final String CURRENTSTATE = "currentState";
 
   public static final String TITLE = "Game!";
   public static final String VIEW_NAME = "game.ftl";
@@ -100,6 +101,8 @@ public class GetGameRoute implements Route
     vm.put(WHITEPLAYER, game.getWhitePlayer());
 
     vm.put(ACTIVECOLOR, game.getActiveColor());
+
+    vm.put(CURRENTSTATE, game.getGameState());
 
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }

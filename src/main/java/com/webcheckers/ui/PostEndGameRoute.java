@@ -46,19 +46,19 @@ public class PostEndGameRoute implements Route {
 
         Player player = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
 
-        response.redirect(WebServer.HOME_URL);
-
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
         vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
 
         if(playerLobby.inGame(opponentName) || player.getName().equals(opponentName))
         {
+            System.out.println("did work, smart man");
             playerLobby.endGame(player, playerLobby.getPlayer(opponentName));
             response.redirect(WebServer.HOME_URL);
             halt();
         }
 
+        System.out.println("didn't work, idiot");
         return templateEngine.render(new ModelAndView(vm, GetGameRoute.VIEW_NAME));
     }
 
