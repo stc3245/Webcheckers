@@ -136,8 +136,8 @@ public class PlayerLobby
     /**
      * Checks to see if the username is taken
      *
-     * @param username
-     * @return
+     * @param username name of player
+     * @return if the username has been taken
      */
     public boolean usernameTaken(String username)
     {
@@ -145,11 +145,24 @@ public class PlayerLobby
     }
 
 
-
+    /**
+     * Determines if a username is invalid to use
+     *
+     * @param username
+     * @return whether or not username is valid
+     */
     public static boolean containsInvalidCharacters(String username)
     {
-        return (username.length() == 0 ||
-                username.length() !=
-                        username.replaceAll(" ", "").length());
+        username = username.trim();
+        for (char c : username.toCharArray())
+        {
+            if (!(Character.isLetterOrDigit(c) || c == ' '))
+            {
+                // found invalid char
+                return true;
+            }
+        }
+
+        return (username.length() == 0);
     }
 }
