@@ -119,8 +119,6 @@ define(function(require){
    */
   PlayController.prototype.requestHelp = function requestHelp()
   {
-      console.log("Yahoo!!!!");
-
       // if confirmed, then send the resignation command to the server
       AjaxUtils.callServer(
           // the action takes no data

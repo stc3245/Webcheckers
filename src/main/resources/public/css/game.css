@@ -144,16 +144,8 @@ table#game-board td.valid {
   background-color: rgba(255, 192, 203, 0.4);
 }
 
-.Space.help {
-  background-color: rgba(255, 215, 0, 0.6) !important;
-}
-.Piece.help {
-  background-color: rgba(255, 215, 0, 0.6) !important;
-}
-
-
 .help {
-  background-color: rgba(255, 215, 0, 0.6) !important;
+  background-color: rgba(255, 215, 0, 0.6);
 }
 
 
