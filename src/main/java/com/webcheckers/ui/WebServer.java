@@ -71,6 +71,7 @@ public class WebServer
   public static final String CHECK_TURN = "/checkTurn";
   public static final String SUBMIT_TURN = "/submitTurn";
   public static final String BACKUP_MOVE = "/backupMove";
+  public static final String GET_HELP = "/requestHelp";
 
 
 
@@ -176,6 +177,8 @@ public class WebServer
     post(CHECK_TURN, new PostCheckTurn(playerLobby));
     post(BACKUP_MOVE, new PostBackupMove(playerLobby));
     post(SUBMIT_TURN, new PostSubmitTurn(playerLobby));
+    post(GET_HELP, new PostGetHelp(playerLobby));
+
     LOG.config("WebServer is initialized.");
   }
 

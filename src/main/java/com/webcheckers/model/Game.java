@@ -2,14 +2,13 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Used to store the status of an active game
  * 
  * @author Jeffery Russell 10-10-18
+ * @author Sean Coyne 11-10-18
  */
 public class Game
 {
@@ -232,5 +231,47 @@ public class Game
             default:
                 return new Message(Message.MessageEnum.error, "Unknown server side error.");
         }
+    }
+
+
+    /**
+     * Returns the recommended move that the player should make used for Player Help.
+     * Finds all possible moves that can be made and chooses a random one, prioritizing
+     * jump moves over normal moves
+     *
+     * @return
+     */
+    public Move getRecommendedMove() {
+        List<Move> endJumpMoves = new ArrayList<>();
+        List<Move> endNormalMoves = new ArrayList<>();
+        Random randomGenerator = new Random();
+
+        for (Row row : board){
+            for (Space space : row){
+                if (space.getPiece() != null) {
+
+                    Piece piece = space.getPiece();
+
+                    if ((piece.getColor() == getActiveColor())){
+                        Position startPos = new Position(row.getIndex(), space.getCellIdx());
+
+                        List<Position> endJumpPositions = MoveValidator.getJumpMoves(board, startPos);
+                        List<Position> endNormalPositions = MoveValidator.getNormalMoves(board, startPos);
+
+                        for (Position endPosition : endJumpPositions){
+                            endJumpMoves.add(new Move(startPos, endPosition));
+                        }
+
+                        for (Position endPosition : endNormalPositions){
+                            endNormalMoves.add(new Move(startPos, endPosition));
+                        }
+                    }
+                }
+            }
+        }
+        if (!endJumpMoves.isEmpty()){
+            return endJumpMoves.get(randomGenerator.nextInt(endJumpMoves.size()));
+        }
+        return endNormalMoves.get(randomGenerator.nextInt(endNormalMoves.size()));
     }
 }
