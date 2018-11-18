@@ -91,6 +91,12 @@ public class GetGameRoute implements Route
 
     Game game = lobby.getGame(player.getName());
 
+    if (game.getGameState() != Game.GameState.GameInProgress) {
+      lobby.endGame(player, lobby.getPlayer(request.queryParams("opponentName")));
+      response.redirect(WebServer.HOME_URL);
+      halt();
+    }
+    
     vm.put(CURRENTPLAYER, player);
 
     vm.put(VIEWMODE, game.getViewMode());

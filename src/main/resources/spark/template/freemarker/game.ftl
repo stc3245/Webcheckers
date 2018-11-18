@@ -27,9 +27,6 @@
     <#else>
       <a href="/signin">sign in</a>
     </#if>
-    <#if gameEnded>
-      <form action="./endGame" method="post"></form>
-    </#if>
     </div>
     
     <div class="body">
