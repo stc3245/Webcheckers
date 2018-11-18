@@ -102,6 +102,22 @@ public class PlayerLobbyTest
 
 
     /**
+     * Tets the player lobby's ability to return a list of
+     * active users with the a single username ripped out for the
+     * home lobby view.
+     */
+    @Test
+    public void getOtherPlayersListTest()
+    {
+        cut.createPlayer(name1);
+        cut.createPlayer(name2);
+
+        assertFalse(cut.getOtherPlayers(name1).contains(name1));
+        assertTrue(cut.getOtherPlayers(name1).contains(name2));
+    }
+
+
+    /**
      * Simple test to verify that they create player
      * function of create player does not return null
      */

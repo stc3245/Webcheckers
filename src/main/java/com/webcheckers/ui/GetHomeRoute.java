@@ -98,7 +98,7 @@ public class GetHomeRoute implements Route {
       {
         vm.put(SIGN_IN_ATTR, true);
         vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, player.getName()));
-        vm.put(PLAYER_LIST, playerLobby.getOnlinePlayers());
+        vm.put(PLAYER_LIST, playerLobby.getOtherPlayers(player.getName()));
         vm.put(USER_NUM_ATTR, String.format(USER_NUM, playerLobby.getOnlinePlayers().size()));
       }
       

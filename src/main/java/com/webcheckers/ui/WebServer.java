@@ -60,6 +60,7 @@ public class WebServer
    */
   public static final String HOME_URL = "/";
   public static final String SIGNIN_URL = "/signin";
+  public static final String SIGNOUT_URL = "/signout";
   public static final String GAME_URL = "/game";
   public static final String START_GAME_URL = "/startGame";
   public static final String END_GAME_URL = "/endGame";
@@ -161,6 +162,7 @@ public class WebServer
     // Shows the Checkers game Home page.
     get(HOME_URL, new GetHomeRoute(playerLobby, templateEngine));
     get(SIGNIN_URL, new GetSignInRoute(templateEngine));
+    get(SIGNOUT_URL, new GetSignOutRoute(playerLobby, templateEngine));
     // redirects home for now, can be changed in the future
     post(HOME_URL, new PostSignInRoute(playerLobby, templateEngine));
 
@@ -170,7 +172,7 @@ public class WebServer
     post(END_GAME_URL, new PostEndGameRoute(playerLobby, templateEngine));
 
 
-    /** Ajax handelers for the game */
+    /* Ajax handlers for the game */
     post(VALIDATE_MOVE, new PostValidateMove(playerLobby));
     post(CHECK_TURN, new PostCheckTurn(playerLobby));
     post(BACKUP_MOVE, new PostBackupMove(playerLobby));

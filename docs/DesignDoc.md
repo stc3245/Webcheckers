@@ -58,7 +58,7 @@ rules. At any point in the game a player must be able to resign which ends the g
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](domain-model.png)
+![The WebCheckers Domain Model](SWEN%20261%20-%20Domain%20Model.png)
 
 In this domain model, we captured the high level aspects of playing a game of
 checkers. Each checkers game consists of two players, a red player and a black
@@ -156,6 +156,7 @@ us keep the business logic in the model tier.
 This is the state diagram from the [SWEN](http://www.se.rit.edu/~swen-261/projects/WebCheckers/Sprint2_info.html) 
 website. I am including it here to illustrate how the client side code integrates with the ajax
 handlers which we wrote on the server side. 
+
 ![Client Side State Diagram](GameView%20state%20model.png)
 
 
@@ -177,7 +178,8 @@ a new game is established.
 The biggest design goal that we focused on in the model tiers was
 high cohesion, low coupling, and single responsibility.
 
-![Model Tier UML](SWEN%20261%20-%20Model%20Tier.png)
+![Model Tier](SWEN%20261%20-%20Information%20Expert.png)
+
 
 In our design you can see high cohesion with the BoardView, Row, Space, and Piece
 classes since they are smaller classes with high focus on the type of information that
@@ -190,6 +192,7 @@ complex logic while keeping low coupling, we didn't put a ton
 of logic in each of our model value entities, instead we created classes like MoveValidator and
 MoveApplyer which served as logic experts.
 
+![Model Tier UML](SWEN%20261%20-%20Model%20Tier.png)
 
 These "logic" model classes like Move Validator serve both the principles of Single Responsibility
 and Pure Fabrication. These classes represent Pure Fabrication since they don't appear in our 
@@ -197,6 +200,10 @@ domain model, however, they help us construct our system efficiently. These loci
 single responsibility since they are very focused in they task which they want to solve
 and they further decompose the problem into sub problems to be solved using static functions. 
 
+Another beauty of using these information experts is the ability to do dependency injection when 
+testing. Since the classes are merely a collection of static functions, it is easy to test
+since each function simply has an input and an output. These classes not affected by class level 
+fields which may be mutated by other functions. 
 
 ### Design Improvements
 
@@ -224,6 +231,9 @@ Currently the following stories are passing all their acceptance tests:
 - Single Move
 - Login
 - Start Game
+- King Player
+- Sign Out
+
 
 Notable Issues:
 - None at the moment.
@@ -281,5 +291,19 @@ public void testValidateMove()
 With good design using dependency inversion, we are able to inject a checkers board
 which is at a current state either into our "logic" classes or even our Game class 
 and test very niche cases which would otherwise be close to impossible to test.
+Without our board generator, it would be nearly impossible if not close to impossible
+to unit test for tricky senarios like when happens when you are in the middle of a
+jump move.
 
-This helped us hit every branch when running our unit tests.
+This helped us hit every branch when running our unit tests in the model tier.
+
+![model tier test coverage](TestCoverageModelTier.png)
+
+![AjaxMethods](AjaxMethods.png)
+![Application Level](ApplicationLevel.png)
+
+These images demonstrate that the unit tests written for the classes implemented in
+sprint 2 were largely successful.
+
+
+
