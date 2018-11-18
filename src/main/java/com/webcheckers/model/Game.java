@@ -1,6 +1,8 @@
 package com.webcheckers.model;
 
 import com.webcheckers.appl.*;
+import com.webcheckers.model.bot.GameAgent;
+import com.webcheckers.model.bot.RandomAgent;
 
 import java.util.*;
 
@@ -18,6 +20,15 @@ public class Game
     /** White Player in the game */
     private Player whitePlayer;
 
+    /** whether bot is enabled */
+    private boolean botEnabled;
+
+    /** game agent */
+    private GameAgent agent;
+
+    /** bot color */
+    private Piece.ColorEnum botColor;
+
     /** The current color of the current player */
     private Piece.ColorEnum activeColor;
 
@@ -29,6 +40,9 @@ public class Game
 
     /** Queue of current moves the player wants to make */
     private List<Move> currentMoves;
+
+    /** bot to recommend move with */
+    private GameAgent moveRecommender;
 
 
     /**
@@ -44,6 +58,18 @@ public class Game
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
         this.currentMoves = new ArrayList<>();
+        this.moveRecommender = new RandomAgent();
+    }
+
+
+    /**
+     * sets the AI for this game
+     * @param agent an instance of a implementation of GameAgent
+     */
+    public void setAgent(GameAgent agent, Piece.ColorEnum botColor){
+        botEnabled = true;
+        this.agent = agent;
+        this.botColor = botColor;
     }
 
 
@@ -223,6 +249,19 @@ public class Game
                 this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
                         Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
                 this.currentMoves.clear();
+                if (botEnabled && activeColor == botColor){
+                    Message em = validateMove(agent.nextMove(this));
+                    if (em.getType() != Message.MessageEnum.error){
+                        em = applyMoves();
+                        if (em.getType() != Message.MessageEnum.error){
+                            return new Message(Message.MessageEnum.info, "Move Applied");
+                        }
+                        System.out.println(em.getText());
+                        return new Message(Message.MessageEnum.error, "Bot Broken");
+                    }
+                    System.out.println(em.getText());
+                    return new Message(Message.MessageEnum.error, "Bot Broken");
+                }
                 return new Message(Message.MessageEnum.info, "Move Applied");
             case INVALID:
                 return new Message(Message.MessageEnum.error, "Invalid Move");
@@ -242,36 +281,6 @@ public class Game
      * @return
      */
     public Move getRecommendedMove() {
-        List<Move> endJumpMoves = new ArrayList<>();
-        List<Move> endNormalMoves = new ArrayList<>();
-        Random randomGenerator = new Random();
-
-        for (Row row : board){
-            for (Space space : row){
-                if (space.getPiece() != null) {
-
-                    Piece piece = space.getPiece();
-
-                    if ((piece.getColor() == getActiveColor())){
-                        Position startPos = new Position(row.getIndex(), space.getCellIdx());
-
-                        List<Position> endJumpPositions = MoveValidator.getJumpMoves(board, startPos);
-                        List<Position> endNormalPositions = MoveValidator.getNormalMoves(board, startPos);
-
-                        for (Position endPosition : endJumpPositions){
-                            endJumpMoves.add(new Move(startPos, endPosition));
-                        }
-
-                        for (Position endPosition : endNormalPositions){
-                            endNormalMoves.add(new Move(startPos, endPosition));
-                        }
-                    }
-                }
-            }
-        }
-        if (!endJumpMoves.isEmpty()){
-            return endJumpMoves.get(randomGenerator.nextInt(endJumpMoves.size()));
-        }
-        return endNormalMoves.get(randomGenerator.nextInt(endNormalMoves.size()));
+        return moveRecommender.nextMove(this);
     }
 }
