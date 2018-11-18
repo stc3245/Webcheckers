@@ -259,15 +259,19 @@ public class Game
         switch (state) {
             case RedLost:
                 currState = GameState.RedLost;
+                this.activeColor = Piece.ColorEnum.WHITE;
                 return new Message(Message.MessageEnum.info, "Red Lost.");
             case WhiteLost:
                 currState = GameState.WhiteLost;
+                this.activeColor = Piece.ColorEnum.RED;
                 return new Message(Message.MessageEnum.info, "White Lost.");
             case RedResigned:
                 currState = GameState.RedResigned;
+                this.activeColor = Piece.ColorEnum.WHITE;
                 return new Message(Message.MessageEnum.info, "Red Resigned.");
             case WhiteResigned:
                 currState = GameState.WhiteResigned;
+                this.activeColor = Piece.ColorEnum.RED;
                 return new Message(Message.MessageEnum.info, "White Resigned.");
             default:
                 return new Message(Message.MessageEnum.error, "Invalid request.");
