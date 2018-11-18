@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-    <meta http-equiv="refresh" content="10">
     <title>${title} | Player Sign In</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
@@ -20,19 +19,23 @@
 
 
     <#if signInError??>
-        <p>
-            ${errorMessage}
-        </p>
+         <div class="alert">
+             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+             ${errorMessage}<br />
+         </div>
     </#if>
 
-    <form action="./" method="post">
-        <br/>
-        Sign in here.
-        <br/>
-        <input name="username" />
-        <br/> <br/>
-        <button type="submit">Sign In</button>
-    </form>
+    <center>
+        <form action="./" method="post">
+            <h3>
+                Sign-in With Username
+            </h3>
+            <input name="username" />
+            <br/>
+            <button type="submit">Sign In</button>
+        </form>
+    </center>
+    <br>
 
 </div>
 </body>

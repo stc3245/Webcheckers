@@ -32,6 +32,7 @@ public class GetHomeRoute implements Route {
   static final String USER_NUM = "current number of signed in users: %d";
   static final String WELCOME_MSG = "Welcome, %s!";
   static final String ERROR_MSG = "errorMsg"; //msg for when someone tries to play wt someone already in the game
+  static final String ERROR = "error";
   static final String PLAYER_LIST = "users";
 
   // Key in the session attribute map for the player who started the session
@@ -80,6 +81,7 @@ public class GetHomeRoute implements Route {
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
     vm.put(SIGN_IN_ATTR, false);
+    vm.put(ERROR, false);
 
     // retrieve the game object
     final Session session = request.session();
