@@ -162,9 +162,8 @@ public class PlayerLobby
     /**
      * Determins if a player is already in a game
      */
-    public boolean inGame(String playerName)
-    {
-        return this.getGame(playerName) != null;
+    public boolean inGame(String playerName) {
+        return !botMap.containsKey(playerName) && this.getGame(playerName) != null;
     }
 
 
