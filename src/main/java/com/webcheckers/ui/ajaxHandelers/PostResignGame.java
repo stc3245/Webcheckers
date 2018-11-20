@@ -84,6 +84,7 @@ public class PostResignGame implements Route
                 break;
         }
 
+        game.setGameState(arg);
         Message msg = game.endGame(arg);
 
         return gson.toJson(msg);

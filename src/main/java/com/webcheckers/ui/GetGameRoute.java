@@ -90,6 +90,21 @@ public class GetGameRoute implements Route
     }
 
     Game game = lobby.getGame(player.getName());
+
+    Game.GameState arg = game.getGameState();
+
+    // gets piece count for active player
+    if (game.getPieceCount(game.getActiveColor()) == 0) {
+      switch (game.getActiveColor()) {
+        case RED:
+          arg = Game.GameState.RedLost;
+          break;
+        case WHITE:
+          arg = Game.GameState.WhiteLost;
+          break;
+      }
+      game.setGameState(arg);
+    }
     
     vm.put(CURRENTPLAYER, player);
 
@@ -104,8 +119,26 @@ public class GetGameRoute implements Route
 
     vm.put(CURRENTSTATE, game.getGameState());
 
+    // if game isn't in progress, redirect home
     if (game.getGameState() != Game.GameState.GameInProgress) {
       lobby.endGame(player, lobby.getPlayer(request.queryParams("opponentName")));
+      switch (game.getActiveColor()) {
+        case RED:
+          System.out.println("in Red");
+          if (game.getGameState() == Game.GameState.RedLost || game.getGameState() == Game.GameState.RedResigned) {
+
+          } else if (game.getGameState() == Game.GameState.WhiteLost || game.getGameState() == Game.GameState.WhiteResigned) {
+
+          }
+          break;
+        case WHITE:
+          if (game.getGameState() == Game.GameState.WhiteLost || game.getGameState() == Game.GameState.WhiteResigned) {
+
+          } else if (game.getGameState() == Game.GameState.RedLost || game.getGameState() == Game.GameState.RedResigned) {
+
+          }
+          break;
+      }
       response.redirect(WebServer.HOME_URL);
       halt();
     }

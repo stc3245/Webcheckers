@@ -38,6 +38,9 @@ public class Game
         GameInProgress, RedLost, WhiteLost, RedResigned, WhiteResigned
     }
 
+    private int redPieceCount;
+    private int whitePieceCount;
+
     /**
      * Constructs a new game with two players
      * @param redPlayer red player
@@ -52,6 +55,8 @@ public class Game
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
         this.currentMoves = new ArrayList<>();
+        this.redPieceCount = 12;
+        this.whitePieceCount = 12;
     }
 
 
@@ -242,6 +247,16 @@ public class Game
         switch (status)
         {
             case VALID:
+                for (Move m: this.currentMoves) {
+                    switch (this.activeColor) {
+                        case RED:
+                            this.whitePieceCount--;
+                            break;
+                        case WHITE:
+                            this.redPieceCount--;
+                            break;
+                    }
+                }
                 this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
                         Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
                 this.currentMoves.clear();
@@ -256,25 +271,35 @@ public class Game
     }
 
     public Message endGame(GameState state) {
+        this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
+                Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
         switch (state) {
             case RedLost:
                 currState = GameState.RedLost;
-                this.activeColor = Piece.ColorEnum.WHITE;
                 return new Message(Message.MessageEnum.info, "Red Lost.");
             case WhiteLost:
                 currState = GameState.WhiteLost;
-                this.activeColor = Piece.ColorEnum.RED;
                 return new Message(Message.MessageEnum.info, "White Lost.");
             case RedResigned:
                 currState = GameState.RedResigned;
-                this.activeColor = Piece.ColorEnum.WHITE;
                 return new Message(Message.MessageEnum.info, "Red Resigned.");
             case WhiteResigned:
                 currState = GameState.WhiteResigned;
-                this.activeColor = Piece.ColorEnum.RED;
                 return new Message(Message.MessageEnum.info, "White Resigned.");
             default:
                 return new Message(Message.MessageEnum.error, "Invalid request.");
+        }
+
+    }
+
+    public int getPieceCount(Piece.ColorEnum color) {
+        switch (color) {
+            case RED:
+                return redPieceCount;
+            case WHITE:
+                return whitePieceCount;
+            default:
+                return 12;
         }
     }
 }
