@@ -27,7 +27,10 @@ public class GetHomeRoute implements Route {
   static final String VIEW_NAME = "home.ftl";
 
   static final String SIGN_IN_ATTR = "signedIn";
+  static final String GAME_END_ATTR = "gameEnded";
   static final String WELCOME_MSG_ATTR = "welcomeMessage";
+  static final String GAME_MSG_ATTR = "gameMessage";
+  static final String GAME_MSG = "You %s your last game.";
   static final String USER_NUM_ATTR = "currentUserNum";
   static final String USER_NUM = "current number of signed in users: %d";
   static final String WELCOME_MSG = "Welcome, %s!";
@@ -75,11 +78,11 @@ public class GetHomeRoute implements Route {
   @Override
   public Object handle(Request request, Response response)
   {
-    final Session httpSession = request.session();
     //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
     vm.put(SIGN_IN_ATTR, false);
+    vm.put(GAME_END_ATTR, false);
 
     // retrieve the game object
     final Session session = request.session();
@@ -96,6 +99,10 @@ public class GetHomeRoute implements Route {
       }
       else
       {
+        if (player.getLastGame() != null) {
+          vm.put(GAME_END_ATTR, true);
+          vm.put(GAME_MSG_ATTR, String.format(GAME_MSG, player.getLastResult()));
+        }
         vm.put(SIGN_IN_ATTR, true);
         vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, player.getName()));
         vm.put(PLAYER_LIST, playerLobby.getOtherPlayers(player.getName()));

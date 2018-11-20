@@ -122,23 +122,8 @@ public class GetGameRoute implements Route
     // if game isn't in progress, redirect home
     if (game.getGameState() != Game.GameState.GameInProgress) {
       lobby.endGame(player, lobby.getPlayer(request.queryParams("opponentName")));
-      switch (game.getActiveColor()) {
-        case RED:
-          System.out.println("in Red");
-          if (game.getGameState() == Game.GameState.RedLost || game.getGameState() == Game.GameState.RedResigned) {
-
-          } else if (game.getGameState() == Game.GameState.WhiteLost || game.getGameState() == Game.GameState.WhiteResigned) {
-
-          }
-          break;
-        case WHITE:
-          if (game.getGameState() == Game.GameState.WhiteLost || game.getGameState() == Game.GameState.WhiteResigned) {
-
-          } else if (game.getGameState() == Game.GameState.RedLost || game.getGameState() == Game.GameState.RedResigned) {
-
-          }
-          break;
-      }
+      game.getRedPlayer().addToPastGames(game);
+      game.getWhitePlayer().addToPastGames(game);
       response.redirect(WebServer.HOME_URL);
       halt();
     }

@@ -31,6 +31,10 @@
           ${welcomeMessage}
             <br/>
 
+          <#if gameEnded>
+            ${gameMessage}
+          </#if>
+
           <center><h2>Click user to play with them!</h2></center>
             <#list users as user>
                 <br>

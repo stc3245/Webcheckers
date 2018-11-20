@@ -41,6 +41,8 @@ public class Game
     private int redPieceCount;
     private int whitePieceCount;
 
+    private String result;
+
     /**
      * Constructs a new game with two players
      * @param redPlayer red player
@@ -57,6 +59,7 @@ public class Game
         this.currentMoves = new ArrayList<>();
         this.redPieceCount = 12;
         this.whitePieceCount = 12;
+        this.result = "Game in Progress";
     }
 
 
