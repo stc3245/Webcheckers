@@ -34,6 +34,7 @@ public class GetHomeRoute implements Route {
   static final String ERROR_MSG = "errorMsg"; //msg for when someone tries to play wt someone already in the game
   static final String ERROR = "error";
   static final String PLAYER_LIST = "users";
+  static final String BOT_LIST = "bots";
 
   // Key in the session attribute map for the player who started the session
   public static final String PLAYERSERVICES_KEY = "playerServices";
@@ -101,6 +102,7 @@ public class GetHomeRoute implements Route {
         vm.put(SIGN_IN_ATTR, true);
         vm.put(WELCOME_MSG_ATTR, String.format(WELCOME_MSG, player.getName()));
         vm.put(PLAYER_LIST, playerLobby.getOtherPlayers(player.getName()));
+        vm.put(BOT_LIST, playerLobby.getBotNames());
         vm.put(USER_NUM_ATTR, String.format(USER_NUM, playerLobby.getOnlinePlayers().size()));
       }
       

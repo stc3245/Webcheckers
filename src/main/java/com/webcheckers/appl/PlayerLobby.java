@@ -134,7 +134,21 @@ public class PlayerLobby
      */
     public Collection<String> getOnlinePlayers()
     {
-        return this.activeSessions.keySet();
+        HashSet<String> listOfNames = new HashSet<>(this.activeSessions.keySet());
+        listOfNames.removeAll(this.botMap.keySet());
+
+        return listOfNames;
+    }
+
+
+    /**
+     * Returns a list of all the mot names
+     *
+     * @return
+     */
+    public Collection<String> getBotNames()
+    {
+        return this.botMap.keySet();
     }
 
 
