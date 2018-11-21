@@ -28,7 +28,7 @@ public class PlayerLobby
     /** names of bots */
     private final String randomAgent = "Easy-Bot";
     private final String minimaxAgent = "LeetBot";
-    private final String[] bots = {randomAgent};
+    public final String[] bots = {randomAgent};
     private HashMap<String, Class> botMap;
 
     /**
