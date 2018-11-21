@@ -92,19 +92,6 @@ public class GetGameRoute implements Route
     Game game = lobby.getGame(player.getName());
 
     Game.GameState arg = game.getGameState();
-
-    // gets piece count for active player
-    if (game.getPieceCount(game.getActiveColor()) == 0) {
-      switch (game.getActiveColor()) {
-        case RED:
-          arg = Game.GameState.RedLost;
-          break;
-        case WHITE:
-          arg = Game.GameState.WhiteLost;
-          break;
-      }
-      game.setGameState(arg);
-    }
     
     vm.put(CURRENTPLAYER, player);
 
@@ -118,6 +105,18 @@ public class GetGameRoute implements Route
     vm.put(ACTIVECOLOR, game.getActiveColor());
 
     vm.put(CURRENTSTATE, game.getGameState());
+
+    if (game.getPieceCount(game.getActiveColor()) == 0) {
+      switch (game.getActiveColor()) {
+        case RED:
+          arg = Game.GameState.RedLost;
+          break;
+        case WHITE:
+          arg = Game.GameState.WhiteLost;
+          break;
+      }
+      game.setGameState(arg);
+    }
 
     // if game isn't in progress, redirect home
     if (game.getGameState() != Game.GameState.GameInProgress) {

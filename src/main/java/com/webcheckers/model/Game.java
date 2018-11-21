@@ -38,9 +38,6 @@ public class Game
         GameInProgress, RedLost, WhiteLost, RedResigned, WhiteResigned
     }
 
-    private int redPieceCount;
-    private int whitePieceCount;
-
     private String result;
 
     /**
@@ -57,8 +54,6 @@ public class Game
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
         this.currentMoves = new ArrayList<>();
-        this.redPieceCount = 12;
-        this.whitePieceCount = 12;
         this.result = "Game in Progress";
     }
 
@@ -250,16 +245,6 @@ public class Game
         switch (status)
         {
             case VALID:
-                for (Move m: this.currentMoves) {
-                    switch (this.activeColor) {
-                        case RED:
-                            this.whitePieceCount--;
-                            break;
-                        case WHITE:
-                            this.redPieceCount--;
-                            break;
-                    }
-                }
                 this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
                         Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
                 this.currentMoves.clear();
@@ -296,13 +281,29 @@ public class Game
     }
 
     public int getPieceCount(Piece.ColorEnum color) {
-        switch (color) {
-            case RED:
-                return redPieceCount;
-            case WHITE:
-                return whitePieceCount;
-            default:
-                return 12;
+        int count = 0;
+        int row = 0;
+        int col = 0;
+        while (row < 8) {
+            while (col < 8) {
+                if (board.getTile(row, col).getPiece() != null) {
+                    switch (color) {
+                        case RED:
+                            if (board.getTile(row, col).getPiece().getColor() == Piece.ColorEnum.RED) {
+                                count++;
+                            }
+                            break;
+                        case WHITE:
+                            if (board.getTile(row, col).getPiece().getColor() == Piece.ColorEnum.WHITE) {
+                                count++;
+                            }
+                            break;
+                    }
+                }
+                col++;
+            }
+            row++;
         }
+        return count;
     }
 }
