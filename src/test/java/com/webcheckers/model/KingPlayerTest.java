@@ -4,29 +4,39 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test for the king piece
+ */
 @Tag("Model-tier")
-public class KingPlayerTest {
+public class KingPlayerTest
+{
 
-    // tests that promote turns a single piece into a king
+    /**
+     * tests that promote turns a single piece into a king
+     */
     @Test
-    public void testPromote() {
+    public void testPromote()
+    {
         Piece temp = new Piece(Piece.PieceEnum.SINGLE, Piece.ColorEnum.RED);
         temp.promote();
         assertTrue(temp.getType() == Piece.PieceEnum.KING);
     }
 
-    // tests that the single red piece is actually promoted when it reaches end of board
-    @Test
-    public void testPromoteRedPieceAtEnd() {
 
+    /**
+     * tests that the single red piece is actually promoted
+     * when it reaches end of board
+     */
+    @Test
+    public void testPromoteRedPieceAtEnd()
+    {
         String boardString =
                 /* '@'= white tile '*' = empty black tile */
                 /* r = red, w = white, caps means king    */
@@ -40,7 +50,7 @@ public class KingPlayerTest {
                 /* 5 */ "  @  *  @  r  @  *  @  *  " +
                 /* 6 */ "  *  @  *  @  w  @  *  @  " +
                 /* 7 */ "  @  *  @  *  @  *  @  *  ";
-        /*         Red side of board       */
+                 /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
@@ -56,9 +66,14 @@ public class KingPlayerTest {
 
     }
 
-    // tests that the single white piece is actually promoted when it reaches end of board
+
+    /**
+     * tests that the single white piece is actually
+     * promoted when it reaches end of board
+     */
     @Test
-    public void testPromoteWhitePieceAtEnd() {
+    public void testPromoteWhitePieceAtEnd()
+    {
 
         String boardString =
                 /* '@'= white tile '*' = empty black tile */
@@ -73,7 +88,7 @@ public class KingPlayerTest {
                 /* 5 */ "  @  *  @  r  @  *  @  *  " +
                 /* 6 */ "  *  @  *  @  w  @  *  @  " +
                 /* 7 */ "  @  *  @  *  @  *  @  *  ";
-        /*         Red side of board       */
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
@@ -89,9 +104,13 @@ public class KingPlayerTest {
 
     }
 
-    // ensures kings can move how it is allowed to
+
+    /**
+     *  ensures kings can move how it is allowed to
+     */
     @Test
-    public void testMove() {
+    public void testMove()
+    {
         String boardString =
                 /* '@'= white tile '*' = empty black tile */
                 /* r = red, w = white, caps means king    */
@@ -105,7 +124,7 @@ public class KingPlayerTest {
                 /* 5 */ "  @  *  @  W  @  *  @  *  " +
                 /* 6 */ "  *  @  *  @  r  @  *  @  " +
                 /* 7 */ "  @  *  @  *  @  *  @  *  ";
-        /*         Red side of board       */
+                /*         Red side of board       */
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
         Position start = new Position(5,3);
@@ -117,7 +136,10 @@ public class KingPlayerTest {
         assertTrue(positions.contains(new Position(4,2)));
     }
 
-    // tests that a king can jump legally
+
+    /**
+     * tests that a king can jump legally
+     */
     @Test
     public void testApplyJumpMoveNormal()
     {
@@ -134,7 +156,7 @@ public class KingPlayerTest {
                 /* 5 */ "  @  *  @  W  @  *  @  *  " +
                 /* 6 */ "  *  @  *  @  *  @  *  @  " +
                 /* 7 */ "  @  *  @  *  @  *  @  *  ";
-        /*         Red side of board       */
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
 
@@ -153,9 +175,13 @@ public class KingPlayerTest {
 
     }
 
-    // tests king specific jump move
+
+    /**
+     * tests king specific jump move
+     */
     @Test
-    public void testJumpMoveKing() {
+    public void testJumpMoveKing()
+    {
         String boardString =
                 /* '@'= white tile '*' = empty black tile */
                 /* r = red, w = white, caps means king    */
@@ -169,7 +195,7 @@ public class KingPlayerTest {
                 /* 5 */ "  @  *  @  W  @  *  @  *  " +
                 /* 6 */ "  *  @  *  @  *  @  *  @  " +
                 /* 7 */ "  @  *  @  *  @  *  @  *  ";
-        /*         Red side of board       */
+                /*         Red side of board       */
 
         BoardView board = BoardGenerator.constructBoardView(boardString);
 

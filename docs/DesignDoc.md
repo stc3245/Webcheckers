@@ -233,7 +233,8 @@ Currently the following stories are passing all their acceptance tests:
 - Start Game
 - King Player
 - Sign Out
-
+- Player Help
+- AI Player
 
 Notable Issues:
 - None at the moment.

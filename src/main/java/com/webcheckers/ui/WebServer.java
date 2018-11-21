@@ -72,6 +72,8 @@ public class WebServer
   public static final String SUBMIT_TURN = "/submitTurn";
   public static final String BACKUP_MOVE = "/backupMove";
   public static final String RESIGN_GAME = "/resignGame";
+  public static final String GET_HELP = "/requestHelp";
+
 
 
   //
@@ -178,6 +180,8 @@ public class WebServer
     post(BACKUP_MOVE, new PostBackupMove(playerLobby));
     post(SUBMIT_TURN, new PostSubmitTurn(playerLobby));
     post(RESIGN_GAME, new PostResignGame(playerLobby));
+
+    post(GET_HELP, new PostGetHelp(playerLobby));
     LOG.config("WebServer is initialized.");
   }
 
