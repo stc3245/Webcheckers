@@ -26,9 +26,9 @@ public class PlayerLobby
     private List<Game> activeGames;
 
     /** names of bots */
-    private final String randomAgent = "DumbBot";
+    private final String randomAgent = "Easy-Bot";
     private final String minimaxAgent = "LeetBot";
-    private final String[] bots = {randomAgent, minimaxAgent};
+    private final String[] bots = {randomAgent};
     private HashMap<String, Class> botMap;
 
     /**
@@ -41,10 +41,12 @@ public class PlayerLobby
 
         // bots are players too
         botMap = new HashMap<>();
-        for (String bot : bots) {
+        for (String bot : bots)
+        {
             Player botPlayer = new Player(bot);
             activeSessions.put(bot, botPlayer);
-            switchState: switch (bot){
+            switchState: switch (bot)
+            {
                 case randomAgent:
                     botMap.put(bot, RandomAgent.class);
                     break switchState;

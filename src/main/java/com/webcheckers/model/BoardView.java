@@ -1,7 +1,5 @@
 package com.webcheckers.model;
 
-import javafx.geometry.Pos;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;

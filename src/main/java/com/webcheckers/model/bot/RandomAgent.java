@@ -53,7 +53,8 @@ public class RandomAgent extends GameAgent
 
         if(reccMoves.isEmpty())
         {
-            reccMoves.add(endNormalMoves.get(randomGenerator.nextInt(endNormalMoves.size())));
+            reccMoves.add(endNormalMoves
+                    .get(randomGenerator.nextInt(endNormalMoves.size())));
         }
         return reccMoves;
     }
