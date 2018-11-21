@@ -173,6 +173,12 @@ public class PlayerLobbyTest
     {
         assertTrue(PlayerLobby.containsInvalidCharacters(""));
 
+
+        assertTrue(PlayerLobby.containsInvalidCharacters("$money"));
+
+        assertTrue(PlayerLobby.containsInvalidCharacters("#invalid"));
+        assertFalse(PlayerLobby.containsInvalidCharacters("Bruce Lee"));
+
         assertTrue(PlayerLobby.containsInvalidCharacters(" "));
         assertTrue(PlayerLobby.containsInvalidCharacters("       "));
 
