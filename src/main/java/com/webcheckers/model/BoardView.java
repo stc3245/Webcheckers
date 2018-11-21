@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import javafx.geometry.Pos;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -92,6 +94,19 @@ public class BoardView implements Iterable<Row>
 
 
     /**
+     * Returns a piece at a location. The idea
+     * of this method is to decrease coupling
+     *
+     * @param p position
+     * @return piece
+     */
+    public Piece getPiece(Position p)
+    {
+        return this.getTile(p).getPiece();
+    }
+
+
+    /**
      * Determines if the position is occupied.
      *
      * @param p
@@ -111,6 +126,27 @@ public class BoardView implements Iterable<Row>
     public Iterator<Row> iterator() 
     {
         return board.iterator();
+    }
+
+
+    /**
+     * Returns all occupied positions on the board
+     * @return occupied positions
+     */
+    public List<Position> getAllActivePositions()
+    {
+        List<Position> occPositions = new ArrayList<>();
+        for(Row row : this)
+        {
+            for(Space space: row)
+            {
+                if(space.getPiece() != null)
+                {
+                    occPositions.add(new Position(row.getIndex(), space.getCellIdx()));
+                }
+            }
+        }
+        return occPositions;
     }
 
 

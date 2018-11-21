@@ -17,7 +17,14 @@ import static com.webcheckers.model.Piece.PieceEnum.KING;
 public class MoveValidator
 {
     /** Enum which represents the validation status of a move */
-    public enum MoveStatus{VALID, INVALID, JUMP_REQUIRED, INVALID_DOUBLE, CANT_DO_DOUBLE, MUST_FINISH_DOUBLE_JUMP_MOVE}
+    public enum MoveStatus
+    {
+        VALID,
+        INVALID,
+        JUMP_REQUIRED,
+        INVALID_DOUBLE,
+        CANT_DO_DOUBLE
+    }
 
 
     /**
@@ -151,34 +158,22 @@ public class MoveValidator
      * Scans entire board to determine if a jump is available on the
      * board
      *
-     * @param boardView checkers board
+     * @param board checkers board
      * @param currentColor current players color
      * @return whether a jump move is available or not
      */
-    public static boolean jumpMovesAvailable(BoardView boardView, Piece.ColorEnum currentColor)
+    public static boolean jumpMovesAvailable(BoardView board, Piece.ColorEnum currentColor)
     {
-        for(Row row : boardView) {
+        for(Position startPos: board.getAllActivePositions())
+        {
+            if(board.getPiece(startPos).getColor() == currentColor)
+            {
+                List<Position> jumpMoves =
+                        MoveValidator.getJumpMoves(board, startPos);
 
-            for (Space space : row) {
-
-                if (space.getPiece() != null) {
-
-                    Piece piece = space.getPiece();
-
-                    if ((piece.getColor() == currentColor)
-                            && (piece.getType() == Piece.PieceEnum.SINGLE)) {
-
-                        Position startPosition =
-                                new Position(row.getIndex(), space.getCellIdx());
-
-                        List<Position> jumpMoves =
-                                MoveValidator.getJumpMoves(boardView, startPosition);
-
-                        if(!jumpMoves.isEmpty()){
-
-                            return true;
-                        }
-                    }
+                if(!jumpMoves.isEmpty())
+                {
+                    return true;
                 }
             }
         }

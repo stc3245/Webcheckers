@@ -10,53 +10,48 @@ import java.util.Random;
  * An agent that chooses move randomly from all moves available
  *
  * @author <a href='mailto:xxd9704@rit.edu'>Perry Deng</a>
+ * @author Jeffery Russell 11-21-18
  */
 public class RandomAgent extends GameAgent
 {
+
+    /**
+     * A simple random bot which takes the first move available
+     * If a jump or double jump move is available it will take
+     * that first. If no jump move is available it wil make a
+     * normal move.
+     *
+     * @param board board of the game
+     * @param currentColor current player
+     * @return move queue to make
+     */
     @Override
     public List<Move> nextMove(BoardView board, Piece.ColorEnum currentColor)
     {
-        List<Move> endJumpMoves = new ArrayList<>();
-        List<Move> endNormalMoves = new ArrayList<>();
+        List<Move> endJumpMoves = MoveGenerator.getAllJumpMoves(board, currentColor);
+        List<Move> endNormalMoves = MoveGenerator.getAllNormalMoves(board, currentColor);
         Random randomGenerator = new Random();
-
-        for (Row row : board)
-        {
-            for (Space space : row)
-            {
-                if (space.getPiece() != null)
-                {
-
-                    Piece piece = space.getPiece();
-
-                    if ((piece.getColor() == currentColor))
-                    {
-                        Position startPos = new Position(row.getIndex(), space.getCellIdx());
-
-                        List<Position> endJumpPositions = MoveValidator.getJumpMoves(board, startPos);
-                        List<Position> endNormalPositions = MoveValidator.getNormalMoves(board, startPos);
-
-                        for (Position endPosition : endJumpPositions)
-                        {
-                            endJumpMoves.add(new Move(startPos, endPosition));
-                        }
-
-                        for (Position endPosition : endNormalPositions)
-                        {
-                            endNormalMoves.add(new Move(startPos, endPosition));
-                        }
-                    }
-                }
-            }
-        }
 
         List<Move> reccMoves = new ArrayList<>();
 
-        if (!endJumpMoves.isEmpty())
+
+        while(!endJumpMoves.isEmpty())
         {
-            reccMoves.add(endJumpMoves.get(randomGenerator.nextInt(endJumpMoves.size())));
+            reccMoves.add(endJumpMoves.get(0));
+            Position finalPos = endJumpMoves.get(0).getEndPosition();
+            BoardView boardCopy = board.makeCopy();
+            reccMoves.forEach(m->MoveApplyer.applySingleMove(m, boardCopy));
+
+            List<Position> moreJumps = MoveValidator.getJumpMoves(boardCopy, finalPos);
+
+            endJumpMoves = new ArrayList<>();
+            for(Position p: moreJumps)
+            {
+                endJumpMoves.add(new Move(finalPos, p));
+            }
         }
-        else
+
+        if(reccMoves.isEmpty())
         {
             reccMoves.add(endNormalMoves.get(randomGenerator.nextInt(endNormalMoves.size())));
         }
