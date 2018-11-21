@@ -4,7 +4,6 @@ import com.webcheckers.appl.*;
 import com.webcheckers.model.bot.GameAgent;
 import com.webcheckers.model.bot.RandomAgent;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -37,11 +36,10 @@ public class Game
     /** Current state of game */
     private GameState currState;
 
-    public enum GameState {
+    public enum GameState
+    {
         GameInProgress, RedLost, WhiteLost, RedResigned, WhiteResigned
     }
-
-    private String result;
 
     /** whether bot is enabled */
     private boolean botEnabled;
@@ -68,7 +66,6 @@ public class Game
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
         this.currentMoves = new ArrayList<>();
-        this.result = "Game in Progress";
 
         this.moveRecommender = new RandomAgent();
     }
@@ -82,7 +79,6 @@ public class Game
     {
         botEnabled = true;
         this.agent = agent;
-
     }
 
 
@@ -179,20 +175,25 @@ public class Game
         return getBoard().getInverted();
     }
 
+
     /**
      * getter for current state(currState)
      * @return the current state
      */
-    public GameState getGameState() {
+    public GameState getGameState()
+    {
         return this.currState;
     }
+
 
     /**
      * setter for the current state
      */
-    public void setGameState(GameState currState) {
+    public void setGameState(GameState currState)
+    {
         this.currState = currState;
     }
+
 
     /**
      * Checks to see if it is the current player's turn
@@ -283,6 +284,7 @@ public class Game
                     this.currentMoves.clear();
                     this.activeColor = Piece.ColorEnum.RED;
                 }
+                checkForEndGame();
                 return new Message(Message.MessageEnum.info, "Move Applied");
             case INVALID:
                 return new Message(Message.MessageEnum.error, "Invalid Move");
@@ -293,10 +295,25 @@ public class Game
         }
     }
 
-    public Message endGame(GameState state) {
+    private void checkForEndGame()
+    {
+        if(board.getPieceCount(Piece.ColorEnum.RED) == 0)
+        {
+            currState = GameState.RedLost;
+        }
+
+        if(board.getPieceCount(Piece.ColorEnum.WHITE) == 0)
+        {
+            currState = GameState.WhiteLost;
+        }
+    }
+
+    public Message endGame(GameState state)
+    {
         this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
                 Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
-        switch (state) {
+        switch (state)
+        {
             case RedLost:
                 currState = GameState.RedLost;
                 return new Message(Message.MessageEnum.info, "Red Lost.");
@@ -312,34 +329,6 @@ public class Game
             default:
                 return new Message(Message.MessageEnum.error, "Invalid request.");
         }
-
-    }
-
-    public int getPieceCount(Piece.ColorEnum color) {
-        int count = 0;
-        int row = 0;
-        int col = 0;
-        while (row < 8) {
-            while (col < 8) {
-                if (board.getTile(row, col).getPiece() != null) {
-                    switch (color) {
-                        case RED:
-                            if (board.getTile(row, col).getPiece().getColor() == Piece.ColorEnum.RED) {
-                                count++;
-                            }
-                            break;
-                        case WHITE:
-                            if (board.getTile(row, col).getPiece().getColor() == Piece.ColorEnum.WHITE) {
-                                count++;
-                            }
-                            break;
-                    }
-                }
-                col++;
-            }
-            row++;
-        }
-        return count;
     }
 
     /**

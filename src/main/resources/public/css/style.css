@@ -132,6 +132,15 @@ div.info {
     margin-bottom: 15px;
 }
 
+
+/* The alert message box */
+.endGame {
+    padding: 20px;
+    background-color: #32CD32; /* green */
+    color: white;
+    margin-bottom: 15px;
+}
+
 /* The close button */
 .closebtn {
     margin-left: 15px;

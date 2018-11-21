@@ -53,7 +53,7 @@ public class PostEndGameRoute implements Route {
         if(playerLobby.inGame(opponentName) || player.getName().equals(opponentName))
         {
             System.out.println("did work, smart man");
-            playerLobby.endGame(player, playerLobby.getPlayer(opponentName));
+            playerLobby.endGame(player);
             response.redirect(WebServer.HOME_URL);
             halt();
         }

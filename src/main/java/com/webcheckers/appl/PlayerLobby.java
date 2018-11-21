@@ -109,7 +109,9 @@ public class PlayerLobby
         return g;
     }
 
-    public Game endGame(Player player1, Player player2) {
+
+    public Game endGame(Player player1)
+    {
         Game g = this.getGame(player1.getName());
         this.activeGames.remove(g);
         return g;
