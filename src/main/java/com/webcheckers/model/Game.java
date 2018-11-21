@@ -4,7 +4,9 @@ import com.webcheckers.appl.*;
 import com.webcheckers.model.bot.GameAgent;
 import com.webcheckers.model.bot.RandomAgent;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Used to store the status of an active game
@@ -20,15 +22,6 @@ public class Game
     /** White Player in the game */
     private Player whitePlayer;
 
-    /** whether bot is enabled */
-    private boolean botEnabled;
-
-    /** game agent */
-    private GameAgent agent;
-
-    /** bot color */
-    private Piece.ColorEnum botColor;
-
     /** The current color of the current player */
     private Piece.ColorEnum activeColor;
 
@@ -41,7 +34,14 @@ public class Game
     /** Queue of current moves the player wants to make */
     private List<Move> currentMoves;
 
-    /** bot to recommend move with */
+    /** whether bot is enabled */
+    private boolean botEnabled;
+
+    /** game agent */
+    private GameAgent agent;
+
+
+    /** bot to recommend move with for player help*/
     private GameAgent moveRecommender;
 
 
@@ -66,10 +66,10 @@ public class Game
      * sets the AI for this game
      * @param agent an instance of a implementation of GameAgent
      */
-    public void setAgent(GameAgent agent, Piece.ColorEnum botColor){
+    public void setAgent(GameAgent agent)
+    {
         botEnabled = true;
         this.agent = agent;
-        this.botColor = botColor;
     }
 
 
@@ -249,18 +249,12 @@ public class Game
                 this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
                         Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
                 this.currentMoves.clear();
-                if (botEnabled && activeColor == botColor){
-                    Message em = validateMove(agent.nextMove(this));
-                    if (em.getType() != Message.MessageEnum.error){
-                        em = applyMoves();
-                        if (em.getType() != Message.MessageEnum.error){
-                            return new Message(Message.MessageEnum.info, "Move Applied");
-                        }
-                        System.out.println(em.getText());
-                        return new Message(Message.MessageEnum.error, "Bot Broken");
-                    }
-                    System.out.println(em.getText());
-                    return new Message(Message.MessageEnum.error, "Bot Broken");
+                if (botEnabled && activeColor == Piece.ColorEnum.WHITE)
+                {
+                    this.currentMoves = agent.nextMove(this.board, this.activeColor);
+                    MoveApplyer.applyMove(this.currentMoves, board);
+                    this.currentMoves.clear();
+                    this.activeColor = Piece.ColorEnum.RED;
                 }
                 return new Message(Message.MessageEnum.info, "Move Applied");
             case INVALID:
@@ -278,9 +272,10 @@ public class Game
      * Finds all possible moves that can be made and chooses a random one, prioritizing
      * jump moves over normal moves
      *
-     * @return
+     * @return a recommended move to make
      */
-    public Move getRecommendedMove() {
-        return moveRecommender.nextMove(this);
+    public Move getRecommendedMove()
+    {
+        return moveRecommender.nextMove(this.board, this.activeColor).get(0);
     }
 }

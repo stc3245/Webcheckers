@@ -28,7 +28,7 @@ public class PlayerLobby
     /** names of bots */
     private final String randomAgent = "DumbBot";
     private final String minimaxAgent = "LeetBot";
-    private String[] bots = {randomAgent, minimaxAgent};
+    private final String[] bots = {randomAgent, minimaxAgent};
     private HashMap<String, Class> botMap;
 
     /**
@@ -93,24 +93,15 @@ public class PlayerLobby
         this.activeGames.add(g);
 
         // check for bot
-        String botname;
-        if (botMap.containsKey(player1.getName())){
-            GameAgent agent = null;
-            try {
-                agent = (GameAgent)botMap.get(player1.getName()).getConstructor().newInstance();
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-            }
-            g.setAgent(agent, Piece.ColorEnum.RED);
-        }
-        if (botMap.containsKey(player2.getName())){
+        if (botMap.containsKey(player2.getName()))
+        {
             GameAgent agent = null;
             try {
                 agent = (GameAgent)botMap.get(player2.getName()).getConstructor().newInstance();
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
-            g.setAgent(agent, Piece.ColorEnum.WHITE);
+            g.setAgent(agent);
         }
         return g;
     }

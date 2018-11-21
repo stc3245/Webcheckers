@@ -1,11 +1,16 @@
 package com.webcheckers.model.bot;
 
-import com.webcheckers.model.Game;
+import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Move;
+import com.webcheckers.model.Piece;
 
-public class MinimaxAgent extends GameAgent {
+import java.util.List;
+
+public class MinimaxAgent extends GameAgent
+{
     @Override
-    public Move nextMove(Game game) {
+    public List<Move> nextMove(BoardView board, Piece.ColorEnum currentColor)
+    {
         return null;
     }
 }
