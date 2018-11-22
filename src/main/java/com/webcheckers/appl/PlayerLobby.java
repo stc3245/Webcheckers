@@ -144,7 +144,7 @@ public class PlayerLobby
 
 
     /**
-     * Returns a list of all the mot names
+     * Returns a list of all the bot names
      *
      * @return
      */
