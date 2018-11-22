@@ -31,7 +31,6 @@ public class GetHomeRoute implements Route
     static final String GAME_END_ATTR = "gameEnded";
     static final String WELCOME_MSG_ATTR = "welcomeMessage";
     static final String GAME_MSG_ATTR = "gameMessage";
-    static final String GAME_MSG = "You %s your last game.";
     static final String USER_NUM_ATTR = "currentUserNum";
     static final String USER_NUM = "current number of signed in users: %d";
     static final String WELCOME_MSG = "Welcome, %s!";

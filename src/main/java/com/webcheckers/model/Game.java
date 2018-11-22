@@ -36,9 +36,17 @@ public class Game
     /** Current state of game */
     private GameState currState;
 
+
+    /**
+     * State which the game can be in
+     */
     public enum GameState
     {
-        GameInProgress, RedLost, WhiteLost, RedResigned, WhiteResigned
+        GameInProgress,
+        RedLost,
+        WhiteLost,
+        RedResigned,
+        WhiteResigned
     }
 
     /** whether bot is enabled */
@@ -107,8 +115,12 @@ public class Game
     public boolean playerInGame(String playerName)
     {
         if(playerName == null) return false;
-        return playerName.equals(this.redPlayer.getName()) || 
-            playerName.equals(this.whitePlayer.getName());
+
+        if(redPlayer != null && redPlayer.getName().equals(playerName))
+            return true;
+        else if(whitePlayer != null && whitePlayer.getName().equals(playerName))
+            return true;
+        return false;
     }
 
 
@@ -192,6 +204,24 @@ public class Game
     public void setGameState(GameState currState)
     {
         this.currState = currState;
+    }
+
+
+    public boolean leaveGame(Player p)
+    {
+        if(p.equals(redPlayer))
+        {
+            redPlayer = null;
+        }
+        else if (p.equals(whitePlayer))
+        {
+            whitePlayer = null;
+        }
+
+        if(botEnabled)
+            return true;
+
+        return redPlayer == null && whitePlayer == null;
     }
 
 
@@ -295,6 +325,11 @@ public class Game
         }
     }
 
+
+    /**
+     * Called after anybody makes a move, this will update
+     * the status of the game if someone runs out of pieces.
+     */
     private void checkForEndGame()
     {
         if(board.getPieceCount(Piece.ColorEnum.RED) == 0)
@@ -308,28 +343,6 @@ public class Game
         }
     }
 
-    public Message endGame(GameState state)
-    {
-        this.activeColor = (this.activeColor == Piece.ColorEnum.RED) ?
-                Piece.ColorEnum.WHITE: Piece.ColorEnum.RED;
-        switch (state)
-        {
-            case RedLost:
-                currState = GameState.RedLost;
-                return new Message(Message.MessageEnum.info, "Red Lost.");
-            case WhiteLost:
-                currState = GameState.WhiteLost;
-                return new Message(Message.MessageEnum.info, "White Lost.");
-            case RedResigned:
-                currState = GameState.RedResigned;
-                return new Message(Message.MessageEnum.info, "Red Resigned.");
-            case WhiteResigned:
-                currState = GameState.WhiteResigned;
-                return new Message(Message.MessageEnum.info, "White Resigned.");
-            default:
-                return new Message(Message.MessageEnum.error, "Invalid request.");
-        }
-    }
 
     /**
      * Returns the recommended move that the player should make used for Player Help.

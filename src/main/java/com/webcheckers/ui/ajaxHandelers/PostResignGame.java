@@ -43,6 +43,8 @@ public class PostResignGame implements Route
 
 
     /**
+     * Initializes objects needed for ajax handler
+     * like player lobby.
      *
      * @param lobby
      */
@@ -54,7 +56,8 @@ public class PostResignGame implements Route
 
 
     /**
-     *
+     * Resigns the current player from their game
+     * and returns a message of type info.
      *
      * @param request
      * @param response
@@ -75,7 +78,8 @@ public class PostResignGame implements Route
 
         Game.GameState arg = game.getGameState();
 
-        switch (game.getActiveColor()) {
+        switch (game.getActiveColor())
+        {
             case RED:
                 arg = Game.GameState.RedResigned;
                 break;
@@ -85,9 +89,8 @@ public class PostResignGame implements Route
         }
 
         game.setGameState(arg);
-        Message msg = game.endGame(arg);
+        Message msg = new Message(Message.MessageEnum.info, "");
 
         return gson.toJson(msg);
-
     }
 }

@@ -63,8 +63,6 @@ public class WebServer
   public static final String SIGNOUT_URL = "/signout";
   public static final String GAME_URL = "/game";
   public static final String START_GAME_URL = "/startGame";
-  public static final String END_GAME_URL = "/endGame";
-
 
 
   public static final String VALIDATE_MOVE = "/validateMove";
@@ -171,7 +169,6 @@ public class WebServer
 
     get(GAME_URL, new GetGameRoute(templateEngine, playerLobby));
     post(START_GAME_URL, new PostStartGameRoute(playerLobby,templateEngine));
-    post(END_GAME_URL, new PostEndGameRoute(playerLobby, templateEngine));
 
 
     /* Ajax handlers for the game */

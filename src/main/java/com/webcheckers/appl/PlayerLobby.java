@@ -110,11 +110,15 @@ public class PlayerLobby
     }
 
 
-    public Game endGame(Player player1)
+    public void leaveGame(Player player)
     {
-        Game g = this.getGame(player1.getName());
-        this.activeGames.remove(g);
-        return g;
+        Game g = this.getGame(player.getName());
+
+        //other player has already left the game
+        if(g.leaveGame(player))
+        {
+            this.activeGames.remove(g);
+        }
     }
 
 

@@ -102,15 +102,68 @@ public class GetGameRoute implements Route
         // if game isn't in progress, redirect home
         if (game.getGameState() != Game.GameState.GameInProgress)
         {
-            lobby.endGame(player);
-            return renderWithEndGameMessage(player);
+            String endOfGameMessage = getEndGameMessage(player, game);
+            lobby.leaveGame(player);
+            return renderWithEndGameMessage(player, endOfGameMessage);
         }
 
         return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
     }
 
 
-    public Object renderWithEndGameMessage(Player player)
+
+    public String getEndGameMessage(Player player, Game game)
+    {
+        Game.GameState state = game.getGameState();
+        Piece.ColorEnum playerColor = (player.equals(game.getRedPlayer())) ?
+                Piece.ColorEnum.RED : Piece.ColorEnum.WHITE;
+
+        String winningStatus = "";
+        String resignationStatus = "";
+
+        switch (playerColor)
+        {
+            case WHITE:
+                switch (state)
+                {
+                    case RedResigned:
+                        resignationStatus = "Other player resigned.";
+                    case RedLost:
+                        winningStatus = "You won!";
+                        break;
+                    case WhiteResigned:
+                        resignationStatus = "You resigned.";
+                    case WhiteLost:
+                        winningStatus = "You Lost!";
+                        break;
+                }
+            case RED:
+                switch (state)
+                {
+                    case RedResigned:
+                        resignationStatus = "You resigned.";
+                    case RedLost:
+                        winningStatus = "You Lost!";
+                        break;
+                    case WhiteResigned:
+                        resignationStatus = "Other player resigned.";
+                    case WhiteLost:
+                        winningStatus = "You won!";
+                        break;
+                }
+        }
+        return winningStatus + " " + resignationStatus;
+    }
+
+
+    /**
+     * Renders the home page with a end of game message.
+     *
+     * @param player player which is being rendered for
+     * @param endGameMessage the message to display to the player
+     * @return a rendered html object
+     */
+    public Object renderWithEndGameMessage(Player player, String endGameMessage)
     {
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
@@ -125,8 +178,8 @@ public class GetGameRoute implements Route
                 String.format(GetHomeRoute.USER_NUM, lobby.getOnlinePlayers().size()));
 
         vm.put(GetHomeRoute.GAME_END_ATTR, true);
-        vm.put(GetHomeRoute.GAME_MSG_ATTR,
-                String.format(GetHomeRoute.GAME_MSG, "You Lost"));
+
+        vm.put(GetHomeRoute.GAME_MSG_ATTR, endGameMessage);
 
         vm.put(GetHomeRoute.ERROR_MSG, "");
         return templateEngine.render(new ModelAndView(vm , GetHomeRoute.VIEW_NAME));
