@@ -84,21 +84,6 @@ public class GetGameRoute implements Route
 
         Game game = lobby.getGame(player.getName());
 
-        Game.GameState arg = game.getGameState();
-
-        vm.put(CURRENTPLAYER, player);
-
-        vm.put(VIEWMODE, game.getViewMode());
-        vm.put(BOARD, game.getPlayersBoard(player));
-
-        vm.put(REDPLAYER, game.getRedPlayer());
-
-        vm.put(WHITEPLAYER, game.getWhitePlayer());
-
-        vm.put(ACTIVECOLOR, game.getActiveColor());
-
-        vm.put(CURRENTSTATE, game.getGameState());
-
         // if game isn't in progress, redirect home
         if (game.getGameState() != Game.GameState.GameInProgress)
         {
@@ -106,12 +91,33 @@ public class GetGameRoute implements Route
             lobby.leaveGame(player);
             return renderWithEndGameMessage(player, endOfGameMessage);
         }
+        else
+        {
+            vm.put(CURRENTPLAYER, player);
 
-        return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
+            vm.put(VIEWMODE, game.getViewMode());
+            vm.put(BOARD, game.getPlayersBoard(player));
+
+            vm.put(REDPLAYER, game.getRedPlayer());
+
+            vm.put(WHITEPLAYER, game.getWhitePlayer());
+
+            vm.put(ACTIVECOLOR, game.getActiveColor());
+
+            vm.put(CURRENTSTATE, game.getGameState());
+
+            return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
+        }
     }
 
 
-
+    /**
+     * Returns string to display to the player at the end of the game
+     *
+     * @param player
+     * @param game
+     * @return
+     */
     public String getEndGameMessage(Player player, Game game)
     {
         Game.GameState state = game.getGameState();
@@ -137,6 +143,7 @@ public class GetGameRoute implements Route
                         winningStatus = "You Lost!";
                         break;
                 }
+                break;
             case RED:
                 switch (state)
                 {
@@ -151,6 +158,7 @@ public class GetGameRoute implements Route
                         winningStatus = "You won!";
                         break;
                 }
+                break;
         }
         return winningStatus + " " + resignationStatus;
     }
