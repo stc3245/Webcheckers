@@ -110,6 +110,12 @@ public class PlayerLobby
     }
 
 
+    /**
+     * Removes the player from their
+     * active game
+     *
+     * @param player
+     */
     public void leaveGame(Player player)
     {
         Game g = this.getGame(player.getName());
