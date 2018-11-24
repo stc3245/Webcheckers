@@ -130,6 +130,7 @@ define(function(require){
       function handleResponse(message)
       {
           console.log(message);
+          this._boardController.resetSpaceHelp();
           this._boardController.setSpaceHelp(message.end);
           this._boardController.setSpaceHelp(message.start);
       }
@@ -146,7 +147,9 @@ define(function(require){
   /**
    * Backup a single move.  This message has state-specific behavior.
    */
-  PlayController.prototype.backupMove = function backupMove() {
+  PlayController.prototype.backupMove = function backupMove()
+  {
+    this._boardController.resetSpaceHelp();
     this._delegateStateMessage('backupMove', arguments);
   };
 

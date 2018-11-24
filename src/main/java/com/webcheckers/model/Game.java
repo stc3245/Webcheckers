@@ -4,7 +4,6 @@ import com.webcheckers.appl.*;
 import com.webcheckers.model.bot.GameAgent;
 import com.webcheckers.model.bot.RandomAgent;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -276,6 +275,14 @@ public class Game
      */
     public Move getRecommendedMove()
     {
-        return moveRecommender.nextMove(this.board, this.activeColor).get(0);
+        BoardView boardCopy = this.board.makeCopy();
+        if(!currentMoves.isEmpty() &&
+                MoveApplyer.applyMove(currentMoves, boardCopy) ==
+                        MoveValidator.MoveStatus.JUMP_REQUIRED)
+        {
+            this.currentMoves.forEach(m -> MoveApplyer.applySingleMove(m, boardCopy));
+            return moveRecommender.nextMove(boardCopy, this.activeColor).get(0);
+        }
+        return moveRecommender.nextMove(board, this.activeColor).get(0);
     }
 }
