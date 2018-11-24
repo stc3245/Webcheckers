@@ -42,7 +42,7 @@ public class GetGameRouteTest
     private static final String TITLE_HEAD_TAG = "<title>" + GetGameRoute.TITLE + " | Web Checkers</title>";
 
     /**
-     * Setup new mock objects for each unit test
+     * Setup new mock objects for each unit testtests king specific jump move
      * to use.
      */
     @BeforeEach

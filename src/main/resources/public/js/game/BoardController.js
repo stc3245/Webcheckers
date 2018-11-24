@@ -21,6 +21,7 @@ define(function(require){
   //
 
   var HOVER_CLASS = 'hover';
+  var HELP_CLASS = 'help';
   var PENDING_CLASS = 'pending';
   var VALID_CLASS = 'valid';
   var PIECE_CLASS = 'Piece';
@@ -107,6 +108,15 @@ define(function(require){
   BoardController.prototype.setSpacePending = function setSpacePending(position) {
     var $space = this.getSpace$(position);
     if ($space !== null) $space.addClass(PENDING_CLASS);
+  }
+
+  /**
+   * Sets the Space at this position to the help color
+   */
+  BoardController.prototype.setSpaceHelp = function setSpaceHelp(position)
+  {
+      var $space = this.getSpace$(position);
+      if ($space !== null) $space.addClass(HELP_CLASS);
   }
 
   /**
