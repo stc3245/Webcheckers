@@ -4,7 +4,9 @@ import java.util.*;
 import java.util.logging.Logger;
 
 import com.webcheckers.model.*;
-import com.webcheckers.appl.*;
+import com.webcheckers.model.bot.GameAgent;
+import com.webcheckers.model.bot.MinimaxAgent;
+import com.webcheckers.model.bot.RandomAgent;
 
 /**
  * The object to coordinate the state of the Web Application.
@@ -20,10 +22,14 @@ public class PlayerLobby
     /** Map of all player usernames to their sessions */
     private Map<String, Player> activeSessions;
 
-
     /** Active games on the server */
-    public List<Game> activeGames;
+    private List<Game> activeGames;
 
+    /** names of bots */
+    private final String randomAgent = "Easy-Bot";
+    private final String minimaxAgent = "LeetBot";
+    public final String[] bots = {randomAgent};
+    private HashMap<String, Class> botMap;
 
     /**
      * Initializes game center's hashmap
@@ -32,6 +38,25 @@ public class PlayerLobby
     {
         this.activeGames = new ArrayList<>();
         this.activeSessions = new HashMap<>();
+
+        // bots are players too
+        botMap = new HashMap<>();
+        for (String bot : bots)
+        {
+            Player botPlayer = new Player(bot);
+            activeSessions.put(bot, botPlayer);
+            switchState: switch (bot)
+            {
+                case randomAgent:
+                    botMap.put(bot, RandomAgent.class);
+                    break switchState;
+                case minimaxAgent:
+                    botMap.put(bot, MinimaxAgent.class);
+                    break switchState;
+                default:
+                    break switchState;
+            }
+        }
     }
 
 
@@ -68,6 +93,18 @@ public class PlayerLobby
     {
         Game g =  new Game(player1, player2);
         this.activeGames.add(g);
+
+        // check for bot
+        if (botMap.containsKey(player2.getName()))
+        {
+            GameAgent agent = null;
+            try {
+                agent = (GameAgent)botMap.get(player2.getName()).getConstructor().newInstance();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+            g.setAgent(agent);
+        }
         return g;
     }
 
@@ -99,7 +136,21 @@ public class PlayerLobby
      */
     public Collection<String> getOnlinePlayers()
     {
-        return this.activeSessions.keySet();
+        HashSet<String> listOfNames = new HashSet<>(this.activeSessions.keySet());
+        listOfNames.removeAll(this.botMap.keySet());
+
+        return listOfNames;
+    }
+
+
+    /**
+     * Returns a list of all the bot names
+     *
+     * @return
+     */
+    public Collection<String> getBotNames()
+    {
+        return this.botMap.keySet();
     }
 
 
@@ -114,12 +165,12 @@ public class PlayerLobby
         listOfNames.remove(username);
         return listOfNames;
     }
+
     /**
      * Determins if a player is already in a game
      */
-    public boolean inGame(String playerName)
-    {
-        return this.getGame(playerName) != null;
+    public boolean inGame(String playerName) {
+        return !botMap.containsKey(playerName) && this.getGame(playerName) != null;
     }
 
 
