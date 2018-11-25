@@ -1,0 +1,4 @@
+Directions to build and start web app
+1. Navigate to the root directory of the folder
+2. Double click the run.bat file to launch the server.
+3. Open browser and go to "localhost:4567"

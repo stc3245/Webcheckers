@@ -122,6 +122,22 @@ define(function(require){
   /**
    * Resets the Space at this position out of the Pending state.
    */
+  BoardController.prototype.resetSpaceHelp = function resetSpaceHelp()
+  {
+      for(var r = 0; r < 8; r++)
+      {
+        for(var c = 0; c < 8; c++)
+        {
+          var position = new Position(r,c);
+          var $space = this.getSpace$(position);
+          if ($space !== null) $space.removeClass(HELP_CLASS);
+        }
+      }
+  }
+
+  /**
+   * Resets the Space at this position out of the Pending state.
+   */
   BoardController.prototype.resetSpacePending = function resetSpacePending(position) {
     var $space = this.getSpace$(position);
     if ($space !== null) $space.removeClass(PENDING_CLASS);
