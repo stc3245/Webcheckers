@@ -201,6 +201,7 @@ public class GetGameRouteTest
 
 
         Game game = mock(Game.class);
+        when(game.getGameState()).thenReturn(Game.GameState.GameInProgress);
         when(game.getViewMode()).thenReturn(BoardView.ViewModeEnum.PLAY);
         when(game.getPlayersBoard(p1)).thenReturn(new BoardView());
         when(lobby.getGame(p1Name)).thenReturn(game);
