@@ -65,7 +65,8 @@ checkers. Each checkers game consists of two players, a red player and a black
 player. The game is played on a 8x8 checkers board with each player starting
 with 12 pieces and losing pieces throughout the game. With a checkers piece,
 each player can make a move. This move can either be a simple move, a jump move, or a 
-multi-jump move. Not all players are humans. Some players can be AI players. 
+multi-jump move. Not all players are humans. Some players can be AI players, in which
+case the game will utilize the implemented AI GameAgent to simulate the move making.
 
 
 ## Architecture and Design
