@@ -92,6 +92,19 @@ public class BoardView implements Iterable<Row>
 
 
     /**
+     * Returns a piece at a location. The idea
+     * of this method is to decrease coupling
+     *
+     * @param p position
+     * @return piece
+     */
+    public Piece getPiece(Position p)
+    {
+        return this.getTile(p).getPiece();
+    }
+
+
+    /**
      * Determines if the position is occupied.
      *
      * @param p
@@ -115,6 +128,27 @@ public class BoardView implements Iterable<Row>
 
 
     /**
+     * Returns all occupied positions on the board
+     * @return occupied positions
+     */
+    public List<Position> getAllActivePositions()
+    {
+        List<Position> occPositions = new ArrayList<>();
+        for(Row row : this)
+        {
+            for(Space space: row)
+            {
+                if(space.getPiece() != null)
+                {
+                    occPositions.add(new Position(row.getIndex(), space.getCellIdx()));
+                }
+            }
+        }
+        return occPositions;
+    }
+
+
+    /**
      * Creates a deep copy of the board
      *
      * @return copy of board
@@ -129,4 +163,18 @@ public class BoardView implements Iterable<Row>
         return new BoardView(rows);
     }
 
+
+    /**
+     * Counts the number of pieces a particular player
+     * has on the board.
+     *
+     * @param color of the player
+     * @return number of pieces the player has
+     */
+    public int getPieceCount(Piece.ColorEnum color)
+    {
+        return (int)this.getAllActivePositions().stream()
+                .filter(p -> this.getPiece(p).getColor() == color)
+                .count();
+    }
 }

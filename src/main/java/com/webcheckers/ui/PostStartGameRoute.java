@@ -68,6 +68,7 @@ public class PostStartGameRoute implements Route
     }
 
     Map<String, Object> vm = new HashMap<>();
+    vm.put(GetHomeRoute.GAME_END_ATTR, false);
     vm.put("title", "Welcome!");
     vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
 
@@ -83,6 +84,8 @@ public class PostStartGameRoute implements Route
     else //invalid user selected
     {
         vm.put(GetHomeRoute.SIGN_IN_ATTR, true);
+        vm.put("error", true);
+        vm.put(GetHomeRoute.BOT_LIST, playerLobby.getBotNames());
         vm.put(GetHomeRoute.WELCOME_MSG_ATTR,
              String.format(GetHomeRoute.WELCOME_MSG, player.getName()));
         vm.put(GetHomeRoute.PLAYER_LIST, playerLobby.getOtherPlayers(player.getName()));

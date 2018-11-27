@@ -148,6 +148,17 @@ public class PlayerLobbyTest
 
 
     /**
+     * Tests going into a game against a bot
+     */
+    @Test
+    public void startGameWithBot()
+    {
+        cut.startGame(player1, new Player(cut.bots[0]));
+        assertTrue(cut.inGame(name1));
+    }
+
+
+    /**
      * Tests to make sure that the username taken function
      * is properly working.
      *
@@ -173,10 +184,37 @@ public class PlayerLobbyTest
     {
         assertTrue(PlayerLobby.containsInvalidCharacters(""));
 
+
+        assertTrue(PlayerLobby.containsInvalidCharacters("$money"));
+
+        assertTrue(PlayerLobby.containsInvalidCharacters("#invalid"));
+        assertFalse(PlayerLobby.containsInvalidCharacters("Bruce Lee"));
+
         assertTrue(PlayerLobby.containsInvalidCharacters(" "));
         assertTrue(PlayerLobby.containsInvalidCharacters("       "));
 
         assertFalse(PlayerLobby.containsInvalidCharacters(name1));
         assertFalse(PlayerLobby.containsInvalidCharacters(name2));
+    }
+
+
+    /**
+     * Ensures that the bot's are always marked as not in a game
+     * so that they are playable against.
+     */
+    @Test
+    public void BotInGame()
+    {
+        assertFalse(cut.inGame(cut.bots[0]));
+    }
+
+
+    /**
+     * Tests the get bot names function
+     */
+    @Test
+    public void testGetBotNames()
+    {
+        assertTrue(cut.getBotNames().contains(cut.bots[0]));
     }
 }

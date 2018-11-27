@@ -49,9 +49,9 @@ rules. At any point in the game a player must be able to resign which ends the g
 - Two playes must be able to play a game of checkers adnering to the [American rules](http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html).
 - At any point in the game a player must be able to resign from the game at which point the other player Wins by default. 
 
-### Roadmap of Enhancements
-- AI Player: The player will have the option to play a game against a artificial intelligence.
-- Player Help: If chosen, the player will be able to get move reccomendations from the server. This will then display on the board. 
+### Enhancements
+- AI Player: Players will have the option to play a game against a artificial intelligence of their choosing.
+- Player Help: If chosen, players will be able to get move reccomendations from the server. This will then display on the board.
 
 
 ## Application Domain
@@ -234,7 +234,8 @@ Currently the following stories are passing all their acceptance tests:
 - Start Game
 - King Player
 - Sign Out
-
+- Player Help
+- AI Player
 
 Notable Issues:
 - None at the moment.

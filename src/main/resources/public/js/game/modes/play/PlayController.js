@@ -72,6 +72,8 @@ define(function(require){
             PlayModeConstants.SUBMIT_BUTTON_TOOLTIP, this.submitTurn);
     this.addButton(PlayModeConstants.RESIGN_BUTTON_ID, 'Resign', true,
             PlayModeConstants.RESIGN_BUTTON_TOOLTIP, this.resignGame);
+    this.addButton(PlayModeConstants.HELP_BUTTON_ID, 'Help', false,
+            PlayModeConstants.HELP_BUTTON_TOOLTIP, this.requestHelp);
 
     // Public (internal) methods
 
@@ -108,6 +110,32 @@ define(function(require){
   // Public (external) methods
   //
 
+
+  /**
+   * Resign from the game.
+   *
+   * This action leaves the current Game view and retrieves an
+   * updated Game view from the server.
+   */
+  PlayController.prototype.requestHelp = function requestHelp()
+  {
+      // if confirmed, then send the resignation command to the server
+      AjaxUtils.callServer(
+          // the action takes no data
+          '/requestHelp', '',
+          // the handler method should be run in the context of 'this' Controller object
+          handleResponse, this);
+
+      //
+      function handleResponse(message)
+      {
+          console.log(message);
+          this._boardController.resetSpaceHelp();
+          this._boardController.setSpaceHelp(message.end);
+          this._boardController.setSpaceHelp(message.start);
+      }
+  };
+
   /**
    * Request a move; could be a single move or a jump.
    * This message has state-specific behavior.
@@ -119,7 +147,9 @@ define(function(require){
   /**
    * Backup a single move.  This message has state-specific behavior.
    */
-  PlayController.prototype.backupMove = function backupMove() {
+  PlayController.prototype.backupMove = function backupMove()
+  {
+    this._boardController.resetSpaceHelp();
     this._delegateStateMessage('backupMove', arguments);
   };
 

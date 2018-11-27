@@ -42,7 +42,7 @@ public class GetGameRouteTest
     private static final String TITLE_HEAD_TAG = "<title>" + GetGameRoute.TITLE + " | Web Checkers</title>";
 
     /**
-     * Setup new mock objects for each unit test
+     * Setup new mock objects for each unit testtests king specific jump move
      * to use.
      */
     @BeforeEach
@@ -201,6 +201,7 @@ public class GetGameRouteTest
 
 
         Game game = mock(Game.class);
+        when(game.getGameState()).thenReturn(Game.GameState.GameInProgress);
         when(game.getViewMode()).thenReturn(BoardView.ViewModeEnum.PLAY);
         when(game.getPlayersBoard(p1)).thenReturn(new BoardView());
         when(lobby.getGame(p1Name)).thenReturn(game);

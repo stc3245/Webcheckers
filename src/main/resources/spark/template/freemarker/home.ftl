@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-    <meta http-equiv="refresh" content="10">
+    <meta http-equiv="refresh" content="10;URL='/'" />
     <title>${title} | Web Checkers</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
@@ -24,12 +23,32 @@
           </div>
     </#if>
 
-      ${errorMsg}<br />
+
+
+          <#if error>
+             <div class="alert">
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                 ${errorMsg}<br />
+             </div>
+          <#else>
+              ${errorMsg}<br />
+          </#if>
+
+        <#if gameEnded>
+             <div class="endGame">
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                 ${gameMessage}
+                 <br />
+             </div>
+        </#if>
+
 
       <#if signedIn>
 
           ${welcomeMessage}
             <br/>
+
+
 
           <center><h2>Click user to play with them!</h2></center>
             <#list users as user>
@@ -43,6 +62,18 @@
                   </form>
             </center>
             </#list>
+            <br />
+            <center><h3>Bots!</h3></center>
+          <#list bots as bot>
+            <center>
+                <svg id="i-paperclip" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M10 9 L10 24 C10 28 13 30 16 30 19 30 22 28 22 24 L22 6 C22 3 20 2 18 2 16 2 14 3 14 6 L14 23 C14 24 15 25 16 25 17 25 18 24 18 23 L18 9" />
+                </svg>
+                <form action="./startGame" method="post">
+                    <input type="submit" name="opponentName" value="${bot}" />
+                </form>
+            </center>
+          </#list>
             <br/>
       <#else>
         <br/>

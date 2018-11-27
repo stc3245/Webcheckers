@@ -1,8 +1,7 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.BoardView;
-
 import java.util.Objects;
+
 
 /**
  * Represents a player within the webcheckers game
@@ -14,6 +13,7 @@ public class Player
 {
     /** Stores name of player */
     private String name;
+
 
     /**
      * constructor for Player class

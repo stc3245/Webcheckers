@@ -1,10 +1,10 @@
 package com.webcheckers.appl;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 import com.webcheckers.model.*;
-import com.webcheckers.appl.*;
+import com.webcheckers.model.bot.GameAgent;
+import com.webcheckers.model.bot.RandomAgent;
 
 /**
  * The object to coordinate the state of the Web Application.
@@ -14,16 +14,21 @@ import com.webcheckers.appl.*;
  *
  * @author <a href='mailto:xxd9704@rit.edu'>Perry Deng</a>
  * @author Jeffery Russell 10-13-18
+ * @author Bryce Murphy 11-5-18
  */
 public class PlayerLobby
 {
     /** Map of all player usernames to their sessions */
     private Map<String, Player> activeSessions;
 
-
     /** Active games on the server */
-    public List<Game> activeGames;
+    private List<Game> activeGames;
 
+    /** names of bots */
+
+    private final String randomAgent = "Easy-Bot";
+    public final String[] bots = {randomAgent};
+    private HashMap<String, Class> botMap;
 
     /**
      * Initializes game center's hashmap
@@ -32,6 +37,22 @@ public class PlayerLobby
     {
         this.activeGames = new ArrayList<>();
         this.activeSessions = new HashMap<>();
+
+        // bots are players too
+        botMap = new HashMap<>();
+        for (String bot : bots)
+        {
+            Player botPlayer = new Player(bot);
+            activeSessions.put(bot, botPlayer);
+            switchState: switch (bot)
+            {
+                case randomAgent:
+                    botMap.put(bot, RandomAgent.class);
+                    break switchState;
+                default:
+                    break switchState;
+            }
+        }
     }
 
 
@@ -68,7 +89,37 @@ public class PlayerLobby
     {
         Game g =  new Game(player1, player2);
         this.activeGames.add(g);
+
+        // check for bot
+        if (botMap.containsKey(player2.getName()))
+        {
+            GameAgent agent = null;
+            try {
+                agent = (GameAgent)botMap.get(player2.getName()).getConstructor().newInstance();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+            g.setAgent(agent);
+        }
         return g;
+    }
+
+
+    /**
+     * Removes the player from their
+     * active game
+     *
+     * @param player
+     */
+    public void leaveGame(Player player)
+    {
+        Game g = this.getGame(player.getName());
+
+        //other player has already left the game
+        if(g.leaveGame(player))
+        {
+            this.activeGames.remove(g);
+        }
     }
 
 
@@ -99,7 +150,21 @@ public class PlayerLobby
      */
     public Collection<String> getOnlinePlayers()
     {
-        return this.activeSessions.keySet();
+        HashSet<String> listOfNames = new HashSet<>(this.activeSessions.keySet());
+        listOfNames.removeAll(this.botMap.keySet());
+
+        return listOfNames;
+    }
+
+
+    /**
+     * Returns a list of all the bot names
+     *
+     * @return
+     */
+    public Collection<String> getBotNames()
+    {
+        return this.botMap.keySet();
     }
 
 
@@ -114,12 +179,12 @@ public class PlayerLobby
         listOfNames.remove(username);
         return listOfNames;
     }
+
     /**
      * Determins if a player is already in a game
      */
-    public boolean inGame(String playerName)
-    {
-        return this.getGame(playerName) != null;
+    public boolean inGame(String playerName) {
+        return !botMap.containsKey(playerName) && this.getGame(playerName) != null;
     }
 
 
@@ -136,8 +201,8 @@ public class PlayerLobby
     /**
      * Checks to see if the username is taken
      *
-     * @param username
-     * @return
+     * @param username name of player
+     * @return if the username has been taken
      */
     public boolean usernameTaken(String username)
     {
@@ -145,11 +210,25 @@ public class PlayerLobby
     }
 
 
-
+    /**
+     * Determines if a username is invalid to use
+     *
+     * @param username
+     * @return whether or not username is valid
+     */
     public static boolean containsInvalidCharacters(String username)
     {
-        return (username.length() == 0 ||
-                username.length() !=
-                        username.replaceAll(" ", "").length());
+        username = username.trim();
+        for (char c : username.toCharArray())
+        {
+            if (!(Character.isLetterOrDigit(c) || c == ' '))
+            {
+                // found invalid char
+                return true;
+            }
+        }
+
+        return (username.length() == 0);
     }
+
 }

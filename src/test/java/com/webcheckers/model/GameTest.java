@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * @author Jeffery Russell 11-1-18
+ * @author Sean Coyne 11-14-18
  */
 @Tag("Model-tier")
 public class GameTest
@@ -406,5 +407,184 @@ public class GameTest
         Message message = cut.validateMove(sillyMove);
 
         assertEquals(message.getType(), Message.MessageEnum.error);
+    }
+    /**
+     * Tests the getRecommendedMove function returns the correct move when
+     * a valid normal move is available for a player.
+     */
+    @Test
+    public void testPlayerHelpNormalMove(){
+
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  *  @  *  @  " +
+                /* 3 */ "  @  *  @  *  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  r  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        Move generatedRecommendedMove = cut.getRecommendedMove();
+
+        Move expectedRecommendedMove = new Move(new Position(6,0), new Position(5,1));
+
+        /** Asserts that recommended move is the same as the expected one **/
+
+        assertEquals(generatedRecommendedMove.getEndPosition().getCell(),
+                expectedRecommendedMove.getEndPosition().getCell());
+
+        assertEquals(generatedRecommendedMove.getEndPosition().getRow(),
+                expectedRecommendedMove.getEndPosition().getRow());
+
+        assertEquals(generatedRecommendedMove.getStartPosition().getCell(),
+                expectedRecommendedMove.getStartPosition().getCell());
+
+        assertEquals(generatedRecommendedMove.getStartPosition().getRow(),
+                expectedRecommendedMove.getStartPosition().getRow());
+
+    }
+
+    /**
+     * Tests the getRecommendedMove function returns the correct move when
+     * a single jump move is available for a player.
+     */
+    @Test
+    public void testPlayerHelpSingleJump()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  w  @  *  @  " +
+                /* 3 */ "  @  *  @  r  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+                /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        Move generatedRecommendedMove = cut.getRecommendedMove();
+
+        Move expectedRecommendedMove = new Move(new Position(3,3), new Position(1,5));
+
+        /** Asserts that recommended move is the same as the expected one **/
+
+        assertEquals(generatedRecommendedMove.getEndPosition().getCell(),
+                expectedRecommendedMove.getEndPosition().getCell());
+
+        assertEquals(generatedRecommendedMove.getEndPosition().getRow(),
+                expectedRecommendedMove.getEndPosition().getRow());
+
+        assertEquals(generatedRecommendedMove.getStartPosition().getCell(),
+                expectedRecommendedMove.getStartPosition().getCell());
+
+        assertEquals(generatedRecommendedMove.getStartPosition().getRow(),
+                expectedRecommendedMove.getStartPosition().getRow());
+
+    }
+
+
+    /**
+     * Tests to see if it catches when the board is empty, the game state changes
+     */
+    @Test
+    public void testEndGameRedWon()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  * @  *  @  " +
+                /* 3 */ "  @  *  @  *  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  w  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  R  @  *  @  *  ";
+        /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+
+        Move winningMove = new Move(new Position(7,3), new Position(5,1));
+        cut.validateMove(winningMove);
+        cut.applyMoves();
+
+        assertTrue(cut.getGameState() == Game.GameState.WhiteLost);
+    }
+
+
+    /**
+     * Tests to see if it catches when the board is empty, the game state changes
+     */
+    @Test
+    public void testEndGameWhiteWon()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  r  @  * @  *  @  " +
+                /* 3 */ "  @  *  @  W  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+        /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        Move winningMove = new Move(new Position(3,3), new Position(1,1));
+        cut.validateMove(winningMove);
+
+        cut.applyMoves();
+
+        assertTrue(cut.getGameState() == Game.GameState.RedLost);
+    }
+
+
+    /**
+     * Tests the leave game function of the game
+     */
+    @Test
+    public void testLeaveGame()
+    {
+        Game cut = new Game(new Player(name1), new Player(name2));
+
+        assertNotNull(cut.getRedPlayer());
+        assertNotNull(cut.getWhitePlayer());
+
+        cut.leaveGame(new Player(name2));
+
+        assertNull(cut.getWhitePlayer());
+
+        cut.leaveGame(new Player(name1));
+        assertNull(cut.getRedPlayer());
     }
 }
