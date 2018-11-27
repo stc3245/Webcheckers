@@ -76,17 +76,8 @@ public class PostResignGame implements Route
 
         Game game = lobby.getGame(player.getName());
 
-        Game.GameState arg = game.getGameState();
-
-        switch (game.getActiveColor())
-        {
-            case RED:
-                arg = Game.GameState.RedResigned;
-                break;
-            case WHITE:
-                arg = Game.GameState.WhiteResigned;
-                break;
-        }
+        Game.GameState arg = game.getWhitePlayer().equals(player) ?
+                Game.GameState.WhiteResigned : Game.GameState.RedResigned;
 
         game.setGameState(arg);
         Message msg = new Message(Message.MessageEnum.info, "");

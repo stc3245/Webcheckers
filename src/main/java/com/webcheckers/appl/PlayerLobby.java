@@ -1,11 +1,9 @@
 package com.webcheckers.appl;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 import com.webcheckers.model.*;
 import com.webcheckers.model.bot.GameAgent;
-import com.webcheckers.model.bot.MinimaxAgent;
 import com.webcheckers.model.bot.RandomAgent;
 
 /**
@@ -27,8 +25,8 @@ public class PlayerLobby
     private List<Game> activeGames;
 
     /** names of bots */
+
     private final String randomAgent = "Easy-Bot";
-    private final String minimaxAgent = "LeetBot";
     public final String[] bots = {randomAgent};
     private HashMap<String, Class> botMap;
 
@@ -50,9 +48,6 @@ public class PlayerLobby
             {
                 case randomAgent:
                     botMap.put(bot, RandomAgent.class);
-                    break switchState;
-                case minimaxAgent:
-                    botMap.put(bot, MinimaxAgent.class);
                     break switchState;
                 default:
                     break switchState;
