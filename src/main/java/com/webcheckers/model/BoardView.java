@@ -163,4 +163,18 @@ public class BoardView implements Iterable<Row>
         return new BoardView(rows);
     }
 
+
+    /**
+     * Counts the number of pieces a particular player
+     * has on the board.
+     *
+     * @param color of the player
+     * @return number of pieces the player has
+     */
+    public int getPieceCount(Piece.ColorEnum color)
+    {
+        return (int)this.getAllActivePositions().stream()
+                .filter(p -> this.getPiece(p).getColor() == color)
+                .count();
+    }
 }

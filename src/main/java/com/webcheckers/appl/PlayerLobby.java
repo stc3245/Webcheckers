@@ -1,11 +1,9 @@
 package com.webcheckers.appl;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 import com.webcheckers.model.*;
 import com.webcheckers.model.bot.GameAgent;
-import com.webcheckers.model.bot.MinimaxAgent;
 import com.webcheckers.model.bot.RandomAgent;
 
 /**
@@ -16,6 +14,7 @@ import com.webcheckers.model.bot.RandomAgent;
  *
  * @author <a href='mailto:xxd9704@rit.edu'>Perry Deng</a>
  * @author Jeffery Russell 10-13-18
+ * @author Bryce Murphy 11-5-18
  */
 public class PlayerLobby
 {
@@ -26,8 +25,8 @@ public class PlayerLobby
     private List<Game> activeGames;
 
     /** names of bots */
+
     private final String randomAgent = "Easy-Bot";
-    private final String minimaxAgent = "LeetBot";
     public final String[] bots = {randomAgent};
     private HashMap<String, Class> botMap;
 
@@ -49,9 +48,6 @@ public class PlayerLobby
             {
                 case randomAgent:
                     botMap.put(bot, RandomAgent.class);
-                    break switchState;
-                case minimaxAgent:
-                    botMap.put(bot, MinimaxAgent.class);
                     break switchState;
                 default:
                     break switchState;
@@ -106,6 +102,24 @@ public class PlayerLobby
             g.setAgent(agent);
         }
         return g;
+    }
+
+
+    /**
+     * Removes the player from their
+     * active game
+     *
+     * @param player
+     */
+    public void leaveGame(Player player)
+    {
+        Game g = this.getGame(player.getName());
+
+        //other player has already left the game
+        if(g.leaveGame(player))
+        {
+            this.activeGames.remove(g);
+        }
     }
 
 
@@ -216,4 +230,5 @@ public class PlayerLobby
 
         return (username.length() == 0);
     }
+
 }

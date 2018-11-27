@@ -33,6 +33,22 @@ public class Game
     /** Queue of current moves the player wants to make */
     private List<Move> currentMoves;
 
+    /** Current state of game */
+    private GameState currState;
+
+
+    /**
+     * State which the game can be in
+     */
+    public enum GameState
+    {
+        GameInProgress,
+        RedLost,
+        WhiteLost,
+        RedResigned,
+        WhiteResigned
+    }
+
     /** whether bot is enabled */
     private boolean botEnabled;
 
@@ -51,12 +67,14 @@ public class Game
      */
     public Game(Player redPlayer, Player whitePlayer)
     {
+        this.currState = GameState.GameInProgress;
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.board = new BoardView();
         this.viewMode = BoardView.ViewModeEnum.PLAY;
         this.activeColor = Piece.ColorEnum.RED;
         this.currentMoves = new ArrayList<>();
+
         this.moveRecommender = new RandomAgent();
     }
 
@@ -97,8 +115,12 @@ public class Game
     public boolean playerInGame(String playerName)
     {
         if(playerName == null) return false;
-        return playerName.equals(this.redPlayer.getName()) || 
-            playerName.equals(this.whitePlayer.getName());
+
+        if(redPlayer != null && redPlayer.getName().equals(playerName))
+            return true;
+        else if(whitePlayer != null && whitePlayer.getName().equals(playerName))
+            return true;
+        return false;
     }
 
 
@@ -163,6 +185,51 @@ public class Game
             return getBoard();
         }
         return getBoard().getInverted();
+    }
+
+
+    /**
+     * getter for current state(currState)
+     * @return the current state
+     */
+    public GameState getGameState()
+    {
+        return this.currState;
+    }
+
+
+    /**
+     * setter for the current state
+     */
+    public void setGameState(GameState currState)
+    {
+        this.currState = currState;
+    }
+
+
+    /**
+     * Removes a player from the game and returns whether
+     * the game can be removed from the game list in
+     * player lobby.
+     *
+     * @param p player to remove
+     * @return whether game can be remove from game list
+     */
+    public boolean leaveGame(Player p)
+    {
+        if(p.equals(redPlayer))
+        {
+            redPlayer = null;
+        }
+        else if (p.equals(whitePlayer))
+        {
+            whitePlayer = null;
+        }
+
+        if(botEnabled)
+            return true;
+
+        return redPlayer == null && whitePlayer == null;
     }
 
 
@@ -255,6 +322,7 @@ public class Game
                     this.currentMoves.clear();
                     this.activeColor = Piece.ColorEnum.RED;
                 }
+                checkForEndGame();
                 return new Message(Message.MessageEnum.info, "Move Applied");
             case INVALID:
                 return new Message(Message.MessageEnum.error, "Invalid Move");
@@ -262,6 +330,24 @@ public class Game
                 return new Message(Message.MessageEnum.error, "Jump move required.");
             default:
                 return new Message(Message.MessageEnum.error, "Unknown server side error.");
+        }
+    }
+
+
+    /**
+     * Called after anybody makes a move, this will update
+     * the status of the game if someone runs out of pieces.
+     */
+    private void checkForEndGame()
+    {
+        if(board.getPieceCount(Piece.ColorEnum.RED) == 0)
+        {
+            currState = GameState.RedLost;
+        }
+
+        if(board.getPieceCount(Piece.ColorEnum.WHITE) == 0)
+        {
+            currState = GameState.WhiteLost;
         }
     }
 

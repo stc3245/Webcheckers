@@ -459,7 +459,8 @@ public class GameTest
      * a single jump move is available for a player.
      */
     @Test
-    public void testPlayerHelpSingleJump(){
+    public void testPlayerHelpSingleJump()
+    {
         String boardString =
                 /* '@'= white tile '*' = empty black tile */
                 /* r = red, w = white, caps means king    */
@@ -497,5 +498,93 @@ public class GameTest
         assertEquals(generatedRecommendedMove.getStartPosition().getRow(),
                 expectedRecommendedMove.getStartPosition().getRow());
 
+    }
+
+
+    /**
+     * Tests to see if it catches when the board is empty, the game state changes
+     */
+    @Test
+    public void testEndGameRedWon()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  *  @  * @  *  @  " +
+                /* 3 */ "  @  *  @  *  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  w  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  R  @  *  @  *  ";
+        /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+
+        Move winningMove = new Move(new Position(7,3), new Position(5,1));
+        cut.validateMove(winningMove);
+        cut.applyMoves();
+
+        assertTrue(cut.getGameState() == Game.GameState.WhiteLost);
+    }
+
+
+    /**
+     * Tests to see if it catches when the board is empty, the game state changes
+     */
+    @Test
+    public void testEndGameWhiteWon()
+    {
+        String boardString =
+                /* '@'= white tile '*' = empty black tile */
+                /* r = red, w = white, caps means king    */
+                /*         White side of board      */
+                /*         0  1  2  3  4  5  6  7   */
+                /* 0 */ "  *  @  *  @  *  @  *  @  " +
+                /* 1 */ "  @  *  @  *  @  *  @  *  " +
+                /* 2 */ "  *  @  r  @  * @  *  @  " +
+                /* 3 */ "  @  *  @  W  @  *  @  *  " +
+                /* 4 */ "  *  @  *  @  *  @  *  @  " +
+                /* 5 */ "  @  *  @  *  @  *  @  *  " +
+                /* 6 */ "  *  @  *  @  *  @  *  @  " +
+                /* 7 */ "  @  *  @  *  @  *  @  *  ";
+        /*         Red side of board       */
+
+        BoardView board = BoardGenerator.constructBoardView(boardString);
+
+        Game cut = new Game(new Player(name1), new Player(name2), board);
+
+        Move winningMove = new Move(new Position(3,3), new Position(1,1));
+        cut.validateMove(winningMove);
+
+        cut.applyMoves();
+
+        assertTrue(cut.getGameState() == Game.GameState.RedLost);
+    }
+
+
+    /**
+     * Tests the leave game function of the game
+     */
+    @Test
+    public void testLeaveGame()
+    {
+        Game cut = new Game(new Player(name1), new Player(name2));
+
+        assertNotNull(cut.getRedPlayer());
+        assertNotNull(cut.getWhitePlayer());
+
+        cut.leaveGame(new Player(name2));
+
+        assertNull(cut.getWhitePlayer());
+
+        cut.leaveGame(new Player(name1));
+        assertNull(cut.getRedPlayer());
     }
 }

@@ -72,8 +72,8 @@ public class PostCheckTurnTest
         when(session.attribute(GetHomeRoute.PLAYERSERVICES_KEY)).thenReturn(null);
         String viewHtml = cut.handle(request, response).toString();
 
-        assertTrue(viewHtml.contains("error"));
-        assertFalse(viewHtml.contains("info"));
+        assertFalse(viewHtml.contains("error"));
+        assertTrue(viewHtml.contains("info"));
     }
 
 
@@ -90,8 +90,8 @@ public class PostCheckTurnTest
         when(lobby.inGame("Pardeep")).thenReturn(false);
         final String viewHtml = cut.handle(request, response).toString();
 
-        assertTrue(viewHtml.contains("error"));
-        assertFalse(viewHtml.contains("info"));
+        assertFalse(viewHtml.contains("error"));
+        assertTrue(viewHtml.contains("info"));
     }
 
 
@@ -111,6 +111,8 @@ public class PostCheckTurnTest
         when(gameMock.isCurrentPlayer(new Player("Jeff"))).thenReturn(true);
 
         when(lobby.getGame("Jeff")).thenReturn(gameMock);
+
+        when(gameMock.getGameState()).thenReturn(Game.GameState.GameInProgress);
 
         final String viewHtml = cut.handle(request, response).toString();
 
@@ -135,6 +137,8 @@ public class PostCheckTurnTest
         when(lobby.inGame("Jeff")).thenReturn(true);
 
         Game gameMock = mock(Game.class);
+
+        when(gameMock.getGameState()).thenReturn(Game.GameState.GameInProgress);
 
         when(gameMock.isCurrentPlayer(new Player("Jeff"))).thenReturn(false);
 

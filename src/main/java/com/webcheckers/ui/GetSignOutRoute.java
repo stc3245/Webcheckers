@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.Player;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Game;
 import spark.*;
 
 import java.util.HashMap;
@@ -79,6 +80,19 @@ public class GetSignOutRoute implements Route {
         }
         else
         {
+
+            if(playerLobby.inGame(player.getName()))
+            {
+                Game game = playerLobby.getGame(player.getName());
+
+                Game.GameState state = game.getRedPlayer().equals(player) ?
+                        Game.GameState.RedResigned: Game.GameState.WhiteResigned;
+
+                game.setGameState(state);
+
+                playerLobby.leaveGame(player);
+            }
+
             playerLobby.terminateSession(player.getName());
             session.attribute(GetHomeRoute.PLAYERSERVICES_KEY, null);
             response.redirect(WebServer.HOME_URL);

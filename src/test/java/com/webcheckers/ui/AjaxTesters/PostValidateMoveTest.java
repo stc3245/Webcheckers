@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Testing class for the {@link PostValidateMove}
- * ajax handeler
+ * ajax handler
  *
  * @author Jeffery Russell 11-2-18
  */
