@@ -207,6 +207,14 @@ public class Game
     }
 
 
+    /**
+     * Removes a player from the game and returns whether
+     * the game can be removed from the game list in
+     * player lobby.
+     *
+     * @param p player to remove
+     * @return whether game can be remove from game list
+     */
     public boolean leaveGame(Player p)
     {
         if(p.equals(redPlayer))

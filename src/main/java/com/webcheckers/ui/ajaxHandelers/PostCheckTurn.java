@@ -77,13 +77,9 @@ public class PostCheckTurn implements Route
 
         Message msg;
 
-        if(game.getGameState() != Game.GameState.GameInProgress)
+        if(game.getGameState() != Game.GameState.GameInProgress || game.isCurrentPlayer(player))
         {
 
-            msg = new Message(Message.MessageEnum.info, "true");
-        }
-        else if(game.isCurrentPlayer(player))
-        {
             msg = new Message(Message.MessageEnum.info, "true");
         }
         else
