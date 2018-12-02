@@ -121,14 +121,14 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user
 views and interacts with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](web-interface.png)
+![The WebCheckers Web Interface Statechart](NewState%20chart.png)
 
 When the user initially goes to the website, they land on a home page.
 From there, the user can go to the sign-in page. After a user has
 selected a valid username, they can go back to the home page where they
 are now able to see the player lobby. After being selected or selecting
 a player to play a game with, the user is sent to the game page where
-they can play a game of checkers.
+they can play a game of checkers.Sta
 
 ### UI Tier
 
@@ -191,7 +191,7 @@ for a new game is established.
 
 #### Game State Diagram
 
-TODO (Jeffery)
+![Game state diagram](gameStateDiagram.png)
 
 ### Model Tier
 
@@ -199,9 +199,8 @@ TODO (Jeffery)
 
 The biggest design goal that we focused on in the model tiers was high
 cohesion, low coupling, and single responsibility. ![Model
-Tier](SWEN%20261%20-%20Information%20Expert.png)
+Tier](newModelTier.png)
 
-TODO (jeffery) update diagrams with AI
 
 In our design you can see high cohesion with the BoardView, Row, Space,
 and Piece classes since they are smaller classes with high focus on the
