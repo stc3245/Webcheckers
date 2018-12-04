@@ -342,14 +342,13 @@ Code Complexity
 ------------
 ![IDEA IntelliJ Code Complexity Metrics](ComplexityMetrics.png)
 As seen in the above screen capture, the vast majority of our implemented
-methods were up to the standards of this course, but a few of them exceeded
-the recommended threshold of code complexity metrics. Out of the 276 methods
-implemented in the source code, only one scored above the NIST (National
+methods were up to the standards of this course. Out of the 276 methods
+implemented in the source code, a bare one scored above the NIST (National
 Institute of Standards and Technology) recommended threshold of 10 v(G), or
 cyclomatic complexity. It shows the low number of linearly independent
 decision paths through our program, and reflects our simplistic code design.
 There are, however, several methods that scored relatively high on the ev(G)
 metric, or essential complexity. The implication is that the team could have
 structured the program better and took a more modular approach to development.
-Overall, the software is not complex nor expensive for maintenance and further
+Overall, the software is not complex nor expensive for maintenance and future
 development.
