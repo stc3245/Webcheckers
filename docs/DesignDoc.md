@@ -165,6 +165,10 @@ were implemented in the single move story. As you can see, all of the
 classes simply call upon a single method in the Game Class in the model
 tier. This helps us keep the business logic in the model tier.
 
+#### Move Recommended Sequence Diagram
+
+![Help Diagram](getHelp.png)
+
 ![UML Diagram](SWEN%20261%20-%20UI%20Teir.png)
 
 #### Client side State Diagram
