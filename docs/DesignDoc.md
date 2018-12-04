@@ -356,7 +356,7 @@ Overall, the software is not complex nor expensive for maintenance and future
 development.
 
 ###Lines of Code 
-![IDEA IntelliJ Code Complexity Metrics](LOCmetric.png)
+![IDEA IntelliJ Lines of Code Metrics](LOCmetric.png)
 
 With lines of code, most were found to be in the Model tier, as suspected. One thing to note is the 
 number of recursive lines of code. This metric counts the code used in sub-packages as well as 
