@@ -347,7 +347,7 @@ implemented in sprint 2 were largely successful.
 Code Metrics Analytics
 ---------------------
 
-###Code Complexity
+### Code Complexity
 
 ![IDEA IntelliJ Code Complexity Metrics](ComplexityMetrics.png)
 
@@ -363,7 +363,7 @@ structured the program better and took a more modular approach to development.
 Overall, the software is not complex nor expensive for maintenance and future
 development.
 
-###Lines of Code 
+### Lines of Code 
 ![IDEA IntelliJ Lines of Code Metrics](LOCmetric.png)
 
 With lines of code, most were found to be in the Model tier, as suspected. One thing to note is the 
