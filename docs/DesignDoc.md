@@ -336,11 +336,13 @@ Level](ApplicationLevel.png)
 These images demonstrate that the unit tests written for the classes
 implemented in sprint 2 were largely successful.
 
-### Code Metrics Analytics
-TODO (Bryce And Perry)
-Code Complexity
-------------
+Code Metrics Analytics
+---------------------
+
+###Code Complexity
+
 ![IDEA IntelliJ Code Complexity Metrics](ComplexityMetrics.png)
+
 As seen in the above screen capture, the vast majority of our implemented
 methods were up to the standards of this course. Out of the 276 methods
 implemented in the source code, a bare one scored above the NIST (National
@@ -352,3 +354,12 @@ metric, or essential complexity. The implication is that the team could have
 structured the program better and took a more modular approach to development.
 Overall, the software is not complex nor expensive for maintenance and future
 development.
+
+###Lines of Code 
+![IDEA IntelliJ Code Complexity Metrics](LOCmetric.png)
+
+With lines of code, most were found to be in the Model tier, as suspected. One thing to note is the 
+number of recursive lines of code. This metric counts the code used in sub-packages as well as 
+normal code. From this we can see that files in the UI tier are most dependant on other files either
+in or outside the tier. This stands to reason seeing as the UI tier needs to communicate with 
+the Spark Engine, Freemarker Engine, Ajax, as well as the Java itself. 
