@@ -340,7 +340,7 @@ implemented in sprint 2 were largely successful.
 TODO (Bryce And Perry)
 Code Complexity
 ------------
-![IDEA IntelliJ Code Complexity Metrics](ComplexityMetrics.PNG)
+![IDEA IntelliJ Code Complexity Metrics](ComplexityMetrics.png)
 As seen in the above screen capture, the vast majority of our implemented
 methods were up to the standards of this course, but a few of them exceeded
 the recommended threshold of code complexity metrics. Out of the 276 methods
@@ -352,4 +352,4 @@ There are, however, several methods that scored relatively high on the ev(G)
 metric, or essential complexity. The implication is that the team could have
 structured the program better and took a more modular approach to development.
 Overall, the software is not complex nor expensive for maintenance and further
-development. 
+development.
