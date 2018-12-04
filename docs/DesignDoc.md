@@ -344,11 +344,13 @@ Level](ApplicationLevel.png)
 These images demonstrate that the unit tests written for the classes
 implemented in sprint 2 were largely successful.
 
-### Code Metrics Analytics
-TODO (Bryce And Perry)
-Code Complexity
-------------
+Code Metrics Analytics
+---------------------
+
+###Code Complexity
+
 ![IDEA IntelliJ Code Complexity Metrics](ComplexityMetrics.png)
+
 As seen in the above screen capture, the vast majority of our implemented
 methods were up to the standards of this course. Out of the 276 methods
 implemented in the source code, a bare one scored above the NIST (National
