@@ -246,8 +246,6 @@ apparent with scaling. Iterables and java objects in general have more
 overhead than using primitives such as 2D arrays. This in the long run
 would cause us to use more network traffic than necessary.
 
-TODO (MAX) add stuff on sprint 4 with start game
-
 #### Improvements from Sprint 2
 
 In Sprint 3, we once again made Object-Oriented Principles a priority.
@@ -259,6 +257,14 @@ allows us to further expand the AI feature of Web Checkers, which currently
 only makes random, valid moves. We also updated the AI feature to decrease
 the high amount of coupling that existed in the beginning stages of the 
 sprint.
+
+
+#### Future Improvements
+
+- Decrease complexity of some of the logic in move applyer/validator
+- Fix the end of receiving a king move mechanics.
+- More enhancements
+- Better UI for accessibility 
 
 Testing
 -------
