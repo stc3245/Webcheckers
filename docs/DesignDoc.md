@@ -364,11 +364,11 @@ Overall, the software is not complex nor expensive for maintenance and future
 development.
 
 ### Lines of Code 
+
 ![IDEA IntelliJ Lines of Code Metrics](LOCmetric.png)
 
 With lines of code, most were found to be in the Model tier, as suspected. One thing to note is the 
 number of recursive lines of code. This metric counts the code used in sub-packages as well as 
 normal code. From this we can see that files in the UI tier are most dependant on other files either
 in or outside the tier. This stands to reason seeing as the UI tier needs to communicate with 
-the Spark Engine, Freemarker Engine, Ajax, as well as the Java itself. 
-=======
+the Spark Engine, Freemarker Engine, Ajax, as well as the Java itself.
