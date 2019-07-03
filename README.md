@@ -1,3 +1,5 @@
+Not on master branch since this was a school project and don't want repository to be found via Google search.
+
 # WebCheckers
 
 An online Checkers game system built in Java 8 and Spark,
